@@ -1,1 +1,20 @@
 # Projek na przedmiot Biznes Elektroniczny
+# Projekt sklepu https://pancernik.eu/
+
+# Skład zespołu
+Kurpiewski      Paweł       198293
+Pastuszka       Jakub       198339
+Ptasznik        Michał
+Pytka           Ryszard
+
+## Opis projektu
+Projekt przedstawia wdrożenie sklepu internetowego opartego o **PrestaShop 1.7.8**, uruchamianego w środowisku **Docker Compose**.  
+System został rozszerzony o własne modyfikacje HTML/PHP, testy automatyczne oraz narzędzie do scrapowania danych produktowych.
+
+
+## ⚙️ Wykorzystane technologie
+- **PrestaShop**
+- **PHP**
+- **MariaDB**
+- **Docker Compose**
+
