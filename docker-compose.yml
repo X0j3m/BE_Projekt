@@ -1,0 +1,67 @@
+services:
+  db:
+    image: mariadb:10.6
+    container_name: prestashop-db
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=prestashop
+      - MYSQL_USER=prestashop_user
+      - MYSQL_PASSWORD=prestashop_pass
+    ports:
+      - 3306:3306
+    networks:
+      - prestashop
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  prestashop:
+    image: prestashop/prestashop:1.7.8-7.4
+    container_name: prestashop
+    restart: unless-stopped
+    environment:
+      - DB_SERVER=db
+      - DB_NAME=prestashop
+      - DB_USER=prestashop_user
+      - DB_PASSWD=prestashop_pass
+      - PS_DEV_MODE=1
+      - PS_INSTALL_AUTO=0                    # WYŁĄCZAMY auto instalację
+      - PS_ENABLE_SSL=0
+    ports:
+      - 8080:80
+    networks:
+      - prestashop
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./src/prestashop-core:/var/www/html                    # Core PrestaShop (tylko do odczytu)
+      - ./src/themes:/var/www/html/themes                      # Nasze motywy
+      - ./src/modules:/var/www/html/modules                    # Nasze moduły
+      - ./src/override:/var/www/html/override                  # Nadpisywania
+      - ./docker/prestashop/config/docker-php-ext.ini:/usr/local/etc/php/conf.d/docker-php-ext.ini
+
+  adminer:
+    image: adminer:latest
+    container_name: prestashop-adminer
+    restart: unless-stopped
+    ports:
+      - 8081:8080
+    networks:
+      - prestashop
+    depends_on:
+      - db
+
+networks:
+  prestashop:
+    driver: bridge
+
+volumes:
+  db_data:

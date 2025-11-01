@@ -1,33 +1,29 @@
-# ============================
-#  System / IDE / OS
-# ============================
+# PrestaShop core - NIE commitujemy
+src/prestashop-core/
+
+# Konfiguracje z hasłami
+src/prestashop-core/config/settings.inc.php
+src/prestashop-core/app/config/parameters.php
+
+# Cache i logi
+src/prestashop-core/var/cache/
+src/prestashop-core/img/
+src/prestashop-core/mails/
+src/prestashop-core/upload/
+src/prestashop-core/download/
+src/prestashop-core/log/
+
+# Docker volumes
+db_data/
+
+# Backup bazy danych (opcjonalnie - możesz committować initial-data.sql)
+db/backup-*.sql
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# System
 .DS_Store
 Thumbs.db
-.idea/
-.vscode/
-*.swp
-*.swo
-*.iml
-
-# ============================
-#  Docker / Compose
-# ============================
-.env
-.env.*
-*.log
-docker-compose.override.yml
-deployment/db_data/
-deployment/db_data/*
-
-# ============================
-#  Backups / dumpy / cache
-# ============================
-*.sql
-*.sql.gz
-*.tar
-*.zip
-
-# ============================
-#  macOS system
-# ============================
-**/.DS_Store
