@@ -1,29 +1,110 @@
-# PrestaShop core - NIE commitujemy
+# ===========================================
+# PRESTASHOP CORE - NIGDY NIE COMMITUJEMY!
+# ===========================================
 src/prestashop-core/
 
-# Konfiguracje z hasłami
+# ===========================================
+# KONFIGURACJE Z HASŁAMI I KLUCZE
+# ===========================================
+# Główne konfiguracje
 src/prestashop-core/config/settings.inc.php
 src/prestashop-core/app/config/parameters.php
+src/prestashop-core/config/defines.inc.php
 
-# Cache i logi
+# Konfiguracje środowiskowe
+src/prestashop-core/app/config/parameters.yml
+src/prestashop-core/app/config/parameters_*.php
+
+# ===========================================
+# CACHE I LOGI
+# ===========================================
 src/prestashop-core/var/cache/
+src/prestashop-core/var/logs/
+src/prestashop-core/var/sessions/
+
+# Cache Smarty
+src/prestashop-core/cache/
+src/prestashop-core/tools/smarty/cache/
+src/prestashop-core/tools/smarty/compile/
+
+# ===========================================
+# ZASOBY UŻYTKOWNIKA
+# ===========================================
 src/prestashop-core/img/
 src/prestashop-core/mails/
 src/prestashop-core/upload/
 src/prestashop-core/download/
-src/prestashop-core/log/
+src/prestashop-core/localization/
+src/prestashop-core/translations/
 
-# Docker volumes
+# ===========================================
+# DOCKER I VOLUMES
+# ===========================================
+# Volume bazy danych
 db_data/
+prestashop_data/
 
-# Backup bazy danych (opcjonalnie - możesz committować initial-data.sql)
+# Backup bazy (opcjonalnie - możesz committować initial-data.sql)
 db/backup-*.sql
+db/*-backup.sql
+
+# Docker
+docker-compose.override.yml
+.env
+.env.local
+
+# ===========================================
+# INSTALACJA I SETUP
+# ===========================================
+# Pliki instalacji
+src/prestashop-core/install/
+src/prestashop-core/install-dev/
+
+# Instalator
+src/prestashop-core/install.php
+
+# ===========================================
+# SYSTEMOWE I IDE
+# ===========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.directory
 
 # IDE
 .vscode/
 .idea/
 *.swp
+*.swo
+*~
 
-# System
-.DS_Store
-Thumbs.db
+# ===========================================
+# BACKUP I TEMP
+# ===========================================
+*.backup
+*.tmp
+*.temp
+*.log
+
+# ===========================================
+# MODUŁY I MOTYWY (COMMITUJEMY TYLKO NASZE)
+# ===========================================
+# Wyklucz wszystkie moduły prestashop...
+src/prestashop-core/modules/
+
+# ...ALE dołącz nasze własne moduły (przez nadpisanie)
+!src/modules/
+
+# Wyklucz wszystkie motywy prestashop...
+src/prestashop-core/themes/
+
+# ...ALE dołącz nasze własne motywy
+!src/themes/
