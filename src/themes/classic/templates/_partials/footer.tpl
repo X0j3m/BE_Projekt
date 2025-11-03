@@ -4,7 +4,7 @@
  
 <!-- 🎉 TEST: DOCKER VOLUMES DZIAŁAJĄ -->
 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; text-align: center; margin-top: 40px;">
-  <h3>✅ SUKCES! Stopka Edytowana Lokalnie</h3>
+  <h3>✅ SUKCES! Stopka Edytowana Lokalnie PASTUSZEK TU BYł</h3>
   <p><strong>Docker Volumes synchronizują pliki pomiędzy Twoim komputerem a kontenerem</strong></p>
   <p>Data testu: </strong></p>
 </div>

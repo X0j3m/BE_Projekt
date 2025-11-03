@@ -34,6 +34,7 @@ services:
       - PS_DEV_MODE=1
       - PS_INSTALL_AUTO=0                    # WYŁĄCZAMY auto instalację
       - PS_ENABLE_SSL=0
+      - PS_FOLDER_ADMIN=admin123
     ports:
       - 8080:80
     networks:
@@ -42,11 +43,11 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - ./src/prestashop-core:/var/www/html                    # Core PrestaShop (tylko do odczytu)
-      - ./src/themes:/var/www/html/themes                      # Nasze motywy
-      - ./src/modules:/var/www/html/modules                    # Nasze moduły
-      - ./src/override:/var/www/html/override                  # Nadpisywania
-      - ./docker/prestashop/config/docker-php-ext.ini:/usr/local/etc/php/conf.d/docker-php-ext.ini
+      - ./src/prestashop-core:/var/www/html
+      - ./src/themes:/var/www/html/themes
+      - ./src/modules:/var/www/html/modules
+      - ./src/override:/var/www/html/override
+      - ./docker/prestashop/disable-install.php:/var/www/html/install/disable-install.php
 
   adminer:
     image: adminer:latest
