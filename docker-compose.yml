@@ -15,7 +15,7 @@ services:
       - 3306:3306
     volumes:
       - dbdata:/var/lib/mysql
-      - ./init-database.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   adminer:
     image: adminer
@@ -37,6 +37,7 @@ services:
       DB_NAME: prestashop
       DB_USER: root
       DB_PASSWD: root
+      PS_INSTALL_AUTO: 0
     depends_on:
       - db
     volumes:

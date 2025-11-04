@@ -274,6 +274,7 @@ class ComposerStaticInitb00a59af03899e2f8aaff65493439ad2
         'PrestaShop\\Module\\Mbo\\Helpers\\Config' => __DIR__ . '/../..' . '/src/Helpers/Config.php',
         'PrestaShop\\Module\\Mbo\\Helpers\\ErrorHelper' => __DIR__ . '/../..' . '/src/Helpers/ErrorHelper.php',
         'PrestaShop\\Module\\Mbo\\ModuleCollectionDataProvider' => __DIR__ . '/../..' . '/src/ModuleCollectionDataProvider.php',
+        'PrestaShop\\Module\\Mbo\\Module\\ModuleOverrideChecker' => __DIR__ . '/../..' . '/src/Module/ModuleOverrideChecker.php',
         'PrestaShop\\Module\\Mbo\\RecommendedLink\\RecommendedLink' => __DIR__ . '/../..' . '/src/RecommendedLink/RecommendedLink.php',
         'PrestaShop\\Module\\Mbo\\RecommendedLink\\RecommendedLinkInterface' => __DIR__ . '/../..' . '/src/RecommendedLink/RecommendedLinkInterface.php',
         'PrestaShop\\Module\\Mbo\\RecommendedLink\\RecommendedLinkProvider' => __DIR__ . '/../..' . '/src/RecommendedLink/RecommendedLinkProvider.php',

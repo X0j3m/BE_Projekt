@@ -190,6 +190,7 @@ return array(
     'PrestaShop\\Module\\Mbo\\Helpers\\Config' => $baseDir . '/src/Helpers/Config.php',
     'PrestaShop\\Module\\Mbo\\Helpers\\ErrorHelper' => $baseDir . '/src/Helpers/ErrorHelper.php',
     'PrestaShop\\Module\\Mbo\\ModuleCollectionDataProvider' => $baseDir . '/src/ModuleCollectionDataProvider.php',
+    'PrestaShop\\Module\\Mbo\\Module\\ModuleOverrideChecker' => $baseDir . '/src/Module/ModuleOverrideChecker.php',
     'PrestaShop\\Module\\Mbo\\RecommendedLink\\RecommendedLink' => $baseDir . '/src/RecommendedLink/RecommendedLink.php',
     'PrestaShop\\Module\\Mbo\\RecommendedLink\\RecommendedLinkInterface' => $baseDir . '/src/RecommendedLink/RecommendedLinkInterface.php',
     'PrestaShop\\Module\\Mbo\\RecommendedLink\\RecommendedLinkProvider' => $baseDir . '/src/RecommendedLink/RecommendedLinkProvider.php',
