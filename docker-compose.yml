@@ -39,16 +39,18 @@ services:
     depends_on:
       - db
     volumes:
-      - psdata:/var/www/html
       - type: bind
         source: ./modules/test_module             # local path to the module
         target: /var/www/html/modules/test_module # path to be mounted in the container
       - type: bind
         source: ./themes/mytheme                  # local path to the module
         target: /var/www/html/themes/mytheme      # path to be mounted in the container
+      - ./prestashop_source:/var/www/html 
       #- type: bind
       #  source: ./themes/classic                   # lokalna ścieżka do pobranego szablonu
       #  target: /var/www/html/themes/classic      # ścieżka w kontenerze
+      #- ./modules:/var/www/html/modules
+      #- ./themes:/var/www/html/themes
       
 
     networks:
@@ -59,4 +61,3 @@ networks:
 
 volumes:
   dbdata:
-  psdata:

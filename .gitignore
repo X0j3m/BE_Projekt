@@ -1,60 +1,28 @@
-# --- SYSTEM / EDITORS ---
-# systemowe i edytorów
-.DS_Store
-Thumbs.db
+# Cache i logi PrestaShop
+/var/cache/
+/var/logs/
+!/var/cache/.htaccess
+!/var/logs/.htaccess
+
+# Uploady
+/img/
+/upload/
+
+# Konfiguracja
+/app/config/parameters.php
+/config/settings.inc.php
+
+# Docker
+dbdata/
+psdata/
+*.env
+
+# IDE
 .idea/
 .vscode/
 *.swp
+*.swo
 
-# --- DOCKER ---
-# dane wolumenów i buildów
-dbdata/
-psdata/
-*/__pycache__/
-docker-compose.override.yml
-.env
-*.env
-.env.*
-
-# logi kontenerów
-logs/
-*.log
-
-# pliki tymczasowe z docker-compose
-tmp/
-*.pid
-
-# --- PRESTASHOP ---
-# nie commituj plików generowanych przez Prestashop
-/var/
-/vendor/
-/modules/.*
-!/modules/test_module/      # zostaw swój moduł lokalny
-/themes/.*
-!/themes/mytheme/           # zostaw swój motyw lokalny
-/app/cache/
-/app/logs/
-/config/settings.inc.php
-/img/
-/download/
-/upload/
-/mails/
-/translations/
-
-# --- NODE / FRONTEND (jeśli używasz w theme)
-/node_modules/
-/package-lock.json
-/yarn.lock
-/dist/
-/build/
-
-# --- BACKUPS ---
-*.sql
-*.tar
-*.zip
-*.gz
-
-# --- OS TEMP ---
-*.tmp
-*.bak
-*.old
+# Systemowe
+.DS_Store
+Thumbs.db
