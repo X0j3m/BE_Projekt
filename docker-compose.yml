@@ -1,68 +1,58 @@
 services:
+
   db:
-    image: mariadb:10.6
-    container_name: prestashop-db
+    container_name: mariadb
+    image: mariadb:1.6
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=prestashop
-      - MYSQL_USER=prestashop_user
-      - MYSQL_PASSWORD=prestashop_pass
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: prestashop
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: admins
+    networks:
+      - prestashop_network
     ports:
       - 3306:3306
-    networks:
-      - prestashop
     volumes:
-      - db_data:/var/lib/mysql
-      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      start_period: 10s
-      interval: 10s
-      timeout: 5s
-      retries: 3
-
-  prestashop:
-    image: prestashop/prestashop:1.7.8-7.4
-    container_name: prestashop
-    restart: unless-stopped
-    environment:
-      - DB_SERVER=db
-      - DB_NAME=prestashop
-      - DB_USER=prestashop_user
-      - DB_PASSWD=prestashop_pass
-      - PS_DEV_MODE=1
-      - PS_INSTALL_AUTO=0                    # WYŁĄCZAMY auto instalację
-      - PS_ENABLE_SSL=0
-      - PS_FOLDER_ADMIN=admin123
-    ports:
-      - 8080:80
-    networks:
-      - prestashop
-    depends_on:
-      db:
-        condition: service_healthy
-    volumes:
-      - ./src/prestashop-core:/var/www/html
-      - ./src/themes:/var/www/html/themes
-      - ./src/modules:/var/www/html/modules
-      - ./src/override:/var/www/html/override
-      - ./docker/prestashop/disable-install.php:/var/www/html/install/disable-install.php
+      - dbdata:/var/lib/mysql
 
   adminer:
-    image: adminer:latest
-    container_name: prestashop-adminer
+    image: adminer
     restart: unless-stopped
     ports:
       - 8081:8080
-    networks:
-      - prestashop
+
+  prestashop:
+    container_name: prestashop
+    image: prestashop/prestashop:1.7.8
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    environment:
+      PS_DEV_MODE: "1"
+      PS_FOLDER_ADMIN: admin1234
+      PS_FOLDER_INSTALL: install1234
+      DB_SERVER: db
+      DB_NAME: prestashop
+      DB_USER: root
+      DB_PASSWD: root
     depends_on:
       - db
+    volumes:
+      - psdata:/var/www/html
+      - type: bind
+        source: ./modules/test_module             # local path to the module
+        target: /var/www/html/modules/test_module # path to be mounted in the container
+      - type: bind
+        source: ./themes/mytheme                  # local path to the module
+        target: /var/www/html/themes/mytheme      # path to be mounted in the container
+
+    networks:
+      - prestashop_network
 
 networks:
-  prestashop:
-    driver: bridge
+  prestashop_network:
 
 volumes:
-  db_data:
+  dbdata:
+  psdata:
