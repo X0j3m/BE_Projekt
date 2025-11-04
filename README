@@ -2,10 +2,10 @@
 # Projekt sklepu https://pancernik.eu/
 
 # Skład zespołu
-Kurpiewski      Paweł       198293
+Kurpiewski      Paweł       198203
 Pastuszka       Jakub       198339
-Ptasznik        Michał
-Pytka           Ryszard
+Ptasznik        Michał      197933
+Pytka           Ryszard     198323
 
 ## Opis projektu
 Projekt przedstawia wdrożenie sklepu internetowego opartego o **PrestaShop 1.7.8**, uruchamianego w środowisku **Docker Compose**.  
