@@ -38,6 +38,11 @@ services:
       DB_USER: root
       DB_PASSWD: root
       PS_INSTALL_AUTO: 0
+      _PS_DEBUG_PROFILING_: "1"             # Profiling
+      _PS_DISABLE_OVERRIDES_: "0"           # Zezwól na override
+      _PS_SMARTY_FORCE_COMPILE_: "1"        # WYMUSZA KOMPILACJĘ SZABLONÓW
+      _PS_SMARTY_NO_UNDEFINED_: "1"         # Pokazuj błędy w szablonach
+      _PS_DISABLE_NON_NATIVE_MODULE_: "0"   # Zezwól na nietypowe moduły
     depends_on:
       - db
     volumes:

@@ -15,16 +15,6 @@
 /themes/*/cache/
 /mails/themes/*
 
-# Uploads and generated content
-/upload/
-/download/
-/img/tmp/
-/img/import/
-/img/tmp/
-/img/cms/
-/img/p/
-/modules/*/config.xml
-
 # Installation files
 /install/
 /install1234/  # if you have custom install folder

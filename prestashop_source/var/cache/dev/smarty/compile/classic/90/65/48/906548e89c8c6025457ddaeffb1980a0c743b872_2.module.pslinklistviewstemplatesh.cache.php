@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.48, created on 2025-11-04 18:27:52
+/* Smarty version 3.1.48, created on 2025-11-04 18:52:36
   from 'module:pslinklistviewstemplatesh' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.48',
-  'unifunc' => 'content_690a37982dcec2_52208029',
+  'unifunc' => 'content_690a3d647142b6_19812234',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,8 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_690a37982dcec2_52208029 (Smarty_Internal_Template $_smarty_tpl) {
-$_smarty_tpl->compiled->nocache_hash = '883090605690a37982d9756_31354458';
+function content_690a3d647142b6_19812234 (Smarty_Internal_Template $_smarty_tpl) {
+$_smarty_tpl->compiled->nocache_hash = '1697145377690a3d64710a25_32187815';
 ?>
 <!-- begin /var/www/html/themes/classic/modules/ps_linklist/views/templates/hook/linkblock.tpl --><div class="col-md-6 links">
   <div class="row">

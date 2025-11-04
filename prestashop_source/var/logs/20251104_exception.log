@@ -27,3 +27,4 @@
                         AND s.deleted = 0
                     ORDER BY LENGTH(CONCAT(su.physical_uri, su.virtual_uri)) DESC&lt;/pre&gt; at line 769 in file classes/db/Db.php
 *ERROR* 	v1.7.8.11	2025/11/04 - 18:32:19: Link to database cannot be established: SQLSTATE[HY000] [2002] Connection refused at line 137 in file classes/db/DbPDO.php
+*ERROR* 	v1.7.8.11	2025/11/04 - 18:52:33: Link to database cannot be established: SQLSTATE[HY000] [2002] Connection refused at line 137 in file classes/db/DbPDO.php
