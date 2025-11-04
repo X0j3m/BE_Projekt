@@ -1,28 +1,95 @@
-# Cache i logi PrestaShop
-/var/cache/
-/var/logs/
-!/var/cache/.htaccess
-!/var/logs/.htaccess
+# =============================================
+# PRESTASHOP - CORE FILES TO IGNORE
+# =============================================
 
-# Uploady
-/img/
-/upload/
-
-# Konfiguracja
+# Configuration files with sensitive data
 /app/config/parameters.php
 /config/settings.inc.php
+/config/xml/*
+!config/xml/index.php
 
-# Docker
-dbdata/
-psdata/
-*.env
+# Cache and logs
+/var/cache/
+/var/logs/
+/var/sessions/
+/themes/*/cache/
+/mails/themes/*
 
-# IDE
-.idea/
-.vscode/
+# Uploads and generated content
+/upload/
+/download/
+/img/tmp/
+/img/import/
+/img/tmp/
+/img/cms/
+/img/p/
+/modules/*/config.xml
+
+# Installation files
+/install/
+/install1234/  # if you have custom install folder
+
+# =============================================
+# DOCKER - VOLUMES AND CONTAINERS
+# =============================================
+
+# Docker volumes
+/dbdata/
+/psdata/
+/mysql-data/
+/data/
+
+# Docker compose override
+docker-compose.override.yml
+/.dockerignore
+
+# Container data
+/containers/
+
+# =============================================
+# DEVELOPMENT & ENVIRONMENT
+# =============================================
+
+# Environment variables
+.env
+.env.local
+.env.prod
+.env.dev
+.env.test
+
+# IDE and editor files
+/.vscode/
+/.idea/
+/.vs/
 *.swp
 *.swo
-
-# Systemowe
+*~
 .DS_Store
 Thumbs.db
+
+# OS generated files
+ehthumbs.db
+Desktop.ini
+
+# =============================================
+# BACKUPS & TEMP FILES
+# =============================================
+
+# Backup files
+*.backup
+*.bak
+*.old
+*.orig
+*.save
+
+# Temp files
+*.tmp
+*.temp
+/cache/
+
+# =============================================
+# GIT
+# =============================================
+
+# Git
+/.gitkeep
