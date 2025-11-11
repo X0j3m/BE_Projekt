@@ -51,14 +51,3 @@ Thumbs.db
 # Node.js dependencies (jeśli używasz)
 /node_modules/
 
-# Cache PrestaShop
-/prestashop_source/var/cache/
-/prestashop_source/cache/
-/prestashop_source/app/cache/
-
-# Cache motywów
-/prestashop_source/themes/*/cache/
-
-# Cache Smarty
-/prestashop_source/var/cache/prod/
-/prestashop_source/var/cache/dev/
