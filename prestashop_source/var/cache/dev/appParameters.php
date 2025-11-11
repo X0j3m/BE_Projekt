@@ -12,7 +12,7 @@
     'mailer_host' => '127.0.0.1',
     'mailer_user' => NULL,
     'mailer_password' => NULL,
-    'secret' => 'yxQypWdu2deJ7ZqmxnPQwGrA2wT2xHsHvz3EL6q3jInzGDQ9ueDaPmULBBdff3xR',
+    'secret' => 'fKusdg9sDXZLaRRnjuiTZWpt63ifoZAUfKVXBf5oLEaUZeqtK9noAWuhUCNFKipg',
     'ps_caching' => 'CacheMemcache',
     'ps_cache_enable' => false,
     'ps_creation_date' => '2025-11-11',
@@ -20,6 +20,6 @@
     'use_debug_toolbar' => true,
     'cookie_key' => 'k0i1Mem3NgQEhnAxIp0PKfvq6X4x4inMzqAB4Vyi3Bf2wZSCKcjcmj38GtL5bd57',
     'cookie_iv' => '8szMK5qpLOq24BL0Pzymi6ztmQYcxgQP',
-    'new_cookie_key' => 'def000008529b86abd86e75c80e5e337a0af1b00c94763669e01989e166185a6e92450dd9a98d6ddf99a306a96db39e5c10f5cc6bb4ddd3f78fb109df94aa65a5e10cc12',
+    'new_cookie_key' => 'def0000018003d39d423aeae514803610288b4255dbf6a2b42c04a9761561d69a9276a958048432129612cf9c7fc5c573d962693c12f89705b6cf558b7a0b6d0dd27fcc9',
   ),
 );

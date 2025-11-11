@@ -28,7 +28,6 @@ dbdata/
 /prestashop_source/cache/
 
 # Backup bazy danych
-*.sql
 *.sql.gz
 *.backup
 

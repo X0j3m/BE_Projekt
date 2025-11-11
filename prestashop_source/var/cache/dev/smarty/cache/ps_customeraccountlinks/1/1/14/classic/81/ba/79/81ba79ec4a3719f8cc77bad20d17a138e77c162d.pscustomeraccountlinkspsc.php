@@ -1,36 +1,36 @@
 <?php
-/* Smarty version 3.1.48, created on 2025-11-11 11:38:49
+/* Smarty version 3.1.48, created on 2025-11-11 11:49:03
   from 'module:pscustomeraccountlinkspsc' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.48',
-  'unifunc' => 'content_691312394be895_62745709',
+  'unifunc' => 'content_6913149fe2b151_61368253',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '42f9461127ce7396a601c2484841253ea5ba658f' => 
     array (
       0 => 'module:pscustomeraccountlinkspsc',
-      1 => 1762856086,
+      1 => 1762857926,
       2 => 'module',
     ),
   ),
   'cache_lifetime' => 31536000,
 ),true)) {
-function content_691312394be895_62745709 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6913149fe2b151_61368253 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->smarty->ext->_tplFunction->registerTplFunctions($_smarty_tpl, array (
   'renderLogo' => 
   array (
     'compiled_filepath' => '/var/www/html/var/cache/dev/smarty/compile/classiclayouts_layout_full_width_tpl/d2/2d/85/d22d851f6d7c12eb35c1c34c8e84baa801a8cea2_2.file.helpers.tpl.php',
     'uid' => 'd22d851f6d7c12eb35c1c34c8e84baa801a8cea2',
-    'call_name' => 'smarty_template_function_renderLogo_156390046569131239268df0_76536563',
+    'call_name' => 'smarty_template_function_renderLogo_8669108886913149fc0f8e9_68907428',
   ),
 ));
 ?><!-- begin /var/www/html/themes/classic/modules/ps_customeraccountlinks/ps_customeraccountlinks.tpl -->
 <div id="block_myaccount_infos" class="col-md-3 links wrapper">
   <p class="h3 myaccount-title hidden-sm-down">
-    <a class="text-uppercase" href="http://localhost:8080/moje-konto" rel="nofollow">
+    <a class="text-uppercase" href="http://localhost:8080/my-account" rel="nofollow">
       Twoje konto
     </a>
   </p>
@@ -45,22 +45,22 @@ $_smarty_tpl->smarty->ext->_tplFunction->registerTplFunctions($_smarty_tpl, arra
   </div>
   <ul class="account-list collapse" id="footer_account_list">
             <li>
-          <a href="http://localhost:8080/dane-osobiste" title="Dane osobowe" rel="nofollow">
+          <a href="http://localhost:8080/identity" title="Dane osobowe" rel="nofollow">
             Dane osobowe
           </a>
         </li>
             <li>
-          <a href="http://localhost:8080/historia-zamowien" title="Zamówienia" rel="nofollow">
+          <a href="http://localhost:8080/order-history" title="Zamówienia" rel="nofollow">
             Zamówienia
           </a>
         </li>
             <li>
-          <a href="http://localhost:8080/potwierdzenie-zwrotu" title="Moje pokwitowania - korekty płatności" rel="nofollow">
+          <a href="http://localhost:8080/credit-slip" title="Moje pokwitowania - korekty płatności" rel="nofollow">
             Moje pokwitowania - korekty płatności
           </a>
         </li>
             <li>
-          <a href="http://localhost:8080/adresy" title="Adresy" rel="nofollow">
+          <a href="http://localhost:8080/addresses" title="Adresy" rel="nofollow">
             Adresy
           </a>
         </li>
