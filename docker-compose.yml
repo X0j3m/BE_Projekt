@@ -2,7 +2,7 @@ services:
 
   db:
     container_name: mariadb
-    image: mariadb:10.6
+    image: mariadb:1.6
     restart: unless-stopped
     environment:
       MARIADB_ROOT_PASSWORD: root
