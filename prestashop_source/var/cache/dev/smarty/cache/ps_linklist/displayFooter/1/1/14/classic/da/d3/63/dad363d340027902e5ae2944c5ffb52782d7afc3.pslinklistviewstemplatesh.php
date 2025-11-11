@@ -1,30 +1,30 @@
 <?php
-/* Smarty version 3.1.48, created on 2025-11-04 18:27:52
+/* Smarty version 3.1.48, created on 2025-11-11 11:38:49
   from 'module:pslinklistviewstemplatesh' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.48',
-  'unifunc' => 'content_690a37982e5dc9_62570573',
+  'unifunc' => 'content_6913123947d1d1_43574473',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '906548e89c8c6025457ddaeffb1980a0c743b872' => 
     array (
       0 => 'module:pslinklistviewstemplatesh',
-      1 => 1702485415,
+      1 => 1762856086,
       2 => 'module',
     ),
   ),
   'cache_lifetime' => 31536000,
 ),true)) {
-function content_690a37982e5dc9_62570573 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6913123947d1d1_43574473 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->smarty->ext->_tplFunction->registerTplFunctions($_smarty_tpl, array (
   'renderLogo' => 
   array (
     'compiled_filepath' => '/var/www/html/var/cache/dev/smarty/compile/classiclayouts_layout_full_width_tpl/d2/2d/85/d22d851f6d7c12eb35c1c34c8e84baa801a8cea2_2.file.helpers.tpl.php',
     'uid' => 'd22d851f6d7c12eb35c1c34c8e84baa801a8cea2',
-    'call_name' => 'smarty_template_function_renderLogo_616371460690a3798159360_57776408',
+    'call_name' => 'smarty_template_function_renderLogo_156390046569131239268df0_76536563',
   ),
 ));
 ?><!-- begin /var/www/html/themes/classic/modules/ps_linklist/views/templates/hook/linkblock.tpl --><div class="col-md-6 links">
@@ -45,30 +45,30 @@ $_smarty_tpl->smarty->ext->_tplFunction->registerTplFunctions($_smarty_tpl, arra
             <a
                 id="link-product-page-prices-drop-1"
                 class="cms-page-link"
-                href="http://localhost:8080/prices-drop"
+                href="http://localhost:8080/promocje"
                 title="Our special products"
                             >
-              Prices drop
+              Promocje
             </a>
           </li>
                   <li>
             <a
                 id="link-product-page-new-products-1"
                 class="cms-page-link"
-                href="http://localhost:8080/new-products"
-                title="Our new products"
+                href="http://localhost:8080/nowe-produkty"
+                title="Nasze nowe produkty"
                             >
-              New products
+              Nowe produkty
             </a>
           </li>
                   <li>
             <a
                 id="link-product-page-best-sales-1"
                 class="cms-page-link"
-                href="http://localhost:8080/best-sales"
-                title="Our best sales"
+                href="http://localhost:8080/najczesciej-kupowane"
+                title="Nasze najlepiej sprzedające się produkty"
                             >
-              Best sales
+              Najczęściej kupowane
             </a>
           </li>
               </ul>
@@ -139,30 +139,30 @@ $_smarty_tpl->smarty->ext->_tplFunction->registerTplFunctions($_smarty_tpl, arra
             <a
                 id="link-static-page-contact-2"
                 class="cms-page-link"
-                href="http://localhost:8080/contact-us"
-                title="Use our form to contact us"
+                href="http://localhost:8080/kontakt"
+                title="Skorzystaj z formularza kontaktowego"
                             >
-              Contact us
+              Kontakt z nami
             </a>
           </li>
                   <li>
             <a
                 id="link-static-page-sitemap-2"
                 class="cms-page-link"
-                href="http://localhost:8080/sitemap"
-                title="Lost ? Find what your are looking for"
+                href="http://localhost:8080/Mapa strony"
+                title="Zagubiłeś się? Znajdź to, czego szukasz!"
                             >
-              Sitemap
+              Mapa strony
             </a>
           </li>
                   <li>
             <a
                 id="link-static-page-stores-2"
                 class="cms-page-link"
-                href="http://localhost:8080/stores"
+                href="http://localhost:8080/nasze-sklepy"
                 title=""
                             >
-              Stores
+              Sklepy
             </a>
           </li>
               </ul>
