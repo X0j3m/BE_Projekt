@@ -11,6 +11,13 @@ Pytka           Ryszard     198323
 Projekt przedstawia wdrożenie sklepu internetowego opartego o **PrestaShop 1.7.8**, uruchamianego w środowisku **Docker Compose**.  
 System został rozszerzony o własne modyfikacje HTML/PHP, testy automatyczne oraz narzędzie do scrapowania danych produktowych.
 
+## 🚀 Zawartość projektu
+
+| Serwis | Opis | Port |
+|--------|------|------|
+| 🗄️ **MariaDB** | baza danych sklepu | `3306` |
+| 🧠 **Adminer** | prosty panel do zarządzania bazą danych | `8081` |
+| 🛒 **PrestaShop** | właściwy sklep internetowy | `8080` |
 
 ## ⚙️ Wykorzystane technologie
 - **PrestaShop**
@@ -18,3 +25,8 @@ System został rozszerzony o własne modyfikacje HTML/PHP, testy automatyczne or
 - **MariaDB**
 - **Docker Compose**
 
+## Włączenie projektu 
+- wchodzimy w terminalu w folder, w którym znajduje się repozytorium
+- używamy komendy 'docker compose up -d' w celu włączeniu kontenera
+- wchodzimy na 'localhost:8080' - miejsce gdzie znajduje się prestashop
+- w celu przegądania bazy danych można wejść na 'localhost:8081' - włącza się adminer za pomocą, którego można modyfikować baze
