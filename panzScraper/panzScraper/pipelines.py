@@ -6,22 +6,33 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from scrapy.pipelines.images import ImagesPipeline
+from scrapy import Request 
 
-class PanzscraperPipeline:
+
+class PanzscraperPipeline(ImagesPipeline):
+
+    # def get_media_requestes(self, item, info):
+    #     description = item['description'].split(" ")
+    #     images_urls = [i for i in description if "src" in i]
+    #     images_urls = [i.split("=") for i in images_urls]
+    #     images_urls = [i[1] for i in images_urls]
+    #     print(images_urls)
+    #     for url in images_urls:
+    #         yield Request(url)
+    
+    # def item_completed(self, results, item, info):
+    #     print(x["path"] for x in results)
+    #     return item
+
     def process_item(self, item, spider):
-        pass
-        # adapter = ItemAdapter(item)
-        # field_names = adapter.field_names()
-        # for field in field_names:
-        #     if field == 'delivery_time':
-        #         value = adapter.__getitem__(field)
-        #         value = value.split()
-        #         adapter[field] = value[0]
-        #     elif field == 'price':
-        #         value = adapter.__getitem__(field)
-        #         value = value.split(",")
-        #         adapter[field] = value[0] + "." + "00"
-        #     else:
-        #         value = adapter.__getitem__(field)
-        #         adapter[field] = value.strip()
-        # return item
+        return item
+    #     print("PIPELINE ZACZYNA PRACE")
+    #     description = item['description'].split(" ")
+    #     images_urls = [i for i in description if "src" in i]
+    #     images_urls = [i.split("=") for i in images_urls]
+    #     images_urls = [i[1] for i in images_urls]
+    #     print(images_urls)       
+    #     return item 
+        
+    

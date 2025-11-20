@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head data-ajaxbasket-mode="2" data-features="WyJwcm9kdWN0X2J1bmRsZXMiLCJ3ZWJkYXYiLCJzYWFzX2JpbGxpbmciLCJyZWRpcmVjdHNfY29uZmlnIiwicmVkaXJlY3RzX2RvbWFpbnMiLCJyZWRpcmVjdHNfb2JqZWN0cyIsInJlZGlyZWN0c19yb3V0ZXIiLCJyZWRpcmVjdHNfYXBpIiwiYWxsZWdyb19pbXBvcnRfYXVjdGlvbnMiLCJhbGxlZ3JvX3VwZGF0ZV9hdWN0aW9ucyIsImFsbGVncm9fZG93bmxvYWRfb3JkZXJzIiwic2VhcmNoX2luZGV4ZXIiLCJzZWFyY2hfYWRtaW4iLCJwd2EiLCJzZW9fZ2Z4IiwiYWxsZWdyb19zZW5kX3NoaXBwaW5nX251bWJlciIsInNob3dfcHJlbWl1bV9mZWF0dXJlcyIsInNlYXJjaF9jbGllbnQiLCJyZWNvbW1lbmRhdGlvbnNfdHJhY2tpbmciLCJiZWxsX21lc3NhZ2VzIiwicGF5bWVudF9ncGF5IiwibmJwX2N1cnJlbmNpZXMiLCJhbGxlZ3JvX2Rvd25sb2FkX29yZGVyc19zdXJjaGFyZ2VzIiwiYWxsZWdyb19hdXRvX2ltcG9ydF9hdWN0aW9ucyIsImFsbGVncm9fb3JkZXJfYW5kX3RyYW5zYWN0aW9uX3VpZF9maWx0ZXJzIiwiYWxsZWdyb19kb3dubG9hZF9vcmRlcnNfYWRkaXRpb25hbF9zZXJ2aWNlcyIsInR3b19mYWN0b3Jfc21zIiwiaW5wb3N0X21hcCIsInBhY3prb21hdHlfZGlzYWJsZSIsInByb2R1Y3RfZHVwbGljYXRlX25ld19vcHRpb25zIiwiaW5wb3N0X3B3dyIsImZpbGVfbWFuYWdlbWVudCIsIndlYnB1c2hfYWRtaW4iLCJuZXdfcGFuZWxfbWVzc2FnZSIsImRlZmF1bHRfZmlsdGVyX3Byb2ZpbGVzIiwibmV3X29yZGVyc192aWV3Iiwic2lkZWJhcl90b2dnbGUiLCJ0d29fZmFjdG9yIiwidHJhZmZpY19hbmFseXplciIsInRyYWZmaWNfbmV3X3JlcG9ydHMiLCJwZXJmb3JtYW5jZV9yZXBvcnRzIiwibmV3X3BhcmNlbF9jcmVhdGUiLCJhdXJvcmFfcmVmYWN0b3JpbmciLCJub19tb2JpbGVfc2tpbl9sb2dpYyIsInBheW1lbnRfcGF5cG8iLCJhbGxlZ3JvX3VwZGF0ZV9xdWFudGl0eV9tdWx0aWFjdGlvbiIsImFsbGVncm9fdXBkYXRlX3ByaWNlX211bHRpYWN0aW9uIiwiYWxsZWdyb19zdGF0dXNfbWFwIiwiZ3R1X2NvZGUiLCJ2YXRfZXUiLCJuZXdfYWxsZWdyb190ZW1wbGF0ZV9jcmVhdG9yIiwiYWxsZWdyb19hc3NpZ25fdGF4X3ZhbHVlX211bHRpYWN0aW9uIiwiYWxsZWdyb19hdWN0aW9uc190YXhfdmFsdWVfZmlsdGVycyIsImFsbGVncm9fY3JlYXRvcl90YXhfc2VsZWN0aW9uX2xpc3QiLCJhbGxlZ3JvX2RldGVjdF9hbGxlZ3JvX3Byb2R1Y3RfbXVsdGlhY3Rpb24iLCJhbGxlZ3JvX2Fzc2lnbl9hbGxlZ3JvX3Byb2R1Y3RfbXVsdGlhY3Rpb24iLCJhbGxlZ3JvX2F1Y3Rpb25zX2hhc19hbGxlZ3JvX3Byb2R1Y3RfZmlsdGVycyIsImFsbGVncm9fcHJvZHVjdHNfaGFzX2FsbGVncm9fcHJvZHVjdF9maWx0ZXJzIiwiY2xlYW5fdXBfbWFpbF9sb2dzIiwibmV3X29yZGVyX25vdGVzIiwibmV3X2dhbGxlcnkiLCJyZWNvbW1lbmRhdGlvbnNfc3RhdHNfYW5hbHl6ZXIiLCJvYmplY3RzX3N0YXRzX2FuYWx5emVyIiwicmVjb21tZW5kYXRpb25zX21vZGVsX2ZpdCIsInJlY29tbWVuZGF0aW9uc19hZG1pbiIsImN1c3RvbWVyX3ByaXZhY3kiLCJpbWdfc2l6ZV9lZGl0YWJsZSIsImRpZ2l0YWxfbGlua3MiLCJjb2xsZWN0aW9ucyIsImdmeF9tZXRhZGF0YSIsInByb2dyZXNzaXZlX2Rpc2NvdW50cyIsImdvb2dsZV9hbmFseXRpY3NfdjQiLCJmYWNlYm9va19idXNpbmVzc19leHRlbnNpb24iLCJmYWNlYm9va19jYXBpIiwic3RvY2swX3N5bmMiLCJzdG9jazAiLCJyZWNvbW1lbmRhdGlvbnNfY29tcHV0ZV9zdW1zX29wdGltaXphdGlvbiIsInJlY29tbWVuZGF0aW9uc19zdW1zX29wdGltaXphdGlvbiIsInNlc3Npb25fc3RhcnRzX2luX3JlYWRfb25seV9tb2RlIiwiZGlzYWJsZV9jbGllbnRfc2Vzc2lvbl91YV9yZXZhbGlkYXRlIiwid2FyZWhvdXNlc19sb2dzIiwid2FyZWhvdXNlcyIsInByb2R1Y3RfZHVwbGljYXRlX2NvbGxlY3Rpb25zIiwicmVzdGFwaV93aXRob3V0X2xvY2tzIiwiY29uZGl0aW9uX29uX3Byb21vY29kZXNsaXN0IiwicGhvbmVfdmFsaWRhdGlvbiIsInVybF9yZXBhaXJfc3RyaW5nX2Rpc2FibGUiLCJwcm9kdWN0c19vcmRlciIsImFsbGVncm9fZXJwYm94Iiwic3RvY2tfb3B0aW1pemF0aW9uIiwibWFpbl9wYWdlX2NvbGxlY3Rpb24iLCJyZWJyYW5kaW5nX2FwaWxvIiwibW9kYWxfaW1wcm92ZW1lbnQiLCJzaG9wZXJfc2hpcG1lbnRzIiwicHJvbW90aW9uc19wcm9kdWN0c19tYW51YWxfb3JkZXIiLCJjYW1wYWdpbnNfdGlrdG9rIiwibmV3X3Byb2R1Y3RzX21hbnVhbF9vcmRlciIsImZyb250c2tpbl9jb25maWd1cmF0b3JfbmV3X2NvbnRyb2xzIiwiZnJvbnRza2luX2NvbmZpZ3VyYXRvciIsInBheW1lbnRfYXBwbGVfcGF5IiwiYnlfZGF0ZV9hZGRfc29ydF90eXBlcyIsImZlYXR1cmVfZmxhZ3NfYWNrIiwiYWxsZWdyb19sb2NrX3Byb2Nlc3MiLCJjb250cm9sX2NhdGVnb3J5X3JlZmFjdG9yIiwiYWxsZWdyb19wcm9kdWN0aXphdGlvbiIsImFsbGVncm9fcHJvbW9fb3B0aW9ucyIsImFsbGVncm9fcHJvZ3Jlc3NfdmFsaWRhdGlvbl9lcnJvciIsInByb2R1Y3RfY2FyZF9hZGRpdGlvbmFsX3dhcmVob3VzZXNfc2hpcHBpbmdfdGltZSIsImNsaWVudF9maWx0ZXJfY2xlYW5fYXNjaWkiLCJiYXNrZXRfYWRkcmVzc19wbHVnaW5zIiwicG9jenRhX3BvbHNrYV9pbnN1cmFuY2UiLCJvbW5pYnVzX2JhY2tlbmQiLCJzaG9wZXJfY2FtcGFpZ25zX29yZGVyX2VtYWlsIiwiY3JlYXRlX21haWxfbWVzc2FnZV9pZCIsInBheW1lbnRfZmluYW5jaW5nX2JydXR0byIsInBhcmNlbHNfY3JlYXRlX29yZGVyX2lkX25vdGVzIiwic2hpcG1lbnRfY3JlYXRlX2ludmVydF9hbGxlZ3JvIiwic2hpcG1lbnRfY3JlYXRlX2ludmVydF9hcGFjemthIiwic2hpcG1lbnRfY3JlYXRlX2ludmVydF9pbnBvc3QiLCJzaGlwbWVudF9jcmVhdGVfaW52ZXJ0X3BhY3prb21hdHkiLCJwYWxsZXRfcGFja2FnZSIsInNwX2lucG9zdF9wb2ludF90b19kb29yIiwiZ3BheV9jbGVhbl9waG9uZV9udW1iZXIiLCJkaXNhYmxlX3ByaWNlX2ZpbHRlcl9yYW5nZXMiLCJvcHRpbWl6ZWRfcGxhY2Vfb3JkZXJfdHJhbnNhY3Rpb24iLCJjb3VudF9wcm9kdWN0c19pbl9vcHRpb25fdmFsdWVzX2ZpbHRlcl9hdF9vbmNlIiwiY2FtcGFnaW5zX3dwYWRzIiwib21uaWJ1c19mcm9udGVuZCIsImFwcHN0b3JlX2FwaWxvX211bHRpX2NoYW5uZWwiLCJzaGlwbWVudF9jcmVhdGVfaW52ZXJ0X3Nob3BlcnNoaXBtZW50IiwicGF5bWVudF9uZXdfb25saW5lcGF5bWVudF9mb3JtX3VwZGF0ZSIsIm9tbmlidXNfYmFja2VuZF92MiIsInBhcmNlbHNfcHJpbnRfZG9jdW1lbnRzX25ld19maWxlbmFtZSIsImd0YWdfZW1pdF9ldmVudCIsInBheW1lbnRfbmV3X2Zvcm1fYmFja2VuZCIsInNpdGVtYXBfYWRkaXRpb25hbF9vcHRpb25zIiwiYXBwc3RvcmVfcmV0dXJucyIsInBheW1lbnRfYm1fcGhvdG9fdmVyaWZpY2F0aW9uIiwiY2FjaGVfdGFnc19vcHRpbWl6ZXIiLCJwYXlfcGFsX2V4cHJlc3NfY2hlY2tvdXRfcmVwYWlyIiwib25saW5lcGF5bWVudF9kaXNhYmxlX2FjY291bnRfbnVtYmVyX3R5cGUiLCJwYXltZW50X3JlZnVuZF9wcm9jZXNzX2pvYiIsInBheW1lbnRfbmV3X3NlcnZpY2VfZXhpc3RzIiwiaW1wb3J0X2dmeF9mcm9tX3VybF9tb3ZlX291dF9vZl90cmFuc2FjdGlvbiIsImNhbXBhZ2luc19tc2FkcyIsInJlcGVhdGluZ19wYXlwb190cmFuc2FjdGlvbnMiLCJyZXZlcnNlX3BheW1lbnRfbmFtZV9kaXNwbGF5Iiwic3RvY2tfZnJvbnRfY2FjaGVfa2V5IiwiYXBwc3RvcmVfYXBpbG8iLCJ1cGRhdGVfZ2F0ZXdheV9pZCIsIm9ubGluZXBheW1lbnRfcGhvbmVfdmFsaWQiLCJuZXdfY29sbGVjdGlvbl9sYXlvdXQiLCJzaG9wZXJfY2FtcGFpZ25zX25ld19kYXRhX3NvdXJjZSIsInNob3Blcl9jYW1wYWlnbnNfcmVwb3J0cyIsImFwcHN0b3JlX3Nob3Blcl9jb25uZWN0IiwiZm1jX3N0YXJ0aW5nX2NvdW50ZXJfdmFsdWUiLCJyb3V0ZXJfdXJsX2FkZF9xdWVyeV9wYXJhbXMiLCJsb3lhbHR5X21haWxfcGVyX3VzZXIiLCJwYXltZW50X25vbl9hY2NvdW50ZWRfYWN0aXZpdHlfc2V0dGluZ3MiLCJmbWNfbG9jYWxfY291bnRlciIsIm9ubGluZXBheW1lbnRfcmVmdW5kc19kYl90cmFuc2FjdGlvbiIsInBheW1lbnRfZmluYW5jaW5nX25ld19kZXNjcmlwdGlvbiIsIndmaXJtYV9hcGlfYXV0aCIsInBhcnRuZXJfZ29vZ2xlX2FuYWx5dGljc192NCIsImdvb2dsZV9hbmFseXRpY3NfdjRfY2FtcGFpZ24iLCJzaG9wZXJfY2FtcGFpZ25zX2J1eV9jYW1wYWlnbiIsIm9tbmlidXNfcHJpY2VzIiwic2hvcGVyX2NhbXBhaWduc19nb29nbGVfZ21jX25ld19yZXF1ZXN0X2hhc2giLCJmcm9udF9hcGlfcmVnaXN0ZXJfZml4Iiwia2xhcm5hX3BheW1lbnRzIiwiYXBpX29yZGVyc19jcmVhdGVfY3VycmVuY3lfcmF0ZSIsIm5ld19maWx0ZXJzX2NvbmZpZyIsImR5bmFtaWNfb3B0aW9uc19mb3JfbmV3X2FjY291bnRzIiwib25saW5lcGF5bWVudF96aXBjb2RlX3ZhbGlkIiwiZ3BheV9lc2NhcGVfbWVyY2hhbnRfZGF0YSIsImRpc2FibGVfZG90cGF5IiwicHJvbW90aW9uX3RpbWUiLCJjb25maWdfZ29vZ2xlX3JlbWFya2V0aW5nIiwicGF5bWVudHNfYm1fdG9fYXV0b3BheSIsInBheXBvX2Jhbm5lciIsImFwaV9zcGVjaWFsX3Njb3BlcyIsImFwaV9vcmRlcl9vcmlnaW5fc3BlY2lhbF9zY29wZSIsInByb21vX2NvZGVzX2RiX3RpbWVfZW5hYmxlZCIsImFsbGVncm9fbWlncmF0b3IiLCJvcmRlcl9waWNrdXBfcG9pbnRfZGJfZGVkaWNhdGVkX3NhdmUiLCJvcmRlcnNfcHJvcGVydGllc19hbGxlZ3JvX3NtYXJ0IiwicGF5bWVudF9wMjRfcmVmZXJyYWxfbGluayIsIm9yZGVyX3BpY2t1cF9wb2ludF9kYl9kZWRpY2F0ZWRfcmVhZCIsImJtX292ZXJ3cml0ZV9hbWxfZGF0YSIsInBheW1lbnRfY3JlYXRlX3NpbmdsZV90cmFuc2FjdGlvbnMiLCJwcm9tb2NvZGVfdGltZSIsInBheW1lbnRfZG9jdW1lbnRfbnVtYmVyIiwiZGlzYWJsZV9wcm9jZXNzX2Jhc2tldF9xdWV1ZSIsImtsYXJuYV9keW5hbWljX2Jhbm5lciIsInBheW1lbnRzX2JtX3RvX2F1dG9wYXlfbGlua3MiLCJzdG9yZWZyb250X3VwZGF0ZSIsImFsbGVncm9faW50ZWdyYXRpb25fbGltaXRlZCIsInN0b3JlZnJvbnRfc2tpbnN0b3JlX3VwZGF0ZXMiLCJzaG9wZXJfY2FtcGFpZ25zX29yZGVyX2NyZWF0ZWQiLCJzaG9wZXJfY2FtcGFpZ25zX29yZGVyX2FwaV91dG0iLCJvcmRlcl9wYXltZW50X21haWxzIiwib3JkZXJfcGlja3VwX3BvaW50X2NvbXBhdGliaWxpdHkiLCJvcmRlcl9waWNrdXBfcG9pbnRfaW5fY29yZSIsInNwZWNpYWxfb2ZmZXJzX3N0b2Nrc192MCIsImN1c3RvbWVyX3ByaXZhY3lfdjIiLCJtaWNyb3NvZnRfYWRzIiwic2hvcGVyX2NhbXBhaWduc19hcHBzdG9yZV9saW5rcyIsImNvb2tpZV9zZXR0aW5nc19saW5rIiwicGF5bWVudF9vbmxpbmVwYXltZW50X2FkZF9mdW5kcyIsInByb2R1Y3Rfb3B0aW9uX2NvbG9yX3N0cnVjdF9hZ2dyZWdhdGVfZGF0YSIsInVzZV9vYmplY3Rfc3RvcmFnZV9mb3JfdGh1bWJzIiwicGF5bWVudF9rbGFybmFfZmxvYXRfcHJvZHVjdF9xdWFudGl0eSIsInBheW1lbnRfcGF5dV9wZW5kaW5nX3RyYW5zYWN0aW9uc19zeW5jaHJvbml6YXRpb24iLCJzaG9wZXJQMjRfcGF5bWVudHMiLCJwYXltZW50X2FwcGxlX3BheV9pbl9zZXR0aW5ncyIsInNlYXJjaF9hZG1pbl9leGNlcnB0X3N1cHBvcnQiLCJuZXdfY2FyZHNfdmlldyIsInN2ZV9lZGl0b3JzLWJyZWFkY3J1bWJzIiwibWFpbF9vdHAiLCJzdmVfZ3JpZC1sYWJlbHMtdjIiLCJzdG9yZWZyb250X2xhbmd1YWdlcyIsInN0b3JlZnJvbnQiLCJzdG9yZWZyb250X2JlbGxfbWVzc2FnZSIsImdvb2dsZV8yZmFfcXJfY29kZV9nZW5lcmF0ZV9sb2NhbGx5IiwicGF5bWVudHNfZGVmYXVsdF9wYXlwb19wcm92aWRlciIsInNob3Blcl9jYW1wYWlnbnNfbWVudV9nb29nbGVfZGlzYWJsZWQiLCJzdG9yZWZyb250X3NvY2lhbF9sb2dpbiIsInN0b3JlZnJvbnRfc29jaWFsX2xvZ2luX2dvb2dsZSIsInN0b3JlZnJvbnRfc29jaWFsX2xvZ2luX2ZhY2Vib29rIiwic2hvcGVyX2NhbXBhaWduc19nb29nbGVfYXBwIiwic3ZlX25ldy1jb2xvci1waWNrZXIiLCJzdmVfaW1hZ2UtZWRpdG9yIiwiZmlsdGVyc19yZWZhY3RvciIsInAyNF9wYXltZW50X2dwYXkiLCJwMjRfcGF5bWVudF9hcHBsZV9wYXkiLCJyZXR1cm5fcXVhbnRpdHlfdG9fc3RvY2tfYWZ0ZXJfY2FuY2VsZWRfb3JkZXIiLCJmaW5hbmNpbmdfbmV3X29mZmVyIiwic2hvcGVyX2NhbXBhaWduc19kaXNhYmxlX3Nob3Blcl90cmFmZmljIiwicGF5bWVudF9wMjRfZ3BheV9hc3luYyIsInNob3Blcl9jYW1wYWlnbnNfbWVudV9mYWNlYm9va19kaXNhYmxlZCIsInNob3Blcl9jYW1wYWlnbnNfZmFjZWJvb2tfYXBwIiwic2hvcGVyX2NhbXBhaWduc19tZW51X2NhbXBhaWduc19kaXNhYmxlZCIsImltYWdlX2VkaXRvciIsInN2ZV9wcmVkZWZpbmVkLWNvbHVtbnMiLCJzdG9yZWZyb250X21hY3JvcyIsInN0b3JlZnJvbnRfbWFjcm9zX2FkZCIsInN0b3JlZnJvbnRfbWFjcm9zX2VkaXQiLCJpbnBvc3RfcGF5IiwiYXBwc3RvcmVfbGlua3NfbWFrZV9pbnRlcm5hbGx5Iiwic3RvcmVmcm9udF9tYWNyb3NfZGVsZXRlIiwibGltaXRfcHJvZHVjdF9pbWFnZXNfY291bnRfYXBpIiwicGF5bWVudF9wMjRfZGlzY2xhaW1lciIsImdhX2NhbXBhaWduX21vdmVfZnJvbV9wbHVnaW5zIiwic2tpbnN0b3JlX3NraW5fY29weSIsInN2ZV9kdXBsaWNhdGlvbnMiLCJmYWNlYm9va19idXNpbmVzc19leHRlbnNpb25fc2ltcGxlX2dhbW1hIiwiaW5wb3N0X3BheV9jb2QiLCJtZXRhZmllbGRzX2JpbmQiLCJzdmVfcmVwZWF0ZXIiLCJzdmVfc3RydWN0dXJlLWRyYWdhbmRkcm9wIiwic3RvcmVmcm9udF9iYXNrZXRfbGlzdCIsInNwZWNpYWxfb2ZmZXJzX3N0b2Nrc192MSIsInNwZWNpYWxfb2ZmZXJzX2RlZmF1bHRfc3RvY2tfZml4X2dhbW1hIiwic3BlY2lhbF9vZmZlcnNfcGVyY2VudGFnZSIsInNwZWNpYWxfb2ZmZXJzX21hbnVhbF9wcm9tbyIsInN0b3JlZnJvbnRfanNfbmV3Iiwic3RvcmVmcm9udF9qc19uZXdfc2F2ZSIsInNob3BpbG9faGlkZV9vbGRfbWVudSIsInNob3BpbG9fbmV3X21lbnUiLCJzdmVfaG90LWtleXMiLCJwZXJmb3JtYW5jZV9sb2FkX3JlcG9ydHMiLCJ0cmFmZmljX2xvYWRfYWdncmVnYXRvciIsIm1ldGFmaWVsZHNfY2FuX2Fzc2lnbl90b19hcHAiLCJncHNyX3Byb2R1Y3RfaW5mb3JtYXRpb24iLCJncHNyX3Byb2R1Y3RfaW5mb3JtYXRpb25feG1sIiwic3RvcmVmcm9udF9ncHNyIiwicGF5bWVudF9ibGlrMCIsInN0b3JlZnJvbnRfZW5hYmxlX3R1cmJvX3ByZWZldGNoIiwicGF5bWVudHNfYXV0b3BheV92YWxpZGF0ZV9kb2N1bWVudF9udW1iZXIiLCJwYXltZW50X3Nob3BlclAyNF9iZWxsIiwic3RvcmVmcm9udF9mdWxsX3JlZ2lzdHJhdGlvbiIsImdhbGxlcnlfbGlzdCIsInN0b3JlZnJvbnRfYmFza2V0X2hpZGVfY29zdF9wZXJfY291bnRyeSIsInByb2R1Y3Rfb3B0aW9uX3NlbGVjdF9zdHJ1Y3RfYWdncmVnYXRlX2RhdGEiLCJ0YXNrX21haWxfc2VuZF9ieV9tYW5hZ2VyIiwicGF5bWVudF9jdXN0b21fbmFtZV9saW1pdCIsInN0b3JlZnJvbnRfbWFjcm9zX2hpc3Rvcnlfc2F2ZSIsInN0b3JlZnJvbnRfbWFjcm9zX2hpc3RvcnkiLCJzdG9yZWZyb250X21hY3Jvc19jYW5fYWNjZXNzX29yaWdpbmFsIiwic3RvcmVmcm9udF9mdWxsX3JlZ2lzdHJhdGlvbl9mb3JjZSIsInBheW1lbnRzX3AyNF9pbnN0YWxsbWVudHNfaHViIiwicGF5bWVudHNfc3RyaXBlIiwiZXh0ZXJuYWxfaW50ZWdyYXRpb25zX2FwaV90b2tlbnNfZ2FtbWEiLCJhcGlfdG9rZW5zX2FkbWluX21hbmFnZV9nYW1tYSIsInNvYXBfYXBpX2F1dGhlbnRpY2F0ZV9ieV90b2tlbl9nYW1tYSIsImF1dG9fbmJwX3VwZGF0ZXNfZ2FtbWEiLCJ4bWxfY2FtcGFpZ25zX2tvam90eSIsImlucG9zdF9wYXlfdjJfdW5zZXQiLCJwYXltZW50c19wYXltZW50X2NoYW5uZWxzX25hbWUiLCJpbnBvc3RfcGF5X3JlZnVuZHMiLCJzcGZfdmFsaWRhdGlvbl9nYW1tYSIsInBheW1lbnRzX3AyNF9pbnN0YWxsbWVudHNfaHViXzBfb2ZmZXIiLCJpbnBvc3RfcGF5X3YyIiwic3RvY2tfYWRkaXRpb25hbF9jb2Rlc19pcGEiLCJodHRwc19yZWRpcmVjdF8zMDgiLCJpbnBvc3RfcGF5X2dhbGxlcnkiLCJzaG9wZXJfc2hpcG1lbnRzX3Bob25lX3ByZWZpeF9rb2pvdHkiLCJwYXltZW50c19pbnBvc3RfcGF5X3NhdmVkX2tleSIsIm1ldGFmaWVsZHNfaGlkZV9zY29wZSIsInN0b3JlZnJvbnRfbmV3X3NjaGVtYV92YWxpZGF0aW9uIiwiYXBwc3RvcmVfYXBwbGljYXRpb25fcmVkaXJlY3QiLCJzdmVfY29sdW1uLXNwbGl0IiwiZmlsZV9yb3RhdGVfa29qb3R5IiwiZGJfdGFibGVfY29tcGFyZV9udW1lcmljX2RhdGFfdHlwZXMiLCJwcm9kdWN0X2VkaXRfZGF0ZV9nYW1tYSIsImZpbHRlcl9vcHRpb25zX2F2YWlsYWJpbGl0eSIsImV4dGVybmFsX3N5c3RlbV9ub3RpZmljYXRpb24iLCJuYnBfdGFibGVfYl91cGRhdGVzX2tvam90eSIsInByb2R1Y3RfaW1hZ2Vfd2NhZ19rb2pvdHkiLCJpbmxpbmVfZWRpdF90ZXh0YXJlYV9rb2pvdHkiLCJ0cmlhbF9tYWlsX3NlbmRpbmdfYmxvY2tlZF9rb2pvdHkiLCJwYXltZW50X3N0cmlwZV92ZXJpZmljYXRpb25zIiwic3dpZnRfcHJvZHVjdF9nZnhfbm9fY2hlY2siLCJiaWdkYXRhX2luZGV4X3Byb2R1Y3RzIiwiYmlnZGF0YV9pbmRleF9wcm9kdWN0c192YXJpYW50cyIsImJpZ2RhdGFfaW5kZXhfcGFyY2VscyIsImJpZ2RhdGFfaW5kZXhfb3JkZXJzIiwiYmlnZGF0YV9pbmRleF9vcmRlcnNfcHJvZHVjdHMiLCJiaWdkYXRhX2luZGV4X29yZGVyc190cmFuc2FjdGlvbnMiLCJzdGZfZGVmYXVsdF9zb3J0X2ZpeCIsImFwcHN0b3JlX25ld191cmxfZ2VuZXJhdGlvbl9pcGEiLCJmaWx0ZXJfcHJvZHVjdF9hdHRyaWJ1dGVzX3ZhbHVlc19pcGEiLCJncHNyX3Byb2R1Y3RfaW5mb3JtYXRpb25fcG9zdF9kZXBsb3kiLCJjYWNoZV90aHVtYm5haWxzX2tvam90eSIsIndlYmhvb2tzX2Zvcl9leHRlcm5hbF9wYXltZW50c19pcGEiLCJpbnBvc3RfcGF5X2RlYnVnIiwic3RvcmVmcm9udF9jb3B5X3NraW5faW5fYmFja2dyb3VuZCIsInN0b3JlZnJvbnRfZmlsdGVyc19jaGVja3N1bSIsImZpbHRlcl9vcHRpb25zX2F2YWlsYWJpbGl0eV9maXhfbm9uX3N0b2NrIiwicGF5bWVudF9wYXlwYWxlY19uZXdfYnV0dG9uIiwiYXJpYV9saXZlX3J3ZCIsInN0b3JlZnJvbnRfbW9kdWxlc19jb250ZXh0cyIsImlucG9zdF9uZXdfZ2Vvd2lkZ2V0X2tvam90eSIsIm1pbmltdW1fY2FydF92YWx1ZV9mb3Jfc2hpcG1lbnRzX21pbl9jb3N0Iiwic3ZlX3dlc3QiLCJzdmVfem9vbSIsInN2ZV9kcmFnLXdob2xlLWdyaWQtZWxlbWVudCIsInN2ZV9ncmlkLWVsZW1lbnRzLWNsaWNrLWFuZC1lZGl0IiwiZGV2X3N2ZV9uZXctZm9ybXMtZ3JpZCIsImRldl9zdG9yZWZyb250X3JlbW92ZV9tYWNybyIsInBheW1lbnRzX3AyNF90b3BfdXBfYmFsYW5jZSIsImRldl9iYXNrZXRfaWQiLCJkZXZfZmlsdGVyX29wdGlvbnNfc3RvY2tfZml4IiwiZmlsdGVyc19kaXNhYmxlX2Z1enp5X3NlYXJjaCIsImFwcGxpY2F0aW9uc19zc29fbG9naW4iLCJjb3JlX2N1cnJlbmN5X21lbW9yeV9jYWNoZSIsImNvcmVfZW50aXR5X3Jvd19jYWNoZSIsImNvcmVfc2tpcF9hZG1pbl9sb2dzX2Zvcl91c2Vyb25saW5lIiwiZGV2X3N2ZV9wcmV2aWV3LW1vZGUiLCJkZXZfc3ZlX2ltYWdlLWJhY2tncm91bmQiLCJkZXZfYmFja2dyb3VuZF9pbWFnZSIsImJpZ2RhdGFfaW5kZXhfc2VhcmNoX2hpc3RvcnkiLCJiaWdkYXRhX2luZGV4X3Nlc3Npb25zIiwiZGV2X3JlZmVyZXJfaG9zdF9hbmFseXplciIsIm1lcmNoYW50X3RyYWNraW5nIiwicGF5bWVudHNfYXBfdmVyaWZpY2F0aW9uX3RyYW5zZmVyIiwiZGV2X3N5c3RlbV9pY29ucyIsImRldl9zdG9yZWZyb250X3NpbXBsZV9iYXNrZXRfYWRkcmVzcyIsImRldl9zdmVfd2VzdC1ieS1kZWZhdWx0IiwiZGV2X3Byb21vY29kZV9jYXNlX2luc2Vuc2l0aXZlIiwiZGV2X3dlYmhvb2tzX3llYXJseV9pbmRleGluZ19lbGFzdGljIiwicGF5bWVudF9ibGlrbCIsImltYWdlc19jYWNoZV9uYW1lX3JldmVyc2FsIiwiZGV2X2ltYWdlc191cGxvYWRzX3RvX2NvbGxlY3Rpb25zX2FuZF9jYXRlZ29yaWVzIiwiZGV2X3Zpc3VhbF9zdWJjYXRlZ29yaWVzIiwiZGV2X2Rpc2NvdW50c19maXgiLCJkZXZfY3NzX2NsYXNzX29uX2Zvcm1fZXJyb3JzIiwiZGV2X2Jhc2tldF91c2VfZG9tYWluX2xvY2FsZSJd">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=5.0">
+
+    <title>
+        404 Nie znaleziono strony - Pancernik.eu    </title>
+    <meta name="description"
+        content="" />
+        
+    <link rel="preload" as="style" href="/skins/user/rwd_shoper_57/cache/sfc/Nzg6OTc2OjUuMjUuNTQ.css" />
+    <link rel="preload" as="script" href="/assets/js/frontstore/main.f98d99f589fcc388f4af.min.js" />
+    <link rel="home" href="/" />
+    <link rel="shortcut icon" href="/skins/user/rwd_shoper_57/images/favicon.png" />
+    <link rel="icon" href="/skins/user/rwd_shoper_57/images/favicon.png">
+
+    
+
+    <div id="preloader">
+        <img src="/userdata/public/assets/Pancernik%20-%20LOGO%20177x98px%20bez%20t%C5%82a.webp"
+            alt="Pancernik.eu" width="178" height="99">
+    </div>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        
+
+        html.js #preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            right: 0;
+            bottom: 0;
+            background: gray;
+            transition: opacity 0.2s;
+            transform: translate3d(0, 0, 0);
+            will-change: opacity;
+            z-index: 999999;
+            opacity: 1;
+        }
+
+        #preloader img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        #preloader.hidden {
+            display: none !important;
+        }
+
+        .mod-not-sticky {
+            position: static !important;
+        }
+
+            
+    </style>
+
+    <script>
+        
+        document.getElementsByTagName('html')[0].classList.add("js");
+        var preloader = document.getElementById("preloader");
+        function hidePreloader() {
+            setTimeout(function () {
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.classList.add("hidden");
+                }, 200);
+            }, 0);
+        }
+        if (sessionStorage.getItem("firstVisit") == 1) {
+            preloader.classList.add("hidden");
+        }
+        sessionStorage.setItem("firstVisit", 1);
+        
+        window.userLoggedIn =  false;
+    </script>
+
+    <link id="csslink" rel="stylesheet" type="text/css" href="/skins/user/rwd_shoper_57/cache/sfc/Nzg6OTc2OjUuMjUuNTQ.css" />
+    <!--<script src="https://eu1-config.doofinder.com/2.x/5efa2dea-d346-4958-857a-ec654dc67d4d.js" async></script>-->
+    <script type="text/javascript" src="/assets/js/frontstore/main.f98d99f589fcc388f4af.min.js"></script>
+    <script type="text/javascript"
+        src="/userdata/public/locales/pl_PL.js?sci=976"></script>
+
+    
+    
+    <script src="https://dcsaascdn.net/js/front-api-1.5.0.min.js" async></script>
+<!DOCTYPE HTML>
+<!-- CONSENT MODE - Zarządzanie zgodami RODO -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag() {
+    dataLayer.push(arguments);
+}
+gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'analytics_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied'
+});
+window.customerPrivacy.onMarketingConsentGranted(function() {
+    gtag('consent', 'update', {
+        'ad_storage': 'granted',
+      'ad_user_data': 'granted',
+  'ad_personalization': 'granted'
+    });
+});
+window.customerPrivacy.onAnalyticsConsentGranted(function() {
+    gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+    });
+});
+</script>
+
+<!-- GOOGLE TAG MANAGER - Server-Side (sGTM) -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://load.dev.pancernik.eu/1sxnieufeo.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','4vwzwd=aWQ9R1RNLTVGU1NNTlc%3D&page=3');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- GOOGLE TAG MANAGER - Klasyczny (client-side) -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5VJR8Q7');
+</script>
+<!-- End Google Tag Manager -->
+
+<meta name="google-site-verification" content="L6-LXcAZjZgzQD-iEH52PSef8wFwNnmHfsLSbMDJ3m8" />
+<meta name="google-site-verification" content="7qhQbcPccoU8-389SirI-Gy9NOj9Kc_KOIaCNjMpxm8" />
+<meta name="google-site-verification" content="lplE_kIfpfYyfhiAUDvjSA-Plww4x-gEAUmsPt3Cr5Q" />
+<meta name="google-site-verification" content="sOV06KH-GzmBS7PPNRMaqmUM2yPvgwtTYQh4WMIgSgc" />
+<!-- Ahrefs SEO Tool - weryfikacja -->
+<meta name="ahrefs-site-verification" content="813bea9cb33291d593140ac9821110ba12f141d963fd1d6a21c26ca3b4c6367b">
+<!-- MEDIAEFFECT/WEBEPARTNERS - Cookie tracking -->
+<script type="text/javascript">
+window.customerPrivacy.onAnalyticsConsentGranted(function () {
+  function setCookie(name, value, expires, path, domain, secure)
+  {
+      var today = new Date();
+      today.setTime( today.getTime() );
+      if ( expires )
+          {
+          expires = expires * 1000 * 60 * 60 * 24;
+          }
+      var expires_date = new Date( today.getTime() + (expires) );
+      document.cookie= name + "=" + escape(value) +
+      ((expires) ? "; expires=" + expires_date.toGMTString() : "") +
+      ((path) ? "; path=" + path : "") +
+      ((domain) ? "; domain=" + domain : "") +
+      ((secure) ? "; secure" : "");
+  }
+
+  function getParameterValue(name, query)
+  {
+      var match = RegExp('[?&]' + name + '=([^&]*)').exec(query);
+      return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+  }
+
+  var oTTUID = getParameterValue('oTTUID', window.location.search);
+  if (oTTUID != null)
+  {
+      setCookie('MEDIAEFFECT', oTTUID, 30);
+  }
+});
+</script>
+<!-- FACEBOOK - Weryfikacja domeny -->
+<meta name="facebook-domain-verification" content="yive9byphw9i9s4374bbprjvf3vvao" />
+<!-- BING ADS (Microsoft Advertising) -->
+<script>
+window.customerPrivacy.onAnalyticsConsentGranted(function () {
+    (function(w,d,t,r,u)
+    {
+        var f,n,i;
+        w[u]=w[u]||[],f=function()
+        {
+            var o={ti:"97006820"};
+            o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")
+        },
+        n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function()
+        {
+            var s=this.readyState;
+            s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)
+        },
+        i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)
+    })
+    (window,document,"script","//bat.bing.com/bat.js","uetq");
+})
+</script>
+<!-- FACEBOOK MESSENGER - Widget czatu -->
+    <div id="fb-root"></div>
+
+    <!-- Your Wtyczka czatu code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "446756838704238");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+    window.customerPrivacy.onFunctionalConsentGranted(function () {
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v18.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/pl_PL/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    }) 
+    </script>
+<!-- CENEO - Tracking i opinie -->    
+<script>
+window.customerPrivacy.onMarketingConsentGranted(function () {
+(function(w,d,s,i,dl){w._ceneo = w._ceneo || function () {
+w._ceneo.e = w._ceneo.e || []; w._ceneo.e.push(arguments); };
+w._ceneo.e = w._ceneo.e || [];dl=dl===undefined?"dataLayer":dl;
+const f = d.getElementsByTagName(s)[0], j = d.createElement(s); j.defer = true;
+j.src = "https://ssl.ceneo.pl/ct/v5/script.js?accountGuid=" + i + "&t=" + Date.now() + (dl ? "&dl=" + dl : ''); f.parentNode.insertBefore(j, f);
+})(window, document, "script", "d801318f-39b9-4f90-8228-d3dcae7c4c65");
+})
+</script>
+<!-- WP.PL PIXEL - Reklamy WP -->
+<script>
+   !function(d,m,e,v,n,t,s){d['WphTrackObject'] = n;
+   d[n] = window[n] || function() {(d[n].queue=d[n].queue||[]).push(arguments)},
+   d[n].l = 1 * new Date(), t=m.createElement(e), s=m.getElementsByTagName(e)[0],
+   t.async=1;t.src=v;s.parentNode.insertBefore(t,s)}(window,document,'script','https://pixel.wp.pl/w/tr.js', 'wph');
+   wph('init', 'WP-ADS-CWZKOQKYC');
+</script>
+<!-- Hotjar Tracking Code for https://pancernik.eu/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6424823,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+<!-- LUIGI'S BOX - Inteligentna wyszukiwarka -->
+<script async src="https://scripts.luigisbox.com/LBX-772470.js"></script>
+<style id="wce-app-dynamiclists-live"> .wce_dynamic-product{transition:opacity .3s ease-in-out}.wce_dynamic-product.wce_hidden{opacity:0}.wce_app-dynamiclist-container{position:relative;margin:1.5em 0 .5em;min-height:48px}.wce_app-dynamiclist-button{min-width:180px;max-width:100%;padding:0 15px;position:relative;height:48px;line-height:1em;display:inline-grid;align-items:center;justify-content:center;grid-template-columns:100%;box-sizing:border-box;opacity:1;transform:scale(1)}.wce_app-dynamiclist-button.wce_loading{transition:opacity .3s ease-in-out,transform .3s ease-in-out;opacity:0;transform:scale(0)}.wce_app-dynamiclist-button .wce_dynamiclist-btn-hint{position:absolute;bottom:calc(100% + 10px);justify-self:center;box-shadow:0 0 10px 0 rgba(0,0,0,0.1);border-radius:3px;padding:10px;line-height:1em !important;font-size:12px !important;font-weight:normal !important;text-decoration:none !important;border:1px solid;border-color:#d8d8d8 !important;background:#fff !important;color:#000 !important;transition:transform .3s ease-in-out;transform-origin:50% 100%}.wce_app-dynamiclist-button .wce_dynamiclist-btn-hint span{line-height:1em;font-size:12px;font-weight:normal;color:#000 !important}.wce_app-dynamiclist-button .wce_dynamiclist-btn-hint:before{content:"";display:block;width:10px;height:10px;background:#fff;border-right:1px solid #d8d8d8;border-bottom:1px solid #d8d8d8;transform:rotate(45deg);transform-origin:50% 50%;position:absolute;left:calc(50% - 5px);top:calc(100% - 5px)}@media screen and (min-width:980px){.wce_app-dynamiclist-button .wce_dynamiclist-btn-hint{transform:scale(0)}.wce_app-dynamiclist-button:hover .wce_dynamiclist-btn-hint{transform:scale(1)}}@media screen and (max-width:980px){.wce_app-dynamiclist-button .wce_dynamiclist-btn-hint{transform:scale(1)}.wce_app-dynamiclist-button.wce_hint-hide-mobile .wce_dynamiclist-btn-hint{transform:scale(0)}}.wce_app-dynamiclist-loader{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;opacity:0;transform:scale(0)}.wce_app-dynamiclist-loader .wce_loader-text{width:100%;text-align:center;line-height:1em;font-size:11px;margin-top:4px}.wce_app-dynamiclist-loader .wce_loader-ico{display:block;width:30px;height:30px;margin:0 auto;border:4px solid;border-color:#282828 #d8d8d8 #d8d8d8 #d8d8d8;box-sizing:border-box;border-radius:50%}.wce_app-dynamiclist-loader.wce_for-scrolling,.wce_loading+.wce_app-dynamiclist-loader{opacity:1;transform:scale(1);transition:opacity .3s ease-in-out,transform .3s ease-in-out}.wce_app-dynamiclist-loader.wce_for-scrolling .wce_loader-ico,.wce_loading+.wce_app-dynamiclist-loader .wce_loader-ico{-webkit-animation:wce-loading-animation .8s infinite linear;animation:wce-loading-animation .8s infinite linear}.wce_app-dynamiclist-loader .wce_dynamiclist-page-counter:before{content:"("}.wce_app-dynamiclist-loader .wce_dynamiclist-page-counter:after{content:")"}@-webkit-keyframes wce-loading-animation{0%{-webkit-transform:rotate(0deg)}100%{-webkit-transform:rotate(359deg)}}@keyframes wce-loading-animation{0%{transform:rotate(0deg)}100%{transform:rotate(359deg)}} .shop_product_list #box_mainproducts .innerbox .paginator.wce_app-dynamiclist-is-ready:not(.wce_default), .shop_collection #box_mainproducts .innerbox .paginator.wce_app-dynamiclist-is-ready:not(.wce_default){ margin: 0; padding: 0; } .shop_product_list #box_mainproducts .innerbox .paginator.wce_app-dynamiclist-is-ready:not(.wce_default) li, .shop_collection #box_mainproducts .innerbox .paginator.wce_app-dynamiclist-is-ready:not(.wce_default) li{ display: none !important; } </style>
+<meta name="msvalidate.01" content="B30664AB1BFE1D5544F0B117EFB5E5AC">
+
+
+
+	<meta name="uet-tag-for-microsoft" content="187119872">
+
+
+
+    <meta name="shoper_campaigns_analytics_measurment_id" content="G-QSWH788NZF"/>
+    
+</head><body><script>window.customerPrivacy.onPlatformConsentGranted(() =>{window.Shop = window.Shop || {}; Shop.values = Shop.values || {}; Shop.values.partnerEE=true; Shop.values.partnerData="1763588145124999";(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','shopLayer','GTM-T68LWS');});</script>
+
+
+    <div class="wrap-custom">
+    <div class="box resetcss box_custom" id="box_custom67">
+                    
+                                                                        
+                                            
+                    
+                    
+                                        </div>
+</div>
+<div class="wrap rwd">
+    <header class="row">
+        
+                                    <div class="login-bar row container">
+                    <ul class="links right inline">
+                                                                                    <li class="register">
+                                    <a href="/pl/reg" title="Zarejestruj się" class="register">
+                                        <img src="/public/images/1px.gif" alt="pixel" class="px1" >
+                                        <span>Zarejestruj się</span>
+                                    </a>
+                                </li>
+                                                        <li class="login">
+                                <a href="/pl/login" title="Zaloguj się" class="login">
+                                    <img src="/public/images/1px.gif" alt="pixel" class="px1" >
+                                    <span>Zaloguj się</span>
+                                </a>
+                            </li>
+                                            </ul>
+                      <div class="phone-number right">
+                       tel.: <a href="tel:+48699577774">+48 699 577 774</a></span>
+                       e-mail: <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="24574f4841546454454a4741564a4d4f0a4151">[email&#160;protected]</a></span>
+                    </div>
+                </div>
+                            
+        
+        <div class="logo-bar row container">
+            <a href="/" title="Strona główna" class="link-logo link-logo-img">
+                                    <img src="/skins/user/rwd_shoper_57/images/logo.webp" alt="Pancernik.eu" style="max-width: 492; height: 99;">
+                            </a>
+
+                                                <div class="basket right empty-basket">
+                        <a href="/pl/basket" title="Koszyk" class="count">
+                            <img src="/public/images/1px.gif" alt="pixel" class="px1">
+                            <span class="countlabel">
+                                <span>Koszyk:</span>
+                                <b>
+                                                                            (pusty)
+                                                                    </b>
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="basket-contain">
+                        <div class="basket-products">
+                            <ul class="basket-product-list">
+                                                            </ul>
+                        </div>
+                        
+                        <div class="basket-summery">
+                            <a href="/pl/basket">do kasy</a>
+                            <span class="basket-price">
+                                <span class="price-total">
+                                    <span>suma:</span>
+                                    <strong class="price-products">0,00 zł</strong>
+                                </span>
+                                                            </span>
+                        </div>
+                    </div>
+                                                        <div class="search__container">
+                    <form data-product-view-type="" data-search-promotions-route="/pl/promotions" data-base-dir="" class="js__search search search-form" action="/pl/s" method="post">
+    <div class="none bottest"><!-- <input name="bottest1" value="1" /> --> <input name="bottest2" /></div>
+    <div class="search-input search__input-area r--l-flex r--l-flex-vcenter">
+        <div class="search__input-area-item">
+            <span class="js__search-clear-btn search__btn icon icon-close search__icon none" role="button" aria-label="clear search input"></span>
+            <img class="search__loader none" src="/libraries/images/loader.svg">
+        </div>
+        
+        <div class="search__input-area-item search__input-area-item_grow">
+            <input maxlength="255" class="search__input" name="search" type="search" autocomplete="off" placeholder="szukaj w sklepie...">
+        </div>
+
+        <div class="search__input-area-item">
+            <span class="js__search-close-btn icon icon-back" role="button" aria-label="close search"></span>
+            <button type="button" class="js__search-submit-btn search-btn search__input-area-item btn btn-red search__btn-search r--l-flex r--l-flex-vcenter r--l-flex-hcenter">
+                <span class="fa fa-search search__icon_size-l"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="search__content"></div>
+    
+    <input type="hidden" class="js__search-settings" value="eyJTSE9XX1BIUkFTRV9TVUdHRVNUSU9OUyI6MSwiU0hPUlRFTl9OQU1FUyI6MCwiU0hPV19NT0JJTEVfQlROIjoxLCJESVNQTEFZX0ZPUk1BVCI6MSwiUkVTVUxUU19QRVJfUEFHRSI6MTEsIkNBVEVHT1JJRVNfRU5BQkxFRCI6MSwiUFJPRFVDRVJTX0VOQUJMRUQiOjEsIlBST0RVQ1RTX0VOQUJMRUQiOjEsIkZST05UX09SSUdJTkFMX1FVRVJZX1BIUkFTRSI6IjAiLCJQUk9EVUNUX0FVVE9DT01QTEVURV9CVVRUT05fVkVSU0lPTiI6MSwiU0hPV19QUk9EVUNUU19QUklDRSI6MSwiU0hPV19QUk9EVUNUU19TQ09SRSI6MSwiU0hPV19QUk9EVUNUU19BVkFJTEFCSUxJVFkiOjF9">
+</form>                </div>
+                    </div>
+    </header>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+ window.cacheId = '976';
+</script>
+
+    <div class="menu row">
+        <nav class="innermenu row container relative">
+                            <ul class="menu-list large standard">
+                                                                        <li class="parent" id="hcategory_7317"  data-category="7317">
+                            	                                <a  href="/wg-modelu" title="Wybierz urządzenie" id="headlink87" class="spanhover mainlevel">Wybierz urządzenie</a>
+                                                                    <div class="submenu level1">
+                <ul class="level1">
+                                            <li class="parent" id="hcategory_1399" data-category="1399">
+                        		                                <a href="/apple"
+                                    title="Apple" id="headercategory1399" class="spanhover">Apple</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1389" data-category="1389">
+                        		                                <a href="/samsung"
+                                    title="Samsung" id="headercategory1389" class="spanhover">Samsung</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1396" data-category="1396">
+                        		                                <a href="/xiaomi"
+                                    title="Xiaomi" id="headercategory1396" class="spanhover">Xiaomi</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1391" data-category="1391">
+                        		                                <a href="/huawei"
+                                    title="Huawei" id="headercategory1391" class="spanhover">Huawei</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1402" data-category="1402">
+                        		                                <a href="/google"
+                                    title="Google" id="headercategory1402" class="spanhover">Google</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_2681" data-category="2681">
+                        		                                <a href="/oppo"
+                                    title="Oppo" id="headercategory2681" class="spanhover">Oppo</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_3021" data-category="3021">
+                        		                                <a href="/vivo"
+                                    title="Vivo" id="headercategory3021" class="spanhover">Vivo</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5636" data-category="5636">
+                        		                                <a href="/tecno"
+                                    title="Tecno" id="headercategory5636" class="spanhover">Tecno</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5182" data-category="5182">
+                        		                                <a href="/infinix"
+                                    title="Infinix" id="headercategory5182" class="spanhover">Infinix</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_4172" data-category="4172">
+                        		                                <a href="/nothing"
+                                    title="Nothing" id="headercategory4172" class="spanhover">Nothing</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1394" data-category="1394">
+                        		                                <a href="/oneplus"
+                                    title="OnePlus" id="headercategory1394" class="spanhover">OnePlus</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_7338" data-category="7338">
+                        		                                <a href="/amazfit"
+                                    title="Amazfit" id="headercategory7338" class="spanhover">Amazfit</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_7733" data-category="7733">
+                        		                                <a href="/suunto"
+                                    title="Suunto" id="headercategory7733" class="spanhover">Suunto</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_7729" data-category="7729">
+                        		                                <a href="/polar"
+                                    title="Polar" id="headercategory7729" class="spanhover">Polar</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_3307" data-category="3307">
+                        		                                <a href="/amazon"
+                                    title="Amazon" id="headercategory3307" class="spanhover">Amazon</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1853" data-category="1853">
+                        		                                <a href="/asus"
+                                    title="Asus" id="headercategory1853" class="spanhover">Asus</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_2641" data-category="2641">
+                        		                                <a href="/cat"
+                                    title="CAT" id="headercategory2641" class="spanhover">CAT</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_3900" data-category="3900">
+                        		                                <a href="/garmin"
+                                    title="Garmin" id="headercategory3900" class="spanhover">Garmin</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5139" data-category="5139">
+                        		                                <a href="/honor"
+                                    title="Honor" id="headercategory5139" class="spanhover">Honor</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1392" data-category="1392">
+                        		                                <a href="/htc"
+                                    title="HTC" id="headercategory1392" class="spanhover">HTC</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1388" data-category="1388">
+                        		                                <a href="/sony-xperia"
+                                    title="Sony Xperia" id="headercategory1388" class="spanhover">Sony Xperia</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1390" data-category="1390">
+                        		                                <a href="/lg"
+                                    title="LG" id="headercategory1390" class="spanhover">LG</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1401" data-category="1401">
+                        		                                <a href="/microsoft"
+                                    title="Microsoft" id="headercategory1401" class="spanhover">Microsoft</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_2755" data-category="2755">
+                        		                                <a href="/lenovo"
+                                    title="Lenovo" id="headercategory2755" class="spanhover">Lenovo</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_7736" data-category="7736">
+                        		                                <a href="/hmd"
+                                    title="HMD" id="headercategory7736" class="spanhover">HMD</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1398" data-category="1398">
+                        		                                <a href="/nokia"
+                                    title="Nokia" id="headercategory1398" class="spanhover">Nokia</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1393" data-category="1393">
+                        		                                <a href="/motorola"
+                                    title="Motorola" id="headercategory1393" class="spanhover">Motorola</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_4355" data-category="4355">
+                        		                                <a href="/pocketbook"
+                                    title="PocketBook" id="headercategory4355" class="spanhover">PocketBook</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_3022" data-category="3022">
+                        		                                <a href="/realme"
+                                    title="Realme" id="headercategory3022" class="spanhover">Realme</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_8168" data-category="8168">
+                        		                                <a href="/beats"
+                                    title="Beats" id="headercategory8168" class="spanhover">Beats</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5976" data-category="5976">
+                        		                                <a href="/t-mobile"
+                                    title="T-Mobile" id="headercategory5976" class="spanhover">T-Mobile</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_4724" data-category="4724">
+                        		                                <a href="/tcl"
+                                    title="TCL" id="headercategory4724" class="spanhover">TCL</a>
+                            
+                                                    </li>
+                                    </ul>
+            </div>                                                            </li>
+                                                                                                <li class="parent" id="hcategory_5296"  data-category="5296">
+                            	                                <a  href="/do-smartfona" title="Do smartfona" id="headlink81" class="spanhover mainlevel">Do smartfona</a>
+                                                                    <div class="submenu level1">
+                <ul class="level1">
+                                            <li class="parent" id="hcategory_5297" data-category="5297">
+                        		                                <a href="/do-smartfona/etui-na-telefon"
+                                    title="Etui na telefon" id="headercategory5297" class="spanhover">Etui na telefon</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_6579" data-category="6579">
+                        		                                <a href="/do-smartfona/szklo-hartowane"
+                                    title="Szkło hartowane, folia na telefon" id="headercategory6579" class="spanhover">Szkło hartowane, folia na telefon</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_341" data-category="341">
+                        		                                <a href="/ladowarka-do-telefonu"
+                                    title="Ładowarka do telefonu" id="headercategory341" class="spanhover">Ładowarka do telefonu</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1513" data-category="1513">
+                        		                                <a href="/uchwyt-na-telefon"
+                                    title="Uchwyt do telefonu" id="headercategory1513" class="spanhover">Uchwyt do telefonu</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5555" data-category="5555">
+                        		                                <a href="/do-smartfona/statyw-do-telefonu"
+                                    title="Statyw do telefonu" id="headercategory5555" class="spanhover">Statyw do telefonu</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5558" data-category="5558">
+                        		                                <a href="/do-smartfona/pad-do-telefonu"
+                                    title="Pad do telefonu" id="headercategory5558" class="spanhover">Pad do telefonu</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4156" data-category="4156">
+                        		                                <a href="/do-smartfona/obiektyw-do-telefonu"
+                                    title="Obiektywy do telefonu" id="headercategory4156" class="spanhover">Obiektywy do telefonu</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_7115" data-category="7115">
+                        		                                <a href="/pl/c/Rysik-do-telefonu/7115"
+                                    title="Rysik do telefonu" id="headercategory7115" class="spanhover">Rysik do telefonu</a>
+                            
+                                                    </li>
+                                    </ul>
+            </div>                                                            </li>
+                                                                                                <li class="parent" id="hcategory_693"  data-category="693">
+                            	                                <a  href="/do-smartwatcha" title="Do smartwatcha" id="headlink80" class="spanhover mainlevel">Do smartwatcha</a>
+                                                                    <div class="submenu level1">
+                <ul class="level1">
+                                            <li class="parent" id="hcategory_694" data-category="694">
+                        		                                <a href="/do-smartwatcha/etui-do-smartwatcha"
+                                    title="Etui do smartwatcha" id="headercategory694" class="spanhover">Etui do smartwatcha</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_6582" data-category="6582">
+                        		                                <a href="/do-smartwatcha/szklo-hartowane"
+                                    title="Ochrona wyświetlacza" id="headercategory6582" class="spanhover">Ochrona wyświetlacza</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5826" data-category="5826">
+                        		                                <a href="/do-smartwatcha/pasek-do-smartwatcha"
+                                    title="Paski do smartwatcha" id="headercategory5826" class="spanhover">Paski do smartwatcha</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_695" data-category="695">
+                        		                                <a href="/do-smartwatcha/ladowarki-i-stacje-dokujace"
+                                    title="Ładowarki i stacje dokujące" id="headercategory695" class="spanhover">Ładowarki i stacje dokujące</a>
+                            
+                                                    </li>
+                                    </ul>
+            </div>                                                            </li>
+                                                                                                <li class="parent" id="hcategory_5349"  data-category="5349">
+                            	                                <a  href="/do-laptopa" title="Do laptopa" id="headlink74" class="spanhover mainlevel">Do laptopa</a>
+                                                                    <div class="submenu level1">
+                <ul class="level1">
+                                            <li class="parent" id="hcategory_5351" data-category="5351">
+                        		                                <a href="/do-laptopa/etui-na-laptopa"
+                                    title="Etui na laptopa" id="headercategory5351" class="spanhover">Etui na laptopa</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5661" data-category="5661">
+                        		                                <a href="/do-laptopa/folia-na-ekran"
+                                    title="Ochrona ekranu laptopa" id="headercategory5661" class="spanhover">Ochrona ekranu laptopa</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_7480" data-category="7480">
+                        		                                <a href="/do-laptopa/pokrowiec"
+                                    title="Pokrowiec na laptopa" id="headercategory7480" class="spanhover">Pokrowiec na laptopa</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5350" data-category="5350">
+                        		                                <a href="/do-laptopa/torba-na-laptopa"
+                                    title="Torby na laptopa" id="headercategory5350" class="spanhover">Torby na laptopa</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5653" data-category="5653">
+                        		                                <a href="/do-laptopa/plecak-na-laptopa"
+                                    title="Plecaki na laptopa" id="headercategory5653" class="spanhover">Plecaki na laptopa</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5352" data-category="5352">
+                        		                                <a href="/do-laptopa/podstawka-pod-laptopa"
+                                    title="Podstawki pod laptopa" id="headercategory5352" class="spanhover">Podstawki pod laptopa</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1296" data-category="1296">
+                        		                                <a href="/stacja-dokujaca"
+                                    title="Stacja dokująca / hub USB" id="headercategory1296" class="spanhover">Stacja dokująca / hub USB</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5354" data-category="5354">
+                        		                                <a href="/do-laptopa/karta-sieciowa-usb"
+                                    title="Karty sieciowe USB" id="headercategory5354" class="spanhover">Karty sieciowe USB</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_6558" data-category="6558">
+                        		                                <a href="/do-laptopa/zasilacz-do-laptopa"
+                                    title="Zasilacz do laptopa" id="headercategory6558" class="spanhover">Zasilacz do laptopa</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5355" data-category="5355">
+                        		                                <a href="/do-laptopa/kable"
+                                    title="Kable" id="headercategory5355" class="spanhover">Kable</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_6230" data-category="6230">
+                        		                                <a href="/do-laptopa/akcesoria-do-dyskow"
+                                    title="Akcesoria do dysków" id="headercategory6230" class="spanhover">Akcesoria do dysków</a>
+                            
+                                                    </li>
+                                    </ul>
+            </div>                                                            </li>
+                                                                                                <li class="parent" id="hcategory_5341"  data-category="5341">
+                            	                                <a  href="/do-tabletu" title="Do tabletu" id="headlink85" class="spanhover mainlevel">Do tabletu</a>
+                                                                    <div class="submenu level1">
+                <ul class="level1">
+                                            <li class="parent" id="hcategory_5342" data-category="5342">
+                        		                                <a href="/do-tabletu/etui-na-tablet"
+                                    title="Etui na tablet" id="headercategory5342" class="spanhover">Etui na tablet</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5343" data-category="5343">
+                        		                                <a href="/do-tabletu/szklo-hartowane"
+                                    title="Ochrona ekranu" id="headercategory5343" class="spanhover">Ochrona ekranu</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_353" data-category="353">
+                        		                                <a href="/rysik-do-telefonu-tabletu"
+                                    title="Rysik do telefonu / tabletu" id="headercategory353" class="spanhover">Rysik do telefonu / tabletu</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5347" data-category="5347">
+                        		                                <a href="/do-tabletu/stojak-na-tablet"
+                                    title="Stojak na tablet" id="headercategory5347" class="spanhover">Stojak na tablet</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_1511" data-category="1511">
+                        		                                <a href="/uchwyt-na-tablet-do-samochodu"
+                                    title="Uchwyt na tablet do samochodu" id="headercategory1511" class="spanhover">Uchwyt na tablet do samochodu</a>
+                            
+                                                    </li>
+                                    </ul>
+            </div>                                                            </li>
+                                                                                                <li class="parent" id="hcategory_4855"  data-category="4855">
+                            	                                <a  href="/akcesoria-rowerowe" title="Do roweru" id="headlink88" class="spanhover mainlevel">Do roweru</a>
+                                                                    <div class="submenu level1">
+                <ul class="level1">
+                                            <li class="" id="hcategory_5757" data-category="5757">
+                        		                                <a href="/akcesoria-rowerowe/sakwy-rowerowe"
+                                    title="Sakwy rowerowe" id="headercategory5757" class="spanhover">Sakwy rowerowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_6596" data-category="6596">
+                        		                                <a href="/akcesoria-rowerowe/bagazniki-rowerowe"
+                                    title="Bagażniki rowerowe" id="headercategory6596" class="spanhover">Bagażniki rowerowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_6534" data-category="6534">
+                        		                                <a href="/akcesoria-rowerowe/siodelka-rowerowe"
+                                    title="Siodełka rowerowe" id="headercategory6534" class="spanhover">Siodełka rowerowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4859" data-category="4859">
+                        		                                <a href="/akcesoria-rowerowe/blotniki"
+                                    title="Błotniki" id="headercategory4859" class="spanhover">Błotniki</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4900" data-category="4900">
+                        		                                <a href="/akcesoria-rowerowe/pedaly-rowerowe"
+                                    title="Pedały rowerowe" id="headercategory4900" class="spanhover">Pedały rowerowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4863" data-category="4863">
+                        		                                <a href="/akcesoria-rowerowe/chwyty-rowerowe"
+                                    title="Chwyty rowerowe" id="headercategory4863" class="spanhover">Chwyty rowerowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4864" data-category="4864">
+                        		                                <a href="/akcesoria-rowerowe/dzwonek-do-roweru"
+                                    title="Dzwonek do roweru" id="headercategory4864" class="spanhover">Dzwonek do roweru</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4866" data-category="4866">
+                        		                                <a href="/akcesoria-rowerowe/lampka-do-roweru"
+                                    title="Lampka do roweru" id="headercategory4866" class="spanhover">Lampka do roweru</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_8078" data-category="8078">
+                        		                                <a href="/akcesoria-rowerowe/uchwyty-rowerowe-na-bidony"
+                                    title="Uchwyty rowerowe na bidony" id="headercategory8078" class="spanhover">Uchwyty rowerowe na bidony</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4975" data-category="4975">
+                        		                                <a href="/akcesoria-rowerowe/nozki-rowerowe"
+                                    title="Nóżki rowerowe" id="headercategory4975" class="spanhover">Nóżki rowerowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4899" data-category="4899">
+                        		                                <a href="/akcesoria-rowerowe/zapiecie-rowerowe"
+                                    title="Zapięcie rowerowe" id="headercategory4899" class="spanhover">Zapięcie rowerowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4976" data-category="4976">
+                        		                                <a href="/akcesoria-rowerowe/pompki-rowerowe"
+                                    title="Pompki rowerowe" id="headercategory4976" class="spanhover">Pompki rowerowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_7070" data-category="7070">
+                        		                                <a href="/akcesoria-rowerowe/naklejki-na-rower"
+                                    title="Naklejki na rower" id="headercategory7070" class="spanhover">Naklejki na rower</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_4867" data-category="4867">
+                        		                                <a href="/akcesoria-rowerowe/okulary-rowerowe"
+                                    title="Okulary rowerowe" id="headercategory4867" class="spanhover">Okulary rowerowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4974" data-category="4974">
+                        		                                <a href="/akcesoria-rowerowe/odziez-rowerowa"
+                                    title="Odzież rowerowa" id="headercategory4974" class="spanhover">Odzież rowerowa</a>
+                            
+                                                    </li>
+                                    </ul>
+            </div>                                                            </li>
+                                                                                                <li class="parent" id="hcategory_5362"  data-category="5362">
+                            	                                <a  href="/do-samochodu" title="Do samochodu" id="headlink76" class="spanhover mainlevel">Do samochodu</a>
+                                                                    <div class="submenu level1">
+                <ul class="level1">
+                                            <li class="parent" id="hcategory_7283" data-category="7283">
+                        		                                <a href="/do-samochodu/akcesoria-do-tesli"
+                                    title="Akcesoria do Tesli" id="headercategory7283" class="spanhover">Akcesoria do Tesli</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5363" data-category="5363">
+                        		                                <a href="/do-samochodu/uchwyty-na-telefon"
+                                    title="Uchwyty na telefon do samochodu" id="headercategory5363" class="spanhover">Uchwyty na telefon do samochodu</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_4237" data-category="4237">
+                        		                                <a href="/szkla-folie-do-samochodu"
+                                    title="Szkła i folie do samochodu" id="headercategory4237" class="spanhover">Szkła i folie do samochodu</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_6860" data-category="6860">
+                        		                                <a href="/pl/c/Ladowarka-samochodowa/6860"
+                                    title="Ładowarka samochodowa" id="headercategory6860" class="spanhover">Ładowarka samochodowa</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4020" data-category="4020">
+                        		                                <a href="/transmiter-bluetooth"
+                                    title="Transmiter Bluetooth" id="headercategory4020" class="spanhover">Transmiter Bluetooth</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_3704" data-category="3704">
+                        		                                <a href="/urzadzenie-rozruchowe"
+                                    title="Urządzenia rozruchowe" id="headercategory3704" class="spanhover">Urządzenia rozruchowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5743" data-category="5743">
+                        		                                <a href="/do-samochodu/odkurzacze-samochodowe"
+                                    title="Odkurzacze samochodowe" id="headercategory5743" class="spanhover">Odkurzacze samochodowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5847" data-category="5847">
+                        		                                <a href="/do-samochodu/alkomaty"
+                                    title="Alkomaty" id="headercategory5847" class="spanhover">Alkomaty</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4813" data-category="4813">
+                        		                                <a href="/kabel-usb/kabel-do-apple-carplay"
+                                    title="Kabel do Apple CarPlay" id="headercategory4813" class="spanhover">Kabel do Apple CarPlay</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4812" data-category="4812">
+                        		                                <a href="/kabel-usb/kabel-do-android-auto"
+                                    title="Kabel do Android Auto" id="headercategory4812" class="spanhover">Kabel do Android Auto</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5995" data-category="5995">
+                        		                                <a href="/do-samochodu/organizer-do-samochodu"
+                                    title="Organizer do samochodu" id="headercategory5995" class="spanhover">Organizer do samochodu</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_6951" data-category="6951">
+                        		                                <a href="/do-samochodu/maty-do-bagaznika"
+                                    title="Maty do bagażnika" id="headercategory6951" class="spanhover">Maty do bagażnika</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5996" data-category="5996">
+                        		                                <a href="/do-samochodu/poduszka-do-samochodu"
+                                    title="Poduszka do samochodu" id="headercategory5996" class="spanhover">Poduszka do samochodu</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_6007" data-category="6007">
+                        		                                <a href="/do-samochodu/etui-na-kluczyk-samochodowy"
+                                    title="Etui na kluczyk samochodowy" id="headercategory6007" class="spanhover">Etui na kluczyk samochodowy</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_6037" data-category="6037">
+                        		                                <a href="/akcesoria-podrozne"
+                                    title="Akcesoria podróżne" id="headercategory6037" class="spanhover">Akcesoria podróżne</a>
+                            
+                                                    </li>
+                                    </ul>
+            </div>                                                            </li>
+                                                                                                <li class="parent" id="hcategory_5602"  data-category="5602">
+                            	                                <a  href="/audio" title="Audio" id="headlink75" class="spanhover mainlevel">Audio</a>
+                                                                    <div class="submenu level1">
+                <ul class="level1">
+                                            <li class="parent" id="hcategory_338" data-category="338">
+                        		                                <a href="/sluchawki"
+                                    title="Słuchawki" id="headercategory338" class="spanhover">Słuchawki</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5605" data-category="5605">
+                        		                                <a href="/audio/etui-do-sluchawek"
+                                    title="Etui do słuchawek" id="headercategory5605" class="spanhover">Etui do słuchawek</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5783" data-category="5783">
+                        		                                <a href="/audio/ladowarki-do-sluchawek-bezprzewodowych"
+                                    title="Ładowarki do słuchawek bezprzewodowych" id="headercategory5783" class="spanhover">Ładowarki do słuchawek bezprzewodowych</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5692" data-category="5692">
+                        		                                <a href="/audio/glosnik-bluetooth"
+                                    title="Głośniki Bluetooth" id="headercategory5692" class="spanhover">Głośniki Bluetooth</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5737" data-category="5737">
+                        		                                <a href="/audio/zestawy-sluchawkowe"
+                                    title="Zestawy słuchawkowe" id="headercategory5737" class="spanhover">Zestawy słuchawkowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5983" data-category="5983">
+                        		                                <a href="/audio/mikrofony"
+                                    title="Mikrofony" id="headercategory5983" class="spanhover">Mikrofony</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5741" data-category="5741">
+                        		                                <a href="/audio/transmiter-fm"
+                                    title="Transmiter FM" id="headercategory5741" class="spanhover">Transmiter FM</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_409" data-category="409">
+                        		                                <a href="/adaptery-aux"
+                                    title="Adaptery AUX" id="headercategory409" class="spanhover">Adaptery AUX</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_7026" data-category="7026">
+                        		                                <a href="/audio/akcesoria-do-sluchawek"
+                                    title="Akcesoria do słuchawek" id="headercategory7026" class="spanhover">Akcesoria do słuchawek</a>
+                            
+                                                    </li>
+                                    </ul>
+            </div>                                                            </li>
+                                                                                                <li class="parent" id="hcategory_613"  data-category="613">
+                            	                                <a  href="/kable" title="Kable" id="headlink90" class="spanhover mainlevel">Kable</a>
+                                                                    <div class="submenu level1">
+                <ul class="level1">
+                                            <li class="parent" id="hcategory_2360" data-category="2360">
+                        		                                <a href="/kabel-usb"
+                                    title="Kabel USB" id="headercategory2360" class="spanhover">Kabel USB</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5876" data-category="5876">
+                        		                                <a href="/pl/c/Kabel-sieciowy/5876"
+                                    title="Kabel sieciowy" id="headercategory5876" class="spanhover">Kabel sieciowy</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_7281" data-category="7281">
+                        		                                <a href="/akcesoria/kabel-hdmi"
+                                    title="Kabel HDMI" id="headercategory7281" class="spanhover">Kabel HDMI</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_2355" data-category="2355">
+                        		                                <a href="/kabel-audio"
+                                    title="Kabel audio" id="headercategory2355" class="spanhover">Kabel audio</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_2354" data-category="2354">
+                        		                                <a href="/kabel-wideo"
+                                    title="Kabel wideo" id="headercategory2354" class="spanhover">Kabel wideo</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_6408" data-category="6408">
+                        		                                <a href="/kabel-zasilajacy"
+                                    title="Kabel zasilający" id="headercategory6408" class="spanhover">Kabel zasilający</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_5875" data-category="5875">
+                        		                                <a href="/akcesoria/kable-i-przejsciowki/listwa-zasilajaca"
+                                    title="Listwy zasilające" id="headercategory5875" class="spanhover">Listwy zasilające</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_6003" data-category="6003">
+                        		                                <a href="/akcesoria/kable-i-przejsciowki/organizacja-kabli"
+                                    title="Organizacja kabli" id="headercategory6003" class="spanhover">Organizacja kabli</a>
+                            
+                                                    </li>
+                                    </ul>
+            </div>                                                            </li>
+                                                                                                <li class="parent" id="hcategory_1400"  data-category="1400">
+                            	                                <a  href="/akcesoria" title="Akcesoria" id="headlink58" class="spanhover mainlevel">Akcesoria</a>
+                                                                    <div class="submenu level1">
+                <ul class="level1">
+                                            <li class="parent" id="hcategory_5433" data-category="5433">
+                        		                                <a href="/akcesoria/do-domu"
+                                    title="Do domu" id="headercategory5433" class="spanhover">Do domu</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_7364" data-category="7364">
+                        		                                <a href="/do-czytnika"
+                                    title="Do czytnika" id="headercategory7364" class="spanhover">Do czytnika</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_7703" data-category="7703">
+                        		                                <a href="/komputer-stacjonarny"
+                                    title="Do komputera stacjonarnego" id="headercategory7703" class="spanhover">Do komputera stacjonarnego</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5041" data-category="5041">
+                        		                                <a href="/gaming"
+                                    title="Gaming" id="headercategory5041" class="spanhover">Gaming</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5599" data-category="5599">
+                        		                                <a href="/akcesoria/fotografia-i-wideo"
+                                    title="Fotografia i wideo" id="headercategory5599" class="spanhover">Fotografia i wideo</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_4741" data-category="4741">
+                        		                                <a href="/sport-i-zdrowie"
+                                    title="Sport i zdrowie" id="headercategory4741" class="spanhover">Sport i zdrowie</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_337" data-category="337">
+                        		                                <a href="/powerbank"
+                                    title="Powerbank / ładowarka przenośna" id="headercategory337" class="spanhover">Powerbank / ładowarka przenośna</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_1518" data-category="1518">
+                        		                                <a href="/przejsciowka-adapter"
+                                    title="Przejściówka / adapter" id="headercategory1518" class="spanhover">Przejściówka / adapter</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5964" data-category="5964">
+                        		                                <a href="/akcesoria/pamiec-masowa"
+                                    title="Pamięć masowa" id="headercategory5964" class="spanhover">Pamięć masowa</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4242" data-category="4242">
+                        		                                <a href="/ringi-i-akcesoria-magsafe"
+                                    title="Ringi i akcesoria MagSafe" id="headercategory4242" class="spanhover">Ringi i akcesoria MagSafe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4312" data-category="4312">
+                        		                                <a href="/etui-uniwersalne"
+                                    title="Etui uniwersalne" id="headercategory4312" class="spanhover">Etui uniwersalne</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_5549" data-category="5549">
+                        		                                <a href="/portfel-na-karty"
+                                    title="Portfel na karty" id="headercategory5549" class="spanhover">Portfel na karty</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_2376" data-category="2376">
+                        		                                <a href="/portfel-kryptowalutowy"
+                                    title="Portfele kryptowalutowe" id="headercategory2376" class="spanhover">Portfele kryptowalutowe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4354" data-category="4354">
+                        		                                <a href="/smyczki-uniwersalne"
+                                    title="Smyczki uniwersalne" id="headercategory4354" class="spanhover">Smyczki uniwersalne</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4399" data-category="4399">
+                        		                                <a href="/lokalizator-tracker"
+                                    title="Lokalizatory / trackery" id="headercategory4399" class="spanhover">Lokalizatory / trackery</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_7874" data-category="7874">
+                        		                                <a href="/latarki-taktyczne"
+                                    title="Latarki taktyczne" id="headercategory7874" class="spanhover">Latarki taktyczne</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_386" data-category="386">
+                        		                                <a href="/zimowe-akcesoria"
+                                    title="Zimowe akcesoria" id="headercategory386" class="spanhover">Zimowe akcesoria</a>
+                            
+                                                    </li>
+                                            <li class="parent" id="hcategory_4892" data-category="4892">
+                        		                                <a href="/sprzet-optyczny"
+                                    title="Sprzęt optyczny" id="headercategory4892" class="spanhover">Sprzęt optyczny</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_4979" data-category="4979">
+                        		                                <a href="/szkla-i-folie-ochronne"
+                                    title="Szkła i folie ochronne" id="headercategory4979" class="spanhover">Szkła i folie ochronne</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_2835" data-category="2835">
+                        		                                <a href="/pozostale-akcesoria"
+                                    title="Pozostałe" id="headercategory2835" class="spanhover">Pozostałe</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_6224" data-category="6224">
+                        		                                <a href="/pl/c/Rysik-do-telefonu-tabletu/6224"
+                                    title="Rysik do telefonu / tabletu" id="headercategory6224" class="spanhover">Rysik do telefonu / tabletu</a>
+                            
+                                                    </li>
+                                            <li class="" id="hcategory_2261" data-category="2261">
+                        		                                <a href="/higiena-i-dezynfekcja"
+                                    title="Higiena i dezynfekcja" id="headercategory2261" class="spanhover">Higiena i dezynfekcja</a>
+                            
+                                                    </li>
+                                    </ul>
+            </div>                                                            </li>
+                                                            </ul>
+            
+                            <ul class="menu-mobile rwd-show-medium rwd-hide-full">
+                    <li class="menu-mobile-li small-menu flex flex-4">
+                        <a href="/" title="Menu" class="fa fa-align-justify">
+                            <img src="/libraries/images/1px.gif" alt="" class="px1">
+                        </a>
+                    </li>
+                    <li class="menu-mobile-li small-search flex flex-4" id="activ-search">
+                        <a title="Szukaj" class="fa fa-search">
+                            <img src="/libraries/images/1px.gif" alt="" class="px1">
+                        </a>
+                    </li>
+                    <li class="menu-mobile-li small-panel flex flex-4" id="activ-panel">
+                        <a href="/pl/panel" title="Moje konto" class="fa fa-user">
+                            <img src="/libraries/images/1px.gif" alt="" class="px1">
+                        </a>
+                    </li>
+                    <li class="menu-mobile-li small-cart flex flex-4">
+                        <a href="/pl/basket" title="Koszyk" class="icon icon-custom-cart" data-basket-count="0">
+                            <img src="/libraries/images/1px.gif" alt="" class="px1">
+                        </a>
+                    </li>
+                </ul>
+                    </nav>
+    </div>    
+            <div class="breadcrumbs large tablet row">
+            <div class="innerbreadcrumbs row container">
+                <a href="/" title="Strona główna" rel="nofollow" class="breadcrumb-home left">
+                    <img src="/libraries/images/1px.gif" alt="" class="px1">
+                    <span>Jesteś w:</span>
+                </a>
+
+                <ul itemscope itemtype="https://schema.org/BreadcrumbList" class="path left inline">
+                    
+                                                                <li class="bred-1 last" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a href="/" itemprop="item">                                <span class="raq">&raquo;</span>   
+                                <span itemprop="name">Strona główna</span>
+                            </a>
+                                                            <meta itemprop="position" content="1" />
+                                                                                    </li>
+                                    </ul>
+            </div>
+        </div>
+    
+                    
+                        
+    
+    <script>hidePreloader()</script>
+    <div class="main row">
+        <div class="innermain container">
+            <div class="s-row">
+                
+                <div class="centercol s-grid-12">
+                    
+
+                    <div class="box" id="box_404">
+                        <div class="boxhead">
+                            <h3>
+                                <img src="/libraries/images/1px.gif" alt="" class="px1">
+                                Strona o podanym adresie nie istnieje
+                            </h3>
+                        </div>
+
+                        <div class="innerbox">
+                            <p>Przepraszamy, strona której szukasz nie została znaleziona.</p>
+                            <p>Jeżeli szukasz konkretnego produktu, skorzystaj z wyszukiwarki.</p>
+
+                            
+                                                            <form data-product-view-type="" data-search-promotions-route="/pl/promotions" data-base-dir="" class="js__search search search-form" action="/pl/s" method="post">
+    <div class="none bottest"><!-- <input name="bottest1" value="1" /> --> <input name="bottest2" /></div>
+    <div class="search-input search__input-area r--l-flex r--l-flex-vcenter">
+        <div class="search__input-area-item">
+            <span class="js__search-clear-btn search__btn icon icon-close search__icon none" role="button" aria-label="clear search input"></span>
+            <img class="search__loader none" src="/libraries/images/loader.svg">
+        </div>
+        
+        <div class="search__input-area-item search__input-area-item_grow">
+            <input maxlength="255" class="search__input" name="search" type="search" autocomplete="off" placeholder="szukaj w sklepie...">
+        </div>
+
+        <div class="search__input-area-item">
+            <span class="js__search-close-btn icon icon-back" role="button" aria-label="close search"></span>
+            <button type="button" class="js__search-submit-btn search-btn search__input-area-item btn btn-red search__btn-search r--l-flex r--l-flex-vcenter r--l-flex-hcenter">
+                <span class="fa fa-search search__icon_size-l"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="search__content"></div>
+    
+    <input type="hidden" class="js__search-settings" value="eyJTSE9XX1BIUkFTRV9TVUdHRVNUSU9OUyI6MSwiU0hPUlRFTl9OQU1FUyI6MCwiU0hPV19NT0JJTEVfQlROIjoxLCJESVNQTEFZX0ZPUk1BVCI6MSwiUkVTVUxUU19QRVJfUEFHRSI6MTEsIkNBVEVHT1JJRVNfRU5BQkxFRCI6MSwiUFJPRFVDRVJTX0VOQUJMRUQiOjEsIlBST0RVQ1RTX0VOQUJMRUQiOjEsIkZST05UX09SSUdJTkFMX1FVRVJZX1BIUkFTRSI6IjAiLCJQUk9EVUNUX0FVVE9DT01QTEVURV9CVVRUT05fVkVSU0lPTiI6MSwiU0hPV19QUk9EVUNUU19QUklDRSI6MSwiU0hPV19QUk9EVUNUU19TQ09SRSI6MSwiU0hPV19QUk9EVUNUU19BVkFJTEFCSUxJVFkiOjF9">
+</form>                            
+                            <p>
+                                <a href="/" title="">lub przejdź do strony głównej</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    
+                    
+                </div>
+
+                            </div>
+        </div>
+    </div>
+<div class="bottom-footer row">
+	<div class="container">
+        
+    </div>
+</div><footer class="footer row">
+        <div class="innerfooter container row">
+            <ul class="overall">
+                                    <li class="overall flex flex-4" id="footgroup1">
+                        <ul>
+                            <li class="head hidden"><h4 style="color:#fff;margin:0;font-size:18px;">Zamówienia</h4></li>
+                                                                                                                                                            <li>
+                                        <a href="/status-zamowienia"  title="Status zamówienia" id="footlink76">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Status zamówienia
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/czas-realizacji-i-dostawa"  title="Czas realizacji i dostawa" id="footlink77">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Czas realizacji i dostawa
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/pl/i/Logowanie-i-rejestracja/31"  title="Logowanie i rejestracja" id="footlink52">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Logowanie i rejestracja
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/metody-platnosci"  title="Metody płatności" id="footlink62">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Metody płatności
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/zamowienia-publiczne-i-b2b"  title="Zamówienia publiczne i B2B" id="footlink73">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Zamówienia publiczne i B2B
+                                        </a>
+                                    </li>
+                                                                                    </ul>
+                    </li>
+                                    <li class="overall flex flex-4" id="footgroup4">
+                        <ul>
+                            <li class="head hidden"><h4 style="color:#fff;margin:0;font-size:18px;">Obsługa klienta</h4></li>
+                                                                                                <li>
+                                        <a href="/zwroty-i-reklamacje"  title="Zwroty i reklamacje" id="footlink69">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Zwroty i reklamacje
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/najczesciej-zadawane-pytania"  title="Najcześciej zadawane pytania" id="footlink79">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Najcześciej zadawane pytania
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/uszkodzenie-w-transporcie"  title="Uszkodzenie w transporcie" id="footlink78">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Uszkodzenie w transporcie
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/kody-rabatowe"  title="Kody rabatowe &amp; promocje" id="footlink44">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Kody rabatowe &amp; promocje
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/pl/i/Zglos-niebezpieczny-produkt/60"  title="Zgłoś niebezpieczny produkt" id="footlink80">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Zgłoś niebezpieczny produkt
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/newsletter"  title="Newsletter" id="footlink75">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Newsletter
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/opinie"  title="Opinie Trustmate" id="footlink68">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Opinie Trustmate
+                                        </a>
+                                    </li>
+                                                                                    </ul>
+                    </li>
+                                    <li class="overall flex flex-4" id="footgroup3">
+                        <ul>
+                            <li class="head hidden"><h4 style="color:#fff;margin:0;font-size:18px;">O firmie</h4></li>
+                                                                                                <li>
+                                        <a href="/regulamin"  title="Regulamin" id="footlink81">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Regulamin
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="https://pancernik.eu/#cookies-settings"  title="Ustawienia plików cookies" id="footlink70">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Ustawienia plików cookies
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/politykaprywatnosci"  title="Polityka prywatności" id="footlink36">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Polityka prywatności
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/kariera"  title="Kariera" id="footlink72">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Kariera
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/program-partnerski"  title="Program partnerski" id="footlink65">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Program partnerski
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/pl/i/Ochrona-srodowiska/35"  title="Ochrona środowiska" id="footlink57">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Ochrona środowiska
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/pl/n/list"  title="Blog" id="footlink58">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Blog
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/sklep-stacjonarny"  title="Sklep stacjonarny" id="footlink45">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Sklep stacjonarny
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/wspolpraca-marketingowa"  title="Współpraca marketingowa" id="footlink59">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Współpraca marketingowa
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/pl/i/O-Sklepie/6"  title="O Sklepie" id="footlink15">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            O Sklepie
+                                        </a>
+                                    </li>
+                                                                                                                                <li>
+                                        <a href="/pl/i/Kontakt/5"  title="Kontakt" id="footlink67">
+                                            <img alt="pixel" src="/public/images/1px.gif">
+                                            Kontakt
+                                        </a>
+                                    </li>
+                                                                                    </ul>
+                    </li>
+                                    <li class="overall flex flex-4" id="footgroup5">
+                        <ul>
+                            <li class="head hidden"><h4 style="color:#fff;margin:0;font-size:18px;">Kontakt</h4></li>
+                                                    </ul>
+                    </li>
+                            </ul>
+        </div>
+
+                    <div id="contact-info">
+<div class="phone">
+<div class="img"><img  lazy src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" data-src="/userdata/public/assets/footer/phone.svg" alt="" /><noscript><img src="/userdata/public/assets/footer/phone.svg" alt="" /></noscript></div>
+<div class="contact"><a class="tel" href="tel:+48699577774">+48 699 577 774</a>
+<div class="time">
+<div class="days">
+<p>pon - pt:</p>
+</div>
+<div class="hours">
+<p>8:00 - 17:30</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mail">
+<div class="img"><img  lazy src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" data-src="/userdata/public/assets/footer/email.svg" alt="" /><noscript><img src="/userdata/public/assets/footer/email.svg" alt="" /></noscript></div>
+<a class="mail-a" href="https://pancernik.eu/pl/i/Kontakt/5">Formularz kontaktowy</a></div>
+<div class="mail">
+<div class="img"><img  lazy src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" data-src="/userdata/public/assets/footer/email.svg" alt="" /><noscript><img src="/userdata/public/assets/footer/email.svg" alt="" /></noscript></div>
+<a class="mail-a" href="/cdn-cgi/l/email-protection#94e7fff8f1e4d4e4f5faf7f1e6fafdffbaf1e1"><span class="__cf_email__" data-cfemail="97e4fcfbf2e7d7e7f6f9f4f2e5f9fefcb9f2e2">[email&#160;protected]</span></a></div>
+<div class="stationary-shop">
+<div class="img"><img  lazy src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" data-src="/userdata/public/assets/footer/adres.svg" alt="" /><noscript><img src="/userdata/public/assets/footer/adres.svg" alt="" /></noscript></div>
+<div class="stationary-shop-time">
+<p>Lotnicza 35A <br /> 63-400 Ostrów Wielkopolski</p>
+<div class="time">
+<div class="days"> </div>
+<div class="hours"> </div>
+</div>
+</div>
+</div>
+<div class="social-media"><a href="https://www.facebook.com/Pancernik.eu/" target="_blank" rel="noopener"><img class="fb"  lazy src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" data-src="/userdata/public/assets/footer/fb.svg" alt="" /><noscript><img class="fb" src="/userdata/public/assets/footer/fb.svg" alt="" /></noscript></a> <a href="https://www.instagram.com/pancernikeu/?hl=pl" target="_blank" rel="noopener"><img class="instagram"  lazy src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" data-src="/userdata/public/assets/footer/insta.svg" alt="" /><noscript><img class="instagram" src="/userdata/public/assets/footer/insta.svg" alt="" /></noscript></a> <a href="https://www.youtube.com/channel/UCeou4Np_ljh5k2NWvJBmEbA" target="_blank" rel="noopener"><img class="yt"  lazy src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" data-src="/userdata/public/assets/footer/yt.svg" alt="" /><noscript><img class="yt" src="/userdata/public/assets/footer/yt.svg" alt="" /></noscript></a> <a href="https://www.tiktok.com/@pancernik.eu" target="_blank" rel="noopener"><img class="tiktok"  lazy src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D" data-src="/userdata/public/assets/footer/tiktok-icon.svg" alt="" /><noscript><img class="tiktok" src="/userdata/public/assets/footer/tiktok-icon.svg" alt="" /></noscript></a></div>
+</div>
+                            <div class="line"></div>
+
+        <div class="container">
+            <div class="bottom-footer">
+                <img src="/upload/footer/pancernik.svg" alt="PANCERNIK" class="bottom-footer-logo" />
+                <p class="bottom-footer-text">Copyright 2025 Pancernik.eu. All rights reserved.</p>
+                <a href="https://www.shoper.pl/premium/" target="_blank" rel="noopener" title="Sklep internetowy Shoper Premium"><img src="/upload/footer/shoper.svg" alt="PANCERNIK" class="bottom-footer-shoper" /></a>
+            </div>
+        </div>
+
+
+    </footer>
+
+    <div class="up">
+        <a href="#" title="do góry" class="btn fa fa-2x fa-angle-up">
+            <img src="/public/images/1px.gif" alt="pixel" class="px1" />
+            <span>do góry</span>
+        </a>
+    </div>
+</div><!-- and of wrap -->
+
+<div class="modal-overlay"></div><!-- overlay for modal lightbox-->
+<!--
+  <div class="kac-sm-panel" itemscope itemtype="http://schema.org/LocalBusiness">
+    <ul>
+      <li class="kac-sm-block kac-sm-gplus"><a href="https://plus.google.com/109773598845610014624" itemprop="sameAs" rel="publisher" target="_blank"><img src="/images/user/gplus-icon.png" alt="Jesteśmy na Google+" /><span>Google+</span></a></li> 
+      <li class="kac-sm-block kac-sm-fb"><a href="https://pl-pl.facebook.com/pancernik.eu" itemprop="sameAs" target="_blank"><img src="/images/user/fb-icon.png" alt="Jesteśmy na Facebook"><span class="kac-sm-with">Facebook</span></a></li>
+      <li class="kac-sm-block kac-sm-twitter"><a href="https://twitter.com/pancernik_eu" itemprop="sameAs" target="_blank"><img src="/images/user/twitter-icon.png" alt="Jesteśmy na Twitter" /><span>Twitter</span></a></li>
+    </ul>
+  </div>
+  -->
+<span itemscope itemtype="https://schema.org/Organization">
+    <meta itemprop="name" content="pancernik.eu" />
+    <link itemprop="url" content="https://pancernik.eu" />
+    <meta itemprop="logo" content="https://pancernik.eu/upload/footer/pancernik.svg" />
+    <link itemprop="sameAs" href="https://www.facebook.com/Pancernik.eu/" />
+    <link itemprop="sameAs" href="https://www.instagram.com/pancernikeu/" />
+    <link itemprop="sameAs" href="https://www.youtube.com/@pancernik_tv" />
+    <link itemprop="sameAs" href="https://www.tiktok.com/@pancernik.eu" />
+    <span itemprop="contactPoint" itemscope itemtype="https://schema.org/ContactPoint">
+        <meta itemprop="telephone" content="+48 799 399 606"/>
+        <meta itemprop="contactType" content="customer service"/>
+    </span>
+</span>
+<span itemscope itemtype="http://schema.org/LocalBusiness">
+    <meta itemprop="name" content="Sklep Pancernik.eu" />
+    <meta itemprop="image" content="https://pancernik.eu/upload/footer/pancernik.svg" />
+    <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        <meta itemprop="addressCountry" content="PL" />
+        <meta itemprop="streetAddress" content="Lotnicza 35a" />
+        <meta itemprop="addressLocality" content="Ostrów Wielkopolski" />
+        <meta itemprop="postalCode" content="63-400" />
+    </span>
+    <span itemprop="location" itemscope itemtype="https://schema.org/Place">
+        <meta itemprop="logo" content="https://pancernik.eu/upload/footer/pancernik.svg" />
+        <link itemprop="url" href="https://pancernik.eu/">
+        <link itemprop="hasMap" href="https://maps.app.goo.gl/BeWrVyPQZrjaDaez7">
+        <span itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates">
+            <meta itemprop="latitude" content="51.6604036059416" />
+            <meta itemprop="longitude" content="17.79489765413684" />
+        </span>
+    </span>
+    <meta itemprop="telephone" content="+48 799 399 606" />
+</span>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+    <script type="text/javascript" src="/skins/user/rwd_shoper_57/js/user.js?sci=976"></script>
+<div
+	id="tm-multi-hornet-widget"
+	data-widgetUrl='https://trustmate.io/platforms/6ff6136a-bf0b-4294-8927-e491fc8f4d78/widget/hornet/script?product='
+	data-widgetLng ='&language=pl'
+	data-productUrl='https://trustmate.io/platforms/6ff6136a-bf0b-4294-8927-e491fc8f4d78/product/ratings'
+	data-configUrl='https://trustmate.io/platforms/6ff6136a-bf0b-4294-8927-e491fc8f4d78/widget/hornet'>
+</div>
+<script src="/skins/user/rwd_shoper_57/js/tm.js"></script>
+
+
+
+    <div class="info-message info-message_hidden">
+        <strong class="info-message__text">Sklep jest w trybie podglądu</strong>
+    </div>
+    <div class="center">
+        <span id="turn-classic" class="btn rwd">
+    		Pokaż pełną wersję strony
+		</span>
+    </div>
+
+<!-- GOOGLE TAG MANAGER - Noscript fallback -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://load.dev.pancernik.eu/ns.html?id=GTM-5VJR8Q7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5VJR8Q7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- OKAZJE.INFO.PL - Tracker -->
+<script type="text/javascript">
+window.customerPrivacy.onAnalyticsConsentGranted(function () {
+  setTimeout(function(){
+    (function() {
+      var oi = document.createElement('script'); oi.type = 'text/javascript'; oi.async = 'async'; oi.defer = 'defer';
+      oi.src = ('https:' == document.location.protocol ? 'https://' : 'http://')
+      + 'tracker.okazje.info.pl/tracker.js?'+(Math.random());
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(oi, s);
+    })();
+  }, 2000)
+  })
+</script>
+<!-- TRAFFICWATCHDOG (dawniej TrafficScanner) - Pixele trackingowe -->
+<img src="https://trafficscanner.pl/ws2/index.php/?action=noscript&dt=9&cid=1008" width="1" height="1" style='position: absolute; left: 0px; top: 0px; visibility: hidden;'>
+<noscript><img src="https://trafficscanner.pl/ws2/index.php/?action=noscript&dt=1&cid=1008" width="1" height="1" style='position: absolute; left: 0px; top: 0px; visibility: hidden;'></noscript>
+<script>
+  window.customerPrivacy.onAnalyticsConsentGranted(function () {
+      var s = document.createElement("script");
+      s.src = "https://trafficscanner.pl/ws2/script/1008/koniec.js";
+      document.head.appendChild(s);
+  });
+</script>
+
+<!-- GROWCOMMERCE/ANYCHAT - Widget czatu (główny) -->
+<script>(function(d, s, id){
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://api.anychat.one/widget/778d67d7-3213-355d-af32-0153072d3291?r=' + encodeURIComponent(window.location);
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'contactus-jssdk'));</script>
+<!-- koniec czat growcommerce -->
+<!-- WP.PL PIXEL - Eventy trackingowe -->
+<script>
+// View
+wph('track', 'ViewContent', { 'content_name': 'View' })
+</script>
+<script>
+// ProductList
+var url = document.getElementsByTagName('body')[0].getAttribute('class');
+if(url.includes('shop_product_list')){
+  var contents = [
+    
+      ]
+  if(contents.length == 0){
+    var contents = undefined
+  }
+  wph('track', 'ViewContent', {
+    'content_name': 'ProductList',
+     contents: contents
+  })
+}
+</script>
+<script>
+// ViewProduct
+var wph_ps = function() {
+    var url = document.getElementsByTagName('body')[0].getAttribute('class');
+    if (url.includes('shop_product')) {
+        var id_p = '';
+        var name = '';
+        var price = '';
+
+        frontAPI.getProduct(function(p) {
+
+            var category = p.category.name;
+
+            // do stuff
+            wph('track', 'ViewContent', {
+                'content_name': 'ViewProduct',
+                contents: [{
+                    id: id_p,
+                    name: name,
+                    price: Number(Number(price).toFixed(2)),
+                    category: category,
+                    quantity: 1
+                }]
+            })
+            // end stuff
+        }, {
+            id: id_p
+        });
+    };
+};
+if (window.frontAPI) wph_ps();
+else document.addEventListener("frontAPIReady", wph_ps, false);
+</script>
+<script>
+// AddToCart
+Shop.AjaxBasket.fn.display = (function(e, n) {
+    var cached = Shop.AjaxBasket.fn.display;
+    return function(e, n) {
+        var res = cached.apply(this, arguments);
+        var pAtS = this.json.added[0];
+        var idp;
+        $.each(this.json.basket.products, function(el, i) {
+            if (i.basket_id == pAtS.b_id) {
+                idp = i.product_id;
+                $.getJSON('/product/getstock/stock/' + idp, function(d) {
+                    frontAPI.getProduct(function(p) {
+                        wph('track', 'AddToCart', {
+                            contents: [{
+                                "id": idp,
+                                "name": pAtS.name,
+                                "price": p.price.gross.final_float,
+                                "quantity": pAtS.quantity,
+                                "category": p.category.name
+                            }]
+                        });
+                    }, {
+                        id: idp
+                    });
+                });
+                return;
+            }
+        });
+        return res;
+    }
+})();
+</script>
+<script type="text/javascript">
+//<![CDATA[
+var mamezi_product_boxes_data = {
+"shop": "333091455e7fa8e2d0e0064d6bfbb30eeeaae5e9",
+"applicationName": "boxy_pro",
+"priceConfig": "b",
+"availabilityButtonConfig": "0",
+"imagesWebpConfig": "0",
+"owlSliderConfig": "0",
+"omnibusPriceConfig": "0",
+"omnibusTranslationsConfig": '{}'
+};
+//]]>
+</script>
+<script defer="defer" src="https://cdn.appstore.mamezi.pl/libs/shortcode/src/Shortcode.js?v=20251107173501"></script>
+<script defer="defer" src="https://cdn.appstore.mamezi.pl/boxy_produktowe/mamezi_boxy_produktowe.js?shop=333091455e7fa8e2d0e0064d6bfbb30eeeaae5e9&v=20251107173501"></script>
+<link rel="stylesheet" href="https://cdn.appstore.mamezi.pl/boxy_produktowe/mamezi_boxy_produktowe.css?v=20251107173501" media="nope!" onload="this.media='all'">
+<script type="text/javascript">  
+//copyright Onisoft 2022
+$(function() {  
+	if($('body.shop_infopage').length || $('body.shop_panel').length || $('body.shop_panel_orders').length){      	        
+        	var script = document.createElement('script');
+                script.src = 'https://aplshoper.zwroty-reklamacje.pl/public/getzwrscript.php?version=2.0.0&shopid=129&shoplangid=1';
+                script.async = true;
+                script.onload = function () {
+            	       console.log('OnisoftZWRScript - loaded');
+                }
+                document.head.appendChild(script);			
+	}
+});
+</script>
+<script type="text/javascript" id="wceDynamicListsInit">(function(){try {fetch('https://dynaminclists.webcoders.eu/Box/App/javascript/lc/333091455e7fa8e2d0e0064d6bfbb30eeeaae5e9/locale/'+window.Shop.lang.name+'/name/shop.js').then((response) => response.text()).then((text) => {let s = document.createElement('script');let node = document.createTextNode(text);s.appendChild(node);document.head.appendChild(s);});} catch(e) {console.log('%c '+e, 'background: #222; color: #bada55');}})();</script>
+<script type="text/javascript">
+    var content_types = {
+        shop_index: 'Main page',
+        shop_product: 'Products | Product',
+        shop_product_list: 'Products | Category',
+        shop_categories_list: 'Products | Categories list',
+        shop_product_producer: 'Products | Vendor',
+        shop_product_promo: 'Products | Promotions',
+        shop_product_new: 'Products | New',
+        shop_product_day: 'Products | Products of the day',
+        shop_product_search: 'Products | Search results',
+        shop_product_loyaltylist: 'Products | Loyalty list',
+        shop_product_mailfriend: 'Products | Mail to friend',
+        shop_infopage: 'Info page',
+        shop_news: 'Blog | News',
+        shop_news_list: 'Blog | News list',
+        shop_news_category_list: 'Blog | Category',
+        shop_news_tag_list: 'Blog | Tag list',
+        shop_basket: 'Cart | Cart',
+        shop_basket_address: 'Cart | Address',
+        shop_basket_step2: 'Cart | Step 2',
+        shop_basket_step3: 'Cart | Step 3',
+        shop_basket_done: 'Cart | Done',
+        shop_basket_finished: 'Cart | Finished',
+        shop_login: 'User | Login',
+        shop_login_register: 'User | Register',
+        shop_login_passremind: 'User | Password reminder',
+        shop_panel: 'Panel | Main',
+        shop_panel_orders: 'Panel | Order list',
+        shop_panel_order: 'Panel | Order',
+        shop_panel_payment: 'Panel | Payment',
+        shop_panel_comments: 'Panel | Comments',
+        shop_panel_favourites: 'Panel | Favourites',
+        shop_panel_addresses: 'Panel | Addresses',
+        shop_panel_address: 'Panel | Address',
+        shop_panel_password: 'Panel | Password change',
+        shop_panel_edit: 'Panel | Edit profile',
+        shop_contact: 'Contact form',
+        shop_facebook_splash: 'Facebook splash',
+        shop_links_list: 'Links list',
+        shop_newsletter_unsign: 'Newsletter | Unsign'
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        var shoperCampaignsLayer = {};
+
+        var content_type = content_types[document.body.className.split(' ')[0]];
+
+        if (!!document.cookie.indexOf("admin_ip_verify")) {
+            var visitor_type = 'user';
+        } else {
+            var visitor_type = 'admin';
+        }
+
+        if (eval(atob(document.querySelector('head').getAttribute('data-features'))).includes('shoper_campaigns_google_app')) {
+            
+        }
+
+
+        if (eval(atob(document.querySelector('head').getAttribute('data-features'))).includes('shoper_campaigns_facebook_app')) {
+            
+        }
+
+        if (window.shopLayer && Object.keys(shoperCampaignsLayer).length > 0) {
+            shopLayer.push(Object.assign(
+                shoperCampaignsLayer,
+                {
+                    ads_installed: 'true',
+                    ads_contentType: content_type,
+                    ads_visitorType: visitor_type,
+                },
+            ));
+        }
+    });
+</script>
+<script id="tm-script" data-context="" data-product="" async src="https://papi.trustmate.io/shoper/widget/shop/6ff6136a-bf0b-4294-8927-e491fc8f4d78.js"></script>
+<script type="text/javascript">
+            
+            window.Shop = window.Shop || {};
+            window.Shop.basket = window.Shop.basket || {};
+            window.Shop.values = window.Shop.values || {};
+        
+	    	    	    Shop.basket.basketProducts = '';
+		Shop.basket.categoryProducts = '';
+        Shop.values.currency = 'PLN';
+        Shop.values.decimalSep = ',';
+        Shop.values.thousandSep = '';
+        Shop.values.decimalPrecision = 2;
+        Shop.countryCode = 'PL';
+        Shop.pageType = '';
+        Shop.pageId = ''.replace(/\D/g, '');
+        Shop.includeFacebookSDK = '';
+        Shop.displayCookieInfo = '1'
+        Shop.cookiesViewType = '2';
+        Shop.iziIsSandbox = '';
+                Shop.isSsoActive = '0';
+	</script>
+
+<template id="consents-modal">
+    <div class="consents">
+        <div class="consents__wrapper">
+            <div class="consents__modal">
+                <div class="consents__basic-view js__basic-view" role="dialog" aria-modal="true" aria-labelledby="customer_privacy_banner_header">
+                    <div class="consents__content">
+                        <p class="consents__heading" id="customer_privacy_banner_header">
+                            Dbamy o Twoją prywatność
+                        </p>
+
+                        <p style="text-align: justify;">Niniejsza strona korzysta z plików cookie.<br>Wykorzystujemy pliki cookie do spersonalizowania treści i reklam, aby oferować funkcje społecznościowe i analizować ruch w naszej witrynie. Informacje o tym, jak korzystasz z naszej witryny, udostępniamy partnerom społecznościowym, reklamowym i analitycznym. Partnerzy mogą połączyć te informacje z innymi danymi otrzymanymi od Ciebie lub uzyskanymi podczas korzystania z ich usług. Używamy plików cookie w celu personalizacji treści i reklam, analizowania ruchu na stronie oraz zapewnienia funkcji społecznościowych. Dane mogą być udostępniane naszym partnerom reklamowym, analitycznym i społecznościowym.&nbsp;<br>Więcej o plikach cookies przeczytasz w naszej <a href="https://pancernik.eu/politykaprywatnosci" target="_blank" rel="noopener noreferrer">Polityce prywatności</a> i <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener noreferrer">Informacji Google o przetwarzaniu danych</a>.</p>
+
+                                            </div>
+
+                    <div class="consents__buttons">
+                                                    <button type="button" class="btn js__accept-necessary">Zaakceptuj tylko niezbędne</button>
+                                                <button type="button" class="btn js__show-advanced-view">Dostosuj zgody</button>
+                        <button type="button" class="btn btn-red js__accept-all-consents">Zaakceptuj wszystkie</button>
+                    </div>
+                </div>
+
+                <div class="consents__advanced-view js__advanced-view none" role="dialog" aria-modal="true" aria-labelledby="customer_privacy_cookie_header">
+                    <div class="consents__advanced-content">
+                        <p class="consents__heading" id="customer_privacy_cookie_header">
+                            Ustawienia plików cookies
+                        </p>
+
+                        <p>W tym miejscu możesz określić swoje preferencje w zakresie wykorzystywania przez nas plików cookies.</p>
+                        <br>
+
+                        <div class="consents__consent">
+                            <div class="consents__consent-checkbox">
+                                <span class="checkbox-wrap">
+                                    <input type="checkbox" id="select_all" class="checkbox js__select-all-consents">
+                                    <label for="select_all"></label>
+                                </span>
+                            </div>
+
+                            <div class="consents__consent-description">
+                                <p class="consents__text">
+                                    <label for="select_all"><strong>Zaznacz wszystko</strong></label>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="consents__consent">
+                            <div class="consents__consent-checkbox">
+                                <span class="checkbox-wrap">
+                                    <input type="checkbox" id="functionCategoryConsent" name="functionCategoryConsent" class="checkbox" checked disabled>
+                                    <label for="functionCategoryConsent"></label>
+                                </span>
+                            </div>
+
+                            <div class="consents__consent-description">
+                                <p class="consents__text">
+                                    <label for="functionCategoryConsent"><strong>Niezbędne do działania strony</strong></label>
+                                </p>
+
+                                <p>
+                                    <p>Te pliki są niezbędne do działania naszej strony internetowej, dlatego też nie możesz ich wyłączyć.</p>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="consents__consent">
+                            <div class="consents__consent-checkbox">
+                                <span class="checkbox-wrap">
+                                    <input type="checkbox" id="functionalConsent" name="functionalConsent" class="checkbox js__consent">
+                                    <label for="functionalConsent"></label>
+                                </span>
+                            </div>
+
+                            <div class="consents__consent-description">
+                                <p class="consents__text">
+                                    <label for="functionalConsent"><strong>Funkcjonalne</strong></label>
+                                </p>
+
+                                <p>
+                                    <p>Te pliki umożliwiają Ci korzystanie z pozostałych funkcji strony internetowej (innych niż niezbędne do jej działania). Ich włączenie da Ci dostęp do pełnej funkcjonalności strony.</p>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="consents__consent">
+                            <div class="consents__consent-checkbox">
+                                <span class="checkbox-wrap">
+                                    <input type="checkbox" id="analyticsConsent" name="analyticsConsent" class="checkbox js__consent">
+                                    <label for="analyticsConsent"></label>
+                                </span>
+                            </div>
+
+                            <div class="consents__consent-description">
+                                <p class="consents__text">
+                                    <label for="analyticsConsent"><strong>Analityczne</strong></label>
+                                </p>
+
+                                <p>
+                                    <p>Te pliki pozwalają nam na dokonanie analiz dotyczących naszego sklepu internetowego, co może przyczynić się do jego lepszego funkcjonowania i dostosowania do potrzeb Użytkowników.</p>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="consents__consent">
+                            <div class="consents__consent-checkbox">
+                                <span class="checkbox-wrap">
+                                    <input type="checkbox" id="platformAnalyticsConsent" name="platformAnalyticsConsent" class="checkbox js__consent">
+                                    <label for="platformAnalyticsConsent"></label>
+                                </span>
+                            </div>
+
+                            <div class="consents__consent-description">
+                                <p class="consents__text">
+                                    <label for="platformAnalyticsConsent"><strong>Analityczne dostawcy oprogramowania</strong></label>
+                                </p>
+
+                                <p>
+                                    Dane wykorzystywane przez dostawcę oprogramowania sklepu - Shoper S.A. Na ich podstawie dokonywane są analizy, związane z rozwojem oprogramowania, oraz mierzona jest skuteczność kampanii reklamowych. Nie są łączone z innymi informacjami, podawanymi podczas rejestracji i składania zamówienia. Więcej na ten temat przeczytasz w <a href="https://www.shoper.pl/static/dokumenty/polityka-prywatnosci-dla-osob-odwiedzajacych-sklepy-internetowe.pdf" target="_blank" rel="noopener" data-label="Otwieranie w nowej karcie" aria-label="Polityka plików cookies Shoper - otwiera się w nowej karcie">Polityce plików cookies Shoper</a>.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="consents__consent">
+                            <div class="consents__consent-checkbox">
+                                <span class="checkbox-wrap">
+                                    <input type="checkbox" id="marketingConsent" name="marketingConsent" class="checkbox js__consent">
+                                    <label for="marketingConsent"></label>
+                                </span>
+                            </div>
+
+                            <div class="consents__consent-description">
+                                <p class="consents__text">
+                                    <label for="marketingConsent"><strong>Marketingowe</strong></label>
+                                </p>
+
+                                <p>
+                                    <p>Dzięki tym plikom możemy prowadzić działania marketingowe.</p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="consents__advanced-buttons">
+                        <button type="button" class="btn js__show-basic-view">Anuluj</button>
+                        <button type="button" class="btn btn-red js__save-consents">Zapisz ustawienia</button>
+                    </div>
+                </diV>
+            </div>
+        </div>
+
+        <div class="consents__mask"></div>
+    </div>
+</template>
+    <script id="config-analytics" type="application/json">
+        {
+            "clientGoogleAnalyticsV4": {
+                "isActive": "1",
+                "trackingId": "G-ETX51VJJLX",
+                "isGtm": "1"
+                
+                                            ,
+                                "googleRemarketing": {
+                                    "isRemarketingActive": false,
+                                    "conversionId": "",
+                                    "conversionLabel": "",
+                                    "isConversionEnabled": false,
+                                    "isShoppingAdsEnabled": false,
+                                    "awMerchantId": "",
+                                    "awFeedCountry": "",
+                                    "awFeedLanguage": ""
+                                }
+                        
+                                    
+            },
+
+            "facebookBusinessExtension": {
+                "isActive": false,
+                "pixelId": "2098250923627539"
+            }
+            
+                                    ,
+                        "campaignGoogleAnalyticsV4": {
+                            "isActive": false,
+                            "trackingId": "",
+                            "isGtm": "0"
+                        }
+                    
+                            
+        }
+    </script>
+<div id="shoper-foot">
+    <a href="https://www.shoper.pl/premium/" target="_blank" rel="noopener" title="Sklep internetowy Shoper Premium" class="popup" aria-label="Sklep Shoper Premium stworzony na platformie Shoper. Przejdź do strony shoper.pl - otwiera się w nowej karcie">Sklep internetowy Shoper Premium</a>
+</div></body>
+</html>

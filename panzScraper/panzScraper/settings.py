@@ -82,10 +82,11 @@ FEEDS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    "panzScraper.pipelines.PanzscraperPipeline": 300,
-# }
-
+ITEM_PIPELINES = {
+    "scrapy.pipelines.images.ImagesPipeline": 1,
+    "panzScraper.pipelines.PanzscraperPipeline": 300
+}
+#IMAGES_STORE = "/images"
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
@@ -98,6 +99,7 @@ FEEDS = {
 #AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
 #AUTOTHROTTLE_DEBUG = False
+DOWNLOAD_DELAY = 4
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
