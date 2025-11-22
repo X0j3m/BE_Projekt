@@ -82,8 +82,10 @@ FEEDS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+#HIGHER NUMBER MEANS LOWER PRIORITY
 ITEM_PIPELINES = {
-    "panzScraper.pipelines.PanzscraperPipeline": 300
+    "panzScraper.pipelines.PanzscraperPipeline": 300,
+    "panzScraper.databasepipeline.SaveToMariadb": 301
 }
 #IMAGES_STORE = "/images"
 # Enable and configure the AutoThrottle extension (disabled by default)

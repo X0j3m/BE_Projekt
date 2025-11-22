@@ -23,3 +23,4 @@ class PanzscraperPipeline:
         weight = item['weight']
         adapter['weight'] = weight['weight_float']
         return item
+
