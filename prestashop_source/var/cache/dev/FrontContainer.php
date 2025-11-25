@@ -66,6 +66,10 @@ class FrontContainer extends \PrestaShop\PrestaShop\Adapter\Container\LegacyCont
             'prestashop\\module\\prestashopfacebook\\repository\\shoprepository' => 'PrestaShop\\Module\\PrestashopFacebook\\Repository\\ShopRepository',
             'prestashop\\module\\prestashopfacebook\\repository\\tabrepository' => 'PrestaShop\\Module\\PrestashopFacebook\\Repository\\TabRepository',
             'prestashop\\module\\ps_facebook\\tracker\\segment' => 'PrestaShop\\Module\\Ps_facebook\\Tracker\\Segment',
+            'prestashop\\module\\psaccounts\\presenter\\psaccountspresenter' => 'PrestaShop\\Module\\PsAccounts\\Presenter\\PsAccountsPresenter',
+            'prestashop\\module\\psaccounts\\repository\\usertokenrepository' => 'PrestaShop\\Module\\PsAccounts\\Repository\\UserTokenRepository',
+            'prestashop\\module\\psaccounts\\service\\psaccountsservice' => 'PrestaShop\\Module\\PsAccounts\\Service\\PsAccountsService',
+            'prestashop\\module\\psaccounts\\service\\psbillingservice' => 'PrestaShop\\Module\\PsAccounts\\Service\\PsBillingService',
             'prestashop\\module\\psxmarketingwithgoogle\\adapter\\configurationadapter' => 'PrestaShop\\Module\\PsxMarketingWithGoogle\\Adapter\\ConfigurationAdapter',
             'prestashop\\module\\psxmarketingwithgoogle\\buffer\\templatebuffer' => 'PrestaShop\\Module\\PsxMarketingWithGoogle\\Buffer\\TemplateBuffer',
             'prestashop\\module\\psxmarketingwithgoogle\\config\\env' => 'PrestaShop\\Module\\PsxMarketingWithGoogle\\Config\\Env',
@@ -302,6 +306,10 @@ class FrontContainer extends \PrestaShop\PrestaShop\Adapter\Container\LegacyCont
             'PrestaShop\\Module\\PrestashopFacebook\\Repository\\ServerInformationRepository' => 'getServerInformationRepositoryService',
             'PrestaShop\\Module\\PrestashopFacebook\\Repository\\ShopRepository' => 'getShopRepositoryService',
             'PrestaShop\\Module\\PrestashopFacebook\\Repository\\TabRepository' => 'getTabRepositoryService',
+            'PrestaShop\\Module\\PsAccounts\\Presenter\\PsAccountsPresenter' => 'getPsAccountsPresenterService',
+            'PrestaShop\\Module\\PsAccounts\\Repository\\UserTokenRepository' => 'getUserTokenRepositoryService',
+            'PrestaShop\\Module\\PsAccounts\\Service\\PsAccountsService' => 'getPsAccountsServiceService',
+            'PrestaShop\\Module\\PsAccounts\\Service\\PsBillingService' => 'getPsBillingServiceService',
             'PrestaShop\\Module\\Ps_facebook\\Tracker\\Segment' => 'getSegmentService',
             'PrestaShop\\Module\\PsxMarketingWithGoogle\\Adapter\\ConfigurationAdapter' => 'getConfigurationAdapter2Service',
             'PrestaShop\\Module\\PsxMarketingWithGoogle\\Buffer\\TemplateBuffer' => 'getTemplateBuffer2Service',
@@ -1233,6 +1241,46 @@ class FrontContainer extends \PrestaShop\PrestaShop\Adapter\Container\LegacyCont
     protected function getTabRepositoryService()
     {
         return $this->services['PrestaShop\\Module\\PrestashopFacebook\\Repository\\TabRepository'] = new \PrestaShop\Module\PrestashopFacebook\Repository\TabRepository();
+    }
+
+    /**
+     * Gets the public 'PrestaShop\Module\PsAccounts\Presenter\PsAccountsPresenter' shared service.
+     *
+     * @return \PrestaShop\Module\PsAccounts\Presenter\PsAccountsPresenter
+     */
+    protected function getPsAccountsPresenterService()
+    {
+        return $this->services['PrestaShop\\Module\\PsAccounts\\Presenter\\PsAccountsPresenter'] = \PrestaShop\Module\PsAccounts\ServiceProvider\StaticProvider::provide('PrestaShop\\Module\\PsAccounts\\Presenter\\PsAccountsPresenter');
+    }
+
+    /**
+     * Gets the public 'PrestaShop\Module\PsAccounts\Repository\UserTokenRepository' shared service.
+     *
+     * @return \PrestaShop\Module\PsAccounts\Repository\UserTokenRepository
+     */
+    protected function getUserTokenRepositoryService()
+    {
+        return $this->services['PrestaShop\\Module\\PsAccounts\\Repository\\UserTokenRepository'] = \PrestaShop\Module\PsAccounts\ServiceProvider\StaticProvider::provide('PrestaShop\\Module\\PsAccounts\\Repository\\UserTokenRepository');
+    }
+
+    /**
+     * Gets the public 'PrestaShop\Module\PsAccounts\Service\PsAccountsService' shared service.
+     *
+     * @return \PrestaShop\Module\PsAccounts\Service\PsAccountsService
+     */
+    protected function getPsAccountsServiceService()
+    {
+        return $this->services['PrestaShop\\Module\\PsAccounts\\Service\\PsAccountsService'] = \PrestaShop\Module\PsAccounts\ServiceProvider\StaticProvider::provide('PrestaShop\\Module\\PsAccounts\\Service\\PsAccountsService');
+    }
+
+    /**
+     * Gets the public 'PrestaShop\Module\PsAccounts\Service\PsBillingService' shared service.
+     *
+     * @return \PrestaShop\Module\PsAccounts\Service\PsBillingService
+     */
+    protected function getPsBillingServiceService()
+    {
+        return $this->services['PrestaShop\\Module\\PsAccounts\\Service\\PsBillingService'] = \PrestaShop\Module\PsAccounts\ServiceProvider\StaticProvider::provide('PrestaShop\\Module\\PsAccounts\\Service\\PsBillingService');
     }
 
     /**
@@ -3119,9 +3167,12 @@ class FrontContainer extends \PrestaShop\PrestaShop\Adapter\Container\LegacyCont
         $c = ${($_ = isset($this->services['annotation_reader']) ? $this->services['annotation_reader'] : ($this->services['annotation_reader'] = new \Doctrine\Common\Annotations\AnnotationReader())) && false ?: '_'};
         $d = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($c, [0 => '/var/www/html/modules/productcomments/src/Entity']);
         $d->addExcludePaths([0 => '/var/www/html/modules/productcomments/src/Entity/index.php']);
+        $e = new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($c, [0 => '/var/www/html/modules/ps_accounts/src/Entity']);
+        $e->addExcludePaths([0 => '/var/www/html/modules/ps_accounts/src/Entity/index.php']);
 
         $b->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($c, [0 => '/var/www/html/src/PrestaShopBundle/Entity']), 'PrestaShop');
         $b->addDriver($d, 'PrestaShop\\Module\\ProductComment\\Entity');
+        $b->addDriver($e, 'PrestaShop\\Module\\PsAccounts\\Entity');
 
         $a->setEntityNamespaces(['PrestaShopBundle\\Entity' => 'PrestaShop']);
         $a->setMetadataCacheImpl(${($_ = isset($this->services['doctrine.orm.cache.provider.cache.doctrine.orm.default.metadata']) ? $this->services['doctrine.orm.cache.provider.cache.doctrine.orm.default.metadata'] : $this->getDoctrine_Orm_Cache_Provider_Cache_Doctrine_Orm_Default_MetadataService()) && false ?: '_'});
@@ -3139,6 +3190,7 @@ class FrontContainer extends \PrestaShop\PrestaShop\Adapter\Container\LegacyCont
         $a->setRepositoryFactory(new \Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory(new \Symfony\Component\DependencyInjection\ServiceLocator([])));
         $a->addCustomStringFunction('regexp', 'DoctrineExtensions\\Query\\Mysql\\Regexp');
         $a->addEntityNamespace('Moduleproductcomments', 'PrestaShop\\Module\\ProductComment\\Entity');
+        $a->addEntityNamespace('ModulepsAccounts', 'PrestaShop\\Module\\PsAccounts\\Entity');
 
         $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create(${($_ = isset($this->services['doctrine.dbal.default_connection']) ? $this->services['doctrine.dbal.default_connection'] : $this->getDoctrine_Dbal_DefaultConnectionService()) && false ?: '_'}, $a);
 
@@ -4512,6 +4564,8 @@ class FrontContainer extends \PrestaShop\PrestaShop\Adapter\Container\LegacyCont
                 57 => 'ps_facebook',
                 58 => 'psxmarketingwithgoogle',
                 59 => 'blockreassurance',
+                60 => 'ps_accounts',
+                61 => 'mymodule',
             ],
             'ps_cache_dir' => '/var/www/html/var/cache/dev/',
             'mail_themes_uri' => '/mails/themes',

@@ -44,7 +44,7 @@
     <div class="row">
       <div class="col-md-12">
         <p class="text-sm-center">
-          kurwa mać pancernik
+          PANCERNICZEK
         </p>
       </div>
     </div>
