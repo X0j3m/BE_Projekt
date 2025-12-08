@@ -23,29 +23,13 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
 <div class="container">
-  <div class="row">
-    {block name='hook_footer_before'}
-      {hook h='displayFooterBefore'}
-    {/block}
-  </div>
+    {hook h='displayFooterPancernik'}
 </div>
-<div class="footer-container">
-  <div class="container">
+
+<div class="container">
     <div class="row">
-      {block name='hook_footer'}
-        {hook h='displayFooter'}
-      {/block}
+        <div class="col-md-12 text-center copyright-footer">
+            &copy; 2024 Twój Sklep
+        </div>
     </div>
-    <div class="row">
-      {block name='hook_footer_after'}
-        {hook h='displayHome'}
-      {/block}
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <p class="text-sm-center">
-        </p>
-      </div>
-    </div>
-  </div>
 </div>
