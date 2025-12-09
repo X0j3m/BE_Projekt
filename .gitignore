@@ -51,3 +51,13 @@ Thumbs.db
 # Node.js dependencies (jeśli używasz)
 /node_modules/
 
+# ============================
+#  macOS system
+# ============================
+**/.DS_Store
+
+# ============================
+#  Scraper
+# ============================
+*.venv
+

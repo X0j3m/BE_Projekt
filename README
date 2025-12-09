@@ -25,6 +25,13 @@ System został rozszerzony o własne modyfikacje HTML/PHP, testy automatyczne or
 - **MariaDB**
 - **Docker Compose**
 
+## Wymaganne technologie - Scraper
+- **python 3.10.12**
+- **scrapy 2.13.4**
+- **scrapy_playwright 0.0.44**
+- **playwright 1.56.0**
+- **itemadapter 0.12.2**
+- **Requests 2.32.5**
 ## Włączenie projektu 
 - wchodzimy w terminalu w folder, w którym znajduje się repozytorium
 - używamy komendy 'docker compose up -d' w celu włączeniu kontenera
