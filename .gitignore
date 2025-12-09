@@ -1,31 +1,55 @@
-# ============================
-#  System / IDE / OS
-# ============================
+# Docker
+docker-compose.override.yml
+
+# Volumes Docker
+dbdata/
+
+# Logi PrestaShop
+/prestashop_source/var/logs/
+/prestashop_source/app/logs/
+/prestashop_source/var/cache/
+
+# Pliki konfiguracyjne PrestaShop
+/prestashop_source/app/config/parameters.php
+/prestashop_source/config/settings.inc.php
+
+# Pliki sesji
+/prestashop_source/var/sessions/
+
+# Uploadowane pliki
+/prestashop_source/img/
+/prestashop_source/mails/
+!/prestashop_source/modules/test_module/
+!/prestashop_source/themes/mytheme/
+!/prestashop_source/themes/classic/
+
+# Cache i pliki tymczasowe
+/prestashop_source/var/cache/
+/prestashop_source/cache/
+
+# Backup bazy danych
+*.sql.gz
+*.backup
+
+# Środowisko developerskie
+/.env
+/.env.local
+docker-compose.local.yml
+
+# Systemowe pliki
 .DS_Store
 Thumbs.db
-.idea/
-.vscode/
 *.swp
 *.swo
-*.iml
 
-# ============================
-#  Docker / Compose
-# ============================
-.env
-.env.*
-*.log
-docker-compose.override.yml
-deployment/db_data/
-deployment/db_data/*
+# IDE
+/.vscode/
+/.idea/
+*.swp
+*.swo
 
-# ============================
-#  Backups / dumpy / cache
-# ============================
-*.sql
-*.sql.gz
-*.tar
-*.zip
+# Node.js dependencies (jeśli używasz)
+/node_modules/
 
 # ============================
 #  macOS system
