@@ -250,3 +250,293 @@ div {
 .dropdown-item:hover {
     color: #e3bf5d !important;
 }
+
+
+/* ==================================================
+   STRONA LOGOWANIA - DARK MODE (PANCERNIK STYLE)
+   ================================================== */
+
+/* 1. TŁO I KONTENER GŁÓWNY */
+#authentication .page-content {
+    background-color: #f6f6f6; /* Lub ciemne #262626 jeśli chcesz full dark */
+}
+
+/* Karta logowania / rejestracji */
+#authentication .login-form, 
+#authentication .register-form { /* Jeśli masz taki div */
+    background-color: #fff;      /* Lub #363636 dla ciemnego motywu */
+    padding: 30px;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 2. NAGŁÓWKI */
+#authentication h1, 
+#authentication h3,
+.login-form h3,
+.register-section h3 {
+    color: #1a1a1a;             /* Lub #fca311 (złoty) w ciemnym motywie */
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* 3. POLA FORMULARZA (INPUTY) */
+#authentication input.form-control {
+    background-color: #fff;     /* Lub #535353 w ciemnym */
+    border: 1px solid #ddd;     /* Lub #666 w ciemnym */
+    color: #333;                /* Lub #fff w ciemnym */
+    height: 45px;
+    padding: 10px 15px;
+    border-radius: 0;
+}
+
+#authentication input.form-control:focus {
+    outline: none;
+    border-color: #a58149; /* Złoty akcent przy pisaniu */
+}
+
+/* 4. PRZYCISKI (ZŁOTE) */
+#authentication .btn-primary,
+#authentication .btn-submit,
+#authentication #submit-login {
+    background-color: #a58149 !important; /* Złoty Pancernika */
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 12px 25px;
+    border-radius: 3px;
+    transition: 0.3s;
+    width: 100%; /* Pełna szerokość przycisku */
+}
+
+#authentication .btn-primary:hover {
+    background-color: #cfa873 !important; /* Jaśniejszy złoty */
+}
+
+/* Przycisk rejestracji (ten szary na twoim screenie) */
+.no-account .btn-primary, 
+.register-section .btn {
+    background-color: #444 !important; /* Ciemnoszary */
+    color: #fff;
+}
+.no-account .btn-primary:hover {
+    background-color: #666 !important;
+}
+
+/* 5. LINKI (Zapomniałeś hasła?) */
+.forgot-password a {
+    color: #777;
+    font-size: 13px;
+    text-decoration: underline;
+}
+.forgot-password a:hover {
+    color: #a58149;
+}
+
+/* 6. SOCIAL LOGIN (Facebook/Google ze screena) */
+.social-login-btn {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+/* Tu musisz sprawdzić jakie klasy mają te przyciski w kodzie źródłowym, 
+   zazwyczaj to coś w stylu .btn-facebook */
+
+
+/* Przycisk Zaloguj (Złoty) */
+#submit-login {
+    background-color: #a58149;
+    color: #fff;
+    width: auto; /* Lub 100% jeśli wolisz szeroki */
+    margin-top: 15px;
+    padding: 10px 30px;
+    text-transform: lowercase; /* Małe litery jak na screenie */
+    font-weight: bold;
+    border: none;
+}
+#submit-login:hover {
+    background-color: #cfa873;
+}
+
+/* Przycisk Rejestracji (Szary) */
+.no-account .btn-secondary {
+    background-color: #ccc;
+    color: #333;
+    border: 1px solid #bbb;
+    text-transform: lowercase;
+}
+
+/* Link zapomniałeś hasła */
+.forgot-password {
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+/* Nagłówki */
+.login-container h3, .register-container h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.col-md-12{
+    text-align: left !important;
+}
+
+#submit-login{
+    margin: 0 0 0 0 !important;
+}
+
+/* ==================================================
+   REJESTRACJA (PANCERNIK STYLE)
+   ================================================== */
+
+/* 1. Przycisk Zarejestruj się (Ciemny) */
+.btn-register-dark {
+    background-color: #444 !important; /* Ciemny kolor ze zdjęcia */
+    color: #fff !important;
+    border: none;
+    padding: 10px 30px;
+    font-weight: bold;
+    text-transform: lowercase; /* Małe litery: "zarejestruj się" */
+    font-size: 16px;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.btn-register-dark:hover {
+    background-color: #222 !important; /* Jeszcze ciemniejszy po najechaniu */
+}
+
+/* 2. Checkboxy (Regulaminy) */
+/* Presta ma specyficzny HTML dla checkboxów, poprawiamy czytelność */
+#customer-form .custom-checkbox {
+    display: flex;
+    align-items: flex-start;
+}
+#customer-form .custom-checkbox input {
+    margin-top: 4px;
+    margin-right: 10px;
+}
+#customer-form .custom-checkbox label {
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: left;
+}
+
+/* 3. Etykiety pól (Label) */
+#customer-form .form-control-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Pola wymagane z gwiazdką */
+#customer-form .form-control-label.required::before {
+    content: '* ';
+    color: red;
+    font-weight: bold;
+}
+
+/* Wyrównanie etykiet do prawej (jak na Pancerniku) */
+#customer-form .form-control-label {
+    text-align: right;
+    font-weight: 600;
+    padding-top: 10px; /* Wyśrodkowanie względem inputa */
+    font-size: 13px;
+}
+
+/* Inputy formularza */
+#customer-form .form-control {
+    height: 40px;
+    border: 1px solid #ccc;
+}
+
+/* Wygląd Checkboxów (RODO) */
+
+
+/* Ciemny przycisk rejestracji */
+.btn-register-dark {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 10px 40px;
+    font-weight: bold;
+    text-transform: lowercase;
+    border-radius: 3px;
+}
+.btn-register-dark:hover {
+    background-color: #222;
+}
+
+/* Na mobilkach etykiety do lewej */
+@media (max-width: 768px) {
+    #customer-form .form-control-label {
+        text-align: left;
+    }
+}
+
+/* NAPRAWA CHECKBOXÓW */
+
+/* 1. Kontener dla zgody */
+#customer-form .custom-checkbox {
+    display: flex !important;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* 2. Wymuszenie widoczności samego kwadracika */
+#customer-form .custom-checkbox input[type="checkbox"] {
+    opacity: 1 !important;        /* Presta ustawia to na 0 */
+    position: relative !important; /* Presta ustawia absolute */
+    appearance: auto !important;   /* Przywraca wygląd systemowy */
+    -webkit-appearance: auto !important;
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 10px;
+    cursor: pointer;
+    z-index: 10;
+    display: block !important;
+}
+
+/* 3. Styl etykiety (tekstu obok) */
+#customer-form .custom-checkbox label {
+    font-size: 13px;
+    line-height: 1.4;
+    cursor: pointer;
+    color: #333;
+    text-align: left;
+    margin-top: 2px;
+}
+
+
+.product-flag{
+    background-color: #cfa873 !important;
+    color: white !important;
+}
+
+.btn btn-primary add-to-cart{
+    background-color: #cfa873 !important;
+    color: white !important;
+}
+
+.btn-primary {
+    background-color: #cfa873 !important;
+    color: white !important;
+}
+
+.tabs .nav-tabs .nav-link.active {
+    color: #cfa873 ;
+    border: none;
+    border-bottom: #cfa873  3px solid;
+}
+
+.product-price {
+    display: inline-block;
+    color: #cfa873 !important;
+}
