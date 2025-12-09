@@ -202,3 +202,51 @@ div {
     display: block;
     unicode-bidi: isolate;
 }
+
+/* ==================================================
+   MENU POZIOME (PANCERNIK STYLE)
+   ================================================== */
+
+/* Reset marginesów kontenera menu */
+.header-menu-pancernik .top-menu {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Ustawienie elementów w jednej linii (flexbox) */
+.header-menu-pancernik .top-menu > ul {
+    display: flex;
+    flex-wrap: wrap; /* Zawijaj, jeśli się nie zmieszczą */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Styl pojedynczego linku (kategorii) */
+.header-menu-pancernik .top-menu .category {
+    display: inline-block;
+    padding: 15px 20px;       /* Odstępy wewnątrz przycisku */
+    color: #cccccc;           /* Szary kolor tekstu */
+    text-decoration: none;
+    font-weight: 600;         /* Lekko pogrubione */
+    text-transform: uppercase; /* Wielkie litery (opcjonalnie) */
+    font-size: 14px;
+    border-bottom: 3px solid transparent; /* Miejsce na pasek hover */
+    transition: all 0.3s ease;
+}
+
+/* Ukrycie podkategorii (rozwijane menu) - wersja prosta */
+/* Jeśli chcesz, żeby menu się rozwijało, trzeba dodać więcej CSS. 
+   Na start ustawiamy proste linki. */
+.header-menu-pancernik .popover {
+    display: none; /* Usuń tę linię, jeśli chcesz mieć rozwijane menu */
+}
+
+.dropdown-item{
+    color: #b0b0b0 !important;
+}
+
+.dropdown-item:hover {
+    color: #e3bf5d !important;
+}

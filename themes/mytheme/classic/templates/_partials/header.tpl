@@ -70,5 +70,15 @@ padding: 0 0 0 0;">
 
 </div>
 
+<div class="header-menu-pancernik" style="
+      background-color: #262626; /* Ciemne tło menu */
+      border-top: 1px solid #444; /* Lekka linia oddzielająca */
+      width: 100%;
+  ">
+      <div class="container" style="color: #fff;">
+          {widget name='ps_mainmenu'}
+      </div>
+  </div>
 
+</div>
 </div>
