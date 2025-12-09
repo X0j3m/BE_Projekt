@@ -214,4 +214,3 @@
                             </ul>
         </div>
 
-<div class="line"></div>

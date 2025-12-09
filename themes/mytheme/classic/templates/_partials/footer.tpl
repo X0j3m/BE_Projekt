@@ -25,11 +25,9 @@
 <div class="container">
     {hook h='displayFooterPancernik'}
 </div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 text-center copyright-footer">
-            &copy; 2024 Twój Sklep
-        </div>
-    </div>
+<div class="line" style="border-top: 1px solid #5b5b5b;"></div>
+<div class="bottom-footer" style="width: 100%; height: 60px; margin-top: 20px;">
+  <div style="float: left; width: 33%;"><img src="/upload/footer/pancernik.svg" alt="PANCERNIK" class="bottom-footer-logo"></div>
+  <div style="float: left; width: 34%;"><p class="bottom-footer-text">Copyright 2025 Pancernik.eu. All rights reserved.</p></div>
+  <div style="float: left; width: 33%;"><a href="https://www.shoper.pl/premium/" target="_blank" rel="noopener" title="Sklep internetowy Shoper Premium"><img src="/upload/footer/shoper.svg" alt="PANCERNIK" class="bottom-footer-shoper"></a></div>
 </div>

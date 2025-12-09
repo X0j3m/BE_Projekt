@@ -175,8 +175,30 @@ footer {
     background: #363636;
 }
 
-.footer .line {
+.line {
     width: 100%;
-    border-top: 1px solid red;
+    border-top: 100px solid red;
     box-sizing: border-box;
+}
+
+
+.footer .bottom-footer {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #111;
+    background-color: #fff;
+    font-size: 13px;
+    line-height: 18px;
+}
+
+div {
+    display: block;
+    unicode-bidi: isolate;
 }
