@@ -1,87 +1,84 @@
-{**
- * Copyright since 2007 PrestaShop SA and Contributors
- * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Academic Free License 3.0 (AFL-3.0)
- * that is bundled with this package in the file LICENSE.md.
- * It is also available through the world-wide-web at this URL:
- * https://opensource.org/licenses/AFL-3.0
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@prestashop.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
- * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to https://devdocs.prestashop.com/ for more information.
- *
- * @author    PrestaShop SA and Contributors <contact@prestashop.com>
- * @copyright Since 2007 PrestaShop SA and Contributors
- * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
- *}
-{block name='header_banner'}
-  <div class="header-banner">
-    {hook h='displayBanner'}
+<div class="header-pancernik" style="
+background-color: #323334;
+padding: 0 0 0 0;
+">
+  <div class="header-banner-pancernik" style="
+background-color: #4a4c4e;
+text-align: center;
+padding: 0 0 0 0;">
+  <a href="#" style="text-decoration: none; color: #fff; padding: 0 0 0 0;">
+    <p style="color: #fff;"> 🎁 <strong>Kody rabatowe i promocje</strong>  - sprawdź aktualne oferty! ⚡ </p>
+  </a>
+</div>
+  <div class="header-top-pancernik" style="text-align: right; padding: 0px 50px 0px 0px;">
+    <a href="http://localhost:8080/login?create_account=1" data-link-action="display-register-form" style="color: #ccc;">
+      Zarejestruj się
+    </a>
+    <a href="http://localhost:8080/my-account" title="Zaloguj się do swojego konta klienta" rel="nofollow" style="color: #ccc;">
+      <i class="material-icons"></i>
+      <span class="hidden-sm-down">Zaloguj się</span>
+    </a>
   </div>
-{/block}
 
-{block name='header_nav'}
-  <nav class="header-nav">
-    <div class="container">
-      <div class="row">
-        <div class="hidden-sm-down">
-          <div class="col-md-5 col-xs-12">
-            {hook h='displayNav1'}
-          </div>
-          <div class="col-md-7 right-nav">
-              {hook h='displayNav2'}
-          </div>
-        </div>
-        <div class="hidden-md-up text-sm-center mobile">
-          <div class="float-xs-left" id="menu-icon">
-            <i class="material-icons d-inline">&#xE5D2;</i>
-          </div>
-          <div class="float-xs-right" id="_mobile_cart"></div>
-          <div class="float-xs-right" id="_mobile_user_info"></div>
-          <div class="top-logo" id="_mobile_logo"></div>
-          <div class="clearfix"></div>
-        </div>
-      </div>
-    </div>
-  </nav>
-{/block}
+  <div class="header-kontakt-pancernik" style="text-align: right; padding: 20px 50px 20px 0; font-size: 16px">
 
-{block name='header_top'}
-  <div class="header-top">
-    <div class="container">
-       <div class="row">
-        <div class="col-md-2 hidden-sm-down" id="_desktop_logo">
-          {if $shop.logo_details}
-            {if $page.page_name == 'index'}
-              <h1>
-                {renderLogo}
-              </h1>
-            {else}
-              {renderLogo}
-            {/if}
-          {/if}
-        </div>
-        <div class="header-top-right col-md-10 col-sm-12 position-static">
-          {hook h='displayTop'}
-        </div>
-      </div>
-      <div id="mobile_top_menu_wrapper" class="row hidden-md-up" style="display:none;">
-        <div class="js-top-menu mobile" id="_mobile_top_menu"></div>
-        <div class="js-top-menu-bottom">
-          <div id="_mobile_currency_selector"></div>
-          <div id="_mobile_language_selector"></div>
-          <div id="_mobile_contact_link"></div>
-        </div>
-      </div>
-    </div>
+    tel.: 
+    <a href="tel:+48699577774" style="color: #e3bf5d;">+48 699 577 774</a> 
+    e-mail:
+    <span style="color: #e3bf5d;">sklep@pancernik.eu</span>
   </div>
-  {hook h='displayNavFullWidth'}
-{/block}
+
+  <div class="header-main-bar" style="
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      padding: 0px 50px;
+      gap: 30px;
+  ">
+      
+      <div class="logo-wrapper" style="flex-shrink: 0;">
+         <a href="{$urls.base_url}">
+           <img class="logo" src="{$urls.img_url}reprezentant.webp" alt="{$shop.name}" style="max-height: 120px;">
+         </a>
+      </div>
+      
+
+      <div class="search-cart-wrapper" style="
+          text-align: right;
+          display: flex; 
+          align-items: center; 
+          flex-grow: 1; 
+          justify-content: flex-end; 
+          gap: 15px;
+      ">
+          
+          <div class="custom-search" style="max-width: 800px; text-align:right; flex-grow: 1;">
+              {widget name='ps_searchbar'}
+          </div>
+
+          <div class="custom-cart" style="min-width: 100px;">
+              <div id="_desktop_cart">
+                  <a href="{$urls.base_url}cart" title="Koszyk" rel="nofollow" style="text-decoration: none; color: inherit;">
+                      {widget name='ps_shoppingcart'}
+                  </a>
+              </div>
+          </div>
+
+      </div>
+
+  </div>
+
+</div>
+
+<div class="header-menu-pancernik" style="
+      background-color: #262626; /* Ciemne tło menu */
+      border-top: 1px solid #444; /* Lekka linia oddzielająca */
+      width: 100%;
+  ">
+      <div class="container" style="color: #fff;">
+          {widget name='ps_mainmenu'}
+      </div>
+  </div>
+
+</div>
+</div>

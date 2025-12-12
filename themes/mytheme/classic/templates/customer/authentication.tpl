@@ -1,26 +1,5 @@
 {**
- * Copyright since 2007 PrestaShop SA and Contributors
- * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Academic Free License 3.0 (AFL-3.0)
- * that is bundled with this package in the file LICENSE.md.
- * It is also available through the world-wide-web at this URL:
- * https://opensource.org/licenses/AFL-3.0
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@prestashop.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade PrestaShop to newer
- * versions in the future. If you wish to customize PrestaShop for your
- * needs please refer to https://devdocs.prestashop.com/ for more information.
- *
- * @author    PrestaShop SA and Contributors <contact@prestashop.com>
- * @copyright Since 2007 PrestaShop SA and Contributors
- * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
+ * Plik: themes/mytheme/templates/customer/authentication.tpl
  *}
 {extends file='page.tpl'}
 
@@ -29,18 +8,45 @@
 {/block}
 
 {block name='page_content'}
-    {block name='login_form_container'}
-      <section class="login-form">
-        {render file='customer/_partials/login-form.tpl' ui=$login_form}
-      </section>
-      <hr/>
-      {block name='display_after_login_form'}
-        {hook h='displayCustomerLoginFormAfter'}
-      {/block}
-      <div class="no-account">
-        <a href="{$urls.pages.register}" data-link-action="display-register-form">
-          {l s='No account? Create one here' d='Shop.Theme.Customeraccount'}
-        </a>
-      </div>
-    {/block}
+    
+    <div class="social-login-section mb-4">
+        <h3 class="h3" style="font-size: 16px; margin-bottom: 15px;">Zaloguj się przez konto społecznościowe</h3>
+        <div class="social-buttons-wrapper">
+             {* Tutaj wpinają się moduły FB/Google. Jeśli ich nie masz, to miejsce będzie puste *}
+             {hook h='displayCustomerLoginFormAfter'}
+        </div>
+    </div>
+    
+    <hr style="margin: 30px 0; border-top: 1px solid #ddd;">
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12 login-container">
+            <h3 class="h3" style="font-size: 18px; margin-bottom: 15px; font-weight: bold;">Zaloguj się</h3>
+            
+            <div class="login-form-wrapper">
+                 {* Wczytujemy plik z polami formularza (Krok 2) *}
+                 {render file='customer/_partials/login-form.tpl' ui=$login_form}
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xs-12 register-container">
+            <h3 class="h3" style="font-size: 18px; margin-bottom: 15px; font-weight: bold;">Zarejestruj się</h3>
+            
+            <div class="register-benefits">
+                <p class="mb-2">Otrzymasz liczne dodatkowe korzyści:</p>
+                <ul class="benefits-list">
+                    <li>podgląd statusu realizacji zamówień</li>
+                    <li>podgląd historii zakupów</li>
+                    <li>brak konieczności wprowadzania swoich danych przy kolejnych zakupach</li>
+                    <li>możliwość otrzymania rabatów i kuponów promocyjnych</li>
+                </ul>
+
+                <div class="no-account mt-3">
+                    <a href="{$urls.pages.register}" data-link-action="display-register-form" class="btn btn-secondary btn-register">
+                        zarejestruj się
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {/block}
