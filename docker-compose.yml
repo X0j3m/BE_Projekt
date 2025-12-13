@@ -50,6 +50,9 @@ services:
         source: ./themes/mytheme                  # local path to the module
         target: /var/www/html/themes     # path to be mounted in the container
       - ./prestashop_source:/var/www/html:cached
+      - ./img/logo.png:/var/www/html/img/logo.png
+      - ./img/logo.png:/var/www/html/img/logo_mail.png
+      - ./img/logo.png:/var/www/html/img/logo_invoice.png
       #- type: bind
       #  source: ./themes/classic                   # lokalna ścieżka do pobranego szablonu
       #  target: /var/www/html/themes/classic      # ścieżka w kontenerze
