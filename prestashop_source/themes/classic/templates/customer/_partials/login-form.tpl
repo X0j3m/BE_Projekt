@@ -29,7 +29,7 @@
   {/block}
 
   <form id="login-form" action="{block name='login_form_actionurl'}{$action}{/block}" method="post">
-
+    <input type="hidden" name="submitLogin" value="1">
     <div>
       {block name='login_form_fields'}
         {foreach from=$formFields item="field"}
