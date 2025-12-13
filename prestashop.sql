@@ -8230,7 +8230,7 @@ UNLOCK TABLES;
 -- Dump completed on 2025-11-11 11:34:53
 
 DELETE FROM ps_configuration 
-WHERE name IN ('PS_MAIL_METHOD', 'PS_MAIL_SERVER', 'PS_MAIL_USER', 'PS_MAIL_PASSWD', 'PS_MAIL_ENCRYPTION', 'PS_MAIL_PORT');
+WHERE name IN ('PS_MAIL_METHOD', 'PS_MAIL_SERVER', 'PS_MAIL_USER', 'PS_MAIL_PASSWD', 'PS_MAIL_SMTP_ENCRYPTION', 'PS_MAIL_SMTP_PORT');
 
 /* Inserting Gmail configuration */
 INSERT INTO ps_configuration (id_shop, id_shop_group, name, value, date_add, date_upd) VALUES 
