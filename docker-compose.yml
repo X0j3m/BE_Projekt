@@ -29,16 +29,17 @@ services:
     container_name: prestashop
     image: prestashop/prestashop:1.7.8
     restart: unless-stopped
-    ports:
-      - 8080:80
+    #ports:
+    #  - 8080:80
     environment:
       PS_DEV_MODE: 1
       PS_FOLDER_ADMIN: admin1234
       PS_FOLDER_INSTALL: install1234
       DB_SERVER: db
       DB_NAME: prestashop
-      DB_USER: root
-      DB_PASSWD: root
+      DB_USER: admin
+      DB_PASSWD: admins
+      PS_DOMAIN_SSL: localhost
       PS_INSTALL_AUTO: 1
     depends_on:
       - db
@@ -50,6 +51,7 @@ services:
         source: ./themes/mytheme                  # local path to the module
         target: /var/www/html/themes     # path to be mounted in the container
       - ./prestashop_source:/var/www/html:cached
+      - ps_cache:/var/www/html/var/cache
       - ./img/logo.png:/var/www/html/img/logo.png
       - ./img/logo.png:/var/www/html/img/logo_mail.png
       - ./img/logo.png:/var/www/html/img/logo_invoice.png
@@ -61,7 +63,24 @@ services:
       #  target: /var/www/html/themes/classic      # ścieżka w kontenerze
       #- ./modules:/var/www/html/moduless
       #- ./themes:/var/www/html/themes
+      
 
+    networks:
+      - prestashop_network
+
+  nginx-proxy:
+    image: nginx:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"    # Przekierowanie HTTP
+      - "443:443"  # Przekierowanie HTTPS
+    volumes:
+      - ./nginx/prestashop.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./ssl/localhost.crt:/etc/nginx/ssl/cert.crt:ro
+      - ./ssl/localhost.key:/etc/nginx/ssl/key.key:ro
+    depends_on:
+      - prestashop
+    restart: always
     networks:
       - prestashop_network
 
@@ -70,3 +89,6 @@ networks:
 
 volumes:
   dbdata:
+  ps_cache:
+  caddy_data:
+  caddy_config:
