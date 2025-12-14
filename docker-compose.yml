@@ -39,7 +39,7 @@ services:
       DB_NAME: prestashop
       DB_USER: root
       DB_PASSWD: root
-      PS_INSTALL_AUTO: 0
+      PS_INSTALL_AUTO: 1
     depends_on:
       - db
     volumes:
@@ -53,6 +53,9 @@ services:
       - ./img/logo.png:/var/www/html/img/logo.png
       - ./img/logo.png:/var/www/html/img/logo_mail.png
       - ./img/logo.png:/var/www/html/img/logo_invoice.png
+      - ./img/inpost-kurier.jpg:/var/www/html/img/s/1.jpg
+      - ./img/orlen paczka.jpg:/var/www/html/img/s/2.jpg
+      - ./img/poczta-polska.jpg:/var/www/html/img/s/3.jpg
       #- type: bind
       #  source: ./themes/classic                   # lokalna ścieżka do pobranego szablonu
       #  target: /var/www/html/themes/classic      # ścieżka w kontenerze
