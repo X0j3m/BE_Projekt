@@ -22,6 +22,8 @@ services:
     restart: unless-stopped
     ports:
       - 8081:8080
+    networks:
+      - prestashop_network
 
   prestashop:
     container_name: prestashop
@@ -37,7 +39,7 @@ services:
       DB_NAME: prestashop
       DB_USER: root
       DB_PASSWD: root
-      PS_INSTALL_AUTO: 1
+      PS_INSTALL_AUTO: 0
     depends_on:
       - db
     volumes:
@@ -48,12 +50,14 @@ services:
         source: ./themes/mytheme                  # local path to the module
         target: /var/www/html/themes     # path to be mounted in the container
       - ./prestashop_source:/var/www/html:cached
+      - ./img/logo.png:/var/www/html/img/logo.png
+      - ./img/logo.png:/var/www/html/img/logo_mail.png
+      - ./img/logo.png:/var/www/html/img/logo_invoice.png
       #- type: bind
       #  source: ./themes/classic                   # lokalna ścieżka do pobranego szablonu
       #  target: /var/www/html/themes/classic      # ścieżka w kontenerze
       #- ./modules:/var/www/html/moduless
       #- ./themes:/var/www/html/themes
-      
 
     networks:
       - prestashop_network
