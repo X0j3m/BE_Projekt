@@ -1,0 +1,4 @@
+localhost {
+    # This tells Caddy to talk to the 'prestashop' container on port 80
+    reverse_proxy prestashop:80
+}

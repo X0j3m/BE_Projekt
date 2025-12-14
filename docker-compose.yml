@@ -22,13 +22,15 @@ services:
     restart: unless-stopped
     ports:
       - 8081:8080
+    networks:
+      - prestashop_network
 
   prestashop:
     container_name: prestashop
     image: prestashop/prestashop:1.7.8
     restart: unless-stopped
-    ports:
-      - 8080:80
+    #ports:
+    #  - 8080:80
     environment:
       PS_DEV_MODE: 1
       PS_FOLDER_ADMIN: admin1234
@@ -48,6 +50,7 @@ services:
         source: ./themes/mytheme                  # local path to the module
         target: /var/www/html/themes     # path to be mounted in the container
       - ./prestashop_source:/var/www/html:cached
+      - ps_cache:/var/www/html/var/cache
       #- type: bind
       #  source: ./themes/classic                   # lokalna ścieżka do pobranego szablonu
       #  target: /var/www/html/themes/classic      # ścieżka w kontenerze
@@ -58,8 +61,25 @@ services:
     networks:
       - prestashop_network
 
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - prestashop_network
+
 networks:
   prestashop_network:
 
 volumes:
   dbdata:
+  ps_cache:
+  caddy_data:
+  caddy_config:
