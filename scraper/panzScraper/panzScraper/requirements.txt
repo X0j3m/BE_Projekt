@@ -1,5 +1,0 @@
-itemadapter==0.12.2
-playwright==1.56.0
-Requests==2.32.5
-scrapy==2.13.4
-scrapy_playwright==0.0.44
