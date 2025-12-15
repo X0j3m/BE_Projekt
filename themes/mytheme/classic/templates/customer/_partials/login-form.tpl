@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {**
  * Plik: themes/mytheme/templates/customer/_partials/login-form.tpl
  *}

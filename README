@@ -37,3 +37,11 @@ System został rozszerzony o własne modyfikacje HTML/PHP, testy automatyczne or
 - używamy komendy 'docker compose up -d' w celu włączeniu kontenera
 - wchodzimy na 'localhost:8080' - miejsce gdzie znajduje się prestashop
 - w celu przegądania bazy danych można wejść na 'localhost:8081' - włącza się adminer za pomocą, którego można modyfikować baze
+
+
+# Zapisanie pracy w adminie
+
+zapisanie backupu
+```bash
+docker exec -i mariadb mysqldump -u root -proot prestashop > prestashop.sql
+```
