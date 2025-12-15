@@ -11,10 +11,10 @@ padding: 0 0 0 0;">
   </a>
 </div>
   <div class="header-top-pancernik" style="text-align: right; padding: 0px 50px 0px 0px;">
-    <a href="http://localhost:8080/login?create_account=1" data-link-action="display-register-form" style="color: #ccc;">
+    <a href="{$urls.pages.register} data-link-action="display-register-form" style="color: #ccc;">
       Zarejestruj się
     </a>
-    <a href="http://localhost:8080/my-account" title="Zaloguj się do swojego konta klienta" rel="nofollow" style="color: #ccc;">
+    <a href="{$urls.pages.my_account}" title="Zaloguj się do swojego konta klienta" rel="nofollow" style="color: #ccc;">
       <i class="material-icons"></i>
       <span class="hidden-sm-down">Zaloguj się</span>
     </a>
@@ -58,7 +58,7 @@ padding: 0 0 0 0;">
 
           <div class="custom-cart" style="min-width: 100px;">
               <div id="_desktop_cart">
-                  <a href="{$urls.base_url}cart" title="Koszyk" rel="nofollow" style="text-decoration: none; color: inherit;">
+                  <a href="{$urls.pages.cart}" title="Koszyk" rel="nofollow" style="text-decoration: none; color: inherit;">
                       {widget name='ps_shoppingcart'}
                   </a>
               </div>
