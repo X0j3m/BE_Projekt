@@ -32,11 +32,11 @@
             <div class="col-md-3 col-sm-6 footer-column">
                 <h3>Zamówienia</h3>
                 <ul>
-                    <li><a href="#" title="Status zamówienia">Status zamówienia</a></li>
-                    <li><a href="#" title="Czas realizacji i dostawa">Czas realizacji i dostawa</a></li> {* Zmień ID CMS *}
-                    <li><a href="#" title="Logowanie i rejestracja">Logowanie i rejestracja</a></li>
-                    <li><a href="#" title="Metody płatności">Metody płatności</a></li> {* Zmień ID CMS *}
-                    <li><a href="#" title="Zamówienia publiczne i B2B">Zamówienia publiczne i B2B</a></li>
+                    <li><a href="{$urls.pages.guest_tracking}" title="Status zamówienia">Status zamówienia</a></li>
+                    <li><a href="{$link->getCMSLink(1)}" title="Czas realizacji i dostawa">Czas realizacji i dostawa</a></li> {* Zmień ID CMS *}
+                    <li><a href="{$urls.pages.my_account}" title="Logowanie i rejestracja">Logowanie i rejestracja</a></li>
+                    <li><a href="{$link->getCMSLink(5)}" title="Metody płatności">Metody płatności</a></li> {* Zmień ID CMS *}
+                    <li><a href="https://pancernik.eu/zamowienia-publiczne-i-b2b" title="Zamówienia publiczne i B2B">Zamówienia publiczne i B2B</a></li>
                 </ul>
             </div>
 
@@ -47,7 +47,7 @@
                     <li><a href="#" title="Zwroty i reklamacje">Zwroty i reklamacje</a></li>
                     <li><a href="#" title="Najczęściej zadawane pytania">Najczęściej zadawane pytania</a></li>
                     <li><a href="#" title="Uszkodzenie w transporcie">Uszkodzenie w transporcie</a></li>
-                    <li><a href="#" title="Kody rabatowe & promocje">Kody rabatowe & promocje</a></li>
+                    <li><a href="{$urls.pages.discount}" title="Kody rabatowe & promocje">Kody rabatowe & promocje</a></li>
                     <li><a href="#" title="Zgłoś niebezpieczny produkt">Zgłoś niebezpieczny produkt</a></li>
                     <li><a href="#" title="Newsletter">Newsletter</a></li>
                     <li><a href="#" title="Opinie Trustmate">Opinie Trustmate</a></li>
@@ -58,17 +58,17 @@
             <div class="col-md-3 col-sm-6 footer-column">
                 <h3>O firmie</h3>
                 <ul>
-                    <li><a href="#" title="Regulamin">Regulamin</a></li>
+                    <li><a href="{$link->getCMSLink(3)}" title="Regulamin">Regulamin</a></li>
                     <li><a href="#" title="Ustawienia plików cookies">Ustawienia plików cookies</a></li>
-                    <li><a href="#" title="Polityka prywatności">Polityka prywatności</a></li>
+                    <li><a href="{$link->getCMSLink(2)}" title="Polityka prywatności">Polityka prywatności</a></li>
                     <li><a href="#" title="Kariera">Kariera</a></li>
                     <li><a href="#" title="Program partnerski">Program partnerski</a></li>
                     <li><a href="#" title="Ochrona środowiska">Ochrona środowiska</a></li>
                     <li><a href="#" title="Blog">Blog</a></li>
-                    <li><a href="#" title="Sklep stacjonarny">Sklep stacjonarny</a></li>
+                    <li><a href="{$urls.pages.stores}" title="Sklep stacjonarny">Sklep stacjonarny</a></li>
                     <li><a href="#" title="Współpraca marketingowa">Współpraca marketingowa</a></li>
-                    <li><a href="#" title="O Sklepie">O Sklepie</a></li>
-                    <li><a href="#" title="Kontakt">Kontakt</a></li>
+                    <li><a href="{$link->getCMSLink(4)}" title="O Sklepie">O Sklepie</a></li>
+                    <li><a href="{$urls.pages.contact}" title="Kontakt">Kontakt</a></li>
                 </ul>
             </div>
 
