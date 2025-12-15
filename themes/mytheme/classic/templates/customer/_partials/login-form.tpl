@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-{**
- * Plik: themes/mytheme/templates/customer/_partials/login-form.tpl
- *}
-
 {block name='login_form'}
 
   {block name='login_form_errors'}
