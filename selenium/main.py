@@ -68,7 +68,7 @@ try:
     # Sprawdzamy czy nas nie wylogowało
     if "controller=my-account" in aktualny_url or "/moje-konto" in aktualny_url:
         if "login" not in aktualny_url and "back=" not in aktualny_url:
-            print(f"[SUKCES]: Użytkownik jest zalogowany.")
+            print(f"[KONIEC][SUKCES]: Użytkownik jest zalogowany.")
         else:
              raise Exception("[BŁĄD]: URL zawiera 'moje-konto', ale wygląda na przekierowanie do logowania.")
     else:
@@ -135,7 +135,76 @@ try:
                 print(f"    [!] Błąd przy produkcie: {e}")
                 continue
 
-    print(f"\n[KONIEC] Pomyślnie dodano {licznik_produktow} produktów.")
+    print(f"[KONIEC] Pomyślnie dodano {licznik_produktow} produktów.")
+
+    # ==========================================
+    # CZĘŚĆ 3: WYSZUKIWANIE I LOSOWY PRODUKT
+    # ==========================================
+    print("\n--- WYSZUKIWANIE PRODUKTU I DODANIE LOSOWEGO ---")
+    
+    # 1. Znajdź pasek wyszukiwania (standardowo name='s')
+    search_box = driver.find_element(By.NAME, "s")
+    search_box.clear()
+    
+    # [TODO] Zmień frazę na taką, która zwróci wyniki w naszym sklepie
+    fraza_wyszukiwania = "Hummingbird" 
+    search_box.send_keys(fraza_wyszukiwania)
+    search_box.send_keys(Keys.ENTER) # Wciśnij Enter
+    
+    print(f"   -> Wyszukano frazę: '{fraza_wyszukiwania}'")
+    time.sleep(2) # Czekamy na wyniki wyszukiwania
+
+    # 2. Pobierz listę znalezionych produktów
+    wyniki = driver.find_elements(By.CSS_SELECTOR, ".product-miniature .thumbnail.product-thumbnail")
+    linki_wynikow = [elem.get_attribute("href") for elem in wyniki]
+
+    if linki_wynikow:
+        # 3. Wylosuj jeden link
+        wylosowany_link = random.choice(linki_wynikow)
+        print(f"   -> Wylosowano produkt: {wylosowany_link}")
+        
+        # 4. Wejdź i dodaj do koszyka (używamy Twojej funkcji!)
+        driver.get(wylosowany_link)
+        dodaj_pojedynczy_produkt(driver, wait, 1) # Dodajemy 1 sztukę
+        
+        print("   [KONIEC][SUKCES] Dodano losowy produkt z wyszukiwania.")
+    else:
+        print("   [!] Nie znaleziono żadnych produktów dla tej frazy.")
+
+    # ==========================================
+    # CZĘŚĆ 4: USUWANIE 3 PRODUKTÓW Z KOSZYKA
+    # ==========================================
+    print("\n--- USUWANIE 3 PRODUKTÓW Z KOSZYKA ---")
+
+    # 1. Wejście do koszyka
+    driver.get(f"{URL_SKLEPU}/index.php?controller=cart&action=show")
+    print("   -> Jestem w koszyku.")
+    time.sleep(2) # Czekamy aż koszyk się załaduje
+
+    # 2. Pętla usuwająca 3 razy
+    for i in range(3):
+        try:
+            # Pobieramy aktualną listę przycisków usuwania (za każdym razem nową!)
+            print("   -> Szukam ikon kosza do usunięcia...")
+            kosze = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "remove-from-cart")))
+            
+            print(f"   -> Znaleziono {len(kosze)} produkty w koszyku.")
+            if len(kosze) > 0:
+                # Klikamy w PIERWSZY dostępny kosz na liście
+                kosze[0].click()
+                print(f"   [USUNIĘTO {i+1}/3] Kliknięto ikonę kosza.")
+                
+                # Kluczowe: czekamy na przeładowanie koszyka
+                time.sleep(2) 
+            else:
+                print("   [INFO] Koszyk jest pusty, nie ma co usuwać.")
+                break
+                
+        except Exception as e:
+            print(f"   [!] Problem z usunięciem produktu: {e}")
+            break
+
+    print("   [KONIEC][SUKCES] Zakończono usuwanie.")
 
 except Exception as e:
     print(f"\n[BŁĄD KRYTYCZNY CAŁEGO TESTU]: {e}")
