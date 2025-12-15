@@ -10,6 +10,7 @@
   {/block}
 
   <form id="login-form" action="{block name='login_form_actionurl'}{$action}{/block}" method="post">
+   
     <section>
       <input type="hidden" name="submitLogin" value="1">
       {block name='login_form_fields'}
