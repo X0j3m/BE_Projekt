@@ -46,3 +46,12 @@ INSERT INTO prestashop.ps_range_weight (id_range_weight, id_carrier, delimiter1,
 -- Konfiguracja darmowej wysylki
 UPDATE ps_configuration SET value = 0 WHERE name = 'PS_SHIPPING_HANDLING';
 UPDATE ps_configuration SET value = 2000 WHERE name = 'PS_SHIPPING_FREE_PRICE';
+
+-- Konfiguracja konta bankowego
+INSERT INTO prestashop.ps_configuration (id_shop_group, id_shop, name, value, date_add, date_upd) VALUES (null, null, 'BANK_WIRE_ADDRESS', 'UL. PROSTA 18
+00-850 WARSZAWA
+Polska', '2025-12-15 20:22:48', '2025-12-15 20:22:48');
+INSERT INTO prestashop.ps_configuration (id_shop_group, id_shop, name, value, date_add, date_upd) VALUES (null, null, 'BANK_WIRE_DETAILS', 'mBank
+SWIFT: BREXPLPWXXX
+IBAN: PL28114011110556525610608779', '2025-12-15 20:22:48', '2025-12-15 20:22:48');
+INSERT INTO prestashop.ps_configuration (id_shop_group, id_shop, name, value, date_add, date_upd) VALUES (null, null, 'BANK_WIRE_OWNER', 'Jakub Pastuszka', '2025-12-15 20:22:48', '2025-12-15 20:22:48');
