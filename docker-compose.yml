@@ -57,6 +57,7 @@ services:
       - ./img/inpost-kurier.jpg:/var/www/html/img/s/1.jpg
       - ./img/orlen paczka.jpg:/var/www/html/img/s/2.jpg
       - ./img/poczta-polska.jpg:/var/www/html/img/s/3.jpg
+      - ./modules/test_module/ps_imageslider/images/:/var/www/html/modules/ps_imageslider/images
       #- type: bind
       #  source: ./themes/classic                   # lokalna ścieżka do pobranego szablonu
       #  target: /var/www/html/themes/classic      # ścieżka w kontenerze

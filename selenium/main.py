@@ -76,7 +76,7 @@ try:
     # ==========================================
     print("\n--- DODAWANIE PRODUKTÓW ---")
     #TODO: zmień kategorie na swoje
-    kategorie = [f"{URL_SKLEPU}/3-clothes", f"{URL_SKLEPU}/6-accessories"]
+    kategorie = [f"{URL_SKLEPU}/6-do-smartwatcha", f"{URL_SKLEPU}/8-do-laptopa"]
     licznik = 0
     limit = 10
 
@@ -110,7 +110,7 @@ try:
     search = driver.find_element(By.NAME, "s")
     search.clear()
     #TODO: zmień na produkt, który chce szukać
-    search.send_keys("Hummingbird")
+    search.send_keys("kabel")
     search.send_keys(Keys.ENTER)
     time.sleep(2)
     wyniki = driver.find_elements(By.CSS_SELECTOR, ".product-miniature .thumbnail.product-thumbnail")
