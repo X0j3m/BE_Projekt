@@ -1,0 +1,92 @@
+services:
+
+  db:
+    container_name: mariadb
+    image: mariadb:10.6
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: prestashop
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: admins
+    networks:
+      - prestashop_network
+    ports:
+      - 3306:3306
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./prestashop.sql:/docker-entrypoint-initdb.d/prestashop.sql
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - 8081:8080
+    networks:
+      - prestashop_network
+
+  prestashop:
+    container_name: prestashop
+    image: prestashop/prestashop:1.7.8
+    restart: unless-stopped
+    #ports:
+    #  - 8080:80
+    environment:
+      PS_DEV_MODE: 1
+      PS_FOLDER_ADMIN: admin1234
+      PS_FOLDER_INSTALL: install1234
+      DB_SERVER: db
+      DB_NAME: prestashop
+      DB_USER: root
+      DB_PASSWD: root
+      PS_INSTALL_AUTO: 1
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ./modules/test_module             # local path to the module
+        target: /var/www/html/modules # path to be mounted in the container
+      - type: bind
+        source: ./themes/mytheme                  # local path to the module
+        target: /var/www/html/themes     # path to be mounted in the container
+      - ./prestashop_source:/var/www/html:cached
+      - ps_cache:/var/www/html/var/cache
+      - ./img/logo.png:/var/www/html/img/logo.png
+      - ./img/logo.png:/var/www/html/img/logo_mail.png
+      - ./img/logo.png:/var/www/html/img/logo_invoice.png
+      - ./img/inpost-kurier.jpg:/var/www/html/img/s/1.jpg
+      - ./img/orlen paczka.jpg:/var/www/html/img/s/2.jpg
+      - ./img/poczta-polska.jpg:/var/www/html/img/s/3.jpg
+      - ./modules/test_module/ps_imageslider/images/:/var/www/html/modules/ps_imageslider/images
+      #- type: bind
+      #  source: ./themes/classic                   # lokalna ścieżka do pobranego szablonu
+      #  target: /var/www/html/themes/classic      # ścieżka w kontenerze
+      #- ./modules:/var/www/html/moduless
+      #- ./themes:/var/www/html/themes
+      
+
+    networks:
+      - prestashop_network
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - prestashop_network
+
+networks:
+  prestashop_network:
+
+volumes:
+  dbdata:
+  ps_cache:
+  caddy_data:
+  caddy_config:

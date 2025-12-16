@@ -1,0 +1,17 @@
+localhost {
+    # Caddy automatycznie obsługuje SSL dla localhost
+
+    reverse_proxy prestashop:80 {
+        # 1. Przekazujemy oryginalną nazwę hosta (localhost), a nie IP kontenera
+        header_up Host {host}
+
+        # 2. Przekazujemy prawdziwe IP klienta (niezbędne do logów i bezpieczeństwa)
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+
+        # 3. KLUCZOWE: Mówimy Preście, że klient łączy się przez HTTPS
+        # Bez tego PrestaShop będzie próbował przekierowywać na HTTP lub pętlić
+        header_up X-Forwarded-Proto https
+        header_up X-Forwarded-Port 443
+    }
+}
