@@ -81,11 +81,31 @@ try:
     limit = 10
 
     def dodaj_produkt(ilosc):
+        # 1. Najpierw sprawdzamy, czy przycisk "Dodaj do koszyka" w ogóle jest aktywny
+        add_btn = wait.until(EC.presence_of_element_located((By.CLASS_NAME, "add-to-cart")))
+        
+        # Sprawdzenie czy przycisk jest zablokowany (HTML attribute 'disabled' lub klasa 'disabled')
+        if not add_btn.is_enabled():
+            raise Exception("Produkt niedostępny (przycisk nieaktywny)")
+
+        # Opcjonalnie: Sprawdzenie komunikatu dostępności (np. 'Brak w magazynie')
+        try:
+            availability = driver.find_element(By.ID, "product-availability")
+            if "product-unavailable" in availability.get_attribute("class"):
+                 raise Exception("Produkt oznaczony jako niedostępny")
+        except:
+            pass # Jeśli nie ma elementu availability, ignorujemy to sprawdzenie
+
+        # 2. Jeśli jest dostępny, ustawiamy ilość
         qty = wait.until(EC.presence_of_element_located((By.ID, "quantity_wanted")))
         qty.click()
         qty.send_keys(Keys.BACK_SPACE * 5)
         qty.send_keys(str(ilosc))
-        driver.find_element(By.CLASS_NAME, "add-to-cart").click()
+        
+        # 3. Klikamy dodaj
+        add_btn.click()
+        
+        # 4. Obsługa modala (okienka potwierdzenia)
         wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".modal-dialog .btn-secondary"))).click()
         time.sleep(1)
 
