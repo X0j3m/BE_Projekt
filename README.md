@@ -41,7 +41,29 @@ System został rozszerzony o własne modyfikacje HTML/PHP, testy automatyczne or
 
 # Zapisanie pracy w adminie
 
-zapisanie backupu
+po zakończeniu pracy w admin-dev -> u nas admin1234, nalezy w folderze głównym projektu:
+
 ```bash
-docker exec -i mariadb mysqldump -u root -proot prestashop > prestashop.sql
+./backup.sh
+```
+
+w celu zapisania pracy.
+
+Aby inny deweloper mógł zobaczyć zmiany gdy nigdy jeszcze nie pobierał volumenu bazy danych wystraczy:
+
+```bash
+docker compose up -d
+```
+
+lecz gdy ma juz jej volumen nalezy zrobić:
+
+```bash
+docker compose down -v
+docker compose up -d
+```
+
+W celu nadania uprawnień dla pliku:
+
+```bash
+chmod +x backup.sh
 ```
