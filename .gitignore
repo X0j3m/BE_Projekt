@@ -61,3 +61,16 @@ Thumbs.db
 # ============================
 *.venv
 
+/prestashop_source/var/cache/
+/prestashop_source/var/logs/
+
+/prestashop_source/cache/cachefs/
+/prestashop_source/cache/purifier/
+/prestashop_source/cache/smarty/
+/prestashop_source/cache/push/
+/prestashop_source/cache/sandbox/
+/prestashop_source/cache/tcpdf/
+
+
+/selenium/venv/
+/selenium/*.png
