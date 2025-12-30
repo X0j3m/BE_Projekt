@@ -24,8 +24,7 @@ dbdata/
 !/prestashop_source/themes/classic/
 
 # Cache i pliki tymczasowe
-/prestashop_source/var/cache/
-/prestashop_source/cache/
+/prestashop_source/var/cache/s
 
 # Backup bazy danych
 *.sql.gz
