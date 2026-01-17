@@ -1,7 +1,5 @@
 FROM prestashop/prestashop:1.7.8
 
-ENV PS_INSTALL_AUTO=0
-
 COPY ./prestashop_source /var/www/html
 
 COPY ./modules/test_module /var/www/html/modules/test_module
@@ -16,3 +14,9 @@ COPY ./img/poczta-polska.jpg /var/www/html/img/s/3.jpg
 
 RUN chown -R www-data:www-data /var/www/html
 RUN rm -rf /var/www/html/install
+
+COPY ./prestashop.sql /tmp/prestashop.sql
+COPY ./import-db.sh /usr/local/bin/import-db.sh
+RUN chmod +x /usr/local/bin/import-db.sh
+
+ENTRYPOINT ["/usr/local/bin/import-db.sh"]

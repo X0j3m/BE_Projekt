@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Konfiguracja
-CONTAINER_NAME="mariadb"
+CONTAINER_NAME="admin-mysql_db"
 DB_USER="root"
-DB_PASS="root"
-DB_NAME="prestashop"
+DB_PASS="student"
+DB_NAME="BE_197933"
 BACKUP_DIR="backups"
 OUTPUT_FILE="prestashop.sql"
 

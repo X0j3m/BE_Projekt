@@ -1,13 +1,14 @@
--- MySQL dump 10.13  Distrib 5.7.41, for Linux (x86_64)
+/*M!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19  Distrib 10.6.24-MariaDB, for debian-linux-gnu (aarch64)
 --
--- Host: localhost    Database: BE_197933
+-- Host: localhost    Database: prestashop
 -- ------------------------------------------------------
--- Server version	5.7.41
+-- Server version	10.6.24-MariaDB-ubu2204
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,12 +22,12 @@
 
 DROP TABLE IF EXISTS `ps_access`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_access` (
   `id_profile` int(10) unsigned NOT NULL,
   `id_authorization_role` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_profile`,`id_authorization_role`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,12 +46,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_accessory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_accessory` (
   `id_product_1` int(10) unsigned NOT NULL,
   `id_product_2` int(10) unsigned NOT NULL,
   KEY `accessory_product` (`id_product_1`,`id_product_2`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,15 +69,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_address` (
   `id_address` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_country` int(10) unsigned NOT NULL,
   `id_state` int(10) unsigned DEFAULT NULL,
-  `id_customer` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_manufacturer` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_supplier` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_warehouse` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_customer` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_manufacturer` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_supplier` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_warehouse` int(10) unsigned NOT NULL DEFAULT 0,
   `alias` varchar(32) NOT NULL,
   `company` varchar(255) DEFAULT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -85,15 +86,15 @@ CREATE TABLE `ps_address` (
   `address2` varchar(128) DEFAULT NULL,
   `postcode` varchar(12) DEFAULT NULL,
   `city` varchar(64) NOT NULL,
-  `other` text,
+  `other` text DEFAULT NULL,
   `phone` varchar(32) DEFAULT NULL,
   `phone_mobile` varchar(32) DEFAULT NULL,
   `vat_number` varchar(32) DEFAULT NULL,
   `dni` varchar(16) DEFAULT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_address`),
   KEY `address_customer` (`id_customer`),
   KEY `id_country` (`id_country`),
@@ -101,7 +102,7 @@ CREATE TABLE `ps_address` (
   KEY `id_manufacturer` (`id_manufacturer`),
   KEY `id_supplier` (`id_supplier`),
   KEY `id_warehouse` (`id_warehouse`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,12 +121,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_address_format`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_address_format` (
   `id_country` int(10) unsigned NOT NULL,
   `format` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id_country`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,18 +145,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_admin_filter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_admin_filter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `employee` int(11) NOT NULL,
   `shop` int(11) NOT NULL,
-  `controller` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `action` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `filter` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `filter_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `controller` varchar(60) NOT NULL,
+  `action` varchar(100) NOT NULL,
+  `filter` longtext NOT NULL,
+  `filter_id` varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admin_filter_search_id_idx` (`employee`,`shop`,`controller`,`action`,`filter_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +165,7 @@ CREATE TABLE `ps_admin_filter` (
 
 LOCK TABLES `ps_admin_filter` WRITE;
 /*!40000 ALTER TABLE `ps_admin_filter` DISABLE KEYS */;
-INSERT INTO `ps_admin_filter` VALUES (1,1,1,'','','{\"limit\":50,\"orderBy\":\"id_order\",\"sortOrder\":\"desc\",\"filters\":[]}','order'),(2,1,1,'email','index','{\"limit\":50,\"orderBy\":\"id_mail\",\"sortOrder\":\"desc\",\"filters\":[]}',''),(3,1,1,'','','{\"limit\":50,\"orderBy\":\"date_add\",\"sortOrder\":\"DESC\",\"filters\":[]}','customer'),(4,1,1,'ProductController','catalogAction','{\"filter_category\":\"\",\"filter_column_id_product\":\"\",\"filter_column_name\":\"\",\"filter_column_reference\":\"\",\"filter_column_name_category\":\"\",\"filter_column_price\":\"\",\"filter_column_sav_quantity\":\"\",\"filter_column_active\":\"\",\"last_offset\":\"0\",\"last_limit\":\"20\",\"last_orderBy\":\"id_product\",\"last_sortOrder\":\"desc\"}',''),(5,1,1,'','','{\"orderBy\":\"position\",\"sortOrder\":\"asc\",\"limit\":50,\"filters\":{\"id_category_parent\":2}}','category');
+INSERT INTO `ps_admin_filter` VALUES (1,1,1,'','','{\"limit\":50,\"orderBy\":\"id_order\",\"sortOrder\":\"desc\",\"filters\":[]}','order'),(2,1,1,'email','index','{\"limit\":50,\"orderBy\":\"id_mail\",\"sortOrder\":\"desc\",\"filters\":[]}',''),(3,1,1,'','','{\"limit\":50,\"orderBy\":\"date_add\",\"sortOrder\":\"DESC\",\"filters\":[]}','customer'),(4,1,1,'ProductController','catalogAction','{\"filter_category\":\"\",\"filter_column_id_product\":\"\",\"filter_column_name\":\"\",\"filter_column_reference\":\"\",\"filter_column_name_category\":\"\",\"filter_column_price\":\"\",\"filter_column_sav_quantity\":\"\",\"filter_column_active\":\"\",\"last_offset\":\"0\",\"last_limit\":\"20\",\"last_orderBy\":\"id_product\",\"last_sortOrder\":\"desc\"}','');
 /*!40000 ALTER TABLE `ps_admin_filter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,15 +175,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_alias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_alias` (
   `id_alias` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `alias` varchar(191) NOT NULL,
   `search` varchar(255) NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `active` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_alias`),
   UNIQUE KEY `alias` (`alias`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,15 +202,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_attachment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_attachment` (
   `id_attachment` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `file` varchar(40) NOT NULL,
   `file_name` varchar(128) NOT NULL,
-  `file_size` bigint(10) unsigned NOT NULL DEFAULT '0',
+  `file_size` bigint(10) unsigned NOT NULL DEFAULT 0,
   `mime` varchar(128) NOT NULL,
   PRIMARY KEY (`id_attachment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,14 +228,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_attachment_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_attachment_lang` (
   `id_attachment` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(32) DEFAULT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   PRIMARY KEY (`id_attachment`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,11 +253,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_attribute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_attribute` (
   `id_attribute` int(11) NOT NULL AUTO_INCREMENT,
   `id_attribute_group` int(11) NOT NULL,
-  `color` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `color` varchar(32) NOT NULL,
   `position` int(11) NOT NULL,
   PRIMARY KEY (`id_attribute`),
   KEY `attribute_group` (`id_attribute_group`)
@@ -279,11 +280,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_attribute_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_attribute_group` (
   `id_attribute_group` int(11) NOT NULL AUTO_INCREMENT,
   `is_color_group` tinyint(1) NOT NULL,
-  `group_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `group_type` varchar(255) NOT NULL,
   `position` int(11) NOT NULL,
   PRIMARY KEY (`id_attribute_group`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -305,12 +306,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_attribute_group_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_attribute_group_lang` (
   `id_attribute_group` int(11) NOT NULL,
   `id_lang` int(11) NOT NULL,
-  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `public_name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `public_name` varchar(64) NOT NULL,
   PRIMARY KEY (`id_attribute_group`,`id_lang`),
   KEY `IDX_4653726C67A664FB` (`id_attribute_group`),
   KEY `IDX_4653726CBA299860` (`id_lang`)
@@ -333,7 +334,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_attribute_group_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_attribute_group_shop` (
   `id_attribute_group` int(11) NOT NULL,
   `id_shop` int(11) NOT NULL,
@@ -359,7 +360,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_attribute_impact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_attribute_impact` (
   `id_attribute_impact` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_product` int(11) unsigned NOT NULL,
@@ -368,7 +369,7 @@ CREATE TABLE `ps_attribute_impact` (
   `price` decimal(20,6) NOT NULL,
   PRIMARY KEY (`id_attribute_impact`),
   UNIQUE KEY `id_product` (`id_product`,`id_attribute`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -386,11 +387,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_attribute_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_attribute_lang` (
   `id_attribute` int(11) NOT NULL,
   `id_lang` int(11) NOT NULL,
-  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(128) NOT NULL,
   PRIMARY KEY (`id_attribute`,`id_lang`),
   KEY `IDX_3ABE46A77A4F53DC` (`id_attribute`),
   KEY `IDX_3ABE46A7BA299860` (`id_lang`)
@@ -413,7 +414,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_attribute_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_attribute_shop` (
   `id_attribute` int(11) NOT NULL,
   `id_shop` int(11) NOT NULL,
@@ -439,13 +440,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_authorization_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_authorization_role` (
   `id_authorization_role` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `slug` varchar(191) NOT NULL,
   PRIMARY KEY (`id_authorization_role`),
   UNIQUE KEY `slug` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=825 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=825 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -464,16 +465,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_blockwishlist_statistics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_blockwishlist_statistics` (
   `id_statistics` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_cart` int(10) unsigned DEFAULT NULL,
   `id_product` int(10) unsigned NOT NULL,
   `id_product_attribute` int(10) unsigned NOT NULL,
   `date_add` datetime NOT NULL,
-  `id_shop` int(10) unsigned DEFAULT '1',
+  `id_shop` int(10) unsigned DEFAULT 1,
   PRIMARY KEY (`id_statistics`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,34 +492,34 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_carrier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_carrier` (
   `id_carrier` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_reference` int(10) unsigned NOT NULL,
-  `id_tax_rules_group` int(10) unsigned DEFAULT '0',
+  `id_tax_rules_group` int(10) unsigned DEFAULT 0,
   `name` varchar(64) NOT NULL,
   `url` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `shipping_handling` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `range_behavior` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_module` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_free` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `shipping_external` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `need_range` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `shipping_handling` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `range_behavior` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `is_module` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `is_free` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `shipping_external` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `need_range` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `external_module_name` varchar(64) DEFAULT NULL,
-  `shipping_method` int(2) NOT NULL DEFAULT '0',
-  `position` int(10) unsigned NOT NULL DEFAULT '0',
-  `max_width` int(10) DEFAULT '0',
-  `max_height` int(10) DEFAULT '0',
-  `max_depth` int(10) DEFAULT '0',
-  `max_weight` decimal(20,6) DEFAULT '0.000000',
-  `grade` int(10) DEFAULT '0',
+  `shipping_method` int(2) NOT NULL DEFAULT 0,
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
+  `max_width` int(10) DEFAULT 0,
+  `max_height` int(10) DEFAULT 0,
+  `max_depth` int(10) DEFAULT 0,
+  `max_weight` decimal(20,6) DEFAULT 0.000000,
+  `grade` int(10) DEFAULT 0,
   PRIMARY KEY (`id_carrier`),
   KEY `deleted` (`deleted`,`active`),
   KEY `id_tax_rules_group` (`id_tax_rules_group`),
   KEY `reference` (`id_reference`,`deleted`,`active`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -537,12 +538,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_carrier_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_carrier_group` (
   `id_carrier` int(10) unsigned NOT NULL,
   `id_group` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_carrier`,`id_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -561,14 +562,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_carrier_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_carrier_lang` (
   `id_carrier` int(10) unsigned NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_lang` int(10) unsigned NOT NULL,
   `delay` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id_lang`,`id_shop`,`id_carrier`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -587,13 +588,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_carrier_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_carrier_shop` (
   `id_carrier` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_carrier`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -612,13 +613,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_carrier_tax_rules_group_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_carrier_tax_rules_group_shop` (
   `id_carrier` int(11) unsigned NOT NULL,
   `id_tax_rules_group` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_carrier`,`id_tax_rules_group`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -637,12 +638,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_carrier_zone`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_carrier_zone` (
   `id_carrier` int(10) unsigned NOT NULL,
   `id_zone` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_carrier`,`id_zone`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -661,11 +662,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart` (
   `id_cart` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_shop_group` int(11) unsigned NOT NULL DEFAULT '1',
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop_group` int(11) unsigned NOT NULL DEFAULT 1,
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_carrier` int(10) unsigned NOT NULL,
   `delivery_option` text NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
@@ -675,14 +676,14 @@ CREATE TABLE `ps_cart` (
   `id_customer` int(10) unsigned NOT NULL,
   `id_guest` int(10) unsigned NOT NULL,
   `secure_key` varchar(32) NOT NULL DEFAULT '-1',
-  `recyclable` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `gift` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `gift_message` text,
-  `mobile_theme` tinyint(1) NOT NULL DEFAULT '0',
-  `allow_seperated_package` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `recyclable` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `gift` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `gift_message` text DEFAULT NULL,
+  `mobile_theme` tinyint(1) NOT NULL DEFAULT 0,
+  `allow_seperated_package` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `checkout_session_data` mediumtext,
+  `checkout_session_data` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id_cart`),
   KEY `cart_customer` (`id_customer`),
   KEY `id_address_delivery` (`id_address_delivery`),
@@ -694,7 +695,7 @@ CREATE TABLE `ps_cart` (
   KEY `id_shop_group` (`id_shop_group`),
   KEY `id_shop_2` (`id_shop`,`date_upd`),
   KEY `id_shop` (`id_shop`,`date_add`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -713,13 +714,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_cart_rule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_cart_rule` (
   `id_cart` int(10) unsigned NOT NULL,
   `id_cart_rule` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_cart`,`id_cart_rule`),
   KEY `id_cart_rule` (`id_cart_rule`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -737,20 +738,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_product` (
   `id_cart` int(10) unsigned NOT NULL,
   `id_product` int(10) unsigned NOT NULL,
-  `id_address_delivery` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
-  `id_product_attribute` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_customization` int(10) unsigned NOT NULL DEFAULT '0',
-  `quantity` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_address_delivery` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_shop` int(10) unsigned NOT NULL DEFAULT 1,
+  `id_product_attribute` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_customization` int(10) unsigned NOT NULL DEFAULT 0,
+  `quantity` int(10) unsigned NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_cart`,`id_product`,`id_product_attribute`,`id_customization`,`id_address_delivery`),
   KEY `id_product_attribute` (`id_product_attribute`),
   KEY `id_cart_order` (`id_cart`,`date_add`,`id_product`,`id_product_attribute`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -759,7 +760,7 @@ CREATE TABLE `ps_cart_product` (
 
 LOCK TABLES `ps_cart_product` WRITE;
 /*!40000 ALTER TABLE `ps_cart_product` DISABLE KEYS */;
-INSERT INTO `ps_cart_product` VALUES (2,8,3,1,0,0,1,'0000-00-00 00:00:00'),(6,6,7,1,0,0,3,'2025-12-15 19:08:03'),(6,8,7,1,0,0,3,'2025-12-15 19:08:05'),(6,15,7,1,0,0,1,'2025-12-15 19:08:13'),(7,6,8,1,0,0,2,'2025-12-15 20:11:37'),(7,8,8,1,0,0,2,'2025-12-15 20:11:39'),(7,15,8,1,0,0,1,'2025-12-15 20:11:49'),(8,6,9,1,0,0,4,'2025-12-16 10:17:01'),(8,8,9,1,0,0,3,'2025-12-16 10:17:04'),(8,15,9,1,0,0,1,'2025-12-16 10:17:13');
+INSERT INTO `ps_cart_product` VALUES (1,1,3,1,1,0,1,'0000-00-00 00:00:00'),(1,2,3,1,9,0,1,'0000-00-00 00:00:00'),(2,4,3,1,18,0,1,'0000-00-00 00:00:00'),(2,8,3,1,0,0,1,'0000-00-00 00:00:00'),(3,16,3,1,28,0,1,'0000-00-00 00:00:00'),(4,16,3,1,29,0,1,'0000-00-00 00:00:00'),(5,10,3,1,25,0,1,'0000-00-00 00:00:00'),(6,6,7,1,0,0,3,'2025-12-15 19:08:03'),(6,8,7,1,0,0,3,'2025-12-15 19:08:05'),(6,9,7,1,22,0,1,'2025-12-15 19:08:09'),(6,10,7,1,24,0,1,'2025-12-15 19:08:07'),(6,11,7,1,26,0,4,'2025-12-15 19:08:11'),(6,15,7,1,0,0,1,'2025-12-15 19:08:13'),(6,16,7,1,28,0,2,'2025-12-15 19:08:15'),(7,6,8,1,0,0,2,'2025-12-15 20:11:37'),(7,8,8,1,0,0,2,'2025-12-15 20:11:39'),(7,9,8,1,22,0,4,'2025-12-15 20:11:44'),(7,10,8,1,24,0,2,'2025-12-15 20:11:41'),(7,11,8,1,26,0,1,'2025-12-15 20:11:46'),(7,15,8,1,0,0,1,'2025-12-15 20:11:49'),(7,16,8,1,28,0,3,'2025-12-15 20:11:52'),(8,6,9,1,0,0,4,'2025-12-16 10:17:01'),(8,8,9,1,0,0,3,'2025-12-16 10:17:04'),(8,9,9,1,22,0,4,'2025-12-16 10:17:08'),(8,10,9,1,24,0,1,'2025-12-16 10:17:06'),(8,11,9,1,26,0,2,'2025-12-16 10:17:10'),(8,15,9,1,0,0,1,'2025-12-16 10:17:13'),(8,16,9,1,28,0,4,'2025-12-16 10:17:15');
 /*!40000 ALTER TABLE `ps_cart_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -769,39 +770,39 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_rule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_rule` (
   `id_cart_rule` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_customer` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_customer` int(10) unsigned NOT NULL DEFAULT 0,
   `date_from` datetime NOT NULL,
   `date_to` datetime NOT NULL,
-  `description` text,
-  `quantity` int(10) unsigned NOT NULL DEFAULT '0',
-  `quantity_per_user` int(10) unsigned NOT NULL DEFAULT '0',
-  `priority` int(10) unsigned NOT NULL DEFAULT '1',
-  `partial_use` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `description` text DEFAULT NULL,
+  `quantity` int(10) unsigned NOT NULL DEFAULT 0,
+  `quantity_per_user` int(10) unsigned NOT NULL DEFAULT 0,
+  `priority` int(10) unsigned NOT NULL DEFAULT 1,
+  `partial_use` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `code` varchar(254) NOT NULL,
-  `minimum_amount` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `minimum_amount_tax` tinyint(1) NOT NULL DEFAULT '0',
-  `minimum_amount_currency` int(10) unsigned NOT NULL DEFAULT '0',
-  `minimum_amount_shipping` tinyint(1) NOT NULL DEFAULT '0',
-  `country_restriction` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `carrier_restriction` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `group_restriction` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `cart_rule_restriction` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `product_restriction` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `shop_restriction` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `free_shipping` tinyint(1) NOT NULL DEFAULT '0',
-  `reduction_percent` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `reduction_amount` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `reduction_tax` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `reduction_currency` int(10) unsigned NOT NULL DEFAULT '0',
-  `reduction_product` int(10) NOT NULL DEFAULT '0',
-  `reduction_exclude_special` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `gift_product` int(10) unsigned NOT NULL DEFAULT '0',
-  `gift_product_attribute` int(10) unsigned NOT NULL DEFAULT '0',
-  `highlight` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `minimum_amount` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `minimum_amount_tax` tinyint(1) NOT NULL DEFAULT 0,
+  `minimum_amount_currency` int(10) unsigned NOT NULL DEFAULT 0,
+  `minimum_amount_shipping` tinyint(1) NOT NULL DEFAULT 0,
+  `country_restriction` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `carrier_restriction` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `group_restriction` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `cart_rule_restriction` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `product_restriction` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `shop_restriction` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `free_shipping` tinyint(1) NOT NULL DEFAULT 0,
+  `reduction_percent` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `reduction_amount` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `reduction_tax` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `reduction_currency` int(10) unsigned NOT NULL DEFAULT 0,
+  `reduction_product` int(10) NOT NULL DEFAULT 0,
+  `reduction_exclude_special` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `gift_product` int(10) unsigned NOT NULL DEFAULT 0,
+  `gift_product_attribute` int(10) unsigned NOT NULL DEFAULT 0,
+  `highlight` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_cart_rule`),
@@ -811,7 +812,7 @@ CREATE TABLE `ps_cart_rule` (
   KEY `group_restriction_2` (`group_restriction`,`active`,`highlight`,`date_to`),
   KEY `date_from` (`date_from`),
   KEY `date_to` (`date_to`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -829,12 +830,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_rule_carrier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_rule_carrier` (
   `id_cart_rule` int(10) unsigned NOT NULL,
   `id_carrier` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_cart_rule`,`id_carrier`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -852,14 +853,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_rule_combination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_rule_combination` (
   `id_cart_rule_1` int(10) unsigned NOT NULL,
   `id_cart_rule_2` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_cart_rule_1`,`id_cart_rule_2`),
   KEY `id_cart_rule_1` (`id_cart_rule_1`),
   KEY `id_cart_rule_2` (`id_cart_rule_2`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -877,12 +878,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_rule_country`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_rule_country` (
   `id_cart_rule` int(10) unsigned NOT NULL,
   `id_country` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_cart_rule`,`id_country`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -900,12 +901,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_rule_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_rule_group` (
   `id_cart_rule` int(10) unsigned NOT NULL,
   `id_group` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_cart_rule`,`id_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -923,13 +924,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_rule_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_rule_lang` (
   `id_cart_rule` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(254) NOT NULL,
   PRIMARY KEY (`id_cart_rule`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -947,13 +948,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_rule_product_rule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_rule_product_rule` (
   `id_product_rule` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_product_rule_group` int(10) unsigned NOT NULL,
   `type` enum('products','categories','attributes','manufacturers','suppliers') NOT NULL,
   PRIMARY KEY (`id_product_rule`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -971,13 +972,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_rule_product_rule_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_rule_product_rule_group` (
   `id_product_rule_group` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_cart_rule` int(10) unsigned NOT NULL,
-  `quantity` int(10) unsigned NOT NULL DEFAULT '1',
+  `quantity` int(10) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_product_rule_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -995,12 +996,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_rule_product_rule_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_rule_product_rule_value` (
   `id_product_rule` int(10) unsigned NOT NULL,
   `id_item` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_product_rule`,`id_item`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1018,12 +1019,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cart_rule_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cart_rule_shop` (
   `id_cart_rule` int(10) unsigned NOT NULL,
   `id_shop` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_cart_rule`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1041,19 +1042,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_category` (
   `id_category` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_parent` int(10) unsigned NOT NULL,
-  `id_shop_default` int(10) unsigned NOT NULL DEFAULT '1',
-  `level_depth` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `nleft` int(10) unsigned NOT NULL DEFAULT '0',
-  `nright` int(10) unsigned NOT NULL DEFAULT '0',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `id_shop_default` int(10) unsigned NOT NULL DEFAULT 1,
+  `level_depth` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `nleft` int(10) unsigned NOT NULL DEFAULT 0,
+  `nright` int(10) unsigned NOT NULL DEFAULT 0,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `position` int(10) unsigned NOT NULL DEFAULT '0',
-  `is_root_category` tinyint(1) NOT NULL DEFAULT '0',
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
+  `is_root_category` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_category`),
   KEY `category_parent` (`id_parent`),
   KEY `nleftrightactive` (`nleft`,`nright`,`active`),
@@ -1061,7 +1062,7 @@ CREATE TABLE `ps_category` (
   KEY `nright` (`nright`),
   KEY `activenleft` (`active`,`nleft`),
   KEY `activenright` (`active`,`nright`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1070,7 +1071,7 @@ CREATE TABLE `ps_category` (
 
 LOCK TABLES `ps_category` WRITE;
 /*!40000 ALTER TABLE `ps_category` DISABLE KEYS */;
-INSERT INTO `ps_category` VALUES (1,0,1,0,1,4,1,'2025-12-15 18:50:39','2025-12-15 18:50:39',0,0),(2,1,1,1,2,3,1,'2025-12-15 18:50:39','2025-12-15 18:50:39',0,1);
+INSERT INTO `ps_category` VALUES (1,0,1,0,1,18,1,'2025-12-15 18:50:39','2025-12-15 18:50:39',0,0),(2,1,1,1,2,17,1,'2025-12-15 18:50:39','2025-12-15 18:50:39',0,1),(3,2,1,2,3,8,1,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,0),(4,3,1,3,4,5,1,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,0),(5,3,1,3,6,7,1,'2025-12-15 18:51:24','2025-12-15 18:51:24',1,0),(6,2,1,2,9,14,1,'2025-12-15 18:51:24','2025-12-15 18:51:24',1,0),(7,6,1,3,10,11,1,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,0),(8,6,1,3,12,13,1,'2025-12-15 18:51:24','2025-12-15 18:51:24',1,0),(9,2,1,2,15,16,1,'2025-12-15 18:51:24','2025-12-15 18:51:24',2,0);
 /*!40000 ALTER TABLE `ps_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1080,14 +1081,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_category_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_category_group` (
   `id_category` int(10) unsigned NOT NULL,
   `id_group` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_category`,`id_group`),
   KEY `id_category` (`id_category`),
   KEY `id_group` (`id_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1096,7 +1097,7 @@ CREATE TABLE `ps_category_group` (
 
 LOCK TABLES `ps_category_group` WRITE;
 /*!40000 ALTER TABLE `ps_category_group` DISABLE KEYS */;
-INSERT INTO `ps_category_group` VALUES (2,0),(2,1),(2,2),(2,3);
+INSERT INTO `ps_category_group` VALUES (2,0),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3),(4,1),(4,2),(4,3),(5,1),(5,2),(5,3),(6,1),(6,2),(6,3),(7,1),(7,2),(7,3),(8,1),(8,2),(8,3),(9,1),(9,2),(9,3);
 /*!40000 ALTER TABLE `ps_category_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1106,20 +1107,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_category_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_category_lang` (
   `id_category` int(10) unsigned NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(128) NOT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   `link_rewrite` varchar(128) NOT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
   `meta_keywords` varchar(255) DEFAULT NULL,
   `meta_description` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id_category`,`id_shop`,`id_lang`),
   KEY `category_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1128,7 +1129,7 @@ CREATE TABLE `ps_category_lang` (
 
 LOCK TABLES `ps_category_lang` WRITE;
 /*!40000 ALTER TABLE `ps_category_lang` DISABLE KEYS */;
-INSERT INTO `ps_category_lang` VALUES (1,1,1,'Baza','','baza','','',''),(2,1,1,'Strona główna','','strona-glowna','','','');
+INSERT INTO `ps_category_lang` VALUES (1,1,1,'Baza','','baza','','',''),(2,1,1,'Strona główna','','strona-glowna','','',''),(3,1,1,'Clothes','<p>Discover our favorites fashionable discoveries, a selection of cool items to integrate in your wardrobe. Compose a unique style with personality which matches your own.</p>','clothes','','',''),(4,1,1,'Men','<p>T-shirts, sweaters, hoodies and men\'s accessories. From basics to original creations, for every style. </p>','men','','',''),(5,1,1,'Women','<p>T-shirts, sweaters, hoodies and women\'s accessories. From basics to original creations, for every style. </p>','women','','',''),(6,1,1,'Produkty powiązane','<p>Items and accessories for your desk, kitchen or living room. Make your house a home with our eye-catching designs. </p>','accessories','','',''),(7,1,1,'Stationery','<p>Notebooks, agendas, office accessories and more. Everything you need to combine the pleasant and the useful, either at work or at home. </p>','stationery','','',''),(8,1,1,'Home Accessories','<p>Details matter! Liven up your interior with our selection of home accessories. </p>','home-accessories','','',''),(9,1,1,'Art','<p>Framed poster and vector images, all you need to give personality to your walls or bring your creative projects to life.</p>','art','','','');
 /*!40000 ALTER TABLE `ps_category_lang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1138,15 +1139,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_category_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_category_product` (
   `id_category` int(10) unsigned NOT NULL,
   `id_product` int(10) unsigned NOT NULL,
-  `position` int(10) unsigned NOT NULL DEFAULT '0',
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_category`,`id_product`),
   KEY `id_product` (`id_product`),
   KEY `id_category` (`id_category`,`position`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1155,7 +1156,7 @@ CREATE TABLE `ps_category_product` (
 
 LOCK TABLES `ps_category_product` WRITE;
 /*!40000 ALTER TABLE `ps_category_product` DISABLE KEYS */;
-INSERT INTO `ps_category_product` VALUES (2,1,1),(2,2,2),(2,3,3),(2,4,4),(2,5,5),(2,6,6),(2,7,7),(2,8,8),(2,9,9),(2,10,10),(2,11,11),(2,12,12),(2,13,13),(2,14,14),(2,15,15),(2,16,16),(2,17,17),(2,18,18),(2,19,19);
+INSERT INTO `ps_category_product` VALUES (2,1,1),(2,2,2),(2,3,3),(2,4,4),(2,5,5),(2,6,6),(2,7,7),(2,8,8),(2,9,9),(2,10,10),(2,11,11),(2,12,12),(2,13,13),(2,14,14),(2,15,15),(2,16,16),(2,17,17),(2,18,18),(2,19,19),(3,1,1),(3,2,2),(4,1,1),(5,2,1),(6,7,1),(6,6,2),(6,8,3),(6,10,4),(6,9,5),(6,11,6),(6,15,7),(6,16,8),(6,17,9),(6,18,10),(6,19,11),(7,16,1),(7,17,2),(7,18,3),(8,6,1),(8,7,2),(8,8,3),(8,9,4),(8,10,5),(8,11,6),(8,15,7),(8,19,8),(9,3,1),(9,4,2),(9,5,3),(9,12,4),(9,13,5),(9,14,6),(9,15,7);
 /*!40000 ALTER TABLE `ps_category_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1165,13 +1166,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_category_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_category_shop` (
   `id_category` int(11) NOT NULL,
   `id_shop` int(11) NOT NULL,
-  `position` int(10) unsigned NOT NULL DEFAULT '0',
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_category`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1180,7 +1181,7 @@ CREATE TABLE `ps_category_shop` (
 
 LOCK TABLES `ps_category_shop` WRITE;
 /*!40000 ALTER TABLE `ps_category_shop` DISABLE KEYS */;
-INSERT INTO `ps_category_shop` VALUES (1,1,0),(2,1,0);
+INSERT INTO `ps_category_shop` VALUES (1,1,0),(2,1,0),(3,1,0),(4,1,0),(5,1,1),(6,1,1),(7,1,0),(8,1,1),(9,1,2);
 /*!40000 ALTER TABLE `ps_category_shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1190,15 +1191,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cms` (
   `id_cms` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_cms_category` int(10) unsigned NOT NULL,
-  `position` int(10) unsigned NOT NULL DEFAULT '0',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `indexation` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `indexation` tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_cms`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1217,18 +1218,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cms_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cms_category` (
   `id_cms_category` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_parent` int(10) unsigned NOT NULL,
-  `level_depth` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `level_depth` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `position` int(10) unsigned NOT NULL DEFAULT '0',
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_cms_category`),
   KEY `category_parent` (`id_parent`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1247,20 +1248,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cms_category_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cms_category_lang` (
   `id_cms_category` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
-  `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(10) unsigned NOT NULL DEFAULT 1,
   `name` varchar(128) NOT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   `link_rewrite` varchar(128) NOT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
   `meta_keywords` varchar(255) DEFAULT NULL,
   `meta_description` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id_cms_category`,`id_shop`,`id_lang`),
   KEY `category_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1279,13 +1280,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cms_category_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cms_category_shop` (
   `id_cms_category` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_cms_category`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1304,19 +1305,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cms_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cms_lang` (
   `id_cms` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
-  `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(10) unsigned NOT NULL DEFAULT 1,
   `meta_title` varchar(255) NOT NULL,
   `head_seo_title` varchar(255) DEFAULT NULL,
   `meta_description` varchar(512) DEFAULT NULL,
   `meta_keywords` varchar(255) DEFAULT NULL,
-  `content` longtext,
+  `content` longtext DEFAULT NULL,
   `link_rewrite` varchar(128) NOT NULL,
   PRIMARY KEY (`id_cms`,`id_shop`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1335,14 +1336,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cms_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cms_role` (
   `id_cms_role` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `id_cms` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_cms_role`,`id_cms`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1361,14 +1362,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cms_role_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cms_role_lang` (
   `id_cms_role` int(11) unsigned NOT NULL,
   `id_lang` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   `name` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_cms_role`,`id_lang`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1386,13 +1387,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_cms_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_cms_shop` (
   `id_cms` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_cms`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1411,20 +1412,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_configuration`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_configuration` (
   `id_configuration` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_shop_group` int(11) unsigned DEFAULT NULL,
   `id_shop` int(11) unsigned DEFAULT NULL,
   `name` varchar(254) NOT NULL,
-  `value` text,
+  `value` text DEFAULT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_configuration`),
   KEY `name` (`name`),
   KEY `id_shop` (`id_shop`),
   KEY `id_shop_group` (`id_shop_group`)
-) ENGINE=InnoDB AUTO_INCREMENT=431 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=431 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1443,20 +1444,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_configuration_kpi`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_configuration_kpi` (
   `id_configuration_kpi` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_shop_group` int(11) unsigned DEFAULT NULL,
   `id_shop` int(11) unsigned DEFAULT NULL,
   `name` varchar(64) NOT NULL,
-  `value` text,
+  `value` text DEFAULT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_configuration_kpi`),
   KEY `name` (`name`),
   KEY `id_shop` (`id_shop`),
   KEY `id_shop_group` (`id_shop_group`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1465,7 +1466,7 @@ CREATE TABLE `ps_configuration_kpi` (
 
 LOCK TABLES `ps_configuration_kpi` WRITE;
 /*!40000 ALTER TABLE `ps_configuration_kpi` DISABLE KEYS */;
-INSERT INTO `ps_configuration_kpi` VALUES (1,NULL,NULL,'DASHGOALS_TRAFFIC_01_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(2,NULL,NULL,'DASHGOALS_CONVERSION_01_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(3,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_01_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(4,NULL,NULL,'DASHGOALS_TRAFFIC_02_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(5,NULL,NULL,'DASHGOALS_CONVERSION_02_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(6,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_02_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(7,NULL,NULL,'DASHGOALS_TRAFFIC_03_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(8,NULL,NULL,'DASHGOALS_CONVERSION_03_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(9,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_03_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(10,NULL,NULL,'DASHGOALS_TRAFFIC_04_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(11,NULL,NULL,'DASHGOALS_CONVERSION_04_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(12,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_04_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(13,NULL,NULL,'DASHGOALS_TRAFFIC_05_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(14,NULL,NULL,'DASHGOALS_CONVERSION_05_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(15,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_05_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(16,NULL,NULL,'DASHGOALS_TRAFFIC_06_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(17,NULL,NULL,'DASHGOALS_CONVERSION_06_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(18,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_06_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(19,NULL,NULL,'DASHGOALS_TRAFFIC_07_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(20,NULL,NULL,'DASHGOALS_CONVERSION_07_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(21,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_07_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(22,NULL,NULL,'DASHGOALS_TRAFFIC_08_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(23,NULL,NULL,'DASHGOALS_CONVERSION_08_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(24,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_08_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(25,NULL,NULL,'DASHGOALS_TRAFFIC_09_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(26,NULL,NULL,'DASHGOALS_CONVERSION_09_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(27,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_09_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(28,NULL,NULL,'DASHGOALS_TRAFFIC_10_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(29,NULL,NULL,'DASHGOALS_CONVERSION_10_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(30,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_10_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(31,NULL,NULL,'DASHGOALS_TRAFFIC_11_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(32,NULL,NULL,'DASHGOALS_CONVERSION_11_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(33,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_11_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(34,NULL,NULL,'DASHGOALS_TRAFFIC_12_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(35,NULL,NULL,'DASHGOALS_CONVERSION_12_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(36,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_12_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(37,NULL,NULL,'AVG_ORDER_VALUE','0,00 zł','2025-12-15 19:08:51','2025-12-15 19:08:51'),(38,NULL,NULL,'AVG_ORDER_VALUE_EXPIRE','1765839600','2025-12-15 19:08:51','2025-12-15 19:08:51'),(39,NULL,NULL,'NETPROFIT_VISIT','0,00 zł','2025-12-15 19:08:51','2025-12-15 19:08:51'),(40,NULL,NULL,'NETPROFIT_VISIT_EXPIRE','1765839600','2025-12-15 19:08:51','2025-12-15 19:08:51'),(41,NULL,NULL,'ABANDONED_CARTS','0','2025-12-15 19:08:51','2025-12-15 19:08:51'),(42,NULL,NULL,'ABANDONED_CARTS_EXPIRE','1765825731','2025-12-15 19:08:51','2025-12-15 19:08:51'),(43,NULL,NULL,'CONVERSION_RATE','0%','2025-12-15 19:08:51','2025-12-15 19:08:51'),(44,NULL,NULL,'CONVERSION_RATE_EXPIRE','1765839600','2025-12-15 19:08:51','2025-12-15 19:08:51'),(45,NULL,NULL,'NEWSLETTER_REGISTRATIONS','4','2025-12-16 10:21:43','2025-12-16 10:21:43'),(46,NULL,NULL,'NEWSLETTER_REGISTRATIONS_EXPIRE','1765898503','2025-12-16 10:21:43','2025-12-16 10:21:43'),(47,NULL,NULL,'CUSTOMER_MAIN_GENDER',NULL,'2025-12-16 10:21:43','2025-12-16 10:21:43'),(48,NULL,NULL,'CUSTOMER_MAIN_GENDER_EXPIRE',NULL,'2025-12-16 10:21:43','2025-12-16 10:21:43'),(49,NULL,NULL,'ORDERS_PER_CUSTOMER','0.75','2025-12-16 10:21:43','2025-12-16 10:21:43'),(50,NULL,NULL,'ORDERS_PER_CUSTOMER_EXPIRE','1765963303','2025-12-16 10:21:43','2025-12-16 10:21:43'),(51,NULL,NULL,'AVG_CUSTOMER_AGE',NULL,'2025-12-16 10:21:43','2025-12-16 10:21:43'),(52,NULL,NULL,'AVG_CUSTOMER_AGE_EXPIRE',NULL,'2025-12-16 10:21:43','2025-12-16 10:21:43'),(53,NULL,NULL,'EMPTY_CATEGORIES','0','2026-01-17 20:14:28','2026-01-17 20:14:28'),(54,NULL,NULL,'EMPTY_CATEGORIES_EXPIRE','1768684468','2026-01-17 20:14:28','2026-01-17 20:14:28'),(55,NULL,NULL,'TOP_CATEGORY',NULL,'2026-01-17 20:14:28','2026-01-17 20:14:28'),(56,NULL,NULL,'TOP_CATEGORY_EXPIRE',NULL,'2026-01-17 20:14:28','2026-01-17 20:14:28'),(57,NULL,NULL,'DISABLED_CATEGORIES','0','2026-01-17 20:14:28','2026-01-17 20:14:28'),(58,NULL,NULL,'DISABLED_CATEGORIES_EXPIRE','1768684468','2026-01-17 20:14:28','2026-01-17 20:14:28'),(59,NULL,NULL,'PRODUCTS_PER_CATEGORY','0','2026-01-17 20:14:28','2026-01-17 20:14:28'),(60,NULL,NULL,'PRODUCTS_PER_CATEGORY_EXPIRE','1768680868','2026-01-17 20:14:28','2026-01-17 20:14:28');
+INSERT INTO `ps_configuration_kpi` VALUES (1,NULL,NULL,'DASHGOALS_TRAFFIC_01_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(2,NULL,NULL,'DASHGOALS_CONVERSION_01_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(3,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_01_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(4,NULL,NULL,'DASHGOALS_TRAFFIC_02_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(5,NULL,NULL,'DASHGOALS_CONVERSION_02_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(6,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_02_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(7,NULL,NULL,'DASHGOALS_TRAFFIC_03_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(8,NULL,NULL,'DASHGOALS_CONVERSION_03_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(9,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_03_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(10,NULL,NULL,'DASHGOALS_TRAFFIC_04_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(11,NULL,NULL,'DASHGOALS_CONVERSION_04_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(12,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_04_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(13,NULL,NULL,'DASHGOALS_TRAFFIC_05_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(14,NULL,NULL,'DASHGOALS_CONVERSION_05_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(15,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_05_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(16,NULL,NULL,'DASHGOALS_TRAFFIC_06_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(17,NULL,NULL,'DASHGOALS_CONVERSION_06_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(18,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_06_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(19,NULL,NULL,'DASHGOALS_TRAFFIC_07_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(20,NULL,NULL,'DASHGOALS_CONVERSION_07_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(21,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_07_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(22,NULL,NULL,'DASHGOALS_TRAFFIC_08_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(23,NULL,NULL,'DASHGOALS_CONVERSION_08_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(24,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_08_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(25,NULL,NULL,'DASHGOALS_TRAFFIC_09_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(26,NULL,NULL,'DASHGOALS_CONVERSION_09_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(27,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_09_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(28,NULL,NULL,'DASHGOALS_TRAFFIC_10_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(29,NULL,NULL,'DASHGOALS_CONVERSION_10_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(30,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_10_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(31,NULL,NULL,'DASHGOALS_TRAFFIC_11_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(32,NULL,NULL,'DASHGOALS_CONVERSION_11_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(33,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_11_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(34,NULL,NULL,'DASHGOALS_TRAFFIC_12_2025','600','2025-12-15 18:50:43','2025-12-15 18:50:43'),(35,NULL,NULL,'DASHGOALS_CONVERSION_12_2025','2','2025-12-15 18:50:43','2025-12-15 18:50:43'),(36,NULL,NULL,'DASHGOALS_AVG_CART_VALUE_12_2025','80','2025-12-15 18:50:43','2025-12-15 18:50:43'),(37,NULL,NULL,'AVG_ORDER_VALUE','0,00 zł','2025-12-15 19:08:51','2025-12-15 19:08:51'),(38,NULL,NULL,'AVG_ORDER_VALUE_EXPIRE','1765839600','2025-12-15 19:08:51','2025-12-15 19:08:51'),(39,NULL,NULL,'NETPROFIT_VISIT','0,00 zł','2025-12-15 19:08:51','2025-12-15 19:08:51'),(40,NULL,NULL,'NETPROFIT_VISIT_EXPIRE','1765839600','2025-12-15 19:08:51','2025-12-15 19:08:51'),(41,NULL,NULL,'ABANDONED_CARTS','0','2025-12-15 19:08:51','2025-12-15 19:08:51'),(42,NULL,NULL,'ABANDONED_CARTS_EXPIRE','1765825731','2025-12-15 19:08:51','2025-12-15 19:08:51'),(43,NULL,NULL,'CONVERSION_RATE','0%','2025-12-15 19:08:51','2025-12-15 19:08:51'),(44,NULL,NULL,'CONVERSION_RATE_EXPIRE','1765839600','2025-12-15 19:08:51','2025-12-15 19:08:51'),(45,NULL,NULL,'NEWSLETTER_REGISTRATIONS','4','2025-12-16 10:21:43','2025-12-16 10:21:43'),(46,NULL,NULL,'NEWSLETTER_REGISTRATIONS_EXPIRE','1765898503','2025-12-16 10:21:43','2025-12-16 10:21:43'),(47,NULL,NULL,'CUSTOMER_MAIN_GENDER',NULL,'2025-12-16 10:21:43','2025-12-16 10:21:43'),(48,NULL,NULL,'CUSTOMER_MAIN_GENDER_EXPIRE',NULL,'2025-12-16 10:21:43','2025-12-16 10:21:43'),(49,NULL,NULL,'ORDERS_PER_CUSTOMER','0.75','2025-12-16 10:21:43','2025-12-16 10:21:43'),(50,NULL,NULL,'ORDERS_PER_CUSTOMER_EXPIRE','1765963303','2025-12-16 10:21:43','2025-12-16 10:21:43'),(51,NULL,NULL,'AVG_CUSTOMER_AGE',NULL,'2025-12-16 10:21:43','2025-12-16 10:21:43'),(52,NULL,NULL,'AVG_CUSTOMER_AGE_EXPIRE',NULL,'2025-12-16 10:21:43','2025-12-16 10:21:43');
 /*!40000 ALTER TABLE `ps_configuration_kpi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1475,14 +1476,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_configuration_kpi_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_configuration_kpi_lang` (
   `id_configuration_kpi` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
-  `value` text,
+  `value` text DEFAULT NULL,
   `date_upd` datetime DEFAULT NULL,
   PRIMARY KEY (`id_configuration_kpi`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1491,7 +1492,7 @@ CREATE TABLE `ps_configuration_kpi_lang` (
 
 LOCK TABLES `ps_configuration_kpi_lang` WRITE;
 /*!40000 ALTER TABLE `ps_configuration_kpi_lang` DISABLE KEYS */;
-INSERT INTO `ps_configuration_kpi_lang` VALUES (47,1,'100% Klientów Mężczyzn','2025-12-16 10:21:43'),(48,1,'1765963303','2025-12-16 10:21:43'),(51,1,'56 lat','2025-12-16 10:21:43'),(52,1,'1765963303','2025-12-16 10:21:43'),(55,1,'Women','2026-01-17 20:14:28'),(56,1,'1768763668','2026-01-17 20:14:28');
+INSERT INTO `ps_configuration_kpi_lang` VALUES (47,1,'100% Klientów Mężczyzn','2025-12-16 10:21:43'),(48,1,'1765963303','2025-12-16 10:21:43'),(51,1,'56 lat','2025-12-16 10:21:43'),(52,1,'1765963303','2025-12-16 10:21:43');
 /*!40000 ALTER TABLE `ps_configuration_kpi_lang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1501,14 +1502,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_configuration_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_configuration_lang` (
   `id_configuration` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
-  `value` text,
+  `value` text DEFAULT NULL,
   `date_upd` datetime DEFAULT NULL,
   PRIMARY KEY (`id_configuration`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1527,11 +1528,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_connections`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_connections` (
   `id_connections` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_shop_group` int(11) unsigned NOT NULL DEFAULT '1',
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop_group` int(11) unsigned NOT NULL DEFAULT 1,
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_guest` int(10) unsigned NOT NULL,
   `id_page` int(10) unsigned NOT NULL,
   `ip_address` bigint(20) DEFAULT NULL,
@@ -1541,7 +1542,7 @@ CREATE TABLE `ps_connections` (
   KEY `id_guest` (`id_guest`),
   KEY `date_add` (`date_add`),
   KEY `id_page` (`id_page`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1550,7 +1551,7 @@ CREATE TABLE `ps_connections` (
 
 LOCK TABLES `ps_connections` WRITE;
 /*!40000 ALTER TABLE `ps_connections` DISABLE KEYS */;
-INSERT INTO `ps_connections` VALUES (1,1,1,1,1,2130706433,'2025-12-15 18:51:25','https://www.prestashop.com'),(2,1,1,3,1,0,'2025-12-15 19:04:27',''),(3,1,1,4,1,0,'2025-12-15 19:04:28',''),(4,1,1,5,2,0,'2025-12-15 19:07:42',''),(5,1,1,6,2,0,'2025-12-15 20:11:17',''),(6,1,1,7,2,0,'2025-12-16 10:16:43',''),(7,1,1,3,1,0,'2025-12-16 10:34:02',''),(8,1,1,8,1,0,'2025-12-16 17:01:08',''),(9,1,1,9,1,0,'2025-12-16 17:24:07',''),(10,1,1,10,1,0,'2025-12-30 11:16:01',''),(11,1,1,11,1,0,'2026-01-17 20:13:25','');
+INSERT INTO `ps_connections` VALUES (1,1,1,1,1,2130706433,'2025-12-15 18:51:25','https://www.prestashop.com'),(2,1,1,3,1,0,'2025-12-15 19:04:27',''),(3,1,1,4,1,0,'2025-12-15 19:04:28',''),(4,1,1,5,2,0,'2025-12-15 19:07:42',''),(5,1,1,6,2,0,'2025-12-15 20:11:17',''),(6,1,1,7,2,0,'2025-12-16 10:16:43',''),(7,1,1,3,1,0,'2025-12-16 10:34:02',''),(8,1,1,8,1,0,'2025-12-16 17:01:08',''),(9,1,1,9,1,0,'2025-12-16 17:24:07',''),(10,1,1,10,1,0,'2025-12-30 11:16:01','');
 /*!40000 ALTER TABLE `ps_connections` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1560,14 +1561,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_connections_page`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_connections_page` (
   `id_connections` int(10) unsigned NOT NULL,
   `id_page` int(10) unsigned NOT NULL,
   `time_start` datetime NOT NULL,
   `time_end` datetime DEFAULT NULL,
   PRIMARY KEY (`id_connections`,`id_page`,`time_start`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1585,7 +1586,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_connections_source`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_connections_source` (
   `id_connections_source` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_connections` int(10) unsigned NOT NULL,
@@ -1598,7 +1599,7 @@ CREATE TABLE `ps_connections_source` (
   KEY `orderby` (`date_add`),
   KEY `http_referer` (`http_referer`),
   KEY `request_uri` (`request_uri`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1616,14 +1617,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_contact`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_contact` (
   `id_contact` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
-  `customer_service` tinyint(1) NOT NULL DEFAULT '0',
-  `position` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `customer_service` tinyint(1) NOT NULL DEFAULT 0,
+  `position` tinyint(2) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_contact`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1642,14 +1643,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_contact_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_contact_lang` (
   `id_contact` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   PRIMARY KEY (`id_contact`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1668,13 +1669,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_contact_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_contact_shop` (
   `id_contact` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_contact`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1693,23 +1694,23 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_country`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_country` (
   `id_country` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_zone` int(10) unsigned NOT NULL,
-  `id_currency` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_currency` int(10) unsigned NOT NULL DEFAULT 0,
   `iso_code` varchar(3) NOT NULL,
-  `call_prefix` int(10) NOT NULL DEFAULT '0',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `contains_states` tinyint(1) NOT NULL DEFAULT '0',
-  `need_identification_number` tinyint(1) NOT NULL DEFAULT '0',
-  `need_zip_code` tinyint(1) NOT NULL DEFAULT '1',
+  `call_prefix` int(10) NOT NULL DEFAULT 0,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `contains_states` tinyint(1) NOT NULL DEFAULT 0,
+  `need_identification_number` tinyint(1) NOT NULL DEFAULT 0,
+  `need_zip_code` tinyint(1) NOT NULL DEFAULT 1,
   `zip_code_format` varchar(12) NOT NULL DEFAULT '',
   `display_tax_label` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_country`),
   KEY `country_iso_code` (`iso_code`),
   KEY `country_` (`id_zone`)
-) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=242 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1728,13 +1729,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_country_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_country_lang` (
   `id_country` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(64) NOT NULL,
   PRIMARY KEY (`id_country`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1753,13 +1754,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_country_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_country_shop` (
   `id_country` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_country`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1778,21 +1779,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_currency`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_currency` (
   `id_currency` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `iso_code` varchar(3) NOT NULL DEFAULT '0',
   `numeric_iso_code` varchar(3) DEFAULT NULL,
-  `precision` int(2) NOT NULL DEFAULT '6',
+  `precision` int(2) NOT NULL DEFAULT 6,
   `conversion_rate` decimal(13,6) NOT NULL,
-  `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `unofficial` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `modified` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `unofficial` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `modified` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_currency`),
   KEY `currency_iso_code` (`iso_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1811,7 +1812,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_currency_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_currency_lang` (
   `id_currency` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
@@ -1819,7 +1820,7 @@ CREATE TABLE `ps_currency_lang` (
   `symbol` varchar(255) NOT NULL,
   `pattern` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_currency`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1838,14 +1839,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_currency_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_currency_shop` (
   `id_currency` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   `conversion_rate` decimal(13,6) NOT NULL,
   PRIMARY KEY (`id_currency`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1864,15 +1865,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_customer` (
   `id_customer` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_shop_group` int(11) unsigned NOT NULL DEFAULT '1',
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop_group` int(11) unsigned NOT NULL DEFAULT 1,
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_gender` int(10) unsigned NOT NULL,
-  `id_default_group` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_default_group` int(10) unsigned NOT NULL DEFAULT 1,
   `id_lang` int(10) unsigned DEFAULT NULL,
-  `id_risk` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_risk` int(10) unsigned NOT NULL DEFAULT 1,
   `company` varchar(255) DEFAULT NULL,
   `siret` varchar(14) DEFAULT NULL,
   `ape` varchar(5) DEFAULT NULL,
@@ -1880,21 +1881,21 @@ CREATE TABLE `ps_customer` (
   `lastname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `passwd` varchar(255) NOT NULL,
-  `last_passwd_gen` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_passwd_gen` timestamp NOT NULL DEFAULT current_timestamp(),
   `birthday` date DEFAULT NULL,
-  `newsletter` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `newsletter` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `ip_registration_newsletter` varchar(15) DEFAULT NULL,
   `newsletter_date_add` datetime DEFAULT NULL,
-  `optin` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `optin` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `website` varchar(128) DEFAULT NULL,
-  `outstanding_allow_amount` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `show_public_prices` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `max_payment_days` int(10) unsigned NOT NULL DEFAULT '60',
+  `outstanding_allow_amount` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `show_public_prices` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `max_payment_days` int(10) unsigned NOT NULL DEFAULT 60,
   `secure_key` varchar(32) NOT NULL DEFAULT '-1',
-  `note` text,
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_guest` tinyint(1) NOT NULL DEFAULT '0',
-  `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `note` text DEFAULT NULL,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `is_guest` tinyint(1) NOT NULL DEFAULT 0,
+  `deleted` tinyint(1) NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   `reset_password_token` varchar(40) DEFAULT NULL,
@@ -1906,7 +1907,7 @@ CREATE TABLE `ps_customer` (
   KEY `id_gender` (`id_gender`),
   KEY `id_shop_group` (`id_shop_group`),
   KEY `id_shop` (`id_shop`,`date_add`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1925,14 +1926,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_customer_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_customer_group` (
   `id_customer` int(10) unsigned NOT NULL,
   `id_group` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_customer`,`id_group`),
   KEY `customer_login` (`id_group`),
   KEY `id_customer` (`id_customer`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1951,7 +1952,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_customer_message`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_customer_message` (
   `id_customer_message` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_customer_thread` int(11) DEFAULT NULL,
@@ -1962,12 +1963,12 @@ CREATE TABLE `ps_customer_message` (
   `user_agent` varchar(128) DEFAULT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `private` tinyint(4) NOT NULL DEFAULT '0',
-  `read` tinyint(1) NOT NULL DEFAULT '0',
+  `private` tinyint(4) NOT NULL DEFAULT 0,
+  `read` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_customer_message`),
   KEY `id_customer_thread` (`id_customer_thread`),
   KEY `id_employee` (`id_employee`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1985,11 +1986,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_customer_message_sync_imap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_customer_message_sync_imap` (
   `md5_header` varbinary(32) NOT NULL,
   KEY `md5_header_index` (`md5_header`(4))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2007,13 +2008,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_customer_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_customer_session` (
   `id_customer_session` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_customer` int(10) unsigned DEFAULT NULL,
   `token` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id_customer_session`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2032,10 +2033,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_customer_thread`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_customer_thread` (
   `id_customer_thread` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_lang` int(10) unsigned NOT NULL,
   `id_contact` int(10) unsigned NOT NULL,
   `id_customer` int(10) unsigned DEFAULT NULL,
@@ -2053,7 +2054,7 @@ CREATE TABLE `ps_customer_thread` (
   KEY `id_customer` (`id_customer`),
   KEY `id_order` (`id_order`),
   KEY `id_product` (`id_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2071,21 +2072,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_customization`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_customization` (
   `id_customization` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_product_attribute` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_address_delivery` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_product_attribute` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_address_delivery` int(10) unsigned NOT NULL DEFAULT 0,
   `id_cart` int(10) unsigned NOT NULL,
   `id_product` int(10) NOT NULL,
   `quantity` int(10) NOT NULL,
-  `quantity_refunded` int(11) NOT NULL DEFAULT '0',
-  `quantity_returned` int(11) NOT NULL DEFAULT '0',
-  `in_cart` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `quantity_refunded` int(11) NOT NULL DEFAULT 0,
+  `quantity_returned` int(11) NOT NULL DEFAULT 0,
+  `in_cart` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_customization`,`id_cart`,`id_product`,`id_address_delivery`),
   KEY `id_product_attribute` (`id_product_attribute`),
   KEY `id_cart_product` (`id_cart`,`id_product`,`id_product_attribute`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2103,17 +2104,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_customization_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_customization_field` (
   `id_customization_field` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_product` int(10) unsigned NOT NULL,
   `type` tinyint(1) NOT NULL,
   `required` tinyint(1) NOT NULL,
-  `is_module` tinyint(1) NOT NULL DEFAULT '0',
-  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `is_module` tinyint(1) NOT NULL DEFAULT 0,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_customization_field`),
   KEY `id_product` (`id_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2132,14 +2133,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_customization_field_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_customization_field_lang` (
   `id_customization_field` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
-  `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(10) unsigned NOT NULL DEFAULT 1,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id_customization_field`,`id_lang`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2158,17 +2159,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_customized_data`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_customized_data` (
   `id_customization` int(10) unsigned NOT NULL,
   `type` tinyint(1) NOT NULL,
   `index` int(3) NOT NULL,
   `value` varchar(255) NOT NULL,
-  `id_module` int(10) NOT NULL DEFAULT '0',
-  `price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `weight` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `id_module` int(10) NOT NULL DEFAULT 0,
+  `price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `weight` decimal(20,6) NOT NULL DEFAULT 0.000000,
   PRIMARY KEY (`id_customization`,`type`,`index`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2186,13 +2187,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_date_range`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_date_range` (
   `id_date_range` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `time_start` datetime NOT NULL,
   `time_end` datetime NOT NULL,
   PRIMARY KEY (`id_date_range`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2210,7 +2211,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_delivery`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_delivery` (
   `id_delivery` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_shop` int(10) unsigned DEFAULT NULL,
@@ -2225,7 +2226,7 @@ CREATE TABLE `ps_delivery` (
   KEY `id_carrier` (`id_carrier`,`id_zone`),
   KEY `id_range_price` (`id_range_price`),
   KEY `id_range_weight` (`id_range_weight`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2244,19 +2245,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_emailsubscription`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_emailsubscription` (
   `id` int(6) NOT NULL AUTO_INCREMENT,
-  `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
-  `id_shop_group` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(10) unsigned NOT NULL DEFAULT 1,
+  `id_shop_group` int(10) unsigned NOT NULL DEFAULT 1,
   `email` varchar(255) NOT NULL,
   `newsletter_date_add` datetime DEFAULT NULL,
   `ip_registration_newsletter` varchar(15) NOT NULL,
   `http_referer` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
-  `id_lang` int(10) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT 0,
+  `id_lang` int(10) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2274,42 +2275,42 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_employee` (
   `id_employee` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_profile` int(10) unsigned NOT NULL,
-  `id_lang` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_lang` int(10) unsigned NOT NULL DEFAULT 0,
   `lastname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `passwd` varchar(255) NOT NULL,
-  `last_passwd_gen` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_passwd_gen` timestamp NOT NULL DEFAULT current_timestamp(),
   `stats_date_from` date DEFAULT NULL,
   `stats_date_to` date DEFAULT NULL,
   `stats_compare_from` date DEFAULT NULL,
   `stats_compare_to` date DEFAULT NULL,
-  `stats_compare_option` int(1) unsigned NOT NULL DEFAULT '1',
+  `stats_compare_option` int(1) unsigned NOT NULL DEFAULT 1,
   `preselect_date_range` varchar(32) DEFAULT NULL,
   `bo_color` varchar(32) DEFAULT NULL,
   `bo_theme` varchar(32) DEFAULT NULL,
   `bo_css` varchar(64) DEFAULT NULL,
-  `default_tab` int(10) unsigned NOT NULL DEFAULT '0',
-  `bo_width` int(10) unsigned NOT NULL DEFAULT '0',
-  `bo_menu` tinyint(1) NOT NULL DEFAULT '1',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `default_tab` int(10) unsigned NOT NULL DEFAULT 0,
+  `bo_width` int(10) unsigned NOT NULL DEFAULT 0,
+  `bo_menu` tinyint(1) NOT NULL DEFAULT 1,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `optin` tinyint(1) unsigned DEFAULT NULL,
-  `id_last_order` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_last_customer_message` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_last_customer` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_last_order` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_last_customer_message` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_last_customer` int(10) unsigned NOT NULL DEFAULT 0,
   `last_connection_date` date DEFAULT NULL,
   `reset_password_token` varchar(40) DEFAULT NULL,
   `reset_password_validity` datetime DEFAULT NULL,
-  `has_enabled_gravatar` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `has_enabled_gravatar` tinyint(3) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_employee`),
   KEY `employee_login` (`email`,`passwd`),
   KEY `id_employee_passwd` (`id_employee`,`passwd`),
   KEY `id_profile` (`id_profile`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2318,7 +2319,7 @@ CREATE TABLE `ps_employee` (
 
 LOCK TABLES `ps_employee` WRITE;
 /*!40000 ALTER TABLE `ps_employee` DISABLE KEYS */;
-INSERT INTO `ps_employee` VALUES (1,1,1,'Pastuszka','Jakub','jaku6p@gmail.com','$2y$10$7LOp6.RxTaSaroHaR2iGre5QJfcyeLpMPUvvCB/ZdbwfpYf860HgS','2025-12-15 12:50:41','2025-11-15','2025-12-15','0000-00-00','0000-00-00',1,NULL,NULL,'default','theme.css',1,0,1,1,NULL,0,0,0,'2026-01-17',NULL,'0000-00-00 00:00:00',0);
+INSERT INTO `ps_employee` VALUES (1,1,1,'Pastuszka','Jakub','jaku6p@gmail.com','$2y$10$7LOp6.RxTaSaroHaR2iGre5QJfcyeLpMPUvvCB/ZdbwfpYf860HgS','2025-12-15 12:50:41','2025-11-15','2025-12-15','0000-00-00','0000-00-00',1,NULL,NULL,'default','theme.css',1,0,1,1,NULL,0,0,0,'2025-12-16',NULL,'0000-00-00 00:00:00',0);
 /*!40000 ALTER TABLE `ps_employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2328,13 +2329,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_employee_session`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_employee_session` (
   `id_employee_session` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_employee` int(10) unsigned DEFAULT NULL,
   `token` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id_employee_session`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2343,7 +2344,7 @@ CREATE TABLE `ps_employee_session` (
 
 LOCK TABLES `ps_employee_session` WRITE;
 /*!40000 ALTER TABLE `ps_employee_session` DISABLE KEYS */;
-INSERT INTO `ps_employee_session` VALUES (1,1,'3e8a4d2fa09bfb0b65164b5a5d2b3dd7d90d5010'),(3,1,'4c9ddeb415da90418e12125a6066754bedac8d3e'),(4,1,'8302e6f4f36bf87a7418750524021f6115f2e6fb'),(5,1,'1e32d5279d258612f4fcada0f05c51c1880d0f6b'),(6,1,'c8bcbadc459f0cf4bf900e8f6a1b560c6d9b8dc5'),(7,1,'341313a4ec2823d6819c57904f9fa49de647437c'),(8,1,'adcc1616eb0b945891c95354f8e4205dd7318000');
+INSERT INTO `ps_employee_session` VALUES (1,1,'3e8a4d2fa09bfb0b65164b5a5d2b3dd7d90d5010'),(3,1,'4c9ddeb415da90418e12125a6066754bedac8d3e'),(4,1,'8302e6f4f36bf87a7418750524021f6115f2e6fb'),(5,1,'1e32d5279d258612f4fcada0f05c51c1880d0f6b'),(6,1,'c8bcbadc459f0cf4bf900e8f6a1b560c6d9b8dc5'),(7,1,'341313a4ec2823d6819c57904f9fa49de647437c');
 /*!40000 ALTER TABLE `ps_employee_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2353,13 +2354,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_employee_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_employee_shop` (
   `id_employee` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_employee`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2378,7 +2379,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_fb_category_match`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_fb_category_match` (
   `id_category` int(11) NOT NULL,
   `google_category_id` int(64) NOT NULL,
@@ -2389,7 +2390,7 @@ CREATE TABLE `ps_fb_category_match` (
   `id_shop` int(11) NOT NULL,
   PRIMARY KEY (`id_category`,`id_shop`),
   KEY `id_category` (`id_category`,`google_category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2407,12 +2408,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_feature`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_feature` (
   `id_feature` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `position` int(10) unsigned NOT NULL DEFAULT '0',
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_feature`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2431,15 +2432,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_feature_flag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_feature_flag` (
   `id_feature_flag` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT '0',
-  `label_wording` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `label_domain` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `description_wording` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `description_domain` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `name` varchar(191) NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT 0,
+  `label_wording` varchar(191) NOT NULL DEFAULT '',
+  `label_domain` varchar(255) NOT NULL DEFAULT '',
+  `description_wording` varchar(191) NOT NULL DEFAULT '',
+  `description_domain` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id_feature_flag`),
   UNIQUE KEY `UNIQ_91700F175E237E06` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2461,14 +2462,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_feature_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_feature_lang` (
   `id_feature` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_feature`,`id_lang`),
   KEY `id_lang` (`id_lang`,`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2487,7 +2488,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_feature_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_feature_product` (
   `id_feature` int(10) unsigned NOT NULL,
   `id_product` int(10) unsigned NOT NULL,
@@ -2495,7 +2496,7 @@ CREATE TABLE `ps_feature_product` (
   PRIMARY KEY (`id_feature`,`id_product`,`id_feature_value`),
   KEY `id_feature_value` (`id_feature_value`),
   KEY `id_product` (`id_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2504,7 +2505,7 @@ CREATE TABLE `ps_feature_product` (
 
 LOCK TABLES `ps_feature_product` WRITE;
 /*!40000 ALTER TABLE `ps_feature_product` DISABLE KEYS */;
-INSERT INTO `ps_feature_product` VALUES (1,9,1),(1,10,1),(1,11,1),(1,6,3),(1,7,3),(1,8,3),(1,19,3),(1,1,4),(1,2,4),(1,16,5),(1,17,5),(1,18,5),(1,3,6),(1,4,6),(1,5,6),(2,2,7),(2,1,8),(2,9,9),(2,10,9),(2,11,9),(2,16,10),(2,17,10),(2,18,10);
+INSERT INTO `ps_feature_product` VALUES (1,1,4),(1,2,4),(1,3,6),(1,4,6),(1,5,6),(1,6,3),(1,7,3),(1,8,3),(1,9,1),(1,10,1),(1,11,1),(1,16,5),(1,17,5),(1,18,5),(1,19,3),(2,1,8),(2,2,7),(2,9,9),(2,10,9),(2,11,9),(2,16,10),(2,17,10),(2,18,10);
 /*!40000 ALTER TABLE `ps_feature_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2514,13 +2515,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_feature_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_feature_shop` (
   `id_feature` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_feature`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2539,14 +2540,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_feature_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_feature_value` (
   `id_feature_value` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_feature` int(10) unsigned NOT NULL,
   `custom` tinyint(3) unsigned DEFAULT NULL,
   PRIMARY KEY (`id_feature_value`),
   KEY `feature` (`id_feature`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2565,13 +2566,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_feature_value_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_feature_value_lang` (
   `id_feature_value` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `value` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_feature_value`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2590,12 +2591,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_gender`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_gender` (
   `id_gender` int(11) NOT NULL AUTO_INCREMENT,
   `type` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_gender`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2614,14 +2615,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_gender_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_gender_lang` (
   `id_gender` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`id_gender`,`id_lang`),
   KEY `id_gender` (`id_gender`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2640,16 +2641,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_group` (
   `id_group` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `reduction` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `price_display_method` tinyint(4) NOT NULL DEFAULT '0',
-  `show_prices` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `reduction` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `price_display_method` tinyint(4) NOT NULL DEFAULT 0,
+  `show_prices` tinyint(1) unsigned NOT NULL DEFAULT 1,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_group`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2668,13 +2669,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_group_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_group_lang` (
   `id_group` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`id_group`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2693,7 +2694,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_group_reduction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_group_reduction` (
   `id_group_reduction` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `id_group` int(10) unsigned NOT NULL,
@@ -2701,7 +2702,7 @@ CREATE TABLE `ps_group_reduction` (
   `reduction` decimal(5,4) NOT NULL,
   PRIMARY KEY (`id_group_reduction`),
   UNIQUE KEY `id_group` (`id_group`,`id_category`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2719,13 +2720,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_group_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_group_shop` (
   `id_group` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_group`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2744,11 +2745,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_gsitemap_sitemap`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_gsitemap_sitemap` (
   `link` varchar(255) DEFAULT NULL,
-  `id_shop` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id_shop` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2766,13 +2767,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_guest`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_guest` (
   `id_guest` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_operating_system` int(10) unsigned DEFAULT NULL,
   `id_web_browser` int(10) unsigned DEFAULT NULL,
   `id_customer` int(10) unsigned DEFAULT NULL,
-  `javascript` tinyint(1) DEFAULT '0',
+  `javascript` tinyint(1) DEFAULT 0,
   `screen_resolution_x` smallint(5) unsigned DEFAULT NULL,
   `screen_resolution_y` smallint(5) unsigned DEFAULT NULL,
   `screen_color` tinyint(3) unsigned DEFAULT NULL,
@@ -2783,12 +2784,12 @@ CREATE TABLE `ps_guest` (
   `real_player` tinyint(1) DEFAULT NULL,
   `windows_media` tinyint(1) DEFAULT NULL,
   `accept_language` varchar(8) DEFAULT NULL,
-  `mobile_theme` tinyint(1) NOT NULL DEFAULT '0',
+  `mobile_theme` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_guest`),
   KEY `id_customer` (`id_customer`),
   KEY `id_operating_system` (`id_operating_system`),
   KEY `id_web_browser` (`id_web_browser`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2807,12 +2808,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_homeslider`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_homeslider` (
   `id_homeslider_slides` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_shop` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_homeslider_slides`,`id_shop`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2831,13 +2832,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_homeslider_slides`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_homeslider_slides` (
   `id_homeslider_slides` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `position` int(10) unsigned NOT NULL DEFAULT '0',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_homeslider_slides`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2856,7 +2857,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_homeslider_slides_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_homeslider_slides_lang` (
   `id_homeslider_slides` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
@@ -2866,7 +2867,7 @@ CREATE TABLE `ps_homeslider_slides_lang` (
   `url` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id_homeslider_slides`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2885,17 +2886,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_hook`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_hook` (
   `id_hook` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(191) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `description` text,
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `position` tinyint(1) NOT NULL DEFAULT '1',
+  `description` text DEFAULT NULL,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `position` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_hook`),
   UNIQUE KEY `hook_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=757 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=757 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2914,14 +2915,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_hook_alias`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_hook_alias` (
   `id_hook_alias` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `alias` varchar(191) NOT NULL,
   `name` varchar(191) NOT NULL,
   PRIMARY KEY (`id_hook_alias`),
   UNIQUE KEY `alias` (`alias`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2940,17 +2941,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_hook_module`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_hook_module` (
   `id_module` int(10) unsigned NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_hook` int(10) unsigned NOT NULL,
   `position` tinyint(2) unsigned NOT NULL,
   PRIMARY KEY (`id_module`,`id_hook`,`id_shop`),
   KEY `id_hook` (`id_hook`),
   KEY `id_module` (`id_module`),
   KEY `position` (`id_shop`,`position`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2969,17 +2970,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_hook_module_exceptions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_hook_module_exceptions` (
   `id_hook_module_exceptions` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_module` int(10) unsigned NOT NULL,
   `id_hook` int(10) unsigned NOT NULL,
   `file_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_hook_module_exceptions`),
   KEY `id_module` (`id_module`),
   KEY `id_hook` (`id_hook`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2997,17 +2998,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_image` (
   `id_image` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_product` int(10) unsigned NOT NULL,
-  `position` smallint(2) unsigned NOT NULL DEFAULT '0',
+  `position` smallint(2) unsigned NOT NULL DEFAULT 0,
   `cover` tinyint(1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id_image`),
   UNIQUE KEY `id_product_cover` (`id_product`,`cover`),
   UNIQUE KEY `idx_product_image` (`id_image`,`id_product`,`cover`),
   KEY `image_product` (`id_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3016,6 +3017,7 @@ CREATE TABLE `ps_image` (
 
 LOCK TABLES `ps_image` WRITE;
 /*!40000 ALTER TABLE `ps_image` DISABLE KEYS */;
+INSERT INTO `ps_image` VALUES (1,1,1,1),(2,1,2,NULL),(3,3,1,1),(4,4,1,1),(5,5,1,1),(6,6,1,1),(7,7,1,1),(8,8,1,1),(9,9,1,1),(10,9,2,NULL),(11,10,1,1),(12,10,2,NULL),(13,11,1,1),(14,11,2,NULL),(15,12,1,1),(16,13,1,1),(17,14,1,1),(18,16,1,1),(19,17,1,1),(20,18,1,1),(21,2,1,1),(22,19,1,1),(23,15,1,1);
 /*!40000 ALTER TABLE `ps_image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3025,14 +3027,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_image_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_image_lang` (
   `id_image` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `legend` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_image`,`id_lang`),
   KEY `id_image` (`id_image`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3041,6 +3043,7 @@ CREATE TABLE `ps_image_lang` (
 
 LOCK TABLES `ps_image_lang` WRITE;
 /*!40000 ALTER TABLE `ps_image_lang` DISABLE KEYS */;
+INSERT INTO `ps_image_lang` VALUES (1,1,'Hummingbird printed t-shirt'),(2,1,'Hummingbird printed t-shirt'),(3,1,'The best is yet to come\' Framed poster'),(4,1,'The adventure begins Framed poster'),(5,1,'Today is a good day Framed poster'),(6,1,'Mug The best is yet to come'),(7,1,'Mug The adventure begins'),(8,1,'Mug Today is a good day'),(9,1,'Mountain fox cushion'),(10,1,'Mountain fox cushion'),(11,1,'Brown bear cushion'),(12,1,'Brown bear cushion'),(13,1,'Hummingbird cushion'),(14,1,'Hummingbird cushion'),(15,1,'Mountain fox - Vector graphics'),(16,1,'Brown bear - Vector graphics'),(17,1,'Hummingbird - Vector graphics'),(18,1,'Mountain fox notebook'),(19,1,'Mountain fox notebook'),(20,1,'Mountain fox notebook'),(21,1,'Brown bear printed sweater'),(22,1,'Customizable mug'),(23,1,'Pack Mug + Framed poster');
 /*!40000 ALTER TABLE `ps_image_lang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3050,7 +3053,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_image_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_image_shop` (
   `id_product` int(10) unsigned NOT NULL,
   `id_image` int(11) unsigned NOT NULL,
@@ -3059,7 +3062,7 @@ CREATE TABLE `ps_image_shop` (
   PRIMARY KEY (`id_image`,`id_shop`),
   UNIQUE KEY `id_product` (`id_product`,`id_shop`,`cover`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3068,6 +3071,7 @@ CREATE TABLE `ps_image_shop` (
 
 LOCK TABLES `ps_image_shop` WRITE;
 /*!40000 ALTER TABLE `ps_image_shop` DISABLE KEYS */;
+INSERT INTO `ps_image_shop` VALUES (1,2,1,NULL),(1,1,1,1),(2,21,1,1),(3,3,1,1),(4,4,1,1),(5,5,1,1),(6,6,1,1),(7,7,1,1),(8,8,1,1),(9,10,1,NULL),(9,9,1,1),(10,12,1,NULL),(10,11,1,1),(11,14,1,NULL),(11,13,1,1),(12,15,1,1),(13,16,1,1),(14,17,1,1),(15,23,1,1),(16,18,1,1),(17,19,1,1),(18,20,1,1),(19,22,1,1);
 /*!40000 ALTER TABLE `ps_image_shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3077,20 +3081,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_image_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_image_type` (
   `id_image_type` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `width` int(10) unsigned NOT NULL,
   `height` int(10) unsigned NOT NULL,
-  `products` tinyint(1) NOT NULL DEFAULT '1',
-  `categories` tinyint(1) NOT NULL DEFAULT '1',
-  `manufacturers` tinyint(1) NOT NULL DEFAULT '1',
-  `suppliers` tinyint(1) NOT NULL DEFAULT '1',
-  `stores` tinyint(1) NOT NULL DEFAULT '1',
+  `products` tinyint(1) NOT NULL DEFAULT 1,
+  `categories` tinyint(1) NOT NULL DEFAULT 1,
+  `manufacturers` tinyint(1) NOT NULL DEFAULT 1,
+  `suppliers` tinyint(1) NOT NULL DEFAULT 1,
+  `stores` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_image_type`),
   KEY `image_type_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3109,14 +3113,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_import_match`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_import_match` (
   `id_import_match` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `match` text NOT NULL,
   `skip` int(2) NOT NULL,
   PRIMARY KEY (`id_import_match`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3134,11 +3138,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_info` (
   `id_info` int(10) unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_info`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3157,14 +3161,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_info_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_info_lang` (
   `id_info` int(10) unsigned NOT NULL,
   `id_shop` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `text` text NOT NULL,
   PRIMARY KEY (`id_info`,`id_lang`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3183,12 +3187,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_info_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_info_shop` (
   `id_info` int(10) unsigned NOT NULL,
   `id_shop` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_info`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3207,16 +3211,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_lang` (
   `id_lang` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(32) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `iso_code` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `language_code` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `locale` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_format_lite` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_format_full` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `iso_code` varchar(2) NOT NULL,
+  `language_code` varchar(5) NOT NULL,
+  `locale` varchar(5) NOT NULL,
+  `date_format_lite` varchar(32) NOT NULL,
+  `date_format_full` varchar(32) NOT NULL,
   `is_rtl` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_lang`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3238,7 +3242,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_lang_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_lang_shop` (
   `id_lang` int(11) NOT NULL,
   `id_shop` int(11) NOT NULL,
@@ -3264,21 +3268,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_category` (
   `id_layered_category` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_shop` int(11) unsigned NOT NULL,
   `controller` varchar(64) NOT NULL,
   `id_category` int(10) unsigned NOT NULL,
-  `id_value` int(10) unsigned DEFAULT '0',
+  `id_value` int(10) unsigned DEFAULT 0,
   `type` enum('category','id_feature','id_attribute_group','availability','condition','manufacturer','weight','price','extras') NOT NULL,
   `position` int(10) unsigned NOT NULL,
-  `filter_type` int(10) unsigned NOT NULL DEFAULT '0',
-  `filter_show_limit` int(10) unsigned NOT NULL DEFAULT '0',
+  `filter_type` int(10) unsigned NOT NULL DEFAULT 0,
+  `filter_show_limit` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_layered_category`),
   KEY `id_category_shop` (`id_category`,`id_shop`,`type`,`id_value`,`position`),
   KEY `id_category` (`id_category`,`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3287,7 +3291,7 @@ CREATE TABLE `ps_layered_category` (
 
 LOCK TABLES `ps_layered_category` WRITE;
 /*!40000 ALTER TABLE `ps_layered_category` DISABLE KEYS */;
-INSERT INTO `ps_layered_category` VALUES (1,1,'category',2,NULL,'availability',1,0,0),(2,1,'category',2,NULL,'extras',2,0,0),(3,1,'category',2,NULL,'price',3,0,0),(4,1,'category',2,NULL,'category',4,0,0),(5,1,'category',2,1,'id_attribute_group',5,0,0),(6,1,'category',2,2,'id_attribute_group',6,0,0),(7,1,'category',2,1,'id_feature',7,0,0),(8,1,'category',2,2,'id_feature',8,0,0),(9,1,'category',2,NULL,'manufacturer',9,0,0),(10,1,'category',2,NULL,'condition',10,0,0),(11,1,'category',2,NULL,'weight',11,0,0),(12,1,'category',2,3,'id_attribute_group',12,0,0),(13,1,'category',2,4,'id_attribute_group',13,0,0),(14,1,'category',4,NULL,'availability',1,0,0),(15,1,'category',4,NULL,'extras',2,0,0),(16,1,'category',4,NULL,'price',3,0,0),(17,1,'category',4,NULL,'category',4,0,0),(18,1,'category',4,1,'id_attribute_group',5,0,0),(19,1,'category',4,2,'id_attribute_group',6,0,0),(20,1,'category',4,1,'id_feature',7,0,0),(21,1,'category',4,2,'id_feature',8,0,0),(22,1,'category',4,NULL,'manufacturer',9,0,0),(23,1,'category',4,NULL,'condition',10,0,0),(24,1,'category',4,NULL,'weight',11,0,0),(25,1,'category',4,3,'id_attribute_group',12,0,0),(26,1,'category',4,4,'id_attribute_group',13,0,0),(27,1,'category',5,NULL,'availability',1,0,0),(28,1,'category',5,NULL,'extras',2,0,0),(29,1,'category',5,NULL,'price',3,0,0),(30,1,'category',5,NULL,'category',4,0,0),(31,1,'category',5,1,'id_attribute_group',5,0,0),(32,1,'category',5,2,'id_attribute_group',6,0,0),(33,1,'category',5,1,'id_feature',7,0,0),(34,1,'category',5,2,'id_feature',8,0,0),(35,1,'category',5,NULL,'manufacturer',9,0,0),(36,1,'category',5,NULL,'condition',10,0,0),(37,1,'category',5,NULL,'weight',11,0,0),(38,1,'category',5,3,'id_attribute_group',12,0,0),(39,1,'category',5,4,'id_attribute_group',13,0,0),(40,1,'category',8,NULL,'availability',1,0,0),(41,1,'category',8,NULL,'extras',2,0,0),(42,1,'category',8,NULL,'price',3,0,0),(43,1,'category',8,NULL,'category',4,0,0),(44,1,'category',8,1,'id_attribute_group',5,0,0),(45,1,'category',8,2,'id_attribute_group',6,0,0),(46,1,'category',8,1,'id_feature',7,0,0),(47,1,'category',8,2,'id_feature',8,0,0),(48,1,'category',8,NULL,'manufacturer',9,0,0),(49,1,'category',8,NULL,'condition',10,0,0),(50,1,'category',8,NULL,'weight',11,0,0),(51,1,'category',8,3,'id_attribute_group',12,0,0),(52,1,'category',8,4,'id_attribute_group',13,0,0),(53,1,'category',7,NULL,'availability',1,0,0),(54,1,'category',7,NULL,'extras',2,0,0),(55,1,'category',7,NULL,'price',3,0,0),(56,1,'category',7,NULL,'category',4,0,0),(57,1,'category',7,1,'id_attribute_group',5,0,0),(58,1,'category',7,2,'id_attribute_group',6,0,0),(59,1,'category',7,1,'id_feature',7,0,0),(60,1,'category',7,2,'id_feature',8,0,0),(61,1,'category',7,NULL,'manufacturer',9,0,0),(62,1,'category',7,NULL,'condition',10,0,0),(63,1,'category',7,NULL,'weight',11,0,0),(64,1,'category',7,3,'id_attribute_group',12,0,0),(65,1,'category',7,4,'id_attribute_group',13,0,0),(66,1,'manufacturer',0,NULL,'availability',1,0,0),(67,1,'manufacturer',0,NULL,'extras',2,0,0),(68,1,'manufacturer',0,NULL,'price',3,0,0),(69,1,'manufacturer',0,NULL,'category',4,0,0),(70,1,'manufacturer',0,1,'id_attribute_group',5,0,0),(71,1,'manufacturer',0,2,'id_attribute_group',6,0,0),(72,1,'manufacturer',0,1,'id_feature',7,0,0),(73,1,'manufacturer',0,2,'id_feature',8,0,0),(74,1,'manufacturer',0,NULL,'manufacturer',9,0,0),(75,1,'manufacturer',0,NULL,'condition',10,0,0),(76,1,'manufacturer',0,NULL,'weight',11,0,0),(77,1,'manufacturer',0,3,'id_attribute_group',12,0,0),(78,1,'manufacturer',0,4,'id_attribute_group',13,0,0),(79,1,'supplier',0,NULL,'availability',1,0,0),(80,1,'supplier',0,NULL,'extras',2,0,0),(81,1,'supplier',0,NULL,'price',3,0,0),(82,1,'supplier',0,NULL,'category',4,0,0),(83,1,'supplier',0,1,'id_attribute_group',5,0,0),(84,1,'supplier',0,2,'id_attribute_group',6,0,0),(85,1,'supplier',0,1,'id_feature',7,0,0),(86,1,'supplier',0,2,'id_feature',8,0,0),(87,1,'supplier',0,NULL,'manufacturer',9,0,0),(88,1,'supplier',0,NULL,'condition',10,0,0),(89,1,'supplier',0,NULL,'weight',11,0,0),(90,1,'supplier',0,3,'id_attribute_group',12,0,0),(91,1,'supplier',0,4,'id_attribute_group',13,0,0),(92,1,'new-products',0,NULL,'availability',1,0,0),(93,1,'new-products',0,NULL,'extras',2,0,0),(94,1,'new-products',0,NULL,'price',3,0,0),(95,1,'new-products',0,NULL,'category',4,0,0),(96,1,'new-products',0,1,'id_attribute_group',5,0,0),(97,1,'new-products',0,2,'id_attribute_group',6,0,0),(98,1,'new-products',0,1,'id_feature',7,0,0),(99,1,'new-products',0,2,'id_feature',8,0,0),(100,1,'new-products',0,NULL,'manufacturer',9,0,0),(101,1,'new-products',0,NULL,'condition',10,0,0),(102,1,'new-products',0,NULL,'weight',11,0,0),(103,1,'new-products',0,3,'id_attribute_group',12,0,0),(104,1,'new-products',0,4,'id_attribute_group',13,0,0),(105,1,'best-sales',0,NULL,'availability',1,0,0),(106,1,'best-sales',0,NULL,'extras',2,0,0),(107,1,'best-sales',0,NULL,'price',3,0,0),(108,1,'best-sales',0,NULL,'category',4,0,0),(109,1,'best-sales',0,1,'id_attribute_group',5,0,0),(110,1,'best-sales',0,2,'id_attribute_group',6,0,0),(111,1,'best-sales',0,1,'id_feature',7,0,0),(112,1,'best-sales',0,2,'id_feature',8,0,0),(113,1,'best-sales',0,NULL,'manufacturer',9,0,0),(114,1,'best-sales',0,NULL,'condition',10,0,0),(115,1,'best-sales',0,NULL,'weight',11,0,0),(116,1,'best-sales',0,3,'id_attribute_group',12,0,0),(117,1,'best-sales',0,4,'id_attribute_group',13,0,0),(118,1,'prices-drop',0,NULL,'availability',1,0,0),(119,1,'prices-drop',0,NULL,'extras',2,0,0),(120,1,'prices-drop',0,NULL,'price',3,0,0),(121,1,'prices-drop',0,NULL,'category',4,0,0),(122,1,'prices-drop',0,1,'id_attribute_group',5,0,0),(123,1,'prices-drop',0,2,'id_attribute_group',6,0,0),(124,1,'prices-drop',0,1,'id_feature',7,0,0),(125,1,'prices-drop',0,2,'id_feature',8,0,0),(126,1,'prices-drop',0,NULL,'manufacturer',9,0,0),(127,1,'prices-drop',0,NULL,'condition',10,0,0),(128,1,'prices-drop',0,NULL,'weight',11,0,0),(129,1,'prices-drop',0,3,'id_attribute_group',12,0,0),(130,1,'prices-drop',0,4,'id_attribute_group',13,0,0);
+INSERT INTO `ps_layered_category` VALUES (1,1,'category',2,NULL,'availability',1,0,0),(2,1,'category',2,NULL,'extras',2,0,0),(3,1,'category',2,NULL,'price',3,0,0),(4,1,'category',2,NULL,'category',4,0,0),(5,1,'category',2,1,'id_attribute_group',5,0,0),(6,1,'category',2,2,'id_attribute_group',6,0,0),(7,1,'category',2,1,'id_feature',7,0,0),(8,1,'category',2,2,'id_feature',8,0,0),(9,1,'category',2,NULL,'manufacturer',9,0,0),(10,1,'category',2,NULL,'condition',10,0,0),(11,1,'category',2,NULL,'weight',11,0,0),(12,1,'category',2,3,'id_attribute_group',12,0,0),(13,1,'category',2,4,'id_attribute_group',13,0,0),(14,1,'category',3,NULL,'availability',1,0,0),(15,1,'category',3,NULL,'extras',2,0,0),(16,1,'category',3,NULL,'price',3,0,0),(17,1,'category',3,NULL,'category',4,0,0),(18,1,'category',3,1,'id_attribute_group',5,0,0),(19,1,'category',3,2,'id_attribute_group',6,0,0),(20,1,'category',3,1,'id_feature',7,0,0),(21,1,'category',3,2,'id_feature',8,0,0),(22,1,'category',3,NULL,'manufacturer',9,0,0),(23,1,'category',3,NULL,'condition',10,0,0),(24,1,'category',3,NULL,'weight',11,0,0),(25,1,'category',3,3,'id_attribute_group',12,0,0),(26,1,'category',3,4,'id_attribute_group',13,0,0),(27,1,'category',4,NULL,'availability',1,0,0),(28,1,'category',4,NULL,'extras',2,0,0),(29,1,'category',4,NULL,'price',3,0,0),(30,1,'category',4,NULL,'category',4,0,0),(31,1,'category',4,1,'id_attribute_group',5,0,0),(32,1,'category',4,2,'id_attribute_group',6,0,0),(33,1,'category',4,1,'id_feature',7,0,0),(34,1,'category',4,2,'id_feature',8,0,0),(35,1,'category',4,NULL,'manufacturer',9,0,0),(36,1,'category',4,NULL,'condition',10,0,0),(37,1,'category',4,NULL,'weight',11,0,0),(38,1,'category',4,3,'id_attribute_group',12,0,0),(39,1,'category',4,4,'id_attribute_group',13,0,0),(40,1,'category',5,NULL,'availability',1,0,0),(41,1,'category',5,NULL,'extras',2,0,0),(42,1,'category',5,NULL,'price',3,0,0),(43,1,'category',5,NULL,'category',4,0,0),(44,1,'category',5,1,'id_attribute_group',5,0,0),(45,1,'category',5,2,'id_attribute_group',6,0,0),(46,1,'category',5,1,'id_feature',7,0,0),(47,1,'category',5,2,'id_feature',8,0,0),(48,1,'category',5,NULL,'manufacturer',9,0,0),(49,1,'category',5,NULL,'condition',10,0,0),(50,1,'category',5,NULL,'weight',11,0,0),(51,1,'category',5,3,'id_attribute_group',12,0,0),(52,1,'category',5,4,'id_attribute_group',13,0,0),(53,1,'category',9,NULL,'availability',1,0,0),(54,1,'category',9,NULL,'extras',2,0,0),(55,1,'category',9,NULL,'price',3,0,0),(56,1,'category',9,NULL,'category',4,0,0),(57,1,'category',9,1,'id_attribute_group',5,0,0),(58,1,'category',9,2,'id_attribute_group',6,0,0),(59,1,'category',9,1,'id_feature',7,0,0),(60,1,'category',9,2,'id_feature',8,0,0),(61,1,'category',9,NULL,'manufacturer',9,0,0),(62,1,'category',9,NULL,'condition',10,0,0),(63,1,'category',9,NULL,'weight',11,0,0),(64,1,'category',9,3,'id_attribute_group',12,0,0),(65,1,'category',9,4,'id_attribute_group',13,0,0),(66,1,'category',6,NULL,'availability',1,0,0),(67,1,'category',6,NULL,'extras',2,0,0),(68,1,'category',6,NULL,'price',3,0,0),(69,1,'category',6,NULL,'category',4,0,0),(70,1,'category',6,1,'id_attribute_group',5,0,0),(71,1,'category',6,2,'id_attribute_group',6,0,0),(72,1,'category',6,1,'id_feature',7,0,0),(73,1,'category',6,2,'id_feature',8,0,0),(74,1,'category',6,NULL,'manufacturer',9,0,0),(75,1,'category',6,NULL,'condition',10,0,0),(76,1,'category',6,NULL,'weight',11,0,0),(77,1,'category',6,3,'id_attribute_group',12,0,0),(78,1,'category',6,4,'id_attribute_group',13,0,0),(79,1,'category',8,NULL,'availability',1,0,0),(80,1,'category',8,NULL,'extras',2,0,0),(81,1,'category',8,NULL,'price',3,0,0),(82,1,'category',8,NULL,'category',4,0,0),(83,1,'category',8,1,'id_attribute_group',5,0,0),(84,1,'category',8,2,'id_attribute_group',6,0,0),(85,1,'category',8,1,'id_feature',7,0,0),(86,1,'category',8,2,'id_feature',8,0,0),(87,1,'category',8,NULL,'manufacturer',9,0,0),(88,1,'category',8,NULL,'condition',10,0,0),(89,1,'category',8,NULL,'weight',11,0,0),(90,1,'category',8,3,'id_attribute_group',12,0,0),(91,1,'category',8,4,'id_attribute_group',13,0,0),(92,1,'category',7,NULL,'availability',1,0,0),(93,1,'category',7,NULL,'extras',2,0,0),(94,1,'category',7,NULL,'price',3,0,0),(95,1,'category',7,NULL,'category',4,0,0),(96,1,'category',7,1,'id_attribute_group',5,0,0),(97,1,'category',7,2,'id_attribute_group',6,0,0),(98,1,'category',7,1,'id_feature',7,0,0),(99,1,'category',7,2,'id_feature',8,0,0),(100,1,'category',7,NULL,'manufacturer',9,0,0),(101,1,'category',7,NULL,'condition',10,0,0),(102,1,'category',7,NULL,'weight',11,0,0),(103,1,'category',7,3,'id_attribute_group',12,0,0),(104,1,'category',7,4,'id_attribute_group',13,0,0),(105,1,'manufacturer',0,NULL,'availability',1,0,0),(106,1,'manufacturer',0,NULL,'extras',2,0,0),(107,1,'manufacturer',0,NULL,'price',3,0,0),(108,1,'manufacturer',0,NULL,'category',4,0,0),(109,1,'manufacturer',0,1,'id_attribute_group',5,0,0),(110,1,'manufacturer',0,2,'id_attribute_group',6,0,0),(111,1,'manufacturer',0,1,'id_feature',7,0,0),(112,1,'manufacturer',0,2,'id_feature',8,0,0),(113,1,'manufacturer',0,NULL,'manufacturer',9,0,0),(114,1,'manufacturer',0,NULL,'condition',10,0,0),(115,1,'manufacturer',0,NULL,'weight',11,0,0),(116,1,'manufacturer',0,3,'id_attribute_group',12,0,0),(117,1,'manufacturer',0,4,'id_attribute_group',13,0,0),(118,1,'supplier',0,NULL,'availability',1,0,0),(119,1,'supplier',0,NULL,'extras',2,0,0),(120,1,'supplier',0,NULL,'price',3,0,0),(121,1,'supplier',0,NULL,'category',4,0,0),(122,1,'supplier',0,1,'id_attribute_group',5,0,0),(123,1,'supplier',0,2,'id_attribute_group',6,0,0),(124,1,'supplier',0,1,'id_feature',7,0,0),(125,1,'supplier',0,2,'id_feature',8,0,0),(126,1,'supplier',0,NULL,'manufacturer',9,0,0),(127,1,'supplier',0,NULL,'condition',10,0,0),(128,1,'supplier',0,NULL,'weight',11,0,0),(129,1,'supplier',0,3,'id_attribute_group',12,0,0),(130,1,'supplier',0,4,'id_attribute_group',13,0,0),(131,1,'new-products',0,NULL,'availability',1,0,0),(132,1,'new-products',0,NULL,'extras',2,0,0),(133,1,'new-products',0,NULL,'price',3,0,0),(134,1,'new-products',0,NULL,'category',4,0,0),(135,1,'new-products',0,1,'id_attribute_group',5,0,0),(136,1,'new-products',0,2,'id_attribute_group',6,0,0),(137,1,'new-products',0,1,'id_feature',7,0,0),(138,1,'new-products',0,2,'id_feature',8,0,0),(139,1,'new-products',0,NULL,'manufacturer',9,0,0),(140,1,'new-products',0,NULL,'condition',10,0,0),(141,1,'new-products',0,NULL,'weight',11,0,0),(142,1,'new-products',0,3,'id_attribute_group',12,0,0),(143,1,'new-products',0,4,'id_attribute_group',13,0,0),(144,1,'best-sales',0,NULL,'availability',1,0,0),(145,1,'best-sales',0,NULL,'extras',2,0,0),(146,1,'best-sales',0,NULL,'price',3,0,0),(147,1,'best-sales',0,NULL,'category',4,0,0),(148,1,'best-sales',0,1,'id_attribute_group',5,0,0),(149,1,'best-sales',0,2,'id_attribute_group',6,0,0),(150,1,'best-sales',0,1,'id_feature',7,0,0),(151,1,'best-sales',0,2,'id_feature',8,0,0),(152,1,'best-sales',0,NULL,'manufacturer',9,0,0),(153,1,'best-sales',0,NULL,'condition',10,0,0),(154,1,'best-sales',0,NULL,'weight',11,0,0),(155,1,'best-sales',0,3,'id_attribute_group',12,0,0),(156,1,'best-sales',0,4,'id_attribute_group',13,0,0),(157,1,'prices-drop',0,NULL,'availability',1,0,0),(158,1,'prices-drop',0,NULL,'extras',2,0,0),(159,1,'prices-drop',0,NULL,'price',3,0,0),(160,1,'prices-drop',0,NULL,'category',4,0,0),(161,1,'prices-drop',0,1,'id_attribute_group',5,0,0),(162,1,'prices-drop',0,2,'id_attribute_group',6,0,0),(163,1,'prices-drop',0,1,'id_feature',7,0,0),(164,1,'prices-drop',0,2,'id_feature',8,0,0),(165,1,'prices-drop',0,NULL,'manufacturer',9,0,0),(166,1,'prices-drop',0,NULL,'condition',10,0,0),(167,1,'prices-drop',0,NULL,'weight',11,0,0),(168,1,'prices-drop',0,3,'id_attribute_group',12,0,0),(169,1,'prices-drop',0,4,'id_attribute_group',13,0,0);
 /*!40000 ALTER TABLE `ps_layered_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3297,15 +3301,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_filter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_filter` (
   `id_layered_filter` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
-  `filters` longtext,
+  `filters` longtext DEFAULT NULL,
   `n_categories` int(10) unsigned NOT NULL,
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_layered_filter`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3314,7 +3318,7 @@ CREATE TABLE `ps_layered_filter` (
 
 LOCK TABLES `ps_layered_filter` WRITE;
 /*!40000 ALTER TABLE `ps_layered_filter` DISABLE KEYS */;
-INSERT INTO `ps_layered_filter` VALUES (1,'Mój szablon 2025-12-15','a:16:{s:10:\"categories\";a:5:{i:0;i:2;i:2;i:4;i:3;i:5;i:6;i:8;i:7;i:7;}s:11:\"controllers\";a:6:{i:0;s:8:\"category\";i:1;s:12:\"manufacturer\";i:2;s:8:\"supplier\";i:3;s:12:\"new-products\";i:4;s:10:\"best-sales\";i:5;s:11:\"prices-drop\";}s:9:\"shop_list\";a:1:{i:1;i:1;}s:23:\"layered_selection_stock\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:24:\"layered_selection_extras\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:30:\"layered_selection_price_slider\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:31:\"layered_selection_subcategories\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:22:\"layered_selection_ag_1\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:22:\"layered_selection_ag_2\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:24:\"layered_selection_feat_1\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:24:\"layered_selection_feat_2\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:30:\"layered_selection_manufacturer\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:27:\"layered_selection_condition\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:31:\"layered_selection_weight_slider\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:22:\"layered_selection_ag_3\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:22:\"layered_selection_ag_4\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}}',5,'2025-12-15 17:51:27');
+INSERT INTO `ps_layered_filter` VALUES (1,'Mój szablon 2025-12-15','a:16:{s:10:\"categories\";a:8:{i:0;i:2;i:1;i:3;i:2;i:4;i:3;i:5;i:4;i:9;i:5;i:6;i:6;i:8;i:7;i:7;}s:11:\"controllers\";a:6:{i:0;s:8:\"category\";i:1;s:12:\"manufacturer\";i:2;s:8:\"supplier\";i:3;s:12:\"new-products\";i:4;s:10:\"best-sales\";i:5;s:11:\"prices-drop\";}s:9:\"shop_list\";a:1:{i:1;i:1;}s:23:\"layered_selection_stock\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:24:\"layered_selection_extras\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:30:\"layered_selection_price_slider\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:31:\"layered_selection_subcategories\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:22:\"layered_selection_ag_1\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:22:\"layered_selection_ag_2\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:24:\"layered_selection_feat_1\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:24:\"layered_selection_feat_2\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:30:\"layered_selection_manufacturer\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:27:\"layered_selection_condition\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:31:\"layered_selection_weight_slider\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:22:\"layered_selection_ag_3\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}s:22:\"layered_selection_ag_4\";a:2:{s:11:\"filter_type\";i:0;s:17:\"filter_show_limit\";i:0;}}',8,'2025-12-15 17:51:27');
 /*!40000 ALTER TABLE `ps_layered_filter` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3324,12 +3328,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_filter_block`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_filter_block` (
   `hash` char(32) NOT NULL DEFAULT '',
-  `data` text,
+  `data` text DEFAULT NULL,
   PRIMARY KEY (`hash`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3338,6 +3342,7 @@ CREATE TABLE `ps_layered_filter_block` (
 
 LOCK TABLES `ps_layered_filter_block` WRITE;
 /*!40000 ALTER TABLE `ps_layered_filter_block` DISABLE KEYS */;
+INSERT INTO `ps_layered_filter_block` VALUES ('49fe8498c58dfc48a60ed6c25cb40b6e','a:1:{s:7:\"filters\";a:11:{i:0;a:7:{s:9:\"type_lite\";s:12:\"availability\";s:4:\"type\";s:12:\"availability\";s:6:\"id_key\";i:0;s:4:\"name\";s:13:\"Dostępność\";s:6:\"values\";a:2:{i:2;a:2:{s:4:\"name\";s:11:\"W magazynie\";s:3:\"nbr\";i:2;}i:0;a:2:{s:4:\"name\";s:12:\"Niedostępny\";s:3:\"nbr\";i:0;}}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:1;a:7:{s:9:\"type_lite\";s:6:\"extras\";s:4:\"type\";s:6:\"extras\";s:6:\"id_key\";i:0;s:4:\"name\";s:10:\"Selections\";s:6:\"values\";a:3:{s:4:\"sale\";a:2:{s:4:\"name\";s:7:\"On sale\";s:3:\"nbr\";i:0;}s:3:\"new\";a:2:{s:4:\"name\";s:11:\"New product\";s:3:\"nbr\";i:2;}s:8:\"discount\";a:2:{s:4:\"name\";s:10:\"Discounted\";s:3:\"nbr\";i:2;}}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:2;a:12:{s:9:\"type_lite\";s:5:\"price\";s:4:\"type\";s:5:\"price\";s:6:\"id_key\";i:0;s:4:\"name\";s:4:\"Cena\";s:3:\"max\";d:45;s:3:\"min\";d:23;s:4:\"unit\";s:3:\"zł\";s:14:\"specifications\";a:11:{s:6:\"symbol\";a:11:{i:0;s:1:\",\";i:1;s:2:\" \";i:2;s:1:\";\";i:3;s:1:\"%\";i:4;s:1:\"-\";i:5;s:1:\"+\";i:6;s:1:\"E\";i:7;s:2:\"×\";i:8;s:3:\"‰\";i:9;s:3:\"∞\";i:10;s:3:\"NaN\";}s:12:\"currencyCode\";s:3:\"PLN\";s:14:\"currencySymbol\";s:3:\"zł\";s:13:\"numberSymbols\";a:11:{i:0;s:1:\",\";i:1;s:2:\" \";i:2;s:1:\";\";i:3;s:1:\"%\";i:4;s:1:\"-\";i:5;s:1:\"+\";i:6;s:1:\"E\";i:7;s:2:\"×\";i:8;s:3:\"‰\";i:9;s:3:\"∞\";i:10;s:3:\"NaN\";}s:15:\"positivePattern\";s:12:\"#,##0.00 ¤\";s:15:\"negativePattern\";s:13:\"-#,##0.00 ¤\";s:17:\"maxFractionDigits\";i:2;s:17:\"minFractionDigits\";i:2;s:12:\"groupingUsed\";b:1;s:16:\"primaryGroupSize\";i:3;s:18:\"secondaryGroupSize\";i:3;}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";i:3;s:3:\"nbr\";i:2;s:5:\"value\";N;}i:3;a:7:{s:9:\"type_lite\";s:8:\"category\";s:4:\"type\";s:8:\"category\";s:6:\"id_key\";i:0;s:4:\"name\";s:9:\"Kategorie\";s:6:\"values\";a:2:{i:4;a:2:{s:4:\"name\";s:3:\"Men\";s:3:\"nbr\";s:1:\"1\";}i:5;a:2:{s:4:\"name\";s:5:\"Women\";s:3:\"nbr\";s:1:\"1\";}}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:4;a:10:{s:9:\"type_lite\";s:18:\"id_attribute_group\";s:4:\"type\";s:18:\"id_attribute_group\";s:6:\"id_key\";s:1:\"1\";s:4:\"name\";s:7:\"Rozmiar\";s:14:\"is_color_group\";b:0;s:6:\"values\";a:4:{i:1;a:4:{s:4:\"name\";s:1:\"S\";s:3:\"nbr\";s:1:\"2\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}i:2;a:4:{s:4:\"name\";s:1:\"M\";s:3:\"nbr\";s:1:\"2\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}i:3;a:4:{s:4:\"name\";s:1:\"L\";s:3:\"nbr\";s:1:\"2\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}i:4;a:4:{s:4:\"name\";s:2:\"XL\";s:3:\"nbr\";s:1:\"2\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}}s:8:\"url_name\";N;s:10:\"meta_title\";N;s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:5;a:10:{s:9:\"type_lite\";s:18:\"id_attribute_group\";s:4:\"type\";s:18:\"id_attribute_group\";s:6:\"id_key\";s:1:\"2\";s:4:\"name\";s:5:\"Kolor\";s:14:\"is_color_group\";b:1;s:6:\"values\";a:2:{i:8;a:5:{s:4:\"name\";s:6:\"Biały\";s:3:\"nbr\";s:1:\"1\";s:8:\"url_name\";N;s:10:\"meta_title\";N;s:5:\"color\";s:7:\"#ffffff\";}i:11;a:5:{s:4:\"name\";s:6:\"czarny\";s:3:\"nbr\";s:1:\"1\";s:8:\"url_name\";N;s:10:\"meta_title\";N;s:5:\"color\";s:7:\"#434A54\";}}s:8:\"url_name\";N;s:10:\"meta_title\";N;s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:6;a:9:{s:9:\"type_lite\";s:10:\"id_feature\";s:4:\"type\";s:10:\"id_feature\";s:6:\"id_key\";s:1:\"1\";s:6:\"values\";a:1:{i:4;a:4:{s:3:\"nbr\";s:1:\"2\";s:4:\"name\";s:8:\"Bawełna\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}}s:4:\"name\";s:11:\"Composition\";s:8:\"url_name\";N;s:10:\"meta_title\";N;s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:7;a:9:{s:9:\"type_lite\";s:10:\"id_feature\";s:4:\"type\";s:10:\"id_feature\";s:6:\"id_key\";s:1:\"2\";s:6:\"values\";a:2:{i:7;a:4:{s:3:\"nbr\";s:1:\"1\";s:4:\"name\";s:12:\"Long sleeves\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}i:8;a:4:{s:3:\"nbr\";s:1:\"1\";s:4:\"name\";s:13:\"Short sleeves\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}}s:4:\"name\";s:8:\"Property\";s:8:\"url_name\";N;s:10:\"meta_title\";N;s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:8;a:7:{s:9:\"type_lite\";s:12:\"manufacturer\";s:4:\"type\";s:12:\"manufacturer\";s:6:\"id_key\";i:0;s:4:\"name\";s:5:\"Marka\";s:6:\"values\";a:1:{i:1;a:2:{s:4:\"name\";s:13:\"Studio Design\";s:3:\"nbr\";s:1:\"2\";}}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:9;a:7:{s:9:\"type_lite\";s:9:\"condition\";s:4:\"type\";s:9:\"condition\";s:6:\"id_key\";i:0;s:4:\"name\";s:5:\"Stan:\";s:6:\"values\";a:3:{s:3:\"new\";a:2:{s:4:\"name\";s:4:\"Nowy\";s:3:\"nbr\";s:1:\"2\";}s:4:\"used\";a:2:{s:4:\"name\";s:8:\"Używany\";s:3:\"nbr\";i:0;}s:11:\"refurbished\";a:2:{s:4:\"name\";s:9:\"Odnowiony\";s:3:\"nbr\";i:0;}}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:10;a:12:{s:9:\"type_lite\";s:6:\"weight\";s:4:\"type\";s:6:\"weight\";s:6:\"id_key\";i:0;s:4:\"name\";s:4:\"Waga\";s:3:\"max\";d:0.29999999999999999;s:3:\"min\";d:0.29999999999999999;s:4:\"unit\";s:2:\"kg\";s:14:\"specifications\";N;s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";i:3;s:5:\"value\";N;s:3:\"nbr\";i:2;}}}'),('d09c9a59a8c5442bf92fd6bfac2a47a1','a:1:{s:7:\"filters\";a:11:{i:0;a:7:{s:9:\"type_lite\";s:12:\"availability\";s:4:\"type\";s:12:\"availability\";s:6:\"id_key\";i:0;s:4:\"name\";s:13:\"Dostępność\";s:6:\"values\";a:2:{i:2;a:2:{s:4:\"name\";s:11:\"W magazynie\";s:3:\"nbr\";i:11;}i:0;a:2:{s:4:\"name\";s:12:\"Niedostępny\";s:3:\"nbr\";i:0;}}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:1;a:7:{s:9:\"type_lite\";s:6:\"extras\";s:4:\"type\";s:6:\"extras\";s:6:\"id_key\";i:0;s:4:\"name\";s:10:\"Selections\";s:6:\"values\";a:3:{s:4:\"sale\";a:2:{s:4:\"name\";s:7:\"On sale\";s:3:\"nbr\";i:0;}s:3:\"new\";a:2:{s:4:\"name\";s:11:\"New product\";s:3:\"nbr\";i:11;}s:8:\"discount\";a:2:{s:4:\"name\";s:10:\"Discounted\";s:3:\"nbr\";i:0;}}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:2;a:12:{s:9:\"type_lite\";s:5:\"price\";s:4:\"type\";s:5:\"price\";s:6:\"id_key\";i:0;s:4:\"name\";s:4:\"Cena\";s:3:\"max\";d:44;s:3:\"min\";d:14;s:4:\"unit\";s:3:\"zł\";s:14:\"specifications\";a:11:{s:6:\"symbol\";a:11:{i:0;s:1:\",\";i:1;s:2:\" \";i:2;s:1:\";\";i:3;s:1:\"%\";i:4;s:1:\"-\";i:5;s:1:\"+\";i:6;s:1:\"E\";i:7;s:2:\"×\";i:8;s:3:\"‰\";i:9;s:3:\"∞\";i:10;s:3:\"NaN\";}s:12:\"currencyCode\";s:3:\"PLN\";s:14:\"currencySymbol\";s:3:\"zł\";s:13:\"numberSymbols\";a:11:{i:0;s:1:\",\";i:1;s:2:\" \";i:2;s:1:\";\";i:3;s:1:\"%\";i:4;s:1:\"-\";i:5;s:1:\"+\";i:6;s:1:\"E\";i:7;s:2:\"×\";i:8;s:3:\"‰\";i:9;s:3:\"∞\";i:10;s:3:\"NaN\";}s:15:\"positivePattern\";s:12:\"#,##0.00 ¤\";s:15:\"negativePattern\";s:13:\"-#,##0.00 ¤\";s:17:\"maxFractionDigits\";i:2;s:17:\"minFractionDigits\";i:2;s:12:\"groupingUsed\";b:1;s:16:\"primaryGroupSize\";i:3;s:18:\"secondaryGroupSize\";i:3;}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";i:3;s:3:\"nbr\";i:11;s:5:\"value\";N;}i:3;a:7:{s:9:\"type_lite\";s:8:\"category\";s:4:\"type\";s:8:\"category\";s:6:\"id_key\";i:0;s:4:\"name\";s:9:\"Kategorie\";s:6:\"values\";a:2:{i:7;a:2:{s:4:\"name\";s:10:\"Stationery\";s:3:\"nbr\";s:1:\"3\";}i:8;a:2:{s:4:\"name\";s:16:\"Home Accessories\";s:3:\"nbr\";s:1:\"8\";}}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:4;a:10:{s:9:\"type_lite\";s:18:\"id_attribute_group\";s:4:\"type\";s:18:\"id_attribute_group\";s:6:\"id_key\";s:1:\"2\";s:4:\"name\";s:5:\"Kolor\";s:14:\"is_color_group\";b:1;s:6:\"values\";a:2:{i:8;a:5:{s:4:\"name\";s:6:\"Biały\";s:3:\"nbr\";s:1:\"3\";s:8:\"url_name\";N;s:10:\"meta_title\";N;s:5:\"color\";s:7:\"#ffffff\";}i:11;a:5:{s:4:\"name\";s:6:\"czarny\";s:3:\"nbr\";s:1:\"3\";s:8:\"url_name\";N;s:10:\"meta_title\";N;s:5:\"color\";s:7:\"#434A54\";}}s:8:\"url_name\";N;s:10:\"meta_title\";N;s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:5;a:9:{s:9:\"type_lite\";s:10:\"id_feature\";s:4:\"type\";s:10:\"id_feature\";s:6:\"id_key\";s:1:\"1\";s:6:\"values\";a:3:{i:3;a:4:{s:3:\"nbr\";s:1:\"4\";s:4:\"name\";s:7:\"Ceramic\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}i:1;a:4:{s:3:\"nbr\";s:1:\"3\";s:4:\"name\";s:9:\"Poliester\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}i:5;a:4:{s:3:\"nbr\";s:1:\"3\";s:4:\"name\";s:18:\"Recycled cardboard\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}}s:4:\"name\";s:11:\"Composition\";s:8:\"url_name\";N;s:10:\"meta_title\";N;s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:6;a:9:{s:9:\"type_lite\";s:10:\"id_feature\";s:4:\"type\";s:10:\"id_feature\";s:6:\"id_key\";s:1:\"2\";s:6:\"values\";a:2:{i:10;a:4:{s:3:\"nbr\";s:1:\"3\";s:4:\"name\";s:9:\"120 pages\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}i:9;a:4:{s:3:\"nbr\";s:1:\"3\";s:4:\"name\";s:15:\"Removable cover\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}}s:4:\"name\";s:8:\"Property\";s:8:\"url_name\";N;s:10:\"meta_title\";N;s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:7;a:7:{s:9:\"type_lite\";s:12:\"manufacturer\";s:4:\"type\";s:12:\"manufacturer\";s:6:\"id_key\";i:0;s:4:\"name\";s:5:\"Marka\";s:6:\"values\";a:2:{i:1;a:2:{s:4:\"name\";s:13:\"Studio Design\";s:3:\"nbr\";s:1:\"7\";}i:2;a:2:{s:4:\"name\";s:14:\"Graphic Corner\";s:3:\"nbr\";s:1:\"3\";}}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:8;a:7:{s:9:\"type_lite\";s:9:\"condition\";s:4:\"type\";s:9:\"condition\";s:6:\"id_key\";i:0;s:4:\"name\";s:5:\"Stan:\";s:6:\"values\";a:3:{s:3:\"new\";a:2:{s:4:\"name\";s:4:\"Nowy\";s:3:\"nbr\";s:2:\"11\";}s:4:\"used\";a:2:{s:4:\"name\";s:8:\"Używany\";s:3:\"nbr\";i:0;}s:11:\"refurbished\";a:2:{s:4:\"name\";s:9:\"Odnowiony\";s:3:\"nbr\";i:0;}}s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}i:9;a:12:{s:9:\"type_lite\";s:6:\"weight\";s:4:\"type\";s:6:\"weight\";s:6:\"id_key\";i:0;s:4:\"name\";s:4:\"Waga\";s:3:\"max\";d:0.29999999999999999;s:3:\"min\";d:0.29999999999999999;s:4:\"unit\";s:2:\"kg\";s:14:\"specifications\";N;s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";i:3;s:5:\"value\";N;s:3:\"nbr\";i:11;}i:10;a:10:{s:9:\"type_lite\";s:18:\"id_attribute_group\";s:4:\"type\";s:18:\"id_attribute_group\";s:6:\"id_key\";s:1:\"4\";s:4:\"name\";s:10:\"Paper Type\";s:14:\"is_color_group\";b:0;s:6:\"values\";a:4:{i:22;a:4:{s:4:\"name\";s:5:\"Ruled\";s:3:\"nbr\";s:1:\"3\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}i:23;a:4:{s:4:\"name\";s:5:\"Plain\";s:3:\"nbr\";s:1:\"3\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}i:24;a:4:{s:4:\"name\";s:8:\"Squarred\";s:3:\"nbr\";s:1:\"3\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}i:25;a:4:{s:4:\"name\";s:5:\"Doted\";s:3:\"nbr\";s:1:\"3\";s:8:\"url_name\";N;s:10:\"meta_title\";N;}}s:8:\"url_name\";N;s:10:\"meta_title\";N;s:17:\"filter_show_limit\";i:0;s:11:\"filter_type\";s:1:\"0\";}}}');
 /*!40000 ALTER TABLE `ps_layered_filter_block` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3347,13 +3352,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_filter_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_filter_shop` (
   `id_layered_filter` int(10) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_layered_filter`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3372,12 +3377,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_indexable_attribute_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_indexable_attribute_group` (
   `id_attribute_group` int(11) NOT NULL,
-  `indexable` tinyint(1) NOT NULL DEFAULT '0',
+  `indexable` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_attribute_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3396,14 +3401,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_indexable_attribute_group_lang_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_indexable_attribute_group_lang_value` (
   `id_attribute_group` int(11) NOT NULL,
   `id_lang` int(11) NOT NULL,
   `url_name` varchar(128) DEFAULT NULL,
   `meta_title` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_attribute_group`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3421,14 +3426,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_indexable_attribute_lang_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_indexable_attribute_lang_value` (
   `id_attribute` int(11) NOT NULL,
   `id_lang` int(11) NOT NULL,
   `url_name` varchar(128) DEFAULT NULL,
   `meta_title` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_attribute`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3446,12 +3451,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_indexable_feature`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_indexable_feature` (
   `id_feature` int(11) NOT NULL,
-  `indexable` tinyint(1) NOT NULL DEFAULT '0',
+  `indexable` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_feature`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3470,14 +3475,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_indexable_feature_lang_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_indexable_feature_lang_value` (
   `id_feature` int(11) NOT NULL,
   `id_lang` int(11) NOT NULL,
   `url_name` varchar(128) NOT NULL,
   `meta_title` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_feature`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3495,14 +3500,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_indexable_feature_value_lang_value`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_indexable_feature_value_lang_value` (
   `id_feature_value` int(11) NOT NULL,
   `id_lang` int(11) NOT NULL,
   `url_name` varchar(128) DEFAULT NULL,
   `meta_title` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_feature_value`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3520,7 +3525,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_price_index`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_price_index` (
   `id_product` int(11) NOT NULL,
   `id_currency` int(11) NOT NULL,
@@ -3532,7 +3537,7 @@ CREATE TABLE `ps_layered_price_index` (
   KEY `id_currency` (`id_currency`),
   KEY `price_min` (`price_min`),
   KEY `price_max` (`price_max`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3551,15 +3556,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_layered_product_attribute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_layered_product_attribute` (
   `id_attribute` int(10) unsigned NOT NULL,
   `id_product` int(10) unsigned NOT NULL,
-  `id_attribute_group` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_attribute_group` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_shop` int(10) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_attribute`,`id_product`,`id_shop`),
   UNIQUE KEY `id_attribute_group` (`id_attribute_group`,`id_attribute`,`id_product`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3578,14 +3583,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_link_block`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_link_block` (
   `id_link_block` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_hook` int(1) unsigned DEFAULT NULL,
-  `position` int(10) unsigned NOT NULL DEFAULT '0',
-  `content` text,
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
+  `content` text DEFAULT NULL,
   PRIMARY KEY (`id_link_block`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3604,14 +3609,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_link_block_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_link_block_lang` (
   `id_link_block` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(40) NOT NULL DEFAULT '',
-  `custom_content` text,
+  `custom_content` text DEFAULT NULL,
   PRIMARY KEY (`id_link_block`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3630,13 +3635,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_link_block_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_link_block_shop` (
   `id_link_block` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_shop` int(10) unsigned NOT NULL,
-  `position` int(10) unsigned NOT NULL DEFAULT '0',
+  `position` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_link_block`,`id_shop`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3655,14 +3660,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_linksmenutop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_linksmenutop` (
   `id_linksmenutop` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_shop` int(11) unsigned NOT NULL,
   `new_window` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_linksmenutop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3680,7 +3685,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_linksmenutop_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_linksmenutop_lang` (
   `id_linksmenutop` int(11) unsigned NOT NULL,
   `id_lang` int(11) unsigned NOT NULL,
@@ -3688,7 +3693,7 @@ CREATE TABLE `ps_linksmenutop_lang` (
   `label` varchar(128) NOT NULL,
   `link` varchar(128) NOT NULL,
   KEY `id_linksmenutop` (`id_linksmenutop`,`id_lang`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3706,7 +3711,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_log` (
   `id_log` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `severity` tinyint(1) NOT NULL,
@@ -3717,12 +3722,12 @@ CREATE TABLE `ps_log` (
   `id_shop` int(10) unsigned DEFAULT NULL,
   `id_shop_group` int(10) unsigned DEFAULT NULL,
   `id_lang` int(10) unsigned DEFAULT NULL,
-  `in_all_shops` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `in_all_shops` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `id_employee` int(10) unsigned DEFAULT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_log`)
-) ENGINE=InnoDB AUTO_INCREMENT=258 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=238 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3731,7 +3736,7 @@ CREATE TABLE `ps_log` (
 
 LOCK TABLES `ps_log` WRITE;
 /*!40000 ALTER TABLE `ps_log` DISABLE KEYS */;
-INSERT INTO `ps_log` VALUES (1,1,0,'Exporting mail with theme modern for language Polski (Polish)','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:36','2025-12-15 18:50:36'),(2,1,0,'Core output folder: /var/www/html/mails','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:36','2025-12-15 18:50:36'),(3,1,0,'Modules output folder: /var/www/html/modules/','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:36','2025-12-15 18:50:36'),(4,1,0,'Generate html template account at /var/www/html/mails/pl/account.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(5,1,0,'Generate txt template account at /var/www/html/mails/pl/account.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(6,1,0,'Generate html template backoffice_order at /var/www/html/mails/pl/backoffice_order.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(7,1,0,'Generate txt template backoffice_order at /var/www/html/mails/pl/backoffice_order.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(8,1,0,'Generate html template bankwire at /var/www/html/mails/pl/bankwire.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(9,1,0,'Generate txt template bankwire at /var/www/html/mails/pl/bankwire.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(10,1,0,'Generate html template cheque at /var/www/html/mails/pl/cheque.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(11,1,0,'Generate txt template cheque at /var/www/html/mails/pl/cheque.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(12,1,0,'Generate html template contact at /var/www/html/mails/pl/contact.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(13,1,0,'Generate txt template contact at /var/www/html/mails/pl/contact.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(14,1,0,'Generate html template contact_form at /var/www/html/mails/pl/contact_form.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(15,1,0,'Generate txt template contact_form at /var/www/html/mails/pl/contact_form.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(16,1,0,'Generate html template credit_slip at /var/www/html/mails/pl/credit_slip.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(17,1,0,'Generate txt template credit_slip at /var/www/html/mails/pl/credit_slip.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(18,1,0,'Generate html template download_product at /var/www/html/mails/pl/download_product.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(19,1,0,'Generate txt template download_product at /var/www/html/mails/pl/download_product.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(20,1,0,'Generate html template employee_password at /var/www/html/mails/pl/employee_password.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(21,1,0,'Generate txt template employee_password at /var/www/html/mails/pl/employee_password.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(22,1,0,'Generate html template forward_msg at /var/www/html/mails/pl/forward_msg.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(23,1,0,'Generate txt template forward_msg at /var/www/html/mails/pl/forward_msg.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(24,1,0,'Generate html template guest_to_customer at /var/www/html/mails/pl/guest_to_customer.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(25,1,0,'Generate txt template guest_to_customer at /var/www/html/mails/pl/guest_to_customer.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(26,1,0,'Generate html template import at /var/www/html/mails/pl/import.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(27,1,0,'Generate txt template import at /var/www/html/mails/pl/import.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(28,1,0,'Generate html template in_transit at /var/www/html/mails/pl/in_transit.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(29,1,0,'Generate txt template in_transit at /var/www/html/mails/pl/in_transit.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(30,1,0,'Generate html template log_alert at /var/www/html/mails/pl/log_alert.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(31,1,0,'Generate txt template log_alert at /var/www/html/mails/pl/log_alert.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(32,1,0,'Generate html template newsletter at /var/www/html/mails/pl/newsletter.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(33,1,0,'Generate txt template newsletter at /var/www/html/mails/pl/newsletter.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(34,1,0,'Generate html template order_canceled at /var/www/html/mails/pl/order_canceled.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(35,1,0,'Generate txt template order_canceled at /var/www/html/mails/pl/order_canceled.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(36,1,0,'Generate html template order_changed at /var/www/html/mails/pl/order_changed.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(37,1,0,'Generate txt template order_changed at /var/www/html/mails/pl/order_changed.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(38,1,0,'Generate html template order_conf at /var/www/html/mails/pl/order_conf.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(39,1,0,'Generate txt template order_conf at /var/www/html/mails/pl/order_conf.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(40,1,0,'Generate html template order_customer_comment at /var/www/html/mails/pl/order_customer_comment.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(41,1,0,'Generate txt template order_customer_comment at /var/www/html/mails/pl/order_customer_comment.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(42,1,0,'Generate html template order_merchant_comment at /var/www/html/mails/pl/order_merchant_comment.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(43,1,0,'Generate txt template order_merchant_comment at /var/www/html/mails/pl/order_merchant_comment.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(44,1,0,'Generate html template order_return_state at /var/www/html/mails/pl/order_return_state.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(45,1,0,'Generate txt template order_return_state at /var/www/html/mails/pl/order_return_state.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(46,1,0,'Generate html template outofstock at /var/www/html/mails/pl/outofstock.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(47,1,0,'Generate txt template outofstock at /var/www/html/mails/pl/outofstock.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(48,1,0,'Generate html template password at /var/www/html/mails/pl/password.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(49,1,0,'Generate txt template password at /var/www/html/mails/pl/password.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(50,1,0,'Generate html template password_query at /var/www/html/mails/pl/password_query.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(51,1,0,'Generate txt template password_query at /var/www/html/mails/pl/password_query.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(52,1,0,'Generate html template payment at /var/www/html/mails/pl/payment.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(53,1,0,'Generate txt template payment at /var/www/html/mails/pl/payment.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(54,1,0,'Generate html template payment_error at /var/www/html/mails/pl/payment_error.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(55,1,0,'Generate txt template payment_error at /var/www/html/mails/pl/payment_error.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(56,1,0,'Generate html template preparation at /var/www/html/mails/pl/preparation.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(57,1,0,'Generate txt template preparation at /var/www/html/mails/pl/preparation.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(58,1,0,'Generate html template productoutofstock at /var/www/html/mails/pl/productoutofstock.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(59,1,0,'Generate txt template productoutofstock at /var/www/html/mails/pl/productoutofstock.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(60,1,0,'Generate html template refund at /var/www/html/mails/pl/refund.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(61,1,0,'Generate txt template refund at /var/www/html/mails/pl/refund.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(62,1,0,'Generate html template reply_msg at /var/www/html/mails/pl/reply_msg.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(63,1,0,'Generate txt template reply_msg at /var/www/html/mails/pl/reply_msg.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(64,1,0,'Generate html template shipped at /var/www/html/mails/pl/shipped.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(65,1,0,'Generate txt template shipped at /var/www/html/mails/pl/shipped.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(66,1,0,'Generate html template test at /var/www/html/mails/pl/test.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(67,1,0,'Generate txt template test at /var/www/html/mails/pl/test.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(68,1,0,'Generate html template voucher at /var/www/html/mails/pl/voucher.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(69,1,0,'Generate txt template voucher at /var/www/html/mails/pl/voucher.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(70,1,0,'Generate html template voucher_new at /var/www/html/mails/pl/voucher_new.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(71,1,0,'Generate txt template voucher_new at /var/www/html/mails/pl/voucher_new.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(72,1,0,'Generate html template followup_1 at /var/www/html/modules//followup/mails/pl/followup_1.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(73,1,0,'Generate txt template followup_1 at /var/www/html/modules//followup/mails/pl/followup_1.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(74,1,0,'Generate html template followup_2 at /var/www/html/modules//followup/mails/pl/followup_2.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(75,1,0,'Generate txt template followup_2 at /var/www/html/modules//followup/mails/pl/followup_2.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(76,1,0,'Generate html template followup_3 at /var/www/html/modules//followup/mails/pl/followup_3.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(77,1,0,'Generate txt template followup_3 at /var/www/html/modules//followup/mails/pl/followup_3.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(78,1,0,'Generate html template followup_4 at /var/www/html/modules//followup/mails/pl/followup_4.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(79,1,0,'Generate txt template followup_4 at /var/www/html/modules//followup/mails/pl/followup_4.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(80,1,0,'Generate html template referralprogram-congratulations at /var/www/html/modules//referralprogram/mails/pl/referralprogram-congratulations.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(81,1,0,'Generate txt template referralprogram-congratulations at /var/www/html/modules//referralprogram/mails/pl/referralprogram-congratulations.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(82,1,0,'Generate html template referralprogram-invitation at /var/www/html/modules//referralprogram/mails/pl/referralprogram-invitation.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(83,1,0,'Generate txt template referralprogram-invitation at /var/www/html/modules//referralprogram/mails/pl/referralprogram-invitation.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(84,1,0,'Generate html template referralprogram-voucher at /var/www/html/modules//referralprogram/mails/pl/referralprogram-voucher.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(85,1,0,'Generate txt template referralprogram-voucher at /var/www/html/modules//referralprogram/mails/pl/referralprogram-voucher.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(86,1,0,'Generate html template newsletter_conf at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_conf.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(87,1,0,'Generate txt template newsletter_conf at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_conf.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(88,1,0,'Generate html template newsletter_verif at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_verif.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(89,1,0,'Generate txt template newsletter_verif at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_verif.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(90,1,0,'Generate html template newsletter_voucher at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_voucher.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(91,1,0,'Generate txt template newsletter_voucher at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_voucher.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(92,1,0,'Generate html template followup_1 at /var/www/html/modules//ps_reminder/mails/pl/followup_1.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(93,1,0,'Generate txt template followup_1 at /var/www/html/modules//ps_reminder/mails/pl/followup_1.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(94,1,0,'Generate html template followup_2 at /var/www/html/modules//ps_reminder/mails/pl/followup_2.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(95,1,0,'Generate txt template followup_2 at /var/www/html/modules//ps_reminder/mails/pl/followup_2.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(96,1,0,'Generate html template followup_3 at /var/www/html/modules//ps_reminder/mails/pl/followup_3.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(97,1,0,'Generate txt template followup_3 at /var/www/html/modules//ps_reminder/mails/pl/followup_3.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(98,1,0,'Generate html template followup_4 at /var/www/html/modules//ps_reminder/mails/pl/followup_4.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(99,1,0,'Generate txt template followup_4 at /var/www/html/modules//ps_reminder/mails/pl/followup_4.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(100,1,0,'Generate html template customer_qty at /var/www/html/modules//ps_emailalerts/mails/pl/customer_qty.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(101,1,0,'Generate txt template customer_qty at /var/www/html/modules//ps_emailalerts/mails/pl/customer_qty.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(102,1,0,'Generate html template new_order at /var/www/html/modules//ps_emailalerts/mails/pl/new_order.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(103,1,0,'Generate txt template new_order at /var/www/html/modules//ps_emailalerts/mails/pl/new_order.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(104,1,0,'Generate html template order_changed at /var/www/html/modules//ps_emailalerts/mails/pl/order_changed.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(105,1,0,'Generate txt template order_changed at /var/www/html/modules//ps_emailalerts/mails/pl/order_changed.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(106,1,0,'Generate html template productcoverage at /var/www/html/modules//ps_emailalerts/mails/pl/productcoverage.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(107,1,0,'Generate txt template productcoverage at /var/www/html/modules//ps_emailalerts/mails/pl/productcoverage.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(108,1,0,'Generate html template productoutofstock at /var/www/html/modules//ps_emailalerts/mails/pl/productoutofstock.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(109,1,0,'Generate txt template productoutofstock at /var/www/html/modules//ps_emailalerts/mails/pl/productoutofstock.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(110,1,0,'Generate html template return_slip at /var/www/html/modules//ps_emailalerts/mails/pl/return_slip.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(111,1,0,'Generate txt template return_slip at /var/www/html/modules//ps_emailalerts/mails/pl/return_slip.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(112,1,0,'Protect vendor folder in module blockwishlist','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(113,1,0,'Module blockwishlist has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(114,1,0,'Protect vendor folder in module contactform','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(115,1,0,'Module contactform has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(116,1,0,'Protect vendor folder in module dashactivity','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(117,1,0,'Module dashactivity has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(118,1,0,'Protect vendor folder in module dashtrends','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(119,1,0,'Module dashtrends has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(120,1,0,'Protect vendor folder in module dashgoals','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(121,1,0,'Module dashgoals has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(122,1,0,'Protect vendor folder in module dashproducts','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(123,1,0,'Module dashproducts has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(124,1,0,'Protect vendor folder in module graphnvd3','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(125,1,0,'Module graphnvd3 has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(126,1,0,'Protect vendor folder in module gridhtml','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(127,1,0,'Module gridhtml has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(128,1,0,'Protect vendor folder in module gsitemap','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(129,1,0,'Module gsitemap has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(130,1,0,'Protect vendor folder in module pagesnotfound','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(131,1,0,'Module pagesnotfound has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(132,1,0,'Protect vendor folder in module productcomments','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(133,1,0,'Module productcomments has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(134,1,0,'Protect vendor folder in module ps_banner','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(135,1,0,'Module ps_banner has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(136,1,0,'Protect vendor folder in module ps_categorytree','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(137,1,0,'Module ps_categorytree has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(138,1,0,'Protect vendor folder in module ps_checkpayment','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(139,1,0,'Module ps_checkpayment has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(140,1,0,'Protect vendor folder in module ps_contactinfo','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(141,1,0,'Module ps_contactinfo has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(142,1,0,'Protect vendor folder in module ps_crossselling','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(143,1,0,'Module ps_crossselling has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(144,1,0,'Protect vendor folder in module ps_currencyselector','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(145,1,0,'Module ps_currencyselector has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(146,1,0,'Protect vendor folder in module ps_customeraccountlinks','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(147,1,0,'Module ps_customeraccountlinks has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(148,1,0,'Protect vendor folder in module ps_customersignin','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(149,1,0,'Module ps_customersignin has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(150,1,0,'Protect vendor folder in module ps_customtext','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(151,1,0,'Module ps_customtext has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(152,1,0,'Protect vendor folder in module ps_dataprivacy','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(153,1,0,'Module ps_dataprivacy has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(154,1,0,'Protect vendor folder in module ps_emailsubscription','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(155,1,0,'Module ps_emailsubscription has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(156,1,0,'Protect vendor folder in module ps_facetedsearch','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(157,1,0,'Module ps_facetedsearch has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(158,1,0,'Protect vendor folder in module ps_faviconnotificationbo','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(159,1,0,'Module ps_faviconnotificationbo has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(160,1,0,'Protect vendor folder in module ps_featuredproducts','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(161,1,0,'Module ps_featuredproducts has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(162,1,0,'Protect vendor folder in module ps_imageslider','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(163,1,0,'Module ps_imageslider has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(164,1,0,'Protect vendor folder in module ps_languageselector','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(165,1,0,'Module ps_languageselector has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(166,1,0,'Protect vendor folder in module ps_linklist','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(167,1,0,'Module ps_linklist has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(168,1,0,'Protect vendor folder in module ps_mainmenu','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(169,1,0,'Module ps_mainmenu has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(170,1,0,'Protect vendor folder in module ps_searchbar','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(171,1,0,'Module ps_searchbar has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(172,1,0,'Protect vendor folder in module ps_sharebuttons','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(173,1,0,'Module ps_sharebuttons has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(174,1,0,'Protect vendor folder in module ps_shoppingcart','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(175,1,0,'Module ps_shoppingcart has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(176,1,0,'Protect vendor folder in module ps_socialfollow','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(177,1,0,'Module ps_socialfollow has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(178,1,0,'Protect vendor folder in module ps_themecusto','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(179,1,0,'Module ps_themecusto has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(180,1,0,'Protect vendor folder in module ps_wirepayment','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(181,1,0,'Module ps_wirepayment has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(182,1,0,'Protect vendor folder in module statsbestcategories','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(183,1,0,'Module statsbestcategories has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(184,1,0,'Protect vendor folder in module statsbestcustomers','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(185,1,0,'Module statsbestcustomers has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(186,1,0,'Protect vendor folder in module statsbestproducts','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(187,1,0,'Module statsbestproducts has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(188,1,0,'Protect vendor folder in module statsbestsuppliers','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(189,1,0,'Module statsbestsuppliers has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(190,1,0,'Protect vendor folder in module statsbestvouchers','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(191,1,0,'Module statsbestvouchers has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(192,1,0,'Protect vendor folder in module statscarrier','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(193,1,0,'Module statscarrier has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(194,1,0,'Protect vendor folder in module statscatalog','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(195,1,0,'Module statscatalog has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(196,1,0,'Protect vendor folder in module statscheckup','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(197,1,0,'Module statscheckup has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(198,1,0,'Protect vendor folder in module statsdata','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(199,1,0,'Module statsdata has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(200,1,0,'Protect vendor folder in module statsforecast','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(201,1,0,'Module statsforecast has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(202,1,0,'Protect vendor folder in module statsnewsletter','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(203,1,0,'Module statsnewsletter has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(204,1,0,'Protect vendor folder in module statspersonalinfos','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(205,1,0,'Module statspersonalinfos has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(206,1,0,'Protect vendor folder in module statsproduct','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(207,1,0,'Module statsproduct has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(208,1,0,'Protect vendor folder in module statsregistrations','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(209,1,0,'Module statsregistrations has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(210,1,0,'Protect vendor folder in module statssales','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(211,1,0,'Module statssales has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(212,1,0,'Protect vendor folder in module statssearch','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(213,1,0,'Module statssearch has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(214,1,0,'Protect vendor folder in module statsstock','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(215,1,0,'Module statsstock has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(216,1,0,'Protect vendor folder in module welcome','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(217,1,0,'Module welcome has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(218,1,0,'Protect vendor folder in module psgdpr','',0,1,NULL,1,0,1,'2025-12-15 18:51:11','2025-12-15 18:51:11'),(219,1,0,'Protect vendor folder in module ps_mbo','',0,1,NULL,1,0,1,'2025-12-15 18:51:12','2025-12-15 18:51:12'),(220,1,0,'Protect vendor folder in module ps_buybuttonlite','',0,1,NULL,1,0,1,'2025-12-15 18:51:12','2025-12-15 18:51:12'),(221,1,0,'Protect vendor folder in module ps_checkout','',0,1,NULL,1,0,1,'2025-12-15 18:51:12','2025-12-15 18:51:12'),(222,1,0,'Protect vendor folder in module ps_facebook','',0,1,NULL,1,0,1,'2025-12-15 18:51:13','2025-12-15 18:51:13'),(223,1,0,'Protect vendor folder in module psxmarketingwithgoogle','',0,1,NULL,1,0,1,'2025-12-15 18:51:13','2025-12-15 18:51:13'),(224,1,0,'Protect vendor folder in module blockreassurance','',0,1,NULL,1,0,1,'2025-12-15 18:51:17','2025-12-15 18:51:17'),(225,1,0,'Module blockreassurance has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:51:17','2025-12-15 18:51:17'),(226,1,0,'Protect vendor folder in module ps_facetedsearch','',0,1,NULL,1,0,1,'2025-12-15 18:51:27','2025-12-15 18:51:27'),(227,1,0,'Module ps_facetedsearch has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:51:27','2025-12-15 18:51:27'),(228,1,0,'Połączenie z panelem administracyjnym z 172.18.0.1:50192','',0,NULL,NULL,1,1,1,'2025-12-15 18:51:48','2025-12-15 18:51:48'),(229,1,0,'Połączenie z panelem administracyjnym z 151.101.129.91:18570','',0,NULL,NULL,1,1,1,'2025-12-15 19:04:54','2025-12-15 19:04:54'),(230,1,0,'Frontcontroller::init - Cart cannot be loaded or an order has already been placed using this cart','Cart',6,1,NULL,1,0,0,'2025-12-15 19:08:41','2025-12-15 19:08:41'),(231,1,0,'Połączenie z panelem administracyjnym z 151.101.129.91:33189','',0,NULL,NULL,1,1,1,'2025-12-15 19:08:42','2025-12-15 19:08:42'),(232,1,0,'Frontcontroller::init - Cart cannot be loaded or an order has already been placed using this cart','Cart',7,1,NULL,1,0,0,'2025-12-15 20:12:23','2025-12-15 20:12:23'),(233,1,0,'Połączenie z panelem administracyjnym z 151.101.129.91:25379','',0,NULL,NULL,1,1,1,'2025-12-15 20:12:25','2025-12-15 20:12:25'),(234,1,0,'Frontcontroller::init - Cart cannot be loaded or an order has already been placed using this cart','Cart',8,1,NULL,1,0,0,'2025-12-16 10:17:41','2025-12-16 10:17:41'),(235,1,0,'Połączenie z panelem administracyjnym z 151.101.129.91:41980','',0,NULL,NULL,1,1,1,'2025-12-16 10:17:43','2025-12-16 10:17:43'),(236,1,0,'Połączenie z panelem administracyjnym z 151.101.129.91:47038','',0,NULL,NULL,1,1,1,'2025-12-16 10:21:36','2025-12-16 10:21:36'),(237,1,0,'Połączenie z panelem administracyjnym z 192.168.65.1:22822','',0,NULL,NULL,1,1,1,'2025-12-16 17:03:59','2025-12-16 17:03:59'),(238,1,0,'Połączenie z panelem administracyjnym z 172.18.0.1:59406','',0,NULL,NULL,1,1,1,'2026-01-17 20:13:48','2026-01-17 20:13:48'),(239,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:15','2026-01-17 20:14:15'),(240,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:16','2026-01-17 20:14:16'),(241,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:16','2026-01-17 20:14:16'),(242,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:16','2026-01-17 20:14:16'),(243,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:16','2026-01-17 20:14:16'),(244,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:17','2026-01-17 20:14:17'),(245,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:17','2026-01-17 20:14:17'),(246,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:17','2026-01-17 20:14:17'),(247,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:17','2026-01-17 20:14:17'),(248,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:17','2026-01-17 20:14:17'),(249,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:18','2026-01-17 20:14:18'),(250,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:18','2026-01-17 20:14:18'),(251,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:18','2026-01-17 20:14:18'),(252,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:18','2026-01-17 20:14:18'),(253,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:18','2026-01-17 20:14:18'),(254,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:19','2026-01-17 20:14:19'),(255,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:19','2026-01-17 20:14:19'),(256,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:19','2026-01-17 20:14:19'),(257,2,0,'Cannot delete many requested products.','',0,1,NULL,1,0,1,'2026-01-17 20:14:20','2026-01-17 20:14:20');
+INSERT INTO `ps_log` VALUES (1,1,0,'Exporting mail with theme modern for language Polski (Polish)','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:36','2025-12-15 18:50:36'),(2,1,0,'Core output folder: /var/www/html/mails','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:36','2025-12-15 18:50:36'),(3,1,0,'Modules output folder: /var/www/html/modules/','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:36','2025-12-15 18:50:36'),(4,1,0,'Generate html template account at /var/www/html/mails/pl/account.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(5,1,0,'Generate txt template account at /var/www/html/mails/pl/account.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(6,1,0,'Generate html template backoffice_order at /var/www/html/mails/pl/backoffice_order.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(7,1,0,'Generate txt template backoffice_order at /var/www/html/mails/pl/backoffice_order.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(8,1,0,'Generate html template bankwire at /var/www/html/mails/pl/bankwire.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(9,1,0,'Generate txt template bankwire at /var/www/html/mails/pl/bankwire.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(10,1,0,'Generate html template cheque at /var/www/html/mails/pl/cheque.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(11,1,0,'Generate txt template cheque at /var/www/html/mails/pl/cheque.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(12,1,0,'Generate html template contact at /var/www/html/mails/pl/contact.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(13,1,0,'Generate txt template contact at /var/www/html/mails/pl/contact.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(14,1,0,'Generate html template contact_form at /var/www/html/mails/pl/contact_form.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(15,1,0,'Generate txt template contact_form at /var/www/html/mails/pl/contact_form.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(16,1,0,'Generate html template credit_slip at /var/www/html/mails/pl/credit_slip.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(17,1,0,'Generate txt template credit_slip at /var/www/html/mails/pl/credit_slip.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(18,1,0,'Generate html template download_product at /var/www/html/mails/pl/download_product.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(19,1,0,'Generate txt template download_product at /var/www/html/mails/pl/download_product.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(20,1,0,'Generate html template employee_password at /var/www/html/mails/pl/employee_password.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(21,1,0,'Generate txt template employee_password at /var/www/html/mails/pl/employee_password.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(22,1,0,'Generate html template forward_msg at /var/www/html/mails/pl/forward_msg.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(23,1,0,'Generate txt template forward_msg at /var/www/html/mails/pl/forward_msg.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(24,1,0,'Generate html template guest_to_customer at /var/www/html/mails/pl/guest_to_customer.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(25,1,0,'Generate txt template guest_to_customer at /var/www/html/mails/pl/guest_to_customer.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(26,1,0,'Generate html template import at /var/www/html/mails/pl/import.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(27,1,0,'Generate txt template import at /var/www/html/mails/pl/import.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(28,1,0,'Generate html template in_transit at /var/www/html/mails/pl/in_transit.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(29,1,0,'Generate txt template in_transit at /var/www/html/mails/pl/in_transit.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(30,1,0,'Generate html template log_alert at /var/www/html/mails/pl/log_alert.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(31,1,0,'Generate txt template log_alert at /var/www/html/mails/pl/log_alert.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(32,1,0,'Generate html template newsletter at /var/www/html/mails/pl/newsletter.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(33,1,0,'Generate txt template newsletter at /var/www/html/mails/pl/newsletter.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:37','2025-12-15 18:50:37'),(34,1,0,'Generate html template order_canceled at /var/www/html/mails/pl/order_canceled.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(35,1,0,'Generate txt template order_canceled at /var/www/html/mails/pl/order_canceled.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(36,1,0,'Generate html template order_changed at /var/www/html/mails/pl/order_changed.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(37,1,0,'Generate txt template order_changed at /var/www/html/mails/pl/order_changed.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(38,1,0,'Generate html template order_conf at /var/www/html/mails/pl/order_conf.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(39,1,0,'Generate txt template order_conf at /var/www/html/mails/pl/order_conf.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(40,1,0,'Generate html template order_customer_comment at /var/www/html/mails/pl/order_customer_comment.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(41,1,0,'Generate txt template order_customer_comment at /var/www/html/mails/pl/order_customer_comment.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(42,1,0,'Generate html template order_merchant_comment at /var/www/html/mails/pl/order_merchant_comment.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(43,1,0,'Generate txt template order_merchant_comment at /var/www/html/mails/pl/order_merchant_comment.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(44,1,0,'Generate html template order_return_state at /var/www/html/mails/pl/order_return_state.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(45,1,0,'Generate txt template order_return_state at /var/www/html/mails/pl/order_return_state.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(46,1,0,'Generate html template outofstock at /var/www/html/mails/pl/outofstock.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(47,1,0,'Generate txt template outofstock at /var/www/html/mails/pl/outofstock.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(48,1,0,'Generate html template password at /var/www/html/mails/pl/password.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(49,1,0,'Generate txt template password at /var/www/html/mails/pl/password.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(50,1,0,'Generate html template password_query at /var/www/html/mails/pl/password_query.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(51,1,0,'Generate txt template password_query at /var/www/html/mails/pl/password_query.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(52,1,0,'Generate html template payment at /var/www/html/mails/pl/payment.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(53,1,0,'Generate txt template payment at /var/www/html/mails/pl/payment.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(54,1,0,'Generate html template payment_error at /var/www/html/mails/pl/payment_error.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(55,1,0,'Generate txt template payment_error at /var/www/html/mails/pl/payment_error.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(56,1,0,'Generate html template preparation at /var/www/html/mails/pl/preparation.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(57,1,0,'Generate txt template preparation at /var/www/html/mails/pl/preparation.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(58,1,0,'Generate html template productoutofstock at /var/www/html/mails/pl/productoutofstock.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(59,1,0,'Generate txt template productoutofstock at /var/www/html/mails/pl/productoutofstock.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(60,1,0,'Generate html template refund at /var/www/html/mails/pl/refund.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(61,1,0,'Generate txt template refund at /var/www/html/mails/pl/refund.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(62,1,0,'Generate html template reply_msg at /var/www/html/mails/pl/reply_msg.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(63,1,0,'Generate txt template reply_msg at /var/www/html/mails/pl/reply_msg.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(64,1,0,'Generate html template shipped at /var/www/html/mails/pl/shipped.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(65,1,0,'Generate txt template shipped at /var/www/html/mails/pl/shipped.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(66,1,0,'Generate html template test at /var/www/html/mails/pl/test.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(67,1,0,'Generate txt template test at /var/www/html/mails/pl/test.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(68,1,0,'Generate html template voucher at /var/www/html/mails/pl/voucher.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(69,1,0,'Generate txt template voucher at /var/www/html/mails/pl/voucher.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(70,1,0,'Generate html template voucher_new at /var/www/html/mails/pl/voucher_new.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(71,1,0,'Generate txt template voucher_new at /var/www/html/mails/pl/voucher_new.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(72,1,0,'Generate html template followup_1 at /var/www/html/modules//followup/mails/pl/followup_1.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(73,1,0,'Generate txt template followup_1 at /var/www/html/modules//followup/mails/pl/followup_1.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(74,1,0,'Generate html template followup_2 at /var/www/html/modules//followup/mails/pl/followup_2.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(75,1,0,'Generate txt template followup_2 at /var/www/html/modules//followup/mails/pl/followup_2.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(76,1,0,'Generate html template followup_3 at /var/www/html/modules//followup/mails/pl/followup_3.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(77,1,0,'Generate txt template followup_3 at /var/www/html/modules//followup/mails/pl/followup_3.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(78,1,0,'Generate html template followup_4 at /var/www/html/modules//followup/mails/pl/followup_4.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(79,1,0,'Generate txt template followup_4 at /var/www/html/modules//followup/mails/pl/followup_4.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(80,1,0,'Generate html template referralprogram-congratulations at /var/www/html/modules//referralprogram/mails/pl/referralprogram-congratulations.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(81,1,0,'Generate txt template referralprogram-congratulations at /var/www/html/modules//referralprogram/mails/pl/referralprogram-congratulations.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(82,1,0,'Generate html template referralprogram-invitation at /var/www/html/modules//referralprogram/mails/pl/referralprogram-invitation.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(83,1,0,'Generate txt template referralprogram-invitation at /var/www/html/modules//referralprogram/mails/pl/referralprogram-invitation.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(84,1,0,'Generate html template referralprogram-voucher at /var/www/html/modules//referralprogram/mails/pl/referralprogram-voucher.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(85,1,0,'Generate txt template referralprogram-voucher at /var/www/html/modules//referralprogram/mails/pl/referralprogram-voucher.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(86,1,0,'Generate html template newsletter_conf at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_conf.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(87,1,0,'Generate txt template newsletter_conf at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_conf.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(88,1,0,'Generate html template newsletter_verif at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_verif.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(89,1,0,'Generate txt template newsletter_verif at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_verif.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(90,1,0,'Generate html template newsletter_voucher at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_voucher.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(91,1,0,'Generate txt template newsletter_voucher at /var/www/html/modules//ps_emailsubscription/mails/pl/newsletter_voucher.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(92,1,0,'Generate html template followup_1 at /var/www/html/modules//ps_reminder/mails/pl/followup_1.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(93,1,0,'Generate txt template followup_1 at /var/www/html/modules//ps_reminder/mails/pl/followup_1.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(94,1,0,'Generate html template followup_2 at /var/www/html/modules//ps_reminder/mails/pl/followup_2.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(95,1,0,'Generate txt template followup_2 at /var/www/html/modules//ps_reminder/mails/pl/followup_2.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(96,1,0,'Generate html template followup_3 at /var/www/html/modules//ps_reminder/mails/pl/followup_3.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(97,1,0,'Generate txt template followup_3 at /var/www/html/modules//ps_reminder/mails/pl/followup_3.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(98,1,0,'Generate html template followup_4 at /var/www/html/modules//ps_reminder/mails/pl/followup_4.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(99,1,0,'Generate txt template followup_4 at /var/www/html/modules//ps_reminder/mails/pl/followup_4.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(100,1,0,'Generate html template customer_qty at /var/www/html/modules//ps_emailalerts/mails/pl/customer_qty.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(101,1,0,'Generate txt template customer_qty at /var/www/html/modules//ps_emailalerts/mails/pl/customer_qty.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(102,1,0,'Generate html template new_order at /var/www/html/modules//ps_emailalerts/mails/pl/new_order.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(103,1,0,'Generate txt template new_order at /var/www/html/modules//ps_emailalerts/mails/pl/new_order.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(104,1,0,'Generate html template order_changed at /var/www/html/modules//ps_emailalerts/mails/pl/order_changed.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(105,1,0,'Generate txt template order_changed at /var/www/html/modules//ps_emailalerts/mails/pl/order_changed.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(106,1,0,'Generate html template productcoverage at /var/www/html/modules//ps_emailalerts/mails/pl/productcoverage.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(107,1,0,'Generate txt template productcoverage at /var/www/html/modules//ps_emailalerts/mails/pl/productcoverage.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(108,1,0,'Generate html template productoutofstock at /var/www/html/modules//ps_emailalerts/mails/pl/productoutofstock.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(109,1,0,'Generate txt template productoutofstock at /var/www/html/modules//ps_emailalerts/mails/pl/productoutofstock.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(110,1,0,'Generate html template return_slip at /var/www/html/modules//ps_emailalerts/mails/pl/return_slip.html','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(111,1,0,'Generate txt template return_slip at /var/www/html/modules//ps_emailalerts/mails/pl/return_slip.txt','',0,NULL,NULL,0,0,0,'2025-12-15 18:50:38','2025-12-15 18:50:38'),(112,1,0,'Protect vendor folder in module blockwishlist','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(113,1,0,'Module blockwishlist has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(114,1,0,'Protect vendor folder in module contactform','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(115,1,0,'Module contactform has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(116,1,0,'Protect vendor folder in module dashactivity','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(117,1,0,'Module dashactivity has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(118,1,0,'Protect vendor folder in module dashtrends','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(119,1,0,'Module dashtrends has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(120,1,0,'Protect vendor folder in module dashgoals','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(121,1,0,'Module dashgoals has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(122,1,0,'Protect vendor folder in module dashproducts','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(123,1,0,'Module dashproducts has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(124,1,0,'Protect vendor folder in module graphnvd3','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(125,1,0,'Module graphnvd3 has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(126,1,0,'Protect vendor folder in module gridhtml','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(127,1,0,'Module gridhtml has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:43','2025-12-15 18:50:43'),(128,1,0,'Protect vendor folder in module gsitemap','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(129,1,0,'Module gsitemap has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(130,1,0,'Protect vendor folder in module pagesnotfound','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(131,1,0,'Module pagesnotfound has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(132,1,0,'Protect vendor folder in module productcomments','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(133,1,0,'Module productcomments has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(134,1,0,'Protect vendor folder in module ps_banner','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(135,1,0,'Module ps_banner has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(136,1,0,'Protect vendor folder in module ps_categorytree','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(137,1,0,'Module ps_categorytree has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(138,1,0,'Protect vendor folder in module ps_checkpayment','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(139,1,0,'Module ps_checkpayment has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(140,1,0,'Protect vendor folder in module ps_contactinfo','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(141,1,0,'Module ps_contactinfo has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(142,1,0,'Protect vendor folder in module ps_crossselling','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(143,1,0,'Module ps_crossselling has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(144,1,0,'Protect vendor folder in module ps_currencyselector','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(145,1,0,'Module ps_currencyselector has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:44','2025-12-15 18:50:44'),(146,1,0,'Protect vendor folder in module ps_customeraccountlinks','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(147,1,0,'Module ps_customeraccountlinks has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(148,1,0,'Protect vendor folder in module ps_customersignin','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(149,1,0,'Module ps_customersignin has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(150,1,0,'Protect vendor folder in module ps_customtext','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(151,1,0,'Module ps_customtext has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(152,1,0,'Protect vendor folder in module ps_dataprivacy','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(153,1,0,'Module ps_dataprivacy has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(154,1,0,'Protect vendor folder in module ps_emailsubscription','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(155,1,0,'Module ps_emailsubscription has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:45','2025-12-15 18:50:45'),(156,1,0,'Protect vendor folder in module ps_facetedsearch','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(157,1,0,'Module ps_facetedsearch has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(158,1,0,'Protect vendor folder in module ps_faviconnotificationbo','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(159,1,0,'Module ps_faviconnotificationbo has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(160,1,0,'Protect vendor folder in module ps_featuredproducts','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(161,1,0,'Module ps_featuredproducts has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(162,1,0,'Protect vendor folder in module ps_imageslider','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(163,1,0,'Module ps_imageslider has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(164,1,0,'Protect vendor folder in module ps_languageselector','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(165,1,0,'Module ps_languageselector has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(166,1,0,'Protect vendor folder in module ps_linklist','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(167,1,0,'Module ps_linklist has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:46','2025-12-15 18:50:46'),(168,1,0,'Protect vendor folder in module ps_mainmenu','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(169,1,0,'Module ps_mainmenu has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(170,1,0,'Protect vendor folder in module ps_searchbar','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(171,1,0,'Module ps_searchbar has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(172,1,0,'Protect vendor folder in module ps_sharebuttons','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(173,1,0,'Module ps_sharebuttons has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(174,1,0,'Protect vendor folder in module ps_shoppingcart','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(175,1,0,'Module ps_shoppingcart has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(176,1,0,'Protect vendor folder in module ps_socialfollow','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(177,1,0,'Module ps_socialfollow has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(178,1,0,'Protect vendor folder in module ps_themecusto','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(179,1,0,'Module ps_themecusto has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(180,1,0,'Protect vendor folder in module ps_wirepayment','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(181,1,0,'Module ps_wirepayment has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(182,1,0,'Protect vendor folder in module statsbestcategories','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(183,1,0,'Module statsbestcategories has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(184,1,0,'Protect vendor folder in module statsbestcustomers','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(185,1,0,'Module statsbestcustomers has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(186,1,0,'Protect vendor folder in module statsbestproducts','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(187,1,0,'Module statsbestproducts has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(188,1,0,'Protect vendor folder in module statsbestsuppliers','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(189,1,0,'Module statsbestsuppliers has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(190,1,0,'Protect vendor folder in module statsbestvouchers','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(191,1,0,'Module statsbestvouchers has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(192,1,0,'Protect vendor folder in module statscarrier','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(193,1,0,'Module statscarrier has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(194,1,0,'Protect vendor folder in module statscatalog','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(195,1,0,'Module statscatalog has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(196,1,0,'Protect vendor folder in module statscheckup','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(197,1,0,'Module statscheckup has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(198,1,0,'Protect vendor folder in module statsdata','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(199,1,0,'Module statsdata has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:47','2025-12-15 18:50:47'),(200,1,0,'Protect vendor folder in module statsforecast','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(201,1,0,'Module statsforecast has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(202,1,0,'Protect vendor folder in module statsnewsletter','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(203,1,0,'Module statsnewsletter has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(204,1,0,'Protect vendor folder in module statspersonalinfos','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(205,1,0,'Module statspersonalinfos has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(206,1,0,'Protect vendor folder in module statsproduct','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(207,1,0,'Module statsproduct has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(208,1,0,'Protect vendor folder in module statsregistrations','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(209,1,0,'Module statsregistrations has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(210,1,0,'Protect vendor folder in module statssales','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(211,1,0,'Module statssales has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(212,1,0,'Protect vendor folder in module statssearch','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(213,1,0,'Module statssearch has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(214,1,0,'Protect vendor folder in module statsstock','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(215,1,0,'Module statsstock has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(216,1,0,'Protect vendor folder in module welcome','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(217,1,0,'Module welcome has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:50:48','2025-12-15 18:50:48'),(218,1,0,'Protect vendor folder in module psgdpr','',0,1,NULL,1,0,1,'2025-12-15 18:51:11','2025-12-15 18:51:11'),(219,1,0,'Protect vendor folder in module ps_mbo','',0,1,NULL,1,0,1,'2025-12-15 18:51:12','2025-12-15 18:51:12'),(220,1,0,'Protect vendor folder in module ps_buybuttonlite','',0,1,NULL,1,0,1,'2025-12-15 18:51:12','2025-12-15 18:51:12'),(221,1,0,'Protect vendor folder in module ps_checkout','',0,1,NULL,1,0,1,'2025-12-15 18:51:12','2025-12-15 18:51:12'),(222,1,0,'Protect vendor folder in module ps_facebook','',0,1,NULL,1,0,1,'2025-12-15 18:51:13','2025-12-15 18:51:13'),(223,1,0,'Protect vendor folder in module psxmarketingwithgoogle','',0,1,NULL,1,0,1,'2025-12-15 18:51:13','2025-12-15 18:51:13'),(224,1,0,'Protect vendor folder in module blockreassurance','',0,1,NULL,1,0,1,'2025-12-15 18:51:17','2025-12-15 18:51:17'),(225,1,0,'Module blockreassurance has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:51:17','2025-12-15 18:51:17'),(226,1,0,'Protect vendor folder in module ps_facetedsearch','',0,1,NULL,1,0,1,'2025-12-15 18:51:27','2025-12-15 18:51:27'),(227,1,0,'Module ps_facetedsearch has no vendor folder','',0,1,NULL,1,0,1,'2025-12-15 18:51:27','2025-12-15 18:51:27'),(228,1,0,'Połączenie z panelem administracyjnym z 172.18.0.1:50192','',0,NULL,NULL,1,1,1,'2025-12-15 18:51:48','2025-12-15 18:51:48'),(229,1,0,'Połączenie z panelem administracyjnym z 151.101.129.91:18570','',0,NULL,NULL,1,1,1,'2025-12-15 19:04:54','2025-12-15 19:04:54'),(230,1,0,'Frontcontroller::init - Cart cannot be loaded or an order has already been placed using this cart','Cart',6,1,NULL,1,0,0,'2025-12-15 19:08:41','2025-12-15 19:08:41'),(231,1,0,'Połączenie z panelem administracyjnym z 151.101.129.91:33189','',0,NULL,NULL,1,1,1,'2025-12-15 19:08:42','2025-12-15 19:08:42'),(232,1,0,'Frontcontroller::init - Cart cannot be loaded or an order has already been placed using this cart','Cart',7,1,NULL,1,0,0,'2025-12-15 20:12:23','2025-12-15 20:12:23'),(233,1,0,'Połączenie z panelem administracyjnym z 151.101.129.91:25379','',0,NULL,NULL,1,1,1,'2025-12-15 20:12:25','2025-12-15 20:12:25'),(234,1,0,'Frontcontroller::init - Cart cannot be loaded or an order has already been placed using this cart','Cart',8,1,NULL,1,0,0,'2025-12-16 10:17:41','2025-12-16 10:17:41'),(235,1,0,'Połączenie z panelem administracyjnym z 151.101.129.91:41980','',0,NULL,NULL,1,1,1,'2025-12-16 10:17:43','2025-12-16 10:17:43'),(236,1,0,'Połączenie z panelem administracyjnym z 151.101.129.91:47038','',0,NULL,NULL,1,1,1,'2025-12-16 10:21:36','2025-12-16 10:21:36'),(237,1,0,'Połączenie z panelem administracyjnym z 192.168.65.1:22822','',0,NULL,NULL,1,1,1,'2025-12-16 17:03:59','2025-12-16 17:03:59');
 /*!40000 ALTER TABLE `ps_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3741,17 +3746,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_mail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_mail` (
   `id_mail` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `recipient` varchar(126) NOT NULL,
   `template` varchar(62) NOT NULL,
   `subject` varchar(254) NOT NULL,
   `id_lang` int(11) unsigned NOT NULL,
-  `date_add` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_add` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_mail`),
   KEY `recipient` (`recipient`(10))
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3770,15 +3775,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_manufacturer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_manufacturer` (
   `id_manufacturer` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_manufacturer`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3797,17 +3802,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_manufacturer_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_manufacturer_lang` (
   `id_manufacturer` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
-  `description` text,
-  `short_description` text,
+  `description` text DEFAULT NULL,
+  `short_description` text DEFAULT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
   `meta_keywords` varchar(255) DEFAULT NULL,
   `meta_description` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id_manufacturer`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3826,13 +3831,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_manufacturer_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_manufacturer_shop` (
   `id_manufacturer` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_manufacturer`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3851,14 +3856,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_memcached_servers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_memcached_servers` (
   `id_memcached_server` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ip` varchar(254) NOT NULL,
   `port` int(11) unsigned NOT NULL,
   `weight` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_memcached_server`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3876,7 +3881,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_message`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_message` (
   `id_message` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_cart` int(10) unsigned DEFAULT NULL,
@@ -3884,14 +3889,14 @@ CREATE TABLE `ps_message` (
   `id_employee` int(10) unsigned DEFAULT NULL,
   `id_order` int(10) unsigned NOT NULL,
   `message` text NOT NULL,
-  `private` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `private` tinyint(1) unsigned NOT NULL DEFAULT 1,
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_message`),
   KEY `message_order` (`id_order`),
   KEY `id_cart` (`id_cart`),
   KEY `id_customer` (`id_customer`),
   KEY `id_employee` (`id_employee`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3909,13 +3914,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_message_readed`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_message_readed` (
   `id_message` int(10) unsigned NOT NULL,
   `id_employee` int(10) unsigned NOT NULL,
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_message`,`id_employee`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3933,14 +3938,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_meta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_meta` (
   `id_meta` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `page` varchar(64) NOT NULL,
-  `configurable` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `configurable` tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_meta`),
   UNIQUE KEY `page` (`page`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3959,10 +3964,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_meta_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_meta_lang` (
   `id_meta` int(10) unsigned NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_lang` int(10) unsigned NOT NULL,
   `title` varchar(128) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
@@ -3971,7 +3976,7 @@ CREATE TABLE `ps_meta_lang` (
   PRIMARY KEY (`id_meta`,`id_shop`,`id_lang`),
   KEY `id_shop` (`id_shop`),
   KEY `id_lang` (`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3990,16 +3995,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_module`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_module` (
   `id_module` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `version` varchar(8) NOT NULL,
   PRIMARY KEY (`id_module`),
   UNIQUE KEY `name_UNIQUE` (`name`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4018,12 +4023,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_module_access`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_module_access` (
   `id_profile` int(10) unsigned NOT NULL,
   `id_authorization_role` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_profile`,`id_authorization_role`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4042,13 +4047,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_module_carrier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_module_carrier` (
   `id_module` int(10) unsigned NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_reference` int(11) NOT NULL,
   PRIMARY KEY (`id_module`,`id_shop`,`id_reference`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4067,13 +4072,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_module_country`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_module_country` (
   `id_module` int(10) unsigned NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_country` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_module`,`id_shop`,`id_country`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4092,14 +4097,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_module_currency`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_module_currency` (
   `id_module` int(10) unsigned NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_currency` int(11) NOT NULL,
   PRIMARY KEY (`id_module`,`id_shop`,`id_currency`),
   KEY `id_module` (`id_module`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4118,13 +4123,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_module_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_module_group` (
   `id_module` int(10) unsigned NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_group` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_module`,`id_shop`,`id_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4143,7 +4148,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_module_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_module_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_employee` int(11) NOT NULL,
@@ -4169,7 +4174,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_module_preference`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_module_preference` (
   `id_module_preference` int(11) NOT NULL AUTO_INCREMENT,
   `id_employee` int(11) NOT NULL,
@@ -4178,7 +4183,7 @@ CREATE TABLE `ps_module_preference` (
   `favorite` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id_module_preference`),
   UNIQUE KEY `employee_module` (`id_employee`,`module`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4196,14 +4201,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_module_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_module_shop` (
   `id_module` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
-  `enable_device` tinyint(1) NOT NULL DEFAULT '7',
+  `enable_device` tinyint(1) NOT NULL DEFAULT 7,
   PRIMARY KEY (`id_module`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4222,12 +4227,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_operating_system`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_operating_system` (
   `id_operating_system` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id_operating_system`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4246,7 +4251,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_carrier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_carrier` (
   `id_order_carrier` int(11) NOT NULL AUTO_INCREMENT,
   `id_order` int(11) unsigned NOT NULL,
@@ -4261,7 +4266,7 @@ CREATE TABLE `ps_order_carrier` (
   KEY `id_order` (`id_order`),
   KEY `id_carrier` (`id_carrier`),
   KEY `id_order_invoice` (`id_order_invoice`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4280,21 +4285,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_cart_rule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_cart_rule` (
   `id_order_cart_rule` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_order` int(10) unsigned NOT NULL,
   `id_cart_rule` int(10) unsigned NOT NULL,
-  `id_order_invoice` int(10) unsigned DEFAULT '0',
+  `id_order_invoice` int(10) unsigned DEFAULT 0,
   `name` varchar(254) NOT NULL,
-  `value` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `value_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `free_shipping` tinyint(1) NOT NULL DEFAULT '0',
-  `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `value` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `value_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `free_shipping` tinyint(1) NOT NULL DEFAULT 0,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_order_cart_rule`),
   KEY `id_order` (`id_order`),
   KEY `id_cart_rule` (`id_cart_rule`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4312,29 +4317,29 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_detail` (
   `id_order_detail` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_order` int(10) unsigned NOT NULL,
   `id_order_invoice` int(11) DEFAULT NULL,
-  `id_warehouse` int(10) unsigned DEFAULT '0',
+  `id_warehouse` int(10) unsigned DEFAULT 0,
   `id_shop` int(11) unsigned NOT NULL,
   `product_id` int(10) unsigned NOT NULL,
   `product_attribute_id` int(10) unsigned DEFAULT NULL,
-  `id_customization` int(10) unsigned DEFAULT '0',
+  `id_customization` int(10) unsigned DEFAULT 0,
   `product_name` varchar(255) NOT NULL,
-  `product_quantity` int(10) unsigned NOT NULL DEFAULT '0',
-  `product_quantity_in_stock` int(10) NOT NULL DEFAULT '0',
-  `product_quantity_refunded` int(10) unsigned NOT NULL DEFAULT '0',
-  `product_quantity_return` int(10) unsigned NOT NULL DEFAULT '0',
-  `product_quantity_reinjected` int(10) unsigned NOT NULL DEFAULT '0',
-  `product_price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `reduction_percent` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `reduction_amount` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `reduction_amount_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `reduction_amount_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `group_reduction` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `product_quantity_discount` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `product_quantity` int(10) unsigned NOT NULL DEFAULT 0,
+  `product_quantity_in_stock` int(10) NOT NULL DEFAULT 0,
+  `product_quantity_refunded` int(10) unsigned NOT NULL DEFAULT 0,
+  `product_quantity_return` int(10) unsigned NOT NULL DEFAULT 0,
+  `product_quantity_reinjected` int(10) unsigned NOT NULL DEFAULT 0,
+  `product_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `reduction_percent` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `reduction_amount` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `reduction_amount_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `reduction_amount_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `group_reduction` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `product_quantity_discount` decimal(20,6) NOT NULL DEFAULT 0.000000,
   `product_ean13` varchar(13) DEFAULT NULL,
   `product_isbn` varchar(32) DEFAULT NULL,
   `product_upc` varchar(12) DEFAULT NULL,
@@ -4342,34 +4347,34 @@ CREATE TABLE `ps_order_detail` (
   `product_reference` varchar(64) DEFAULT NULL,
   `product_supplier_reference` varchar(64) DEFAULT NULL,
   `product_weight` decimal(20,6) NOT NULL,
-  `id_tax_rules_group` int(11) unsigned DEFAULT '0',
-  `tax_computation_method` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `id_tax_rules_group` int(11) unsigned DEFAULT 0,
+  `tax_computation_method` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `tax_name` varchar(16) NOT NULL,
-  `tax_rate` decimal(10,3) NOT NULL DEFAULT '0.000',
-  `ecotax` decimal(17,6) NOT NULL DEFAULT '0.000000',
-  `ecotax_tax_rate` decimal(5,3) NOT NULL DEFAULT '0.000',
-  `discount_quantity_applied` tinyint(1) NOT NULL DEFAULT '0',
+  `tax_rate` decimal(10,3) NOT NULL DEFAULT 0.000,
+  `ecotax` decimal(17,6) NOT NULL DEFAULT 0.000000,
+  `ecotax_tax_rate` decimal(5,3) NOT NULL DEFAULT 0.000,
+  `discount_quantity_applied` tinyint(1) NOT NULL DEFAULT 0,
   `download_hash` varchar(255) DEFAULT NULL,
-  `download_nb` int(10) unsigned DEFAULT '0',
+  `download_nb` int(10) unsigned DEFAULT 0,
   `download_deadline` datetime DEFAULT NULL,
-  `total_price_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_price_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `unit_price_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `unit_price_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_shipping_price_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_shipping_price_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `purchase_supplier_price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `original_product_price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `original_wholesale_price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_refunded_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_refunded_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `total_price_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_price_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `unit_price_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `unit_price_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_shipping_price_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_shipping_price_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `purchase_supplier_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `original_product_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `original_wholesale_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_refunded_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_refunded_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
   PRIMARY KEY (`id_order_detail`),
   KEY `order_detail_order` (`id_order`),
   KEY `product_id` (`product_id`,`product_attribute_id`),
   KEY `product_attribute_id` (`product_attribute_id`),
   KEY `id_tax_rules_group` (`id_tax_rules_group`),
   KEY `id_order_id_order_detail` (`id_order`,`id_order_detail`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4388,15 +4393,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_detail_tax`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_detail_tax` (
   `id_order_detail` int(11) NOT NULL,
   `id_tax` int(11) NOT NULL,
-  `unit_amount` decimal(16,6) NOT NULL DEFAULT '0.000000',
-  `total_amount` decimal(16,6) NOT NULL DEFAULT '0.000000',
+  `unit_amount` decimal(16,6) NOT NULL DEFAULT 0.000000,
+  `total_amount` decimal(16,6) NOT NULL DEFAULT 0.000000,
   KEY `id_order_detail` (`id_order_detail`),
   KEY `id_tax` (`id_tax`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4415,7 +4420,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_history` (
   `id_order_history` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_employee` int(10) unsigned NOT NULL,
@@ -4426,7 +4431,7 @@ CREATE TABLE `ps_order_history` (
   KEY `order_history_order` (`id_order`),
   KEY `id_employee` (`id_employee`),
   KEY `id_order_state` (`id_order_state`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4445,30 +4450,30 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_invoice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_invoice` (
   `id_order_invoice` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_order` int(11) NOT NULL,
   `number` int(11) NOT NULL,
   `delivery_number` int(11) NOT NULL,
   `delivery_date` datetime DEFAULT NULL,
-  `total_discount_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_discount_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_paid_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_paid_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_products` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_products_wt` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_shipping_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_shipping_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `total_discount_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_discount_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_paid_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_paid_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_products` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_products_wt` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_shipping_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_shipping_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
   `shipping_tax_computation_method` int(10) unsigned NOT NULL,
-  `total_wrapping_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_wrapping_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `shop_address` text,
-  `note` text,
+  `total_wrapping_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_wrapping_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `shop_address` text DEFAULT NULL,
+  `note` text DEFAULT NULL,
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_order_invoice`),
   KEY `id_order` (`id_order`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4487,7 +4492,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_invoice_payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_invoice_payment` (
   `id_order_invoice` int(11) unsigned NOT NULL,
   `id_order_payment` int(11) unsigned NOT NULL,
@@ -4495,7 +4500,7 @@ CREATE TABLE `ps_order_invoice_payment` (
   PRIMARY KEY (`id_order_invoice`,`id_order_payment`),
   KEY `order_payment` (`id_order_payment`),
   KEY `id_order` (`id_order`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4514,14 +4519,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_invoice_tax`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_invoice_tax` (
   `id_order_invoice` int(11) NOT NULL,
   `type` varchar(15) NOT NULL,
   `id_tax` int(11) NOT NULL,
-  `amount` decimal(10,6) NOT NULL DEFAULT '0.000000',
+  `amount` decimal(10,6) NOT NULL DEFAULT 0.000000,
   KEY `id_tax` (`id_tax`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4540,12 +4545,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_message`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_message` (
   `id_order_message` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_order_message`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4564,14 +4569,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_message_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_message_lang` (
   `id_order_message` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(128) NOT NULL,
   `message` text NOT NULL,
   PRIMARY KEY (`id_order_message`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4590,14 +4595,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_payment` (
   `id_order_payment` int(11) NOT NULL AUTO_INCREMENT,
   `order_reference` varchar(9) DEFAULT NULL,
   `id_currency` int(10) unsigned NOT NULL,
   `amount` decimal(20,6) NOT NULL,
   `payment_method` varchar(255) NOT NULL,
-  `conversion_rate` decimal(13,6) NOT NULL DEFAULT '1.000000',
+  `conversion_rate` decimal(13,6) NOT NULL DEFAULT 1.000000,
   `transaction_id` varchar(254) DEFAULT NULL,
   `card_number` varchar(254) DEFAULT NULL,
   `card_brand` varchar(254) DEFAULT NULL,
@@ -4606,7 +4611,7 @@ CREATE TABLE `ps_order_payment` (
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_order_payment`),
   KEY `order_reference` (`order_reference`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4625,19 +4630,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_return`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_return` (
   `id_order_return` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_customer` int(10) unsigned NOT NULL,
   `id_order` int(10) unsigned NOT NULL,
-  `state` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `state` tinyint(1) unsigned NOT NULL DEFAULT 1,
   `question` text NOT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_order_return`),
   KEY `order_return_customer` (`id_customer`),
   KEY `id_order` (`id_order`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4655,14 +4660,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_return_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_return_detail` (
   `id_order_return` int(10) unsigned NOT NULL,
   `id_order_detail` int(10) unsigned NOT NULL,
-  `id_customization` int(10) unsigned NOT NULL DEFAULT '0',
-  `product_quantity` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_customization` int(10) unsigned NOT NULL DEFAULT 0,
+  `product_quantity` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_order_return`,`id_order_detail`,`id_customization`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4680,12 +4685,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_return_state`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_return_state` (
   `id_order_return_state` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `color` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id_order_return_state`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4704,13 +4709,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_return_state_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_return_state_lang` (
   `id_order_return_state` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(64) NOT NULL,
   PRIMARY KEY (`id_order_return_state`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4729,27 +4734,27 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_slip`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_slip` (
   `id_order_slip` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `conversion_rate` decimal(13,6) NOT NULL DEFAULT '1.000000',
+  `conversion_rate` decimal(13,6) NOT NULL DEFAULT 1.000000,
   `id_customer` int(10) unsigned NOT NULL,
   `id_order` int(10) unsigned NOT NULL,
   `total_products_tax_excl` decimal(20,6) DEFAULT NULL,
   `total_products_tax_incl` decimal(20,6) DEFAULT NULL,
   `total_shipping_tax_excl` decimal(20,6) DEFAULT NULL,
   `total_shipping_tax_incl` decimal(20,6) DEFAULT NULL,
-  `shipping_cost` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `amount` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `shipping_cost_amount` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `shipping_cost` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `amount` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `shipping_cost_amount` decimal(20,6) NOT NULL DEFAULT 0.000000,
   `partial` tinyint(1) NOT NULL,
-  `order_slip_type` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `order_slip_type` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_order_slip`),
   KEY `order_slip_customer` (`id_customer`),
   KEY `id_order` (`id_order`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4767,11 +4772,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_slip_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_slip_detail` (
   `id_order_slip` int(10) unsigned NOT NULL,
   `id_order_detail` int(10) unsigned NOT NULL,
-  `product_quantity` int(10) unsigned NOT NULL DEFAULT '0',
+  `product_quantity` int(10) unsigned NOT NULL DEFAULT 0,
   `unit_price_tax_excl` decimal(20,6) DEFAULT NULL,
   `unit_price_tax_incl` decimal(20,6) DEFAULT NULL,
   `total_price_tax_excl` decimal(20,6) DEFAULT NULL,
@@ -4779,7 +4784,7 @@ CREATE TABLE `ps_order_slip_detail` (
   `amount_tax_excl` decimal(20,6) DEFAULT NULL,
   `amount_tax_incl` decimal(20,6) DEFAULT NULL,
   PRIMARY KEY (`id_order_slip`,`id_order_detail`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4797,25 +4802,25 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_state`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_state` (
   `id_order_state` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `invoice` tinyint(1) unsigned DEFAULT '0',
-  `send_email` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `invoice` tinyint(1) unsigned DEFAULT 0,
+  `send_email` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `module_name` varchar(255) DEFAULT NULL,
   `color` varchar(32) DEFAULT NULL,
   `unremovable` tinyint(1) unsigned NOT NULL,
-  `hidden` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `logable` tinyint(1) NOT NULL DEFAULT '0',
-  `delivery` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `shipped` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `paid` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `pdf_invoice` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `pdf_delivery` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `hidden` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `logable` tinyint(1) NOT NULL DEFAULT 0,
+  `delivery` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `shipped` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `paid` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `pdf_invoice` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `pdf_delivery` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_order_state`),
   KEY `module_name` (`module_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4834,14 +4839,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_order_state_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_order_state_lang` (
   `id_order_state` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(64) NOT NULL,
   `template` varchar(64) NOT NULL,
   PRIMARY KEY (`id_order_state`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4860,12 +4865,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_orders` (
   `id_order` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `reference` varchar(9) DEFAULT NULL,
-  `id_shop_group` int(11) unsigned NOT NULL DEFAULT '1',
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop_group` int(11) unsigned NOT NULL DEFAULT 1,
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_carrier` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `id_customer` int(10) unsigned NOT NULL,
@@ -4876,39 +4881,39 @@ CREATE TABLE `ps_orders` (
   `current_state` int(10) unsigned NOT NULL,
   `secure_key` varchar(32) NOT NULL DEFAULT '-1',
   `payment` varchar(255) NOT NULL,
-  `conversion_rate` decimal(13,6) NOT NULL DEFAULT '1.000000',
+  `conversion_rate` decimal(13,6) NOT NULL DEFAULT 1.000000,
   `module` varchar(255) DEFAULT NULL,
-  `recyclable` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `gift` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `gift_message` text,
-  `mobile_theme` tinyint(1) NOT NULL DEFAULT '0',
+  `recyclable` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `gift` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `gift_message` text DEFAULT NULL,
+  `mobile_theme` tinyint(1) NOT NULL DEFAULT 0,
   `shipping_number` varchar(64) DEFAULT NULL,
-  `total_discounts` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_discounts_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_discounts_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_paid` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_paid_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_paid_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_paid_real` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_products` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_products_wt` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_shipping` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_shipping_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_shipping_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `carrier_tax_rate` decimal(10,3) NOT NULL DEFAULT '0.000',
-  `total_wrapping` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_wrapping_tax_incl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `total_wrapping_tax_excl` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `round_mode` tinyint(1) NOT NULL DEFAULT '2',
-  `round_type` tinyint(1) NOT NULL DEFAULT '1',
-  `invoice_number` int(10) unsigned NOT NULL DEFAULT '0',
-  `delivery_number` int(10) unsigned NOT NULL DEFAULT '0',
+  `total_discounts` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_discounts_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_discounts_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_paid` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_paid_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_paid_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_paid_real` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_products` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_products_wt` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_shipping` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_shipping_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_shipping_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `carrier_tax_rate` decimal(10,3) NOT NULL DEFAULT 0.000,
+  `total_wrapping` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_wrapping_tax_incl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `total_wrapping_tax_excl` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `round_mode` tinyint(1) NOT NULL DEFAULT 2,
+  `round_type` tinyint(1) NOT NULL DEFAULT 1,
+  `invoice_number` int(10) unsigned NOT NULL DEFAULT 0,
+  `delivery_number` int(10) unsigned NOT NULL DEFAULT 0,
   `invoice_date` datetime NOT NULL,
   `delivery_date` datetime NOT NULL,
-  `valid` int(1) unsigned NOT NULL DEFAULT '0',
+  `valid` int(1) unsigned NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `note` text,
+  `note` text DEFAULT NULL,
   PRIMARY KEY (`id_order`),
   KEY `reference` (`reference`),
   KEY `id_customer` (`id_customer`),
@@ -4923,7 +4928,7 @@ CREATE TABLE `ps_orders` (
   KEY `current_state` (`current_state`),
   KEY `id_shop` (`id_shop`),
   KEY `date_add` (`date_add`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4942,15 +4947,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pack`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pack` (
   `id_product_pack` int(10) unsigned NOT NULL,
   `id_product_item` int(10) unsigned NOT NULL,
   `id_product_attribute_item` int(10) unsigned NOT NULL,
-  `quantity` int(10) unsigned NOT NULL DEFAULT '1',
+  `quantity` int(10) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_product_pack`,`id_product_item`,`id_product_attribute_item`),
   KEY `product_item` (`id_product_item`,`id_product_attribute_item`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4969,7 +4974,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_page`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_page` (
   `id_page` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_page_type` int(10) unsigned NOT NULL,
@@ -4977,7 +4982,7 @@ CREATE TABLE `ps_page` (
   PRIMARY KEY (`id_page`),
   KEY `id_page_type` (`id_page_type`),
   KEY `id_object` (`id_object`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4996,13 +5001,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_page_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_page_type` (
   `id_page_type` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id_page_type`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5021,15 +5026,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_page_viewed`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_page_viewed` (
   `id_page` int(10) unsigned NOT NULL,
-  `id_shop_group` int(10) unsigned NOT NULL DEFAULT '1',
-  `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_shop_group` int(10) unsigned NOT NULL DEFAULT 1,
+  `id_shop` int(10) unsigned NOT NULL DEFAULT 1,
   `id_date_range` int(10) unsigned NOT NULL,
   `counter` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_page`,`id_date_range`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5047,17 +5052,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pagenotfound`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pagenotfound` (
   `id_pagenotfound` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
-  `id_shop_group` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(10) unsigned NOT NULL DEFAULT 1,
+  `id_shop_group` int(10) unsigned NOT NULL DEFAULT 1,
   `request_uri` varchar(256) NOT NULL,
   `http_referer` varchar(256) NOT NULL,
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_pagenotfound`),
   KEY `date_add` (`date_add`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5075,62 +5080,62 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product` (
   `id_product` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_supplier` int(10) unsigned DEFAULT NULL,
   `id_manufacturer` int(10) unsigned DEFAULT NULL,
   `id_category_default` int(10) unsigned DEFAULT NULL,
-  `id_shop_default` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_shop_default` int(10) unsigned NOT NULL DEFAULT 1,
   `id_tax_rules_group` int(11) unsigned NOT NULL,
-  `on_sale` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `online_only` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `on_sale` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `online_only` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `ean13` varchar(13) DEFAULT NULL,
   `isbn` varchar(32) DEFAULT NULL,
   `upc` varchar(12) DEFAULT NULL,
   `mpn` varchar(40) DEFAULT NULL,
-  `ecotax` decimal(17,6) NOT NULL DEFAULT '0.000000',
-  `quantity` int(10) NOT NULL DEFAULT '0',
-  `minimal_quantity` int(10) unsigned NOT NULL DEFAULT '1',
+  `ecotax` decimal(17,6) NOT NULL DEFAULT 0.000000,
+  `quantity` int(10) NOT NULL DEFAULT 0,
+  `minimal_quantity` int(10) unsigned NOT NULL DEFAULT 1,
   `low_stock_threshold` int(10) DEFAULT NULL,
-  `low_stock_alert` tinyint(1) NOT NULL DEFAULT '0',
-  `price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `wholesale_price` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `low_stock_alert` tinyint(1) NOT NULL DEFAULT 0,
+  `price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `wholesale_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
   `unity` varchar(255) DEFAULT NULL,
-  `unit_price_ratio` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `additional_shipping_cost` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `unit_price_ratio` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `additional_shipping_cost` decimal(20,6) NOT NULL DEFAULT 0.000000,
   `reference` varchar(64) DEFAULT NULL,
   `supplier_reference` varchar(64) DEFAULT NULL,
   `location` varchar(255) NOT NULL DEFAULT '',
-  `width` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `height` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `depth` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `weight` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `out_of_stock` int(10) unsigned NOT NULL DEFAULT '2',
-  `additional_delivery_times` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `quantity_discount` tinyint(1) DEFAULT '0',
-  `customizable` tinyint(2) NOT NULL DEFAULT '0',
-  `uploadable_files` tinyint(4) NOT NULL DEFAULT '0',
-  `text_fields` tinyint(4) NOT NULL DEFAULT '0',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `width` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `height` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `depth` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `weight` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `out_of_stock` int(10) unsigned NOT NULL DEFAULT 2,
+  `additional_delivery_times` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `quantity_discount` tinyint(1) DEFAULT 0,
+  `customizable` tinyint(2) NOT NULL DEFAULT 0,
+  `uploadable_files` tinyint(4) NOT NULL DEFAULT 0,
+  `text_fields` tinyint(4) NOT NULL DEFAULT 0,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `redirect_type` enum('404','301-product','302-product','301-category','302-category') NOT NULL DEFAULT '404',
-  `id_type_redirected` int(10) unsigned NOT NULL DEFAULT '0',
-  `available_for_order` tinyint(1) NOT NULL DEFAULT '1',
+  `id_type_redirected` int(10) unsigned NOT NULL DEFAULT 0,
+  `available_for_order` tinyint(1) NOT NULL DEFAULT 1,
   `available_date` date DEFAULT NULL,
-  `show_condition` tinyint(1) NOT NULL DEFAULT '0',
+  `show_condition` tinyint(1) NOT NULL DEFAULT 0,
   `condition` enum('new','used','refurbished') NOT NULL DEFAULT 'new',
-  `show_price` tinyint(1) NOT NULL DEFAULT '1',
-  `indexed` tinyint(1) NOT NULL DEFAULT '0',
+  `show_price` tinyint(1) NOT NULL DEFAULT 1,
+  `indexed` tinyint(1) NOT NULL DEFAULT 0,
   `visibility` enum('both','catalog','search','none') NOT NULL DEFAULT 'both',
-  `cache_is_pack` tinyint(1) NOT NULL DEFAULT '0',
-  `cache_has_attachments` tinyint(1) NOT NULL DEFAULT '0',
-  `is_virtual` tinyint(1) NOT NULL DEFAULT '0',
+  `cache_is_pack` tinyint(1) NOT NULL DEFAULT 0,
+  `cache_has_attachments` tinyint(1) NOT NULL DEFAULT 0,
+  `is_virtual` tinyint(1) NOT NULL DEFAULT 0,
   `cache_default_attribute` int(10) unsigned DEFAULT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `advanced_stock_management` tinyint(1) NOT NULL DEFAULT '0',
-  `pack_stock_type` int(11) unsigned NOT NULL DEFAULT '3',
-  `state` int(11) unsigned NOT NULL DEFAULT '1',
+  `advanced_stock_management` tinyint(1) NOT NULL DEFAULT 0,
+  `pack_stock_type` int(11) unsigned NOT NULL DEFAULT 3,
+  `state` int(11) unsigned NOT NULL DEFAULT 1,
   `product_type` enum('standard','pack','virtual','combinations','') NOT NULL DEFAULT '',
   PRIMARY KEY (`id_product`),
   KEY `reference_idx` (`reference`),
@@ -5141,7 +5146,7 @@ CREATE TABLE `ps_product` (
   KEY `indexed` (`indexed`),
   KEY `date_add` (`date_add`),
   KEY `state` (`state`,`date_upd`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5150,6 +5155,7 @@ CREATE TABLE `ps_product` (
 
 LOCK TABLES `ps_product` WRITE;
 /*!40000 ALTER TABLE `ps_product` DISABLE KEYS */;
+INSERT INTO `ps_product` VALUES (1,1,1,4,1,1,0,0,'','','','',0.000000,0,1,NULL,0,23.900000,0.000000,'',0.000000,0.000000,'demo_1','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,1,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(2,1,1,5,1,1,0,0,'','','','',0.000000,0,1,NULL,0,35.900000,0.000000,'',0.000000,0.000000,'demo_3','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'404',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,9,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(3,1,2,9,1,1,0,0,'','','','',0.000000,0,1,NULL,0,29.000000,0.000000,'',0.000000,0.000000,'demo_6','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,13,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(4,1,2,9,1,1,0,0,'','','','',0.000000,0,1,NULL,0,29.000000,0.000000,'',0.000000,0.000000,'demo_5','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'404',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,16,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(5,1,2,9,1,1,0,0,'','','','',0.000000,0,1,NULL,0,29.000000,0.000000,'',0.000000,0.000000,'demo_7','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,19,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(6,2,1,8,1,1,0,0,'','','','',0.000000,0,1,NULL,0,11.900000,0.000000,'',0.000000,0.000000,'demo_11','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'standard'),(7,2,1,8,1,1,0,0,'','','','',0.000000,0,1,NULL,0,11.900000,0.000000,'',0.000000,0.000000,'demo_12','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'standard'),(8,2,1,8,1,1,0,0,'','','','',0.000000,0,1,NULL,0,11.900000,0.000000,'',0.000000,0.000000,'demo_13','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'404',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'standard'),(9,2,1,8,1,1,0,0,'','','','',0.000000,0,1,NULL,0,18.900000,0.000000,'',0.000000,0.000000,'demo_15','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,22,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(10,2,1,8,1,1,0,0,'','','','',0.000000,0,1,NULL,0,18.900000,0.000000,'',0.000000,0.000000,'demo_16','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,24,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(11,2,1,8,1,1,0,0,'','','','',0.000000,0,1,NULL,0,18.900000,0.000000,'',0.000000,0.000000,'demo_17','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,26,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(12,2,2,9,1,1,0,0,'','','','',0.000000,0,1,NULL,0,9.000000,0.000000,'',0.000000,0.000000,'demo_18','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,1,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'virtual'),(13,2,2,9,1,1,0,0,'','','','',0.000000,0,1,NULL,0,9.000000,0.000000,'',0.000000,0.000000,'demo_19','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,1,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'virtual'),(14,2,2,9,1,1,0,0,'','','','',0.000000,0,1,NULL,0,9.000000,0.000000,'',0.000000,0.000000,'demo_20','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,1,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'virtual'),(15,2,0,8,1,1,0,0,'','','','',0.000000,0,1,NULL,0,35.000000,0.000000,'',0.000000,0.000000,'demo_21','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',1,0,0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'pack'),(16,2,2,7,1,1,0,0,'','','','',0.000000,0,1,NULL,0,12.900000,0.000000,'',0.000000,0.000000,'demo_8','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,28,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(17,2,2,7,1,1,0,0,'','','','',0.000000,0,1,NULL,0,12.900000,0.000000,'',0.000000,0.000000,'demo_9','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,32,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(18,2,2,7,1,1,0,0,'','','','',0.000000,0,1,NULL,0,12.900000,0.000000,'',0.000000,0.000000,'demo_10','','',0.000000,0.000000,0.000000,0.300000,2,1,0,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,36,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'combinations'),(19,2,1,8,1,1,0,0,'','','','',0.000000,0,1,NULL,0,13.900000,0.000000,'',0.000000,0.000000,'demo_14','','',0.000000,0.000000,0.000000,0.300000,2,1,0,1,0,1,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',0,3,1,'standard');
 /*!40000 ALTER TABLE `ps_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5159,12 +5165,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_attachment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_attachment` (
   `id_product` int(10) unsigned NOT NULL,
   `id_attachment` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_product`,`id_attachment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5182,7 +5188,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_attribute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_attribute` (
   `id_product_attribute` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_product` int(10) unsigned NOT NULL,
@@ -5193,16 +5199,16 @@ CREATE TABLE `ps_product_attribute` (
   `isbn` varchar(32) DEFAULT NULL,
   `upc` varchar(12) DEFAULT NULL,
   `mpn` varchar(40) DEFAULT NULL,
-  `wholesale_price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `ecotax` decimal(17,6) NOT NULL DEFAULT '0.000000',
-  `quantity` int(10) NOT NULL DEFAULT '0',
-  `weight` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `unit_price_impact` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `wholesale_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `ecotax` decimal(17,6) NOT NULL DEFAULT 0.000000,
+  `quantity` int(10) NOT NULL DEFAULT 0,
+  `weight` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `unit_price_impact` decimal(20,6) NOT NULL DEFAULT 0.000000,
   `default_on` tinyint(1) unsigned DEFAULT NULL,
-  `minimal_quantity` int(10) unsigned NOT NULL DEFAULT '1',
+  `minimal_quantity` int(10) unsigned NOT NULL DEFAULT 1,
   `low_stock_threshold` int(10) DEFAULT NULL,
-  `low_stock_alert` tinyint(1) NOT NULL DEFAULT '0',
+  `low_stock_alert` tinyint(1) NOT NULL DEFAULT 0,
   `available_date` date DEFAULT NULL,
   PRIMARY KEY (`id_product_attribute`),
   UNIQUE KEY `product_default` (`id_product`,`default_on`),
@@ -5210,7 +5216,7 @@ CREATE TABLE `ps_product_attribute` (
   KEY `reference` (`reference`),
   KEY `supplier_reference` (`supplier_reference`),
   KEY `id_product_id_product_attribute` (`id_product_attribute`,`id_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5219,6 +5225,7 @@ CREATE TABLE `ps_product_attribute` (
 
 LOCK TABLES `ps_product_attribute` WRITE;
 /*!40000 ALTER TABLE `ps_product_attribute` DISABLE KEYS */;
+INSERT INTO `ps_product_attribute` VALUES (1,1,'demo_1','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(2,1,'demo_1','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(3,1,'demo_1','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(4,1,'demo_1','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(5,1,'demo_1','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(6,1,'demo_1','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(7,1,'demo_1','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(8,1,'demo_1','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(9,2,'demo_3','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(10,2,'demo_3','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(11,2,'demo_3','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(12,2,'demo_3','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(13,3,'demo_6','','','','','','',0.000000,0.000000,0.000000,0,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(14,3,'demo_6','','','','','','',0.000000,20.000000,0.000000,0,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(15,3,'demo_6','','','','','','',0.000000,50.000000,0.000000,0,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(16,4,'demo_5','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(17,4,'demo_5','','','','','','',0.000000,20.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(18,4,'demo_5','','','','','','',0.000000,50.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(19,5,'demo_7','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(20,5,'demo_7','','','','','','',0.000000,20.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(21,5,'demo_7','','','','','','',0.000000,50.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(22,9,'demo_15','','','','','','',0.000000,0.000000,0.000000,0,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(23,9,'demo_15','','','','','','',0.000000,0.000000,0.000000,0,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(24,10,'demo_16','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(25,10,'demo_16','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(26,11,'demo_17','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(27,11,'demo_17','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(28,16,'demo_8','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(29,16,'demo_8','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(30,16,'demo_8','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(31,16,'demo_8','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(32,17,'demo_9','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(33,17,'demo_9','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(34,17,'demo_9','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(35,17,'demo_9','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(36,18,'demo_10','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(37,18,'demo_10','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(38,18,'demo_10','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(39,18,'demo_10','','','','','','',0.000000,0.000000,0.000000,300,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00');
 /*!40000 ALTER TABLE `ps_product_attribute` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5228,13 +5235,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_attribute_combination`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_attribute_combination` (
   `id_attribute` int(10) unsigned NOT NULL,
   `id_product_attribute` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_attribute`,`id_product_attribute`),
   KEY `id_product_attribute` (`id_product_attribute`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5243,6 +5250,7 @@ CREATE TABLE `ps_product_attribute_combination` (
 
 LOCK TABLES `ps_product_attribute_combination` WRITE;
 /*!40000 ALTER TABLE `ps_product_attribute_combination` DISABLE KEYS */;
+INSERT INTO `ps_product_attribute_combination` VALUES (1,1),(1,2),(1,9),(2,3),(2,4),(2,10),(3,5),(3,6),(3,11),(4,7),(4,8),(4,12),(8,1),(8,3),(8,5),(8,7),(8,22),(8,24),(8,26),(11,2),(11,4),(11,6),(11,8),(11,23),(11,25),(11,27),(19,13),(19,16),(19,19),(20,14),(20,17),(20,20),(21,15),(21,18),(21,21),(22,28),(22,32),(22,36),(23,29),(23,33),(23,37),(24,30),(24,34),(24,38),(25,31),(25,35),(25,39);
 /*!40000 ALTER TABLE `ps_product_attribute_combination` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5252,13 +5260,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_attribute_image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_attribute_image` (
   `id_product_attribute` int(10) unsigned NOT NULL,
   `id_image` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_product_attribute`,`id_image`),
   KEY `id_image` (`id_image`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5267,6 +5275,7 @@ CREATE TABLE `ps_product_attribute_image` (
 
 LOCK TABLES `ps_product_attribute_image` WRITE;
 /*!40000 ALTER TABLE `ps_product_attribute_image` DISABLE KEYS */;
+INSERT INTO `ps_product_attribute_image` VALUES (1,2),(2,1),(3,2),(4,1),(5,2),(6,1),(7,2),(8,1),(9,0),(10,0),(11,0),(12,0),(13,3),(14,3),(15,3),(16,4),(17,4),(18,4),(19,5),(20,5),(21,5),(22,10),(23,9),(24,12),(25,11),(26,14),(27,13),(28,18),(29,18),(30,18),(31,18),(32,19),(33,19),(34,19),(35,19),(36,20),(37,20),(38,20),(39,20);
 /*!40000 ALTER TABLE `ps_product_attribute_image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5276,24 +5285,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_attribute_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_attribute_shop` (
   `id_product` int(10) unsigned NOT NULL,
   `id_product_attribute` int(10) unsigned NOT NULL,
   `id_shop` int(10) unsigned NOT NULL,
-  `wholesale_price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `ecotax` decimal(17,6) NOT NULL DEFAULT '0.000000',
-  `weight` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `unit_price_impact` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `wholesale_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `ecotax` decimal(17,6) NOT NULL DEFAULT 0.000000,
+  `weight` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `unit_price_impact` decimal(20,6) NOT NULL DEFAULT 0.000000,
   `default_on` tinyint(1) unsigned DEFAULT NULL,
-  `minimal_quantity` int(10) unsigned NOT NULL DEFAULT '1',
+  `minimal_quantity` int(10) unsigned NOT NULL DEFAULT 1,
   `low_stock_threshold` int(10) DEFAULT NULL,
-  `low_stock_alert` tinyint(1) NOT NULL DEFAULT '0',
+  `low_stock_alert` tinyint(1) NOT NULL DEFAULT 0,
   `available_date` date DEFAULT NULL,
   PRIMARY KEY (`id_product_attribute`,`id_shop`),
   UNIQUE KEY `id_product` (`id_product`,`id_shop`,`default_on`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5302,6 +5311,7 @@ CREATE TABLE `ps_product_attribute_shop` (
 
 LOCK TABLES `ps_product_attribute_shop` WRITE;
 /*!40000 ALTER TABLE `ps_product_attribute_shop` DISABLE KEYS */;
+INSERT INTO `ps_product_attribute_shop` VALUES (1,1,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(1,2,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(1,3,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(1,4,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(1,5,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(1,6,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(1,7,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(1,8,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(2,9,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(2,10,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(2,11,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(2,12,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(3,13,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(3,14,1,0.000000,20.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(3,15,1,0.000000,50.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(4,16,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(4,17,1,0.000000,20.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(4,18,1,0.000000,50.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(5,19,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(5,20,1,0.000000,20.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(5,21,1,0.000000,50.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(9,22,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(9,23,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(10,24,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(10,25,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(11,26,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(11,27,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(16,28,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(16,29,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(16,30,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(16,31,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(17,32,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(17,33,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(17,34,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(17,35,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(18,36,1,0.000000,0.000000,0.000000,0.000000,0.000000,1,1,NULL,0,'0000-00-00'),(18,37,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(18,38,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00'),(18,39,1,0.000000,0.000000,0.000000,0.000000,0.000000,NULL,1,NULL,0,'0000-00-00');
 /*!40000 ALTER TABLE `ps_product_attribute_shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5311,13 +5321,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_carrier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_carrier` (
   `id_product` int(10) unsigned NOT NULL,
   `id_carrier_reference` int(10) unsigned NOT NULL,
   `id_shop` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_product`,`id_carrier_reference`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5335,7 +5345,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_comment` (
   `id_product_comment` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_product` int(10) unsigned NOT NULL,
@@ -5352,7 +5362,7 @@ CREATE TABLE `ps_product_comment` (
   KEY `id_product` (`id_product`),
   KEY `id_customer` (`id_customer`),
   KEY `id_guest` (`id_guest`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5370,13 +5380,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_comment_criterion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_comment_criterion` (
   `id_product_comment_criterion` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_product_comment_criterion_type` tinyint(1) NOT NULL,
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_product_comment_criterion`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5395,13 +5405,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_comment_criterion_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_comment_criterion_category` (
   `id_product_comment_criterion` int(10) unsigned NOT NULL,
   `id_category` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_product_comment_criterion`,`id_category`),
   KEY `id_category` (`id_category`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5419,13 +5429,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_comment_criterion_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_comment_criterion_lang` (
   `id_product_comment_criterion` int(11) unsigned NOT NULL,
   `id_lang` int(11) unsigned NOT NULL,
   `name` varchar(64) NOT NULL,
   PRIMARY KEY (`id_product_comment_criterion`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5444,13 +5454,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_comment_criterion_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_comment_criterion_product` (
   `id_product` int(10) unsigned NOT NULL,
   `id_product_comment_criterion` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_product`,`id_product_comment_criterion`),
   KEY `id_product_comment_criterion` (`id_product_comment_criterion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5468,14 +5478,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_comment_grade`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_comment_grade` (
   `id_product_comment` int(10) unsigned NOT NULL,
   `id_product_comment_criterion` int(10) unsigned NOT NULL,
   `grade` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_product_comment`,`id_product_comment_criterion`),
   KEY `id_product_comment_criterion` (`id_product_comment_criterion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5493,12 +5503,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_comment_report`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_comment_report` (
   `id_product_comment` int(10) unsigned NOT NULL,
   `id_customer` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_product_comment`,`id_customer`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5516,13 +5526,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_comment_usefulness`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_comment_usefulness` (
   `id_product_comment` int(10) unsigned NOT NULL,
   `id_customer` int(10) unsigned NOT NULL,
   `usefulness` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id_product_comment`,`id_customer`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5540,13 +5550,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_country_tax`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_country_tax` (
   `id_product` int(11) NOT NULL,
   `id_country` int(11) NOT NULL,
   `id_tax` int(11) NOT NULL,
   PRIMARY KEY (`id_product`,`id_country`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5564,7 +5574,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_download`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_download` (
   `id_product_download` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_product` int(10) unsigned NOT NULL,
@@ -5573,11 +5583,11 @@ CREATE TABLE `ps_product_download` (
   `date_add` datetime NOT NULL,
   `date_expiration` datetime DEFAULT NULL,
   `nb_days_accessible` int(10) unsigned DEFAULT NULL,
-  `nb_downloadable` int(10) unsigned DEFAULT '1',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `is_shareable` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `nb_downloadable` int(10) unsigned DEFAULT 1,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `is_shareable` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_product_download`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5595,13 +5605,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_group_reduction_cache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_group_reduction_cache` (
   `id_product` int(10) unsigned NOT NULL,
   `id_group` int(10) unsigned NOT NULL,
   `reduction` decimal(5,4) NOT NULL,
   PRIMARY KEY (`id_product`,`id_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5619,13 +5629,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_lang` (
   `id_product` int(10) unsigned NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_lang` int(10) unsigned NOT NULL,
-  `description` text,
-  `description_short` text,
+  `description` text DEFAULT NULL,
+  `description_short` text DEFAULT NULL,
   `link_rewrite` varchar(128) NOT NULL,
   `meta_description` varchar(512) DEFAULT NULL,
   `meta_keywords` varchar(255) DEFAULT NULL,
@@ -5638,7 +5648,7 @@ CREATE TABLE `ps_product_lang` (
   PRIMARY KEY (`id_product`,`id_shop`,`id_lang`),
   KEY `id_lang` (`id_lang`),
   KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5647,6 +5657,7 @@ CREATE TABLE `ps_product_lang` (
 
 LOCK TABLES `ps_product_lang` WRITE;
 /*!40000 ALTER TABLE `ps_product_lang` DISABLE KEYS */;
+INSERT INTO `ps_product_lang` VALUES (1,1,1,'<p>Symbol of lightness and delicacy, the hummingbird evokes curiosity and joy. Studio Design\' PolyFaune collection features classic products with colorful patterns, inspired by the traditional japanese origamis. To wear with a chino or jeans. The sublimation textile printing process provides an exceptional color rendering and a color, guaranteed overtime.</p>','<p>Regular fit, round neckline, short sleeves. Made of extra long staple pima cotton. </p>\r\n<p></p>','hummingbird-printed-t-shirt','','','','Hummingbird printed t-shirt','','','',''),(2,1,1,'<p>Studio Design\' PolyFaune collection features classic products with colorful patterns, inspired by the traditional japanese origamis. To wear with a chino or jeans. The sublimation textile printing process provides an exceptional color rendering and a color, guaranteed overtime.</p>','<p>Regular fit, round neckline, long sleeves. 100% cotton, brushed inner side for extra comfort. </p>','brown-bear-printed-sweater','','','','Hummingbird printed sweater','','','',''),(3,1,1,'<p>The best is yet to come! Give your walls a voice with a framed poster. This aesthethic, optimistic poster will look great in your desk or in an open-space office. Painted wooden frame with passe-partout for more depth.</p>','<p>Printed on rigid matt paper and smooth surface.</p>','the-best-is-yet-to-come-framed-poster','','','','The best is yet to come\' Framed poster','','','',''),(4,1,1,'<p>The best is yet to come! Give your walls a voice with a framed poster. This aesthethic, optimistic poster will look great in your desk or in an open-space office. Painted wooden frame with passe-partout for more depth.</p>','<p>Printed on rigid matt finish and smooth surface.</p>','the-adventure-begins-framed-poster','','','','The adventure begins Framed poster','','','',''),(5,1,1,'<p>The best is yet to come! Give your walls a voice with a framed poster. This aesthethic, optimistic poster will look great in your desk or in an open-space office. Painted wooden frame with passe-partout for more depth.</p>','<p>Printed on rigid paper with matt finish and smooth surface.</p>','today-is-a-good-day-framed-poster','','','','Today is a good day Framed poster','','','',''),(6,1,1,'<p>The best is yet to come! Start the day off right with a positive thought. 8,2cm diameter / 9,5cm height / 0.43kg. Dishwasher-proof.</p>','<p>White Ceramic Mug, 325ml.</p>','mug-the-best-is-yet-to-come','','','','Mug The best is yet to come','','','',''),(7,1,1,'<p>The adventure begins with a cup of coffee. Set out to conquer the day! 8,2cm diameter / 9,5cm height / 0.43kg. Dishwasher-proof.</p>','<p>White Ceramic Mug. 325ml</p>','mug-the-adventure-begins','','','','Mug The adventure begins','','','',''),(8,1,1,'<p>Add an optimistic touch to your morning coffee and start the day in a good mood! 8,2cm diameter / 9,5cm height / 0.43kg. Dishwasher-proof.</p>','<p>White Ceramic Mug. 325ml</p>','mug-today-is-a-good-day','','','','Mug Today is a good day','','','',''),(9,1,1,'<p>The mountain fox cushion will add a graphic and colorful touch to your sofa, armchair or bed. Create a modern and zen atmosphere that inspires relaxation. Cover 100% cotton, machine washable at 60° / Filling 100% hypoallergenic polyester.</p>','<p>Cushion with removable cover and invisible zip on the back. 32x32cm</p>','mountain-fox-cushion','','','','Mountain fox cushion','','','',''),(10,1,1,'<p>The brown bear cushion will add a graphic and colorful touch to your sofa, armchair or bed. Create a modern and zen atmosphere that inspires relaxation. Cover 100% cotton, machine washable at 60° / Filling 100% hypoallergenic polyester.</p>','<p>Cushion with removable cover and invisible zip on the back. 32x32cm</p>','brown-bear-cushion','','','','Brown bear cushion','','','',''),(11,1,1,'<p>The hummingbird cushion will add a graphic and colorful touch to your sofa, armchair or bed. Create a modern and zen atmosphere that inspires relaxation. Cover 100% cotton, machine washable at 60° / Filling 100% hypoallergenic polyester.</p>','<p>Cushion with removable cover and invisible zip on the back. 32x32cm</p>','hummingbird-cushion','','','','Hummingbird cushion','','','',''),(12,1,1,'<p>You have a custom printing creative project? The vector graphic Mountain fox illustration can be used for printing purpose on any support, without size limitation. </p>','<p>Vector graphic, format: svg. Download for personal, private and non-commercial use.</p>','mountain-fox-vector-graphics','','','','Mountain fox - Vector graphics','','','',''),(13,1,1,'<p>You have a custom printing creative project? The vector graphic Mountain fox illustration can be used for printing purpose on any support, without size limitation. </p>','<p>Vector graphic, format: svg. Download for personal, private and non-commercial use.</p>','brown-bear-vector-graphics','','','','Brown bear - Vector graphics','','','',''),(14,1,1,'<p>You have a custom printing creative project? The vector graphic Mountain fox illustration can be used for printing purpose on any support, without size limitation. </p>','<p>Vector graphic, format: svg. Download for personal, private and non-commercial use.</p>','hummingbird-vector-graphics','','','','Hummingbird - Vector graphics','','','',''),(15,1,1,'','<p>Mug The Adventure Begins + Framed poster Today is a good day 40x60cm </p>','pack-mug-framed-poster','','','','Pack Mug + Framed poster','','','',''),(16,1,1,'<p>The Mountain fox notebook is the best option to write down your most ingenious ideas. At work, at home or when traveling, its endearing design and manufacturing quality will make you feel like writing! 90 gsm paper / double spiral binding.</p>','<p>120 sheets notebook with hard cover made of recycled cardboard. 16x22cm</p>','mountain-fox-notebook','','','','Mountain fox notebook','','','',''),(17,1,1,'<p>The Mountain fox notebook is the best option to write down your most ingenious ideas. At work, at home or when traveling, its endearing design and manufacturing quality will make you feel like writing! 90 gsm paper / double spiral binding.</p>','<p>120 sheets notebook with hard cover made of recycled cardboard. 16x22cm</p>','brown-bear-notebook','','','','Brown bear notebook','','','',''),(18,1,1,'<p>The Mountain fox notebook is the best option to write down your most ingenious ideas. At work, at home or when traveling, its endearing design and manufacturing quality will make you feel like writing! 90 gsm paper / double spiral binding.</p>','<p>120 sheets notebook with hard cover made of recycled cardboard. 16x22cm</p>','hummingbird-notebook','','','','Hummingbird notebook','','','',''),(19,1,1,'<p>Customize your mug with the text of your choice. A mood, a message, a quote... It\'s up to you! Maximum number of characters: ---</p>','<p>White Ceramic Mug. 325ml</p>','customizable-mug','','','','Customizable mug','','','','');
 /*!40000 ALTER TABLE `ps_product_lang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5656,15 +5667,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_sale`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_sale` (
   `id_product` int(10) unsigned NOT NULL,
-  `quantity` int(10) unsigned NOT NULL DEFAULT '0',
-  `sale_nbr` int(10) unsigned NOT NULL DEFAULT '0',
+  `quantity` int(10) unsigned NOT NULL DEFAULT 0,
+  `sale_nbr` int(10) unsigned NOT NULL DEFAULT 0,
   `date_upd` date DEFAULT NULL,
   PRIMARY KEY (`id_product`),
   KEY `quantity` (`quantity`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5683,46 +5694,46 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_shop` (
   `id_product` int(10) unsigned NOT NULL,
   `id_shop` int(10) unsigned NOT NULL,
   `id_category_default` int(10) unsigned DEFAULT NULL,
   `id_tax_rules_group` int(11) unsigned NOT NULL,
-  `on_sale` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `online_only` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ecotax` decimal(17,6) NOT NULL DEFAULT '0.000000',
-  `minimal_quantity` int(10) unsigned NOT NULL DEFAULT '1',
+  `on_sale` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `online_only` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `ecotax` decimal(17,6) NOT NULL DEFAULT 0.000000,
+  `minimal_quantity` int(10) unsigned NOT NULL DEFAULT 1,
   `low_stock_threshold` int(10) DEFAULT NULL,
-  `low_stock_alert` tinyint(1) NOT NULL DEFAULT '0',
-  `price` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `wholesale_price` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `low_stock_alert` tinyint(1) NOT NULL DEFAULT 0,
+  `price` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `wholesale_price` decimal(20,6) NOT NULL DEFAULT 0.000000,
   `unity` varchar(255) DEFAULT NULL,
-  `unit_price_ratio` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `additional_shipping_cost` decimal(20,6) NOT NULL DEFAULT '0.000000',
-  `customizable` tinyint(2) NOT NULL DEFAULT '0',
-  `uploadable_files` tinyint(4) NOT NULL DEFAULT '0',
-  `text_fields` tinyint(4) NOT NULL DEFAULT '0',
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `unit_price_ratio` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `additional_shipping_cost` decimal(20,6) NOT NULL DEFAULT 0.000000,
+  `customizable` tinyint(2) NOT NULL DEFAULT 0,
+  `uploadable_files` tinyint(4) NOT NULL DEFAULT 0,
+  `text_fields` tinyint(4) NOT NULL DEFAULT 0,
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `redirect_type` enum('','404','301-product','302-product','301-category','302-category') NOT NULL DEFAULT '',
-  `id_type_redirected` int(10) unsigned NOT NULL DEFAULT '0',
-  `available_for_order` tinyint(1) NOT NULL DEFAULT '1',
+  `id_type_redirected` int(10) unsigned NOT NULL DEFAULT 0,
+  `available_for_order` tinyint(1) NOT NULL DEFAULT 1,
   `available_date` date DEFAULT NULL,
-  `show_condition` tinyint(1) NOT NULL DEFAULT '1',
+  `show_condition` tinyint(1) NOT NULL DEFAULT 1,
   `condition` enum('new','used','refurbished') NOT NULL DEFAULT 'new',
-  `show_price` tinyint(1) NOT NULL DEFAULT '1',
-  `indexed` tinyint(1) NOT NULL DEFAULT '0',
+  `show_price` tinyint(1) NOT NULL DEFAULT 1,
+  `indexed` tinyint(1) NOT NULL DEFAULT 0,
   `visibility` enum('both','catalog','search','none') NOT NULL DEFAULT 'both',
   `cache_default_attribute` int(10) unsigned DEFAULT NULL,
-  `advanced_stock_management` tinyint(1) NOT NULL DEFAULT '0',
+  `advanced_stock_management` tinyint(1) NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `pack_stock_type` int(11) unsigned NOT NULL DEFAULT '3',
+  `pack_stock_type` int(11) unsigned NOT NULL DEFAULT 3,
   PRIMARY KEY (`id_product`,`id_shop`),
   KEY `id_category_default` (`id_category_default`),
   KEY `date_add` (`date_add`,`active`,`visibility`),
   KEY `indexed` (`indexed`,`active`,`id_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5731,6 +5742,7 @@ CREATE TABLE `ps_product_shop` (
 
 LOCK TABLES `ps_product_shop` WRITE;
 /*!40000 ALTER TABLE `ps_product_shop` DISABLE KEYS */;
+INSERT INTO `ps_product_shop` VALUES (1,1,4,1,0,0,0.000000,1,NULL,0,23.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',1,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(2,1,5,1,0,0,0.000000,1,NULL,0,35.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'404',0,1,'0000-00-00',0,'new',1,1,'both',9,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(3,1,9,1,0,0,0.000000,1,NULL,0,29.000000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',13,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(4,1,9,1,0,0,0.000000,1,NULL,0,29.000000,0.000000,'',0.000000,0.000000,0,0,0,1,'404',0,1,'0000-00-00',0,'new',1,1,'both',16,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(5,1,9,1,0,0,0.000000,1,NULL,0,29.000000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',19,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(6,1,8,1,0,0,0.000000,1,NULL,0,11.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(7,1,8,1,0,0,0.000000,1,NULL,0,11.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(8,1,8,1,0,0,0.000000,1,NULL,0,11.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'404',0,1,'0000-00-00',0,'new',1,1,'both',0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(9,1,8,1,0,0,0.000000,1,NULL,0,18.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',22,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(10,1,8,1,0,0,0.000000,1,NULL,0,18.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',24,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(11,1,8,1,0,0,0.000000,1,NULL,0,18.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',26,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(12,1,9,1,0,0,0.000000,1,NULL,0,9.000000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(13,1,9,1,0,0,0.000000,1,NULL,0,9.000000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(14,1,9,1,0,0,0.000000,1,NULL,0,9.000000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(15,1,8,1,0,0,0.000000,1,NULL,0,35.000000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(16,1,7,1,0,0,0.000000,1,NULL,0,12.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',28,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(17,1,7,1,0,0,0.000000,1,NULL,0,12.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',32,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(18,1,7,1,0,0,0.000000,1,NULL,0,12.900000,0.000000,'',0.000000,0.000000,0,0,0,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',36,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3),(19,1,8,1,0,0,0.000000,1,NULL,0,13.900000,0.000000,'',0.000000,0.000000,1,0,1,1,'301-category',0,1,'0000-00-00',0,'new',1,1,'both',0,0,'2025-12-15 18:51:24','2025-12-15 18:51:24',3);
 /*!40000 ALTER TABLE `ps_product_shop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5740,19 +5752,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_supplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_supplier` (
   `id_product_supplier` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_product` int(11) unsigned NOT NULL,
-  `id_product_attribute` int(11) unsigned NOT NULL DEFAULT '0',
+  `id_product_attribute` int(11) unsigned NOT NULL DEFAULT 0,
   `id_supplier` int(11) unsigned NOT NULL,
   `product_supplier_reference` varchar(64) DEFAULT NULL,
-  `product_supplier_price_te` decimal(20,6) NOT NULL DEFAULT '0.000000',
+  `product_supplier_price_te` decimal(20,6) NOT NULL DEFAULT 0.000000,
   `id_currency` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_product_supplier`),
   UNIQUE KEY `id_product` (`id_product`,`id_product_attribute`,`id_supplier`),
   KEY `id_supplier` (`id_supplier`,`id_product`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5761,7 +5773,7 @@ CREATE TABLE `ps_product_supplier` (
 
 LOCK TABLES `ps_product_supplier` WRITE;
 /*!40000 ALTER TABLE `ps_product_supplier` DISABLE KEYS */;
-INSERT INTO `ps_product_supplier` VALUES (1,6,0,2,'demo_11',5.490000,0),(2,7,0,2,'demo_12',5.490000,0),(3,8,0,2,'demo_13',5.490000,0),(4,19,0,2,'demo_14',5.490000,0),(5,12,0,2,'demo_18',5.490000,0),(6,13,0,2,'demo_19',5.490000,0),(7,14,0,2,'demo_20',5.490000,0),(8,1,0,1,'demo_1_46',5.490000,0),(17,2,0,1,'demo_3_62',5.490000,0),(22,3,0,1,'demo_6_70',5.490000,0),(26,4,0,1,'demo_5_73',5.490000,0),(30,5,0,1,'demo_5_76',5.490000,0),(34,3,0,2,'demo_6_70',2.490000,0),(38,4,0,2,'demo_5_73',2.490000,0),(42,5,0,2,'demo_5_76',2.490000,0),(46,9,0,2,'demo_15_79',5.490000,0),(49,10,0,2,'demo_16_81',5.490000,0),(52,11,0,2,'demo_17_83',5.490000,0),(55,16,0,2,'demo_8_85',5.490000,0),(60,17,0,2,'demo_9_89',5.490000,0),(65,18,0,2,'demo_10_93',5.490000,0),(70,15,0,2,'',0.000000,0);
+INSERT INTO `ps_product_supplier` VALUES (1,6,0,2,'demo_11',5.490000,0),(2,7,0,2,'demo_12',5.490000,0),(3,8,0,2,'demo_13',5.490000,0),(4,19,0,2,'demo_14',5.490000,0),(5,12,0,2,'demo_18',5.490000,0),(6,13,0,2,'demo_19',5.490000,0),(7,14,0,2,'demo_20',5.490000,0),(8,1,0,1,'demo_1_46',5.490000,0),(9,1,1,1,'demo_1_46',5.490000,0),(10,1,2,1,'demo_1_47',5.490000,0),(11,1,3,1,'demo_1_48',5.490000,0),(12,1,4,1,'demo_1_49',5.490000,0),(13,1,5,1,'demo_1_50',5.490000,0),(14,1,6,1,'demo_1_51',5.490000,0),(15,1,7,1,'demo_1_52',5.490000,0),(16,1,8,1,'demo_1_53',5.490000,0),(17,2,0,1,'demo_3_62',5.490000,0),(18,2,9,1,'demo_3_62',5.490000,0),(19,2,10,1,'demo_3_63',5.490000,0),(20,2,11,1,'demo_3_64',5.490000,0),(21,2,12,1,'demo_3_65',5.490000,0),(22,3,0,1,'demo_6_70',5.490000,0),(23,3,13,1,'demo_6_70',5.490000,0),(24,3,14,1,'demo_6_71',5.490000,0),(25,3,15,1,'demo_6_72',5.490000,0),(26,4,0,1,'demo_5_73',5.490000,0),(27,4,16,1,'demo_5_73',5.490000,0),(28,4,17,1,'demo_5_74',5.490000,0),(29,4,18,1,'demo_5_75',5.490000,0),(30,5,0,1,'demo_5_76',5.490000,0),(31,5,19,1,'demo_5_76',5.490000,0),(32,5,20,1,'demo_5_77',5.490000,0),(33,5,21,1,'demo_5_78',5.490000,0),(34,3,0,2,'demo_6_70',2.490000,0),(35,3,13,2,'demo_6_70',2.490000,0),(36,3,14,2,'demo_6_71',2.490000,0),(37,3,15,2,'demo_6_72',2.490000,0),(38,4,0,2,'demo_5_73',2.490000,0),(39,4,16,2,'demo_5_73',2.490000,0),(40,4,17,2,'demo_5_74',2.490000,0),(41,4,18,2,'demo_5_75',2.490000,0),(42,5,0,2,'demo_5_76',2.490000,0),(43,5,19,2,'demo_5_76',2.490000,0),(44,5,20,2,'demo_5_77',2.490000,0),(45,5,21,2,'demo_5_78',2.490000,0),(46,9,0,2,'demo_15_79',5.490000,0),(47,9,22,2,'demo_15_79',5.490000,0),(48,9,23,2,'demo_15_80',5.490000,0),(49,10,0,2,'demo_16_81',5.490000,0),(50,10,24,2,'demo_16_81',5.490000,0),(51,10,25,2,'demo_16_82',5.490000,0),(52,11,0,2,'demo_17_83',5.490000,0),(53,11,26,2,'demo_17_83',5.490000,0),(54,11,27,2,'demo_17_84',5.490000,0),(55,16,0,2,'demo_8_85',5.490000,0),(56,16,28,2,'demo_8_85',5.490000,0),(57,16,29,2,'demo_8_86',5.490000,0),(58,16,30,2,'demo_8_87',5.490000,0),(59,16,31,2,'demo_8_88',5.490000,0),(60,17,0,2,'demo_9_89',5.490000,0),(61,17,32,2,'demo_9_89',5.490000,0),(62,17,33,2,'demo_9_90',5.490000,0),(63,17,34,2,'demo_9_91',5.490000,0),(64,17,35,2,'demo_9_92',5.490000,0),(65,18,0,2,'demo_10_93',5.490000,0),(66,18,36,2,'demo_10_93',5.490000,0),(67,18,37,2,'demo_10_94',5.490000,0),(68,18,38,2,'demo_10_95',5.490000,0),(69,18,39,2,'demo_10_96',5.490000,0),(70,15,0,2,'',0.000000,0);
 /*!40000 ALTER TABLE `ps_product_supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5771,7 +5783,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_product_tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_product_tag` (
   `id_product` int(10) unsigned NOT NULL,
   `id_tag` int(10) unsigned NOT NULL,
@@ -5779,7 +5791,7 @@ CREATE TABLE `ps_product_tag` (
   PRIMARY KEY (`id_product`,`id_tag`),
   KEY `id_tag` (`id_tag`),
   KEY `id_lang` (`id_lang`,`id_tag`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5797,11 +5809,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_profile` (
   `id_profile` int(10) unsigned NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_profile`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5820,13 +5832,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_profile_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_profile_lang` (
   `id_lang` int(10) unsigned NOT NULL,
   `id_profile` int(10) unsigned NOT NULL,
   `name` varchar(128) NOT NULL,
   PRIMARY KEY (`id_profile`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5845,15 +5857,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_authorization`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_authorization` (
   `id` varchar(50) NOT NULL,
   `id_order` varchar(50) NOT NULL,
   `status` varchar(30) NOT NULL,
   `expiration_time` varchar(50) NOT NULL,
-  `seller_protection` text,
+  `seller_protection` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5871,7 +5883,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_capture`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_capture` (
   `id` varchar(50) NOT NULL,
   `id_order` varchar(50) NOT NULL,
@@ -5879,10 +5891,10 @@ CREATE TABLE `ps_pscheckout_capture` (
   `final_capture` tinyint(1) NOT NULL,
   `created_at` varchar(50) NOT NULL,
   `updated_at` varchar(50) NOT NULL,
-  `seller_protection` text,
-  `seller_receivable_breakdown` text,
+  `seller_protection` text DEFAULT NULL,
+  `seller_receivable_breakdown` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5900,7 +5912,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_cart`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_cart` (
   `id_pscheckout_cart` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_cart` int(10) unsigned NOT NULL,
@@ -5908,16 +5920,16 @@ CREATE TABLE `ps_pscheckout_cart` (
   `paypal_order` varchar(20) DEFAULT NULL,
   `paypal_status` varchar(30) DEFAULT NULL,
   `paypal_funding` varchar(20) DEFAULT NULL,
-  `paypal_token` text,
+  `paypal_token` text DEFAULT NULL,
   `paypal_token_expire` datetime DEFAULT NULL,
   `paypal_authorization_expire` datetime DEFAULT NULL,
   `environment` varchar(20) DEFAULT NULL,
-  `isExpressCheckout` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `isHostedFields` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `isExpressCheckout` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `isHostedFields` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_pscheckout_cart`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5935,12 +5947,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_customer` (
   `id_customer` int(10) unsigned NOT NULL,
   `paypal_customer_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id_customer`,`paypal_customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5958,15 +5970,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_funding_source`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_funding_source` (
   `name` varchar(20) NOT NULL,
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `position` tinyint(2) unsigned NOT NULL,
   `id_shop` int(10) unsigned NOT NULL,
   PRIMARY KEY (`name`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5985,14 +5997,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_order` (
   `id` varchar(50) NOT NULL,
   `id_cart` int(10) unsigned NOT NULL,
   `status` varchar(30) NOT NULL,
   `intent` varchar(50) DEFAULT 'CAPTURE',
   `funding_source` varchar(50) NOT NULL,
-  `payment_source` text,
+  `payment_source` text DEFAULT NULL,
   `environment` varchar(50) NOT NULL,
   `is_card_fields` tinyint(1) NOT NULL,
   `is_express_checkout` tinyint(1) NOT NULL,
@@ -6000,7 +6012,7 @@ CREATE TABLE `ps_pscheckout_order` (
   `payment_token_id` varchar(50) DEFAULT NULL,
   `tags` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6018,13 +6030,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_order_matrice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_order_matrice` (
   `id_order_matrice` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_order_prestashop` int(10) unsigned NOT NULL,
   `id_order_paypal` varchar(20) NOT NULL,
   PRIMARY KEY (`id_order_matrice`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6042,7 +6054,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_payment_token`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_payment_token` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `token_id` varchar(50) NOT NULL,
@@ -6051,10 +6063,10 @@ CREATE TABLE `ps_pscheckout_payment_token` (
   `data` text NOT NULL,
   `merchant_id` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL,
-  `is_favorite` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `is_favorite` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `token_id_merchant_id_paypal_customer_id` (`token_id`,`merchant_id`,`paypal_customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6072,14 +6084,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_purchase_unit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_purchase_unit` (
   `id_order` varchar(50) NOT NULL,
   `checksum` varchar(50) NOT NULL,
   `reference_id` varchar(50) NOT NULL,
-  `items` text,
+  `items` text DEFAULT NULL,
   PRIMARY KEY (`reference_id`,`id_order`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6097,7 +6109,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_refund`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_refund` (
   `id` varchar(50) NOT NULL,
   `id_order` varchar(50) NOT NULL,
@@ -6105,10 +6117,10 @@ CREATE TABLE `ps_pscheckout_refund` (
   `invoice_id` varchar(50) NOT NULL,
   `custom_id` varchar(50) NOT NULL,
   `acquirer_reference_number` varchar(50) NOT NULL,
-  `seller_payable_breakdown` text,
+  `seller_payable_breakdown` text DEFAULT NULL,
   `id_order_slip` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6126,7 +6138,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_pscheckout_tracking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_pscheckout_tracking` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_order` int(10) unsigned NOT NULL,
@@ -6136,18 +6148,18 @@ CREATE TABLE `ps_pscheckout_tracking` (
   `paypal_order_id` varchar(50) NOT NULL,
   `paypal_capture_id` varchar(50) NOT NULL,
   `tracker_id` varchar(64) DEFAULT NULL,
-  `items` text,
+  `items` text DEFAULT NULL,
   `status` varchar(20) NOT NULL DEFAULT 'PENDING',
   `paypal_tracking_status` varchar(20) DEFAULT NULL,
   `payload_checksum` varchar(64) NOT NULL,
-  `sent_to_paypal` tinyint(1) NOT NULL DEFAULT '0',
+  `sent_to_paypal` tinyint(1) NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_order` (`id_order`),
   KEY `tracking_number` (`tracking_number`),
   KEY `paypal_order_id` (`paypal_order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6165,17 +6177,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_psgdpr_consent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_psgdpr_consent` (
   `id_gdpr_consent` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_module` int(10) unsigned NOT NULL,
   `active` int(10) NOT NULL,
   `error` int(10) DEFAULT NULL,
-  `error_message` text,
+  `error_message` text DEFAULT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_gdpr_consent`,`id_module`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6193,14 +6205,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_psgdpr_consent_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_psgdpr_consent_lang` (
   `id_gdpr_consent` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_lang` int(10) unsigned NOT NULL,
-  `message` text,
+  `message` text DEFAULT NULL,
   `id_shop` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_gdpr_consent`,`id_lang`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6218,7 +6230,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_psgdpr_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_psgdpr_log` (
   `id_gdpr_log` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_customer` int(10) unsigned DEFAULT NULL,
@@ -6231,7 +6243,7 @@ CREATE TABLE `ps_psgdpr_log` (
   PRIMARY KEY (`id_gdpr_log`),
   KEY `id_customer` (`id_customer`),
   KEY `idx_id_customer` (`id_customer`,`id_guest`,`client_name`,`id_module`,`date_add`,`date_upd`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6250,7 +6262,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_psreassurance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_psreassurance` (
   `id_psreassurance` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `icon` varchar(255) DEFAULT NULL,
@@ -6262,7 +6274,7 @@ CREATE TABLE `ps_psreassurance` (
   `date_add` datetime NOT NULL,
   `date_upd` datetime DEFAULT NULL,
   PRIMARY KEY (`id_psreassurance`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6281,7 +6293,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_psreassurance_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_psreassurance_lang` (
   `id_psreassurance` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
@@ -6289,7 +6301,7 @@ CREATE TABLE `ps_psreassurance_lang` (
   `description` varchar(255) NOT NULL,
   `link` varchar(255) NOT NULL,
   PRIMARY KEY (`id_psreassurance`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6308,13 +6320,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_quick_access`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_quick_access` (
   `id_quick_access` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `new_window` tinyint(1) NOT NULL DEFAULT '0',
+  `new_window` tinyint(1) NOT NULL DEFAULT 0,
   `link` varchar(255) NOT NULL,
   PRIMARY KEY (`id_quick_access`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6333,13 +6345,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_quick_access_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_quick_access_lang` (
   `id_quick_access` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`id_quick_access`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6358,7 +6370,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_range_price`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_range_price` (
   `id_range_price` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_carrier` int(10) unsigned NOT NULL,
@@ -6366,7 +6378,7 @@ CREATE TABLE `ps_range_price` (
   `delimiter2` decimal(20,6) NOT NULL,
   PRIMARY KEY (`id_range_price`),
   UNIQUE KEY `id_carrier` (`id_carrier`,`delimiter1`,`delimiter2`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6385,7 +6397,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_range_weight`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_range_weight` (
   `id_range_weight` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_carrier` int(10) unsigned NOT NULL,
@@ -6393,7 +6405,7 @@ CREATE TABLE `ps_range_weight` (
   `delimiter2` decimal(20,6) NOT NULL,
   PRIMARY KEY (`id_range_weight`),
   UNIQUE KEY `id_carrier` (`id_carrier`,`delimiter1`,`delimiter2`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6412,7 +6424,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_referrer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_referrer` (
   `id_referrer` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -6425,12 +6437,12 @@ CREATE TABLE `ps_referrer` (
   `http_referer_like_not` varchar(64) DEFAULT NULL,
   `request_uri_regexp_not` varchar(64) DEFAULT NULL,
   `request_uri_like_not` varchar(64) DEFAULT NULL,
-  `base_fee` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `percent_fee` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `click_fee` decimal(5,2) NOT NULL DEFAULT '0.00',
+  `base_fee` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `percent_fee` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `click_fee` decimal(5,2) NOT NULL DEFAULT 0.00,
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_referrer`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6448,12 +6460,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_referrer_cache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_referrer_cache` (
   `id_connections_source` int(11) unsigned NOT NULL,
   `id_referrer` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_connections_source`,`id_referrer`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6471,10 +6483,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_referrer_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_referrer_shop` (
   `id_referrer` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(10) unsigned NOT NULL DEFAULT 1,
   `cache_visitors` int(11) DEFAULT NULL,
   `cache_visits` int(11) DEFAULT NULL,
   `cache_pages` int(11) DEFAULT NULL,
@@ -6484,7 +6496,7 @@ CREATE TABLE `ps_referrer_shop` (
   `cache_reg_rate` decimal(5,4) DEFAULT NULL,
   `cache_order_rate` decimal(5,4) DEFAULT NULL,
   PRIMARY KEY (`id_referrer`,`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6502,13 +6514,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_request_sql`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_request_sql` (
   `id_request_sql` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
   `sql` text NOT NULL,
   PRIMARY KEY (`id_request_sql`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6526,14 +6538,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_required_field`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_required_field` (
   `id_required_field` int(11) NOT NULL AUTO_INCREMENT,
   `object_name` varchar(32) NOT NULL,
   `field_name` varchar(32) NOT NULL,
   PRIMARY KEY (`id_required_field`),
   KEY `object_name` (`object_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6551,13 +6563,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_risk`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_risk` (
   `id_risk` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `percent` tinyint(3) NOT NULL,
   `color` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id_risk`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6576,14 +6588,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_risk_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_risk_lang` (
   `id_risk` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`id_risk`,`id_lang`),
   KEY `id_risk` (`id_risk`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6602,13 +6614,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_search_engine`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_search_engine` (
   `id_search_engine` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `server` varchar(64) NOT NULL,
   `getvar` varchar(16) NOT NULL,
   PRIMARY KEY (`id_search_engine`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6627,14 +6639,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_search_index`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_search_index` (
   `id_product` int(11) unsigned NOT NULL,
   `id_word` int(11) unsigned NOT NULL,
-  `weight` smallint(4) unsigned NOT NULL DEFAULT '1',
+  `weight` smallint(4) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (`id_word`,`id_product`),
   KEY `id_product` (`id_product`,`weight`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6653,15 +6665,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_search_word`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_search_word` (
   `id_word` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_lang` int(10) unsigned NOT NULL,
   `word` varchar(30) NOT NULL,
   PRIMARY KEY (`id_word`),
   UNIQUE KEY `id_lang` (`id_lang`,`id_shop`,`word`)
-) ENGINE=InnoDB AUTO_INCREMENT=656 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=666 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6680,14 +6692,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_shop` (
   `id_shop` int(11) NOT NULL AUTO_INCREMENT,
   `id_shop_group` int(11) NOT NULL,
-  `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `color` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `color` varchar(50) NOT NULL,
   `id_category` int(11) NOT NULL,
-  `theme_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `theme_name` varchar(255) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `deleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_shop`),
@@ -6711,11 +6723,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_shop_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_shop_group` (
   `id_shop_group` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `color` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `color` varchar(50) NOT NULL,
   `share_customer` tinyint(1) NOT NULL,
   `share_order` tinyint(1) NOT NULL,
   `share_stock` tinyint(1) NOT NULL,
@@ -6741,7 +6753,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_shop_url`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_shop_url` (
   `id_shop_url` int(11) NOT NULL AUTO_INCREMENT,
   `id_shop` int(11) NOT NULL,
@@ -6753,7 +6765,7 @@ CREATE TABLE `ps_shop_url` (
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_shop_url`),
   KEY `IDX_279F19DA274A50A0` (`id_shop`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6772,18 +6784,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_smarty_cache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_smarty_cache` (
   `id_smarty_cache` char(40) NOT NULL,
   `name` char(40) NOT NULL,
   `cache_id` varchar(254) DEFAULT NULL,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` timestamp NOT NULL DEFAULT current_timestamp(),
   `content` longtext NOT NULL,
   PRIMARY KEY (`id_smarty_cache`),
   KEY `name` (`name`),
   KEY `cache_id` (`cache_id`),
   KEY `modified` (`modified`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6801,12 +6813,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_smarty_last_flush`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_smarty_last_flush` (
   `type` enum('compile','template') NOT NULL,
   `last_flush` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6824,7 +6836,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_smarty_lazy_cache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_smarty_lazy_cache` (
   `template_hash` varchar(32) NOT NULL DEFAULT '',
   `cache_id` varchar(191) NOT NULL DEFAULT '',
@@ -6832,7 +6844,7 @@ CREATE TABLE `ps_smarty_lazy_cache` (
   `filepath` varchar(255) NOT NULL DEFAULT '',
   `last_update` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`template_hash`,`cache_id`,`compile_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6850,13 +6862,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_specific_price`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_specific_price` (
   `id_specific_price` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_specific_price_rule` int(11) unsigned NOT NULL,
   `id_cart` int(11) unsigned NOT NULL,
   `id_product` int(10) unsigned NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_shop_group` int(11) unsigned NOT NULL,
   `id_currency` int(10) unsigned NOT NULL,
   `id_country` int(10) unsigned NOT NULL,
@@ -6866,7 +6878,7 @@ CREATE TABLE `ps_specific_price` (
   `price` decimal(20,6) NOT NULL,
   `from_quantity` mediumint(8) unsigned NOT NULL,
   `reduction` decimal(20,6) NOT NULL,
-  `reduction_tax` tinyint(1) NOT NULL DEFAULT '1',
+  `reduction_tax` tinyint(1) NOT NULL DEFAULT 1,
   `reduction_type` enum('amount','percentage') NOT NULL,
   `from` datetime NOT NULL,
   `to` datetime NOT NULL,
@@ -6881,7 +6893,7 @@ CREATE TABLE `ps_specific_price` (
   KEY `id_customer` (`id_customer`),
   KEY `from` (`from`),
   KEY `to` (`to`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6900,14 +6912,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_specific_price_priority`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_specific_price_priority` (
   `id_specific_price_priority` int(11) NOT NULL AUTO_INCREMENT,
   `id_product` int(11) NOT NULL,
   `priority` varchar(80) NOT NULL,
   PRIMARY KEY (`id_specific_price_priority`,`id_product`),
   UNIQUE KEY `id_product` (`id_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6925,24 +6937,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_specific_price_rule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_specific_price_rule` (
   `id_specific_price_rule` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 1,
   `id_currency` int(10) unsigned NOT NULL,
   `id_country` int(10) unsigned NOT NULL,
   `id_group` int(10) unsigned NOT NULL,
   `from_quantity` mediumint(8) unsigned NOT NULL,
   `price` decimal(20,6) DEFAULT NULL,
   `reduction` decimal(20,6) NOT NULL,
-  `reduction_tax` tinyint(1) NOT NULL DEFAULT '1',
+  `reduction_tax` tinyint(1) NOT NULL DEFAULT 1,
   `reduction_type` enum('amount','percentage') NOT NULL,
   `from` datetime NOT NULL,
   `to` datetime NOT NULL,
   PRIMARY KEY (`id_specific_price_rule`),
   KEY `id_product` (`id_shop`,`id_currency`,`id_country`,`id_group`,`from_quantity`,`from`,`to`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6960,7 +6972,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_specific_price_rule_condition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_specific_price_rule_condition` (
   `id_specific_price_rule_condition` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_specific_price_rule_condition_group` int(11) unsigned NOT NULL,
@@ -6968,7 +6980,7 @@ CREATE TABLE `ps_specific_price_rule_condition` (
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id_specific_price_rule_condition`),
   KEY `id_specific_price_rule_condition_group` (`id_specific_price_rule_condition_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -6986,12 +6998,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_specific_price_rule_condition_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_specific_price_rule_condition_group` (
   `id_specific_price_rule_condition_group` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_specific_price_rule` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_specific_price_rule_condition_group`,`id_specific_price_rule`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7009,20 +7021,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_state`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_state` (
   `id_state` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_country` int(11) unsigned NOT NULL,
   `id_zone` int(11) unsigned NOT NULL,
   `name` varchar(80) NOT NULL,
   `iso_code` varchar(7) NOT NULL,
-  `tax_behavior` smallint(1) NOT NULL DEFAULT '0',
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `tax_behavior` smallint(1) NOT NULL DEFAULT 0,
+  `active` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_state`),
   KEY `id_country` (`id_country`),
   KEY `name` (`name`),
   KEY `id_zone` (`id_zone`)
-) ENGINE=InnoDB AUTO_INCREMENT=353 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=353 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7041,16 +7053,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_statssearch`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_statssearch` (
   `id_statssearch` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
-  `id_shop_group` int(10) unsigned NOT NULL DEFAULT '1',
+  `id_shop` int(10) unsigned NOT NULL DEFAULT 1,
+  `id_shop_group` int(10) unsigned NOT NULL DEFAULT 1,
   `keywords` varchar(255) NOT NULL,
-  `results` int(6) NOT NULL DEFAULT '0',
+  `results` int(6) NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   PRIMARY KEY (`id_statssearch`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7069,7 +7081,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_stock`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_stock` (
   `id_stock` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_warehouse` int(11) unsigned NOT NULL,
@@ -7082,12 +7094,12 @@ CREATE TABLE `ps_stock` (
   `mpn` varchar(40) DEFAULT NULL,
   `physical_quantity` int(11) unsigned NOT NULL,
   `usable_quantity` int(11) unsigned NOT NULL,
-  `price_te` decimal(20,6) DEFAULT '0.000000',
+  `price_te` decimal(20,6) DEFAULT 0.000000,
   PRIMARY KEY (`id_stock`),
   KEY `id_warehouse` (`id_warehouse`),
   KEY `id_product` (`id_product`),
   KEY `id_product_attribute` (`id_product_attribute`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7105,18 +7117,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_stock_available`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_stock_available` (
   `id_stock_available` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_product` int(11) unsigned NOT NULL,
   `id_product_attribute` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   `id_shop_group` int(11) unsigned NOT NULL,
-  `quantity` int(10) NOT NULL DEFAULT '0',
-  `physical_quantity` int(11) NOT NULL DEFAULT '0',
-  `reserved_quantity` int(11) NOT NULL DEFAULT '0',
-  `depends_on_stock` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `out_of_stock` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `quantity` int(10) NOT NULL DEFAULT 0,
+  `physical_quantity` int(11) NOT NULL DEFAULT 0,
+  `reserved_quantity` int(11) NOT NULL DEFAULT 0,
+  `depends_on_stock` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `out_of_stock` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `location` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id_stock_available`),
   UNIQUE KEY `product_sqlstock` (`id_product`,`id_product_attribute`,`id_shop`,`id_shop_group`),
@@ -7124,7 +7136,7 @@ CREATE TABLE `ps_stock_available` (
   KEY `id_shop_group` (`id_shop_group`),
   KEY `id_product` (`id_product`),
   KEY `id_product_attribute` (`id_product_attribute`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7133,7 +7145,7 @@ CREATE TABLE `ps_stock_available` (
 
 LOCK TABLES `ps_stock_available` WRITE;
 /*!40000 ALTER TABLE `ps_stock_available` DISABLE KEYS */;
-INSERT INTO `ps_stock_available` VALUES (59,18,0,1,0,0,0,0,0,0,''),(60,17,0,1,0,0,0,0,0,0,''),(61,16,0,1,0,0,0,0,0,0,''),(62,11,0,1,0,0,0,0,0,0,''),(63,10,0,1,0,0,0,0,0,0,''),(64,9,0,1,0,0,0,0,0,0,''),(65,5,0,1,0,0,0,0,0,0,''),(66,4,0,1,0,0,0,0,0,0,''),(67,3,0,1,0,0,0,0,0,0,''),(68,2,0,1,0,0,0,0,0,0,''),(69,1,0,1,0,0,0,0,0,0,'');
+INSERT INTO `ps_stock_available` VALUES (1,1,0,1,0,2400,0,0,0,2,''),(2,2,0,1,0,2100,0,0,0,2,''),(3,3,0,1,0,1500,0,0,0,2,''),(4,4,0,1,0,1500,0,0,0,2,''),(5,5,0,1,0,900,0,0,0,2,''),(6,6,0,1,0,291,300,9,0,2,''),(7,7,0,1,0,300,0,0,0,2,''),(8,8,0,1,0,292,301,9,0,2,''),(9,9,0,1,0,591,591,0,0,2,''),(10,10,0,1,0,596,596,0,0,2,''),(11,11,0,1,0,593,593,0,0,2,''),(12,12,0,1,0,300,0,0,0,1,''),(13,13,0,1,0,300,0,0,0,1,''),(14,14,0,1,0,300,0,0,0,1,''),(15,15,0,1,0,97,100,3,0,2,''),(16,16,0,1,0,1191,1191,0,0,2,''),(17,17,0,1,0,1200,0,0,0,2,''),(18,18,0,1,0,1200,0,0,0,2,''),(19,19,0,1,0,300,0,0,0,2,''),(20,1,1,1,0,300,0,0,0,2,''),(21,1,2,1,0,300,0,0,0,2,''),(22,1,3,1,0,300,0,0,0,2,''),(23,1,4,1,0,300,0,0,0,2,''),(24,1,5,1,0,300,0,0,0,2,''),(25,1,6,1,0,300,0,0,0,2,''),(26,1,7,1,0,300,0,0,0,2,''),(27,1,8,1,0,300,0,0,0,2,''),(28,2,9,1,0,1200,0,0,0,2,''),(29,2,10,1,0,300,0,0,0,2,''),(30,2,11,1,0,300,0,0,0,2,''),(31,2,12,1,0,300,0,0,0,2,''),(32,3,13,1,0,900,0,0,0,2,''),(33,3,14,1,0,300,0,0,0,2,''),(34,3,15,1,0,300,0,0,0,2,''),(35,4,16,1,0,900,0,0,0,2,''),(36,4,17,1,0,300,0,0,0,2,''),(37,4,18,1,0,300,0,0,0,2,''),(38,5,19,1,0,300,0,0,0,2,''),(39,5,20,1,0,300,0,0,0,2,''),(40,5,21,1,0,300,0,0,0,2,''),(41,9,22,1,0,291,300,9,0,2,''),(42,9,23,1,0,300,300,0,0,2,''),(43,10,24,1,0,296,300,4,0,2,''),(44,10,25,1,0,300,301,1,0,2,''),(45,11,26,1,0,293,300,7,0,2,''),(46,11,27,1,0,300,300,0,0,2,''),(47,16,28,1,0,291,300,9,0,2,''),(48,16,29,1,0,300,301,1,0,2,''),(49,16,30,1,0,300,300,0,0,2,''),(50,16,31,1,0,300,300,0,0,2,''),(51,17,32,1,0,300,0,0,0,2,''),(52,17,33,1,0,300,0,0,0,2,''),(53,17,34,1,0,300,0,0,0,2,''),(54,17,35,1,0,300,0,0,0,2,''),(55,18,36,1,0,300,0,0,0,2,''),(56,18,37,1,0,300,0,0,0,2,''),(57,18,38,1,0,300,0,0,0,2,''),(58,18,39,1,0,300,0,0,0,2,'');
 /*!40000 ALTER TABLE `ps_stock_available` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -7143,7 +7155,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_stock_mvt`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_stock_mvt` (
   `id_stock_mvt` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_stock` int(11) NOT NULL,
@@ -7151,14 +7163,14 @@ CREATE TABLE `ps_stock_mvt` (
   `id_supply_order` int(11) DEFAULT NULL,
   `id_stock_mvt_reason` int(11) NOT NULL,
   `id_employee` int(11) NOT NULL,
-  `employee_lastname` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `employee_firstname` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `employee_lastname` varchar(32) DEFAULT NULL,
+  `employee_firstname` varchar(32) DEFAULT NULL,
   `physical_quantity` int(11) NOT NULL,
   `date_add` datetime NOT NULL,
-  `sign` smallint(6) NOT NULL DEFAULT '1',
-  `price_te` decimal(20,6) DEFAULT '0.000000',
-  `last_wa` decimal(20,6) DEFAULT '0.000000',
-  `current_wa` decimal(20,6) DEFAULT '0.000000',
+  `sign` smallint(6) NOT NULL DEFAULT 1,
+  `price_te` decimal(20,6) DEFAULT 0.000000,
+  `last_wa` decimal(20,6) DEFAULT 0.000000,
+  `current_wa` decimal(20,6) DEFAULT 0.000000,
   `referer` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id_stock_mvt`),
   KEY `id_stock` (`id_stock`),
@@ -7181,15 +7193,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_stock_mvt_reason`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_stock_mvt_reason` (
   `id_stock_mvt_reason` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `sign` tinyint(1) NOT NULL DEFAULT '1',
+  `sign` tinyint(1) NOT NULL DEFAULT 1,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_stock_mvt_reason`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7208,13 +7220,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_stock_mvt_reason_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_stock_mvt_reason_lang` (
   `id_stock_mvt_reason` int(11) unsigned NOT NULL,
   `id_lang` int(11) unsigned NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   PRIMARY KEY (`id_stock_mvt_reason`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7233,7 +7245,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_store`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_store` (
   `id_store` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_country` int(10) unsigned NOT NULL,
@@ -7245,11 +7257,11 @@ CREATE TABLE `ps_store` (
   `phone` varchar(16) DEFAULT NULL,
   `fax` varchar(16) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_store`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7268,17 +7280,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_store_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_store_lang` (
   `id_store` int(11) unsigned NOT NULL,
   `id_lang` int(11) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
   `address1` varchar(255) NOT NULL,
   `address2` varchar(255) DEFAULT NULL,
-  `hours` text,
-  `note` text,
+  `hours` text DEFAULT NULL,
+  `note` text DEFAULT NULL,
   PRIMARY KEY (`id_store`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7297,13 +7309,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_store_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_store_shop` (
   `id_store` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_store`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7322,15 +7334,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_supplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_supplier` (
   `id_supplier` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `active` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_supplier`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7349,16 +7361,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_supplier_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_supplier_lang` (
   `id_supplier` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   `meta_title` varchar(255) DEFAULT NULL,
   `meta_keywords` varchar(255) DEFAULT NULL,
   `meta_description` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id_supplier`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7377,13 +7389,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_supplier_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_supplier_shop` (
   `id_supplier` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_supplier`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7402,7 +7414,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_supply_order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_supply_order` (
   `id_supply_order` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_supplier` int(11) unsigned NOT NULL,
@@ -7416,18 +7428,18 @@ CREATE TABLE `ps_supply_order` (
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   `date_delivery_expected` datetime DEFAULT NULL,
-  `total_te` decimal(20,6) DEFAULT '0.000000',
-  `total_with_discount_te` decimal(20,6) DEFAULT '0.000000',
-  `total_tax` decimal(20,6) DEFAULT '0.000000',
-  `total_ti` decimal(20,6) DEFAULT '0.000000',
-  `discount_rate` decimal(20,6) DEFAULT '0.000000',
-  `discount_value_te` decimal(20,6) DEFAULT '0.000000',
-  `is_template` tinyint(1) DEFAULT '0',
+  `total_te` decimal(20,6) DEFAULT 0.000000,
+  `total_with_discount_te` decimal(20,6) DEFAULT 0.000000,
+  `total_tax` decimal(20,6) DEFAULT 0.000000,
+  `total_ti` decimal(20,6) DEFAULT 0.000000,
+  `discount_rate` decimal(20,6) DEFAULT 0.000000,
+  `discount_value_te` decimal(20,6) DEFAULT 0.000000,
+  `is_template` tinyint(1) DEFAULT 0,
   PRIMARY KEY (`id_supply_order`),
   KEY `id_supplier` (`id_supplier`),
   KEY `id_warehouse` (`id_warehouse`),
   KEY `reference` (`reference`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7445,7 +7457,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_supply_order_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_supply_order_detail` (
   `id_supply_order_detail` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_supply_order` int(11) unsigned NOT NULL,
@@ -7459,24 +7471,24 @@ CREATE TABLE `ps_supply_order_detail` (
   `isbn` varchar(32) DEFAULT NULL,
   `upc` varchar(12) DEFAULT NULL,
   `mpn` varchar(40) DEFAULT NULL,
-  `exchange_rate` decimal(20,6) DEFAULT '0.000000',
-  `unit_price_te` decimal(20,6) DEFAULT '0.000000',
+  `exchange_rate` decimal(20,6) DEFAULT 0.000000,
+  `unit_price_te` decimal(20,6) DEFAULT 0.000000,
   `quantity_expected` int(11) unsigned NOT NULL,
   `quantity_received` int(11) unsigned NOT NULL,
-  `price_te` decimal(20,6) DEFAULT '0.000000',
-  `discount_rate` decimal(20,6) DEFAULT '0.000000',
-  `discount_value_te` decimal(20,6) DEFAULT '0.000000',
-  `price_with_discount_te` decimal(20,6) DEFAULT '0.000000',
-  `tax_rate` decimal(20,6) DEFAULT '0.000000',
-  `tax_value` decimal(20,6) DEFAULT '0.000000',
-  `price_ti` decimal(20,6) DEFAULT '0.000000',
-  `tax_value_with_order_discount` decimal(20,6) DEFAULT '0.000000',
-  `price_with_order_discount_te` decimal(20,6) DEFAULT '0.000000',
+  `price_te` decimal(20,6) DEFAULT 0.000000,
+  `discount_rate` decimal(20,6) DEFAULT 0.000000,
+  `discount_value_te` decimal(20,6) DEFAULT 0.000000,
+  `price_with_discount_te` decimal(20,6) DEFAULT 0.000000,
+  `tax_rate` decimal(20,6) DEFAULT 0.000000,
+  `tax_value` decimal(20,6) DEFAULT 0.000000,
+  `price_ti` decimal(20,6) DEFAULT 0.000000,
+  `tax_value_with_order_discount` decimal(20,6) DEFAULT 0.000000,
+  `price_with_order_discount_te` decimal(20,6) DEFAULT 0.000000,
   PRIMARY KEY (`id_supply_order_detail`),
   KEY `id_supply_order` (`id_supply_order`,`id_product`),
   KEY `id_product_attribute` (`id_product_attribute`),
   KEY `id_product_product_attribute` (`id_product`,`id_product_attribute`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7494,7 +7506,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_supply_order_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_supply_order_history` (
   `id_supply_order_history` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_supply_order` int(11) unsigned NOT NULL,
@@ -7507,7 +7519,7 @@ CREATE TABLE `ps_supply_order_history` (
   KEY `id_supply_order` (`id_supply_order`),
   KEY `id_employee` (`id_employee`),
   KEY `id_state` (`id_state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7525,7 +7537,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_supply_order_receipt_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_supply_order_receipt_history` (
   `id_supply_order_receipt_history` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_supply_order_detail` int(11) unsigned NOT NULL,
@@ -7538,7 +7550,7 @@ CREATE TABLE `ps_supply_order_receipt_history` (
   PRIMARY KEY (`id_supply_order_receipt_history`),
   KEY `id_supply_order_detail` (`id_supply_order_detail`),
   KEY `id_supply_order_state` (`id_supply_order_state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7556,17 +7568,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_supply_order_state`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_supply_order_state` (
   `id_supply_order_state` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `delivery_note` tinyint(1) NOT NULL DEFAULT '0',
-  `editable` tinyint(1) NOT NULL DEFAULT '0',
-  `receipt_state` tinyint(1) NOT NULL DEFAULT '0',
-  `pending_receipt` tinyint(1) NOT NULL DEFAULT '0',
-  `enclosed` tinyint(1) NOT NULL DEFAULT '0',
+  `delivery_note` tinyint(1) NOT NULL DEFAULT 0,
+  `editable` tinyint(1) NOT NULL DEFAULT 0,
+  `receipt_state` tinyint(1) NOT NULL DEFAULT 0,
+  `pending_receipt` tinyint(1) NOT NULL DEFAULT 0,
+  `enclosed` tinyint(1) NOT NULL DEFAULT 0,
   `color` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id_supply_order_state`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7585,13 +7597,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_supply_order_state_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_supply_order_state_lang` (
   `id_supply_order_state` int(11) unsigned NOT NULL,
   `id_lang` int(11) unsigned NOT NULL,
   `name` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`id_supply_order_state`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7610,20 +7622,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_tab`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_tab` (
   `id_tab` int(11) NOT NULL AUTO_INCREMENT,
   `id_parent` int(11) NOT NULL,
   `position` int(11) NOT NULL,
-  `module` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `class_name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `route_name` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `module` varchar(64) DEFAULT NULL,
+  `class_name` varchar(64) NOT NULL,
+  `route_name` varchar(256) DEFAULT NULL,
   `active` tinyint(1) NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   `hide_host_mode` tinyint(1) NOT NULL,
-  `icon` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `wording` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `wording_domain` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `icon` varchar(32) DEFAULT NULL,
+  `wording` varchar(255) DEFAULT NULL,
+  `wording_domain` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_tab`)
 ) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -7644,11 +7656,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_tab_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_tab_lang` (
   `id_tab` int(11) NOT NULL,
   `id_lang` int(11) NOT NULL,
-  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(128) NOT NULL,
   PRIMARY KEY (`id_tab`,`id_lang`),
   KEY `IDX_CFD9262DED47AB56` (`id_tab`),
   KEY `IDX_CFD9262DBA299860` (`id_lang`)
@@ -7671,7 +7683,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_tab_module_preference`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_tab_module_preference` (
   `id_tab_module_preference` int(11) NOT NULL AUTO_INCREMENT,
   `id_employee` int(11) NOT NULL,
@@ -7679,7 +7691,7 @@ CREATE TABLE `ps_tab_module_preference` (
   `module` varchar(191) NOT NULL,
   PRIMARY KEY (`id_tab_module_preference`),
   UNIQUE KEY `employee_module` (`id_employee`,`id_tab`,`module`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7697,7 +7709,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_tag` (
   `id_tag` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_lang` int(10) unsigned NOT NULL,
@@ -7705,7 +7717,7 @@ CREATE TABLE `ps_tag` (
   PRIMARY KEY (`id_tag`),
   KEY `tag_name` (`name`),
   KEY `id_lang` (`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7723,16 +7735,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_tag_count`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_tag_count` (
-  `id_group` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_tag` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_lang` int(10) unsigned NOT NULL DEFAULT '0',
-  `id_shop` int(11) unsigned NOT NULL DEFAULT '0',
-  `counter` int(10) unsigned NOT NULL DEFAULT '0',
+  `id_group` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_tag` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_lang` int(10) unsigned NOT NULL DEFAULT 0,
+  `id_shop` int(11) unsigned NOT NULL DEFAULT 0,
+  `counter` int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_group`,`id_tag`),
   KEY `id_group` (`id_group`,`id_lang`,`id_shop`,`counter`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7750,14 +7762,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_tax`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_tax` (
   `id_tax` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `rate` decimal(10,3) NOT NULL,
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 1,
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_tax`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7776,13 +7788,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_tax_lang`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_tax_lang` (
   `id_tax` int(10) unsigned NOT NULL,
   `id_lang` int(10) unsigned NOT NULL,
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`id_tax`,`id_lang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7801,7 +7813,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_tax_rule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_tax_rule` (
   `id_tax_rule` int(11) NOT NULL AUTO_INCREMENT,
   `id_tax_rules_group` int(11) NOT NULL,
@@ -7816,7 +7828,7 @@ CREATE TABLE `ps_tax_rule` (
   KEY `id_tax_rules_group` (`id_tax_rules_group`),
   KEY `id_tax` (`id_tax`),
   KEY `category_getproducts` (`id_tax_rules_group`,`id_country`,`id_state`,`zipcode_from`)
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7835,7 +7847,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_tax_rules_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_tax_rules_group` (
   `id_tax_rules_group` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -7844,7 +7856,7 @@ CREATE TABLE `ps_tax_rules_group` (
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
   PRIMARY KEY (`id_tax_rules_group`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7863,13 +7875,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_tax_rules_group_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_tax_rules_group_shop` (
   `id_tax_rules_group` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_tax_rules_group`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7888,12 +7900,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_timezone`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_timezone` (
   `id_timezone` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`id_timezone`)
-) ENGINE=InnoDB AUTO_INCREMENT=561 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=561 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7912,14 +7924,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_translation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_translation` (
   `id_translation` int(11) NOT NULL AUTO_INCREMENT,
   `id_lang` int(11) NOT NULL,
-  `key` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `translation` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `domain` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `theme` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `key` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL,
+  `translation` text NOT NULL,
+  `domain` varchar(80) NOT NULL,
+  `theme` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id_translation`),
   KEY `IDX_ADEBEB36BA299860` (`id_lang`),
   KEY `key` (`domain`)
@@ -7941,7 +7953,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_warehouse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_warehouse` (
   `id_warehouse` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_currency` int(11) unsigned NOT NULL,
@@ -7950,9 +7962,9 @@ CREATE TABLE `ps_warehouse` (
   `reference` varchar(64) DEFAULT NULL,
   `name` varchar(45) NOT NULL,
   `management_type` enum('WA','FIFO','LIFO') NOT NULL DEFAULT 'WA',
-  `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_warehouse`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7970,14 +7982,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_warehouse_carrier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_warehouse_carrier` (
   `id_carrier` int(11) unsigned NOT NULL,
   `id_warehouse` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_warehouse`,`id_carrier`),
   KEY `id_warehouse` (`id_warehouse`),
   KEY `id_carrier` (`id_carrier`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -7995,7 +8007,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_warehouse_product_location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_warehouse_product_location` (
   `id_warehouse_product_location` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_product` int(11) unsigned NOT NULL,
@@ -8004,7 +8016,7 @@ CREATE TABLE `ps_warehouse_product_location` (
   `location` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id_warehouse_product_location`),
   UNIQUE KEY `id_product` (`id_product`,`id_product_attribute`,`id_warehouse`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8022,14 +8034,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_warehouse_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_warehouse_shop` (
   `id_shop` int(11) unsigned NOT NULL,
   `id_warehouse` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_warehouse`,`id_shop`),
   KEY `id_warehouse` (`id_warehouse`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8047,12 +8059,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_web_browser`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_web_browser` (
   `id_web_browser` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id_web_browser`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8071,18 +8083,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_webservice_account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_webservice_account` (
   `id_webservice_account` int(11) NOT NULL AUTO_INCREMENT,
   `key` varchar(32) NOT NULL,
-  `description` text,
+  `description` text DEFAULT NULL,
   `class_name` varchar(50) NOT NULL DEFAULT 'WebserviceRequest',
-  `is_module` tinyint(2) NOT NULL DEFAULT '0',
+  `is_module` tinyint(2) NOT NULL DEFAULT 0,
   `module_name` varchar(50) DEFAULT NULL,
   `active` tinyint(2) NOT NULL,
   PRIMARY KEY (`id_webservice_account`),
   KEY `key` (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8100,13 +8112,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_webservice_account_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_webservice_account_shop` (
   `id_webservice_account` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_webservice_account`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8124,7 +8136,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_webservice_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_webservice_permission` (
   `id_webservice_permission` int(11) NOT NULL AUTO_INCREMENT,
   `resource` varchar(50) NOT NULL,
@@ -8135,7 +8147,7 @@ CREATE TABLE `ps_webservice_permission` (
   KEY `resource` (`resource`),
   KEY `method` (`method`),
   KEY `id_webservice_account` (`id_webservice_account`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8153,20 +8165,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_wishlist`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_wishlist` (
   `id_wishlist` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_customer` int(10) unsigned NOT NULL,
-  `id_shop` int(10) unsigned DEFAULT '1',
-  `id_shop_group` int(10) unsigned DEFAULT '1',
+  `id_shop` int(10) unsigned DEFAULT 1,
+  `id_shop_group` int(10) unsigned DEFAULT 1,
   `token` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
   `counter` int(10) unsigned DEFAULT NULL,
   `date_add` datetime NOT NULL,
   `date_upd` datetime NOT NULL,
-  `default` int(10) unsigned DEFAULT '0',
+  `default` int(10) unsigned DEFAULT 0,
   PRIMARY KEY (`id_wishlist`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8184,7 +8196,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_wishlist_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_wishlist_product` (
   `id_wishlist_product` int(10) NOT NULL AUTO_INCREMENT,
   `id_wishlist` int(10) unsigned NOT NULL,
@@ -8193,7 +8205,7 @@ CREATE TABLE `ps_wishlist_product` (
   `quantity` int(10) unsigned NOT NULL,
   `priority` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id_wishlist_product`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8211,13 +8223,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_wishlist_product_cart`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_wishlist_product_cart` (
   `id_wishlist_product` int(10) unsigned NOT NULL,
   `id_cart` int(10) unsigned NOT NULL,
   `quantity` int(10) unsigned NOT NULL,
   `date_add` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8235,13 +8247,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_zone`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_zone` (
   `id_zone` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
-  `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `active` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_zone`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8260,13 +8272,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ps_zone_shop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ps_zone_shop` (
   `id_zone` int(11) unsigned NOT NULL,
   `id_shop` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id_zone`,`id_shop`),
   KEY `id_shop` (`id_shop`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -8288,4 +8300,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-01-17 19:15:39
+-- Dump completed on 2025-12-30 10:37:35

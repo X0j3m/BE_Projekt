@@ -1,32 +1,14 @@
 services:
-
-  db:
-    container_name: admin-mysql_db
-    image: mysql:5.7.41
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: BE_197933
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admins
-    networks:
-      - prestashop_network
-    ports:
-      - 3306:3306
-    volumes:
-      - dbdata:/var/lib/mysql
-      - ./prestashop.sql:/docker-entrypoint-initdb.d/prestashop.sql
-
   prestashop:
-    container_name: prestashop
-    build: .
+    image: pancernik/prestashop
+    container_name: BE_197933_prestashop
     restart: unless-stopped
     environment:
       - PS_DEV_MODE=1
-      - DB_SERVER=db
+      - DB_SERVER=admin-mysql_db
       - DB_NAME=BE_197933
-      - DB_USER=admin
-      - DB_PASSWD=admins
+      - DB_USER=root
+      - DB_PASSWD=student
       - PS_INSTALL_AUTO=1
       - PS_ERASE_DB=0
       - PS_ADMIN_EMAIL=jaku6p@gmail.com
@@ -36,10 +18,11 @@ services:
       - ps_cache:/var/www/html/var/cache
     networks:
       - prestashop_network
+      - admin-mysql_default
       
   caddy:
     image: caddy:latest
-    container_name: caddy
+    container_name: BE_197933_caddy
     restart: unless-stopped
     ports:
       - 80:80
@@ -53,9 +36,10 @@ services:
 
 networks:
   prestashop_network:
+  admin-mysql_default:
+    external: true
 
 volumes:
-  dbdata:
   ps_data:
   ps_cache:
   caddy_data:
