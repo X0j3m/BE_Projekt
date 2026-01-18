@@ -14,6 +14,7 @@ mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWD" -e "CREATE DATABASE IF NOT EXIS
 # 3. Sprawdzenie czy baza jest pusta
 TABLE_COUNT=$(mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWD" "$DB_NAME" -e "SELECT count(*) FROM information_schema.tables WHERE table_schema = '$DB_NAME';" -sN)
 
+# 4. Import backupu
 if [ "$TABLE_COUNT" -eq 0 ]; then
     echo "Baza pusta. Importowanie backupu..."
     mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWD" "$DB_NAME" < /tmp/prestashop.sql

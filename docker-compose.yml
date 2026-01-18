@@ -25,8 +25,8 @@ services:
     container_name: BE_197933_caddy
     restart: unless-stopped
     ports:
-      - 80:80
-      - 443:443
+      - 19793:80
+      - 19794:443
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data

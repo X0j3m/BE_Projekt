@@ -2,7 +2,7 @@ FROM prestashop/prestashop:1.7.8
 
 COPY ./prestashop_source /var/www/html
 
-COPY ./modules/test_module /var/www/html/modules/test_module
+COPY ./modules/test_module /var/www/html/modules
 COPY ./themes/mytheme/classic /var/www/html/themes/classic
 
 COPY ./img/logo.png /var/www/html/img/logo.png
