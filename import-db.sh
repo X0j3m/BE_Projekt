@@ -22,5 +22,11 @@ else
     echo "Baza zawiera już tabele ($TABLE_COUNT). Pomijam import."
 fi
 
-# 4. Uruchomienie oryginalnego startu PrestaShop
+# 5. Aktualizacja portu SSL i domeny w bazie danych
+# Aktualizacja domeny i SSL - dodajemy port bezpośrednio do nazwy domeny
+echo "Aktualizuję konfigurację domeny na localhost:19793..."
+mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWD" "$DB_NAME" -e "UPDATE ps_shop_url SET domain='localhost:19793', domain_ssl='localhost:19793' WHERE id_shop=1;"
+# Włączanie SSL w konfiguracji
+mysql -h"$DB_SERVER" -u"$DB_USER" -p"$DB_PASSWD" "$DB_NAME" -e "UPDATE ps_configuration SET value='1' WHERE name IN ('PS_SSL_ENABLED', 'PS_SSL_ENABLED_EVERYWHERE');"
+# 6. Uruchomienie oryginalnego startu
 exec /tmp/docker_run.sh

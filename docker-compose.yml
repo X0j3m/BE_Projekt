@@ -1,8 +1,11 @@
 services:
   prestashop:
-    image: pancernik/prestashop
+    image: x0j3m/be_197933_pancernik
     container_name: BE_197933_prestashop
     restart: unless-stopped
+    ports:
+      #- "80:80"
+      - "19793:443"
     environment:
       - PS_DEV_MODE=1
       - DB_SERVER=admin-mysql_db
@@ -13,34 +16,11 @@ services:
       - PS_ERASE_DB=0
       - PS_ADMIN_EMAIL=jaku6p@gmail.com
       - PS_ADMIN_PASSWORD=12345678
-    volumes:
-      - ps_data:/var/www/html
-      - ps_cache:/var/www/html/var/cache
     networks:
       - prestashop_network
       - admin-mysql_default
-      
-  caddy:
-    image: caddy:latest
-    container_name: BE_197933_caddy
-    restart: unless-stopped
-    ports:
-      - 19793:80
-      - 19794:443
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-    networks:
-      - prestashop_network
 
 networks:
   prestashop_network:
   admin-mysql_default:
     external: true
-
-volumes:
-  ps_data:
-  ps_cache:
-  caddy_data:
-  caddy_config:
