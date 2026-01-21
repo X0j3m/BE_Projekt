@@ -1,0 +1,5 @@
+Tworzenie kontenera MySQL
+docker run -d   --name admin-mysql_db   --network admin-mysql_default   -p 3306:3306   -e MYSQL_ROOT_PASSWORD=student mysql:5.7.41
+
+Budowanie obrazu
+docker build -t x0j3m/be_197933_pancernik .
