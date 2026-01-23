@@ -12,7 +12,6 @@ COPY ./img/inpost-kurier.jpg /var/www/html/img/s/1.jpg
 COPY ./img/orlen-paczka.jpg /var/www/html/img/s/2.jpg
 COPY ./img/poczta-polska.jpg /var/www/html/img/s/3.jpg
 
-
 RUN chown -R www-data:www-data /var/www/html
 
 COPY ./ssl/cert.pem /etc/ssl/certs/ssl-cert-snakeoil.pem
