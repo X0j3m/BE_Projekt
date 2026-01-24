@@ -5,6 +5,7 @@ COPY ./prestashop_source /var/www/html
 COPY ./modules/test_module /var/www/html/modules
 COPY ./themes/mytheme/classic /var/www/html/themes/classic
 
+
 COPY ./img/logo.png /var/www/html/img/logo.png
 COPY ./img/logo.png /var/www/html/img/logo_mail.png
 COPY ./img/logo.png /var/www/html/img/logo_invoice.png

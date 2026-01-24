@@ -21,14 +21,7 @@ services:
     networks:
       - prestashop_network
       - admin-mysql_default
-  adminer:
-    image: adminer
-    restart: unless-stopped
-    ports:
-      - 8081:8080
-    networks:
-      - prestashop_network
-      - admin-mysql_default
+
 
 networks:
   prestashop_network:
