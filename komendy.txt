@@ -4,7 +4,7 @@ Instrukcja do zasumulowania środowiska z klastrem
 docker run -d   --name admin-mysql_db   --network admin-mysql_default   -p 3306:3306   -e MYSQL_ROOT_PASSWORD=student mysql:5.7.41
 
 2. Zbudowanie obrazu ze sklepem
-docker build -t x0j3m/be_197933_pancernik .
+docker build --no-cache -t x0j3m/be_197933_pancernik .
 
 3. Uruchomienie kontenera ze sklepem
 docker compose up -d
