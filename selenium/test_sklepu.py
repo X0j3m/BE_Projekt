@@ -13,8 +13,6 @@ from faker import Faker
 # --- KONFIGURACJA ---
 URL_SKLEPU = "https://localhost:19793"
 ADMIN_URL = "https://localhost:19793/admin1234" # Twój folder admina
-ADMIN_EMAIL = "jaku6p@gmail.com"
-ADMIN_PASS = "12345678"
 FAKER = Faker("pl_PL")
 
 # Ustawienia przeglądarki
@@ -124,24 +122,50 @@ try:
             print(f"    [BŁĄD DODAWANIA]: {e}")
             return False
 
-    for kat in kategorie:
-        if licznik >= limit: break
-        driver.get(kat)
+    # Główna pętla losowania
+    while licznik < limit:
+        # 1. Losujemy kategorię
+        kat_url = random.choice(kategorie)
+        driver.get(kat_url)
         time.sleep(2)
-        linki = [e.get_attribute("href") for e in driver.find_elements(By.CSS_SELECTOR, ".product-miniature .thumbnail.product-thumbnail")]
-        for link in linki:
-            if licznik >= limit: break
-            try:
-                driver.get(link)
-                sukces=dodaj_produkt(random.randint(1, 4))
-                if sukces:
-                    licznik += 1
-                    print(f"    [OK {licznik}/{limit}] Dodano: {link}")
-                else:
-                    print(f"    [POMINIĘTO] Produkt niedostępny, szukam dalej...")
-                    # Nie zwiększamy licznika, pętla przejdzie do kolejnego 'link' w 'linki'
-            except: continue
 
+        while licznik < limit:
+            # 2. Pobieramy wszystkie linki do produktów na AKTUALNEJ stronie
+            produkty = driver.find_elements(By.CSS_SELECTOR, ".product-miniature .thumbnail.product-thumbnail")
+            
+            if not produkty:
+                break # Wyjdź do losowania innej kategorii, jeśli pusta
+
+            # 3. Wybieramy losowy produkt z tej strony
+            losowy_produkt = random.choice(produkty)
+            link_produktu = losowy_produkt.get_attribute("href")
+            
+            driver.get(link_produktu)
+            if dodaj_produkt(random.randint(1, 3)):
+                licznik += 1
+                print(f"    [OK {licznik}/{limit}] Dodano: {link_produktu}")
+            
+            if licznik >= limit: break
+
+            # --- LOGIKA PAGINACJI ---
+            driver.get(kat_url) # Powrót do listy produktów w kategorii
+            time.sleep(1)
+            
+            try:
+                # Szukamy przycisku "Następny" (zazwyczaj klasa .next lub link z rel="next")
+                next_page = driver.find_elements(By.CSS_SELECTOR, "a.next, .pagination a[rel='next']")
+                
+                if next_page and next_page[0].is_displayed():
+                    print("   [PAGINACJA]: Przechodzę na kolejną stronę...")
+                    kat_url = next_page[0].get_attribute("href")
+                    driver.get(kat_url)
+                    time.sleep(2)
+                else:
+                    print("   [INFO]: To ostatnia strona tej kategorii.")
+                    break # Brak kolejnych stron, wylosuj nową kategorię
+            except Exception as e:
+                print(f"   [INFO]: Koniec stron w tej kategorii lub błąd: {e}")
+                break
     # ==========================================
     # CZĘŚĆ 3: WYSZUKIWANIE
     # ==========================================
@@ -149,7 +173,7 @@ try:
     search = driver.find_element(By.NAME, "s")
     search.clear()
     #TODO: zmień na produkt, który chce szukać
-    search.send_keys("Hummingbird")
+    search.send_keys("samsung")
     search.send_keys(Keys.ENTER)
     time.sleep(2)
     wyniki = driver.find_elements(By.CSS_SELECTOR, ".product-miniature .thumbnail.product-thumbnail")
