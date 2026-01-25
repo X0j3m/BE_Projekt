@@ -14,7 +14,7 @@ services:
       - DB_PASSWD=student
       - PS_INSTALL_AUTO=1
       - PS_ERASE_DB=0
-      - PS_ADMIN_EMAIL=jaku6p@gmail.com
+      - PS_ADMIN_EMAIL=presta.pancernik@gmail.com
       - PS_ADMIN_PASSWORD=12345678
     #volumes:
     #  - ./img_prod:/var/www/html
