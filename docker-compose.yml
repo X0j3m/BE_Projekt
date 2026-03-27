@@ -16,17 +16,18 @@ services:
       - PS_ERASE_DB=0
       - PS_ADMIN_EMAIL=jaku6p@gmail.com
       - PS_ADMIN_PASSWORD=12345678
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1.0G
+        reservations:
+          cpus: "0.5"
+          memory: 512M
     networks:
       - prestashop_network
       - admin-mysql_default
-  adminer:
-    image: adminer
-    restart: unless-stopped
-    ports:
-      - 8081:8080
-    networks:
-      - prestashop_network
-      - admin-mysql_default
+
 
 networks:
   prestashop_network:

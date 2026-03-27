@@ -2575,7 +2575,7 @@ CREATE TABLE `ps_feature_value` (
 
 LOCK TABLES `ps_feature_value` WRITE;
 /*!40000 ALTER TABLE `ps_feature_value` DISABLE KEYS */;
-INSERT INTO `ps_feature_value` VALUES (1,1,0),(2,1,0),(3,1,0),(4,1,0),(5,1,0),(6,1,0),(7,2,0),(8,2,0),(9,2,0),(10,2,0);
+INSERT INTO `ps_feature_value` VALUES (1,1,0),(2,1,0),(3,1,0),(4,1,0),(5,1,0),(6,1,0),(7,2,0),(8,2,0),(9,2,0),(10,2,0),(11,2,1),(12,2,1);
 /*!40000 ALTER TABLE `ps_feature_value` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2600,7 +2600,7 @@ CREATE TABLE `ps_feature_value_lang` (
 
 LOCK TABLES `ps_feature_value_lang` WRITE;
 /*!40000 ALTER TABLE `ps_feature_value_lang` DISABLE KEYS */;
-INSERT INTO `ps_feature_value_lang` VALUES (1,1,'Poliester'),(2,1,'Wełna'),(3,1,'Ceramic'),(4,1,'Bawełna'),(5,1,'Recycled cardboard'),(6,1,'Matt paper'),(7,1,'Long sleeves'),(8,1,'Short sleeves'),(9,1,'Removable cover'),(10,1,'120 pages');
+INSERT INTO `ps_feature_value_lang` VALUES (1,1,'Poliester'),(2,1,'Wełna'),(3,1,'Ceramic'),(4,1,'Bawełna'),(5,1,'Recycled cardboard'),(6,1,'Matt paper'),(7,1,'Long sleeves'),(8,1,'Short sleeves'),(9,1,'Removable cover'),(10,1,'120 pages'),(11,1,'kabel'),(12,1,'kabel');
 /*!40000 ALTER TABLE `ps_feature_value_lang` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4552,6 +4552,7 @@ CREATE TABLE `ps_order_invoice` (
 
 LOCK TABLES `ps_order_invoice` WRITE;
 /*!40000 ALTER TABLE `ps_order_invoice` DISABLE KEYS */;
+INSERT INTO `ps_order_invoice` VALUES (1,6,1,0,'0000-00-00 00:00:00',0.000000,0.000000,1179.740000,1179.740000,1179.740000,1179.740000,0.000000,0.000000,0,0.000000,0.000000,'Pancernik','','2025-12-16 17:15:34');
 /*!40000 ALTER TABLE `ps_order_invoice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4578,6 +4579,7 @@ CREATE TABLE `ps_order_invoice_payment` (
 
 LOCK TABLES `ps_order_invoice_payment` WRITE;
 /*!40000 ALTER TABLE `ps_order_invoice_payment` DISABLE KEYS */;
+INSERT INTO `ps_order_invoice_payment` VALUES (1,1,6);
 /*!40000 ALTER TABLE `ps_order_invoice_payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4688,6 +4690,7 @@ CREATE TABLE `ps_order_payment` (
 
 LOCK TABLES `ps_order_payment` WRITE;
 /*!40000 ALTER TABLE `ps_order_payment` DISABLE KEYS */;
+INSERT INTO `ps_order_payment` VALUES (1,'OKYWUNAEY',1,1179.740000,'Płatności elektroniczne',1.000000,'','','','','','2025-12-16 17:15:34');
 /*!40000 ALTER TABLE `ps_order_payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -6993,6 +6996,7 @@ CREATE TABLE `ps_specific_price_priority` (
 
 LOCK TABLES `ps_specific_price_priority` WRITE;
 /*!40000 ALTER TABLE `ps_specific_price_priority` DISABLE KEYS */;
+INSERT INTO `ps_specific_price_priority` VALUES (1,118132,'id_shop;id_currency;id_country;id_group'),(2,118124,'id_shop;id_currency;id_country;id_group');
 /*!40000 ALTER TABLE `ps_specific_price_priority` ENABLE KEYS */;
 UNLOCK TABLES;
 
